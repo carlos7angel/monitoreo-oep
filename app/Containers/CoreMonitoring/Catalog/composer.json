@@ -1,0 +1,6 @@
+{
+    "name": "apiato/catalog",
+    "description": "Catalog Container for apiato.",
+    "require": {
+    }
+}

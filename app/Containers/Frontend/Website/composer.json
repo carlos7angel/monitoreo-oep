@@ -1,0 +1,6 @@
+{
+    "name": "apiato/website",
+    "description": "Website Container for apiato.",
+    "require": {
+    }
+}

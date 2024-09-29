@@ -1,0 +1,12 @@
+:root{
+    --bs-primary: #883f7e;
+    --bs-primary-active: #77376e;
+    /*--bs-primary-rgb: 136,63,126;*/
+    --bs-header-bg-color: #883f7e;
+}
+
+@media (min-width: 992px) {
+    .menu-root-here-bg-desktop>.menu-item.here>.menu-link {
+        background-color: #f1f1f1;
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "name": "apiato/filemanager",
+    "description": "FileManager Container for apiato.",
+    "require": {
+    }
+}
