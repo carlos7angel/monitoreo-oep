@@ -26,7 +26,6 @@ after.sh
 aliases
 .php-cs-fixer.cache
 /psalm_cache/
-/app/Containers/Vendor
 /public/vendor
 .bash_aliases
 .DS_Store
