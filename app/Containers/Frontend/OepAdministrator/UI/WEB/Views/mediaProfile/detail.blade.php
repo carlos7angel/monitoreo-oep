@@ -114,6 +114,7 @@
                             <div class="row g-5 mb-11">
                                 <div class="col-sm-6">
                                     @php
+                                        $scope_content = "";
                                         $types = json_decode($profile->type);
                                     @endphp
                                     <div class="fw-semibold fs-7 text-gray-600 mb-1">Tipo de Medio:</div>
