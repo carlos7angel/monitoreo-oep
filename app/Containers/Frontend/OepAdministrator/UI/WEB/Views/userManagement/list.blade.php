@@ -58,32 +58,32 @@
                     </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">
-                    <tr>
-                        <td><span class="fw-bold">1</span></td>
-                        <td class="pe-0">
-                            <div class="d-flex align-items-center">
-                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                    <div class="symbol-label">
-                                        <img src="{{ asset('themes/common/media/images/blank-user.jpg') }}" alt="Emma Smith" class="w-100">
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <a class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
-                                    <span>smith@kpmg.com</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="text-center pe-0">
-                            <div class="badge badge-secondary px-4 py-1 fw-bold">Administrador de Medios</div>
-                        </td>
-                        <td class="text-center pe-0">
-                            <div class="badge badge-light-danger">Inactivo</div>
-                        </td>
-                        <td class="text-center pe-0">02/10/2024 12:52 pm</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="las la-wallet fs-2"></i></a>
-                        </td>
-                    </tr>
+{{--                    <tr>--}}
+{{--                        <td><span class="fw-bold">1</span></td>--}}
+{{--                        <td class="pe-0">--}}
+{{--                            <div class="d-flex align-items-center">--}}
+{{--                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">--}}
+{{--                                    <div class="symbol-label">--}}
+{{--                                        <img src="{{ asset('themes/common/media/images/blank-user.jpg') }}" alt="Emma Smith" class="w-100">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="d-flex flex-column">--}}
+{{--                                    <a class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>--}}
+{{--                                    <span>smith@kpmg.com</span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </td>--}}
+{{--                        <td class="text-center pe-0">--}}
+{{--                            <div class="badge badge-secondary px-4 py-1 fw-bold">Administrador de Medios</div>--}}
+{{--                        </td>--}}
+{{--                        <td class="text-center pe-0">--}}
+{{--                            <div class="badge badge-light-danger">Inactivo</div>--}}
+{{--                        </td>--}}
+{{--                        <td class="text-center pe-0">02/10/2024 12:52 pm</td>--}}
+{{--                        <td class="text-end">--}}
+{{--                            <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="las la-wallet fs-2"></i></a>--}}
+{{--                        </td>--}}
+{{--                    </tr>--}}
                     </tbody>
                 </table>
             </div>

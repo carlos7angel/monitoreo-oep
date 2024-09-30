@@ -101,34 +101,34 @@
                     </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">
-                    <tr>
-                        <td><span class="fw-bold"></span></td>
-                        <td class="pe-0">F01001</td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <a class="symbol symbol-50px">
-                                    <span class="symbol-label" style="background-image:url(assets/media/stock/ecommerce/68.png);"></span>
-                                </a>
-                                <div class="ms-5">
-                                    <a class="text-gray-700 fs-6 fw-bold mb-1">Elecciones Generales</a>
-                                    <div class="text-muted fs-7 fw-bold">2024</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="text-center ">
-                            Generales
-                        </td>
-                        <td class="text-center">
-                            10/12/2024
-                        </td>
-                        <td class="text-center pe-0">
-                            <div class="badge badge-light-danger">Inactive</div>
-                        </td>
-                        <td class="text-center pe-0">02/10/2024 12:52 pm</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="las la-edit fs-2"></i></a>
-                        </td>
-                    </tr>
+{{--                    <tr>--}}
+{{--                        <td><span class="fw-bold"></span></td>--}}
+{{--                        <td class="pe-0">F01001</td>--}}
+{{--                        <td>--}}
+{{--                            <div class="d-flex align-items-center">--}}
+{{--                                <a class="symbol symbol-50px">--}}
+{{--                                    <span class="symbol-label" style="background-image:url(assets/media/stock/ecommerce/68.png);"></span>--}}
+{{--                                </a>--}}
+{{--                                <div class="ms-5">--}}
+{{--                                    <a class="text-gray-700 fs-6 fw-bold mb-1">Elecciones Generales</a>--}}
+{{--                                    <div class="text-muted fs-7 fw-bold">2024</div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </td>--}}
+{{--                        <td class="text-center ">--}}
+{{--                            Generales--}}
+{{--                        </td>--}}
+{{--                        <td class="text-center">--}}
+{{--                            10/12/2024--}}
+{{--                        </td>--}}
+{{--                        <td class="text-center pe-0">--}}
+{{--                            <div class="badge badge-light-danger">Inactive</div>--}}
+{{--                        </td>--}}
+{{--                        <td class="text-center pe-0">02/10/2024 12:52 pm</td>--}}
+{{--                        <td class="text-end">--}}
+{{--                            <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="las la-edit fs-2"></i></a>--}}
+{{--                        </td>--}}
+{{--                    </tr>--}}
                     </tbody>
                 </table>
             </div>

@@ -77,34 +77,34 @@
                     </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">
-                        <tr>
-                            <td><span class="fw-bold">1</span></td>
-                            <td class="text-center pe-0">D8A580-2024</td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <a class="symbol symbol-50px">
-                                        <span class="symbol-label" style="background-image:url();"></span>
-                                    </a>
-                                    <div class="ms-3">
-                                        <div class="text-gray-800 text-hover-primary fs-6 fw-bold mb-0">Elecciones Judiciales 2024</div>
-                                        <div class="text-muted fs-7">EJUD24</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-center pe-0">
-                                <span class="fs-7 pe-2">Del</span>
-                                <div class="badge badge-secondary py-2 px-4">01/09/2024</div>
-                                <span class="fs-7 px-2">al</span>
-                                <div class="badge badge-secondary py-2 px-4">30/09/2024</div>
-                            </td>
-                            <td class="text-center pe-0">
-                                <div class="badge badge-success py-1 px-2">Acreditado</div>
-                            </td>
-                            <td class="text-center pe-0"><span class="text-gray-700">02/10/2024 12:35 pm</span></td>
-                            <td class="text-end">
-                                <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-gear fs-2"></i></a>
-                            </td>
-                        </tr>
+{{--                        <tr>--}}
+{{--                            <td><span class="fw-bold">1</span></td>--}}
+{{--                            <td class="text-center pe-0">D8A580-2024</td>--}}
+{{--                            <td>--}}
+{{--                                <div class="d-flex align-items-center">--}}
+{{--                                    <a class="symbol symbol-50px">--}}
+{{--                                        <span class="symbol-label" style="background-image:url();"></span>--}}
+{{--                                    </a>--}}
+{{--                                    <div class="ms-3">--}}
+{{--                                        <div class="text-gray-800 text-hover-primary fs-6 fw-bold mb-0">Elecciones Judiciales 2024</div>--}}
+{{--                                        <div class="text-muted fs-7">EJUD24</div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td class="text-center pe-0">--}}
+{{--                                <span class="fs-7 pe-2">Del</span>--}}
+{{--                                <div class="badge badge-secondary py-2 px-4">01/09/2024</div>--}}
+{{--                                <span class="fs-7 px-2">al</span>--}}
+{{--                                <div class="badge badge-secondary py-2 px-4">30/09/2024</div>--}}
+{{--                            </td>--}}
+{{--                            <td class="text-center pe-0">--}}
+{{--                                <div class="badge badge-success py-1 px-2">Acreditado</div>--}}
+{{--                            </td>--}}
+{{--                            <td class="text-center pe-0"><span class="text-gray-700">02/10/2024 12:35 pm</span></td>--}}
+{{--                            <td class="text-end">--}}
+{{--                                <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-gear fs-2"></i></a>--}}
+{{--                            </td>--}}
+{{--                        </tr>--}}
                     </tbody>
                 </table>
             </div>
