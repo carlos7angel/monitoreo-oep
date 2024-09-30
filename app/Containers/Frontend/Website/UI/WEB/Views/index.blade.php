@@ -7,17 +7,17 @@
             <div class="app-hero-wrapper d-flex align-items-stretch py-5 py-lg-20 me-lg-n20">
                 <div class="d-flex flex-column justify-content-center py-5 py-lg-10 ">
                     <h1 class="text-gray-900 fs-3x fw-bolder letter-spacing">
-                        Órgano Electoral
+                        Sistema de Monitoreo de Propaganda Electoral
                     </h1>
                     <h3 class="d-flex text-gray-900 fs-1 fw-bold letter-spacing">
-                        Sistema de Monitoreo
+                        REGISTRO DE MEDIOS
                     </h3>
-                    <h4 class="d-flex text-gray-900 fs-1 fw-bold letter-spacing">
-                        de
-                        <span class="ms-3 d-inline-flex position-relative">
-                            <span class="px-1">Propaganda Electoral</span>
-                        </span>
-                    </h4>
+{{--                    <h4 class="d-flex text-gray-900 fs-1 fw-bold letter-spacing">--}}
+{{--                        de--}}
+{{--                        <span class="ms-3 d-inline-flex position-relative">--}}
+{{--                            <span class="px-1">Propaganda Electoral</span>--}}
+{{--                        </span>--}}
+{{--                    </h4>--}}
                     <p class="text-gray-600 fs-4 lh-2 fw-semibold py-5 py-lg-6">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, <br/>
                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br/>
@@ -32,7 +32,7 @@
                         </a>
                     </div>
                 </div>
-                <img src="{{ asset('themes/external/media/misc/hero.png') }}" class="app-hero-img" alt=""/>
+                <img src="{{ asset('themes/external/media/misc/hero__xx.png') }}" class="app-hero-img" alt=""/>
             </div>
         </div>
     </div>
