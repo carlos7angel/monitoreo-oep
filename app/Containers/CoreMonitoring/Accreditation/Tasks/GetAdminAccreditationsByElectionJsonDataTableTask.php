@@ -61,7 +61,7 @@ class GetAdminAccreditationsByElectionJsonDataTableTask extends ParentTask
 
             // $query = $query->whereIn('status', ['active', 'finished']);
             return $query->distinct()->select(['media_accreditations.*', 'media_profiles.name as media_name', 'media_profiles.business_name as media_business_name',
-                'media_profiles.logo as media_logo', 'media_profiles.type as media_type']);
+                'media_profiles.logo as media_logo', 'media_profiles.media_type_television', 'media_profiles.media_type_radio', 'media_profiles.media_type_print', 'media_profiles.media_type_digital']);
         });
 
         $recordsTotal =  (clone $result)->count();

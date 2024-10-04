@@ -10,7 +10,7 @@ use App\Ship\Parents\Tasks\Task as ParentTask;
 class CreateUserMediaProfileTask extends ParentTask
 {
     public function __construct(
-        protected readonly MediaProfileRepository $repository,
+        protected MediaProfileRepository $repository,
     ) {
     }
 
@@ -19,10 +19,10 @@ class CreateUserMediaProfileTask extends ParentTask
      */
     public function run(array $data): MediaProfile
     {
-//        try {
+        try {
             return $this->repository->create($data);
-//        } catch (\Exception) {
-//            throw new CreateResourceFailedException();
-//        }
+        } catch (\Exception) {
+            throw new CreateResourceFailedException();
+        }
     }
 }

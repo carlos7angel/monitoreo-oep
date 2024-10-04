@@ -7,9 +7,10 @@ use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTa
 use App\Containers\CoreMonitoring\Accreditation\Models\Accreditation;
 use App\Containers\CoreMonitoring\Accreditation\Tasks\CreateAccreditationTask;
 use App\Containers\CoreMonitoring\Accreditation\Tasks\GenerateAccreditationDataTask;
+use App\Containers\CoreMonitoring\Accreditation\Tasks\StoreAccreditationRatesTask;
+use App\Containers\CoreMonitoring\Accreditation\Tasks\UpdateAccreditationRatesTask;
 use App\Containers\CoreMonitoring\Accreditation\Tasks\UpdateAccreditationTask;
 use App\Containers\CoreMonitoring\Accreditation\Tasks\UpdateStatusActivityAccreditationTask;
-use App\Containers\CoreMonitoring\Accreditation\UI\WEB\Requests\CreateAccreditationRequest;
 use App\Containers\CoreMonitoring\FileManager\Tasks\CreateFileTask;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
@@ -23,6 +24,8 @@ class CreateAccreditationAction extends ParentAction
         private CreateFileTask $createFileTask,
         private CreateAccreditationTask $createAccreditationTask,
         private UpdateAccreditationTask $updateAccreditationTask,
+        private StoreAccreditationRatesTask $storeAccreditationRatesTask,
+        private UpdateAccreditationRatesTask $updateAccreditationRatesTask,
     ) {
     }
 
@@ -44,8 +47,7 @@ class CreateAccreditationAction extends ParentAction
             'fid_election' => (int) $request->get('media_election'),
             'fid_user' => $user->id,
             'fid_media_profile' => $user->profile_data->id,
-            'status' => 'new',
-            'submitted_at' => Carbon::now()->toDateTimeString()
+            'status' => 'draft',
         ];
 
         $accreditation = $this->createAccreditationTask->run($data);
@@ -61,17 +63,13 @@ class CreateAccreditationAction extends ParentAction
             $data['file_affidavit'] = $file_affidavit->unique_code;
         }
 
-        if($request->file('media_file_pricing_list')) {
-            $file_pricing_list = $this->createFileTask->run($request->file('media_file_pricing_list'), 'accreditation', $accreditation->id, $user);
-            $data['file_pricing_list'] = $file_pricing_list->unique_code;
-        }
-
         $data['data'] = app(GenerateAccreditationDataTask::class)->run($user->profile_data);
         $data['code'] = 'D-' . strtoupper(substr(md5($accreditation->id . $accreditation->created_at . $accreditation->code),0,6)) . '-' . Carbon::now()->format('y');
-        $data['status_activity'] = app(UpdateStatusActivityAccreditationTask::class)->run(null,'new', '', $user->id);
+        $data['status_activity'] = app(UpdateStatusActivityAccreditationTask::class)->run(null,'draft', '', $user->id);
 
         $accreditation = $this->updateAccreditationTask->run($data, $accreditation->id);
-
+        
+        $this->updateAccreditationRatesTask->run($request, $user, $accreditation);
 
         return $accreditation;
     }

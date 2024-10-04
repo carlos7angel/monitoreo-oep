@@ -58,7 +58,7 @@ var KTAccreditationsList = function () {
             columns: [
                 {data: 'id', name: "id"},
                 {data: 'media_name', name: "media_profiles.name"},
-                {data: 'media_type', name: "media_profiles.type"},
+                {data: 'media_type_television', name: "media_profiles.media_type_television"},
                 {data: 'code', name: "code"},
                 {data: 'submitted_at', name: "submitted_at"},
                 {data: 'status', name: "status"},
@@ -100,16 +100,24 @@ var KTAccreditationsList = function () {
                 },
                 {
                     targets: 2,
-                    orderable: true,
-                    searchable: true,
+                    orderable: false,
+                    searchable: false,
                     className: 'text-center pe-0',
                     render: function (data, type, full, meta) {
-                        let types = JSON.parse(data);
-                        let text = ``;
-                        types.forEach((el) => {
-                            text = text + `<div class="badge badge-secondary py-2 px-4 me-2">${el}</div>`
-                        });
-                        return `<span>${text}</span>`;
+                        let types = ``;
+                        if(full.media_type_television == 1) {
+                            types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Televisivo</div>`
+                        }
+                        if(full.media_type_radio == 1) {
+                            types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Radial</div>`
+                        }
+                        if(full.media_type_print == 1) {
+                            types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Impreso</div>`
+                        }
+                        if(full.media_type_digital == 1) {
+                            types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Digital</div>`
+                        }
+                        return `<span>${types}</span>`;
                     },
                 },
                 {

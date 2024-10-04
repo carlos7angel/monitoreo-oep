@@ -62,7 +62,7 @@ var KTMediaList = function () {
                 {data: 'id', name: "id"},
                 {data: 'name', name: "name"},
                 {data: 'email', name: "name"},
-                {data: 'type', name: "active"},
+                {data: 'media_type_television', name: "media_type_television"},
                 {data: 'registration_date', name: "registration_date"},
                 {data: 'status', name: "status"},
                 {data: null, responsivePriority: -1},
@@ -107,15 +107,28 @@ var KTMediaList = function () {
                 {
                     targets: 3,
                     searchable: false,
-                    orderable: true,
+                    orderable: false,
                     className: 'pe-0',
                     render: function (data, type, full, meta) {
-                        let types = JSON.parse(data);
-                        let text = ``;
-                        types.forEach((el) => {
-                            text = text + `<div class="badge badge-secondary py-2 px-4 me-2">${el}</div>`
-                        });
-                        return `<span>${text}</span>`;
+                        let types = ``;
+                        if (full.media_type_television) {
+                            types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Televisivo</div>`
+                        }
+                        if (full.media_type_radio) {
+                            types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Radial</div>`
+                        }
+                        if (full.media_type_print) {
+                            types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Impreso</div>`
+                        }
+                        if (full.media_type_digital) {
+                            types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Digital</div>`
+                        }
+                        // let types = JSON.parse(data);
+                        // let text = ``;
+                        // types.forEach((el) => {
+                        //     text = text + `<div class="badge badge-secondary py-2 px-4 me-2">${el}</div>`
+                        // });
+                        return `<span>${types}</span>`;
                     },
                 },
                 {

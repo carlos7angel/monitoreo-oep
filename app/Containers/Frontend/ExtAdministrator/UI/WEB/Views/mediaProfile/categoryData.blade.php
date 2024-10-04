@@ -94,164 +94,89 @@
                             <div class="fv-row mb-7">
                                 <label class="form-label mb-1">Tipo de Medio</label>
                                 <div class="text-muted fs-7 mb-5">Puede seleccionar más de una opción, en tal caso, en su declaración jurada debe incluir las tarifas de los tipos de medios seleccionados.</div>
-                                @php
-                                    $types = json_decode($profile->type);
-                                @endphp
+
                                 <div class="form-check form-check-custom mb-3">
-                                    <input class="form-check-input h-25px w-25px" type="checkbox" name="media_type[]" value="Televisivo" {{ in_array('Televisivo', $types) ? 'checked="checked"' : '' }} />
-                                    <label class="form-check-label fw-semibold">Televisión</label>
+                                    <input class="form-check-input h-25px w-25px media_type_checkbox" type="checkbox" name="media_type_television" value="media_type_television" data-label="Televisivo" {{ $profile->media_type_television ? 'checked="checked"' : '' }} />
+                                    <label class="form-check-label fw-semibold">Televisivo</label>
                                 </div>
                                 <div class="form-check form-check-custom mb-3">
-                                    <input class="form-check-input h-25px w-25px" type="checkbox" name="media_type[]" value="Radial" {{ in_array('Radial', $types) ? 'checked="checked"' : '' }} />
-                                    <label class="form-check-label fw-semibold">Radio</label>
+                                    <input class="form-check-input h-25px w-25px media_type_checkbox" type="checkbox" name="media_type_radio" value="media_type_radio" data-label="Radial" {{ $profile->media_type_radio ? 'checked="checked"' : '' }} />
+                                    <label class="form-check-label fw-semibold">Radial</label>
                                 </div>
                                 <div class="form-check form-check-custom mb-3">
-                                    <input class="form-check-input h-25px w-25px" type="checkbox" name="media_type[]" value="Impreso" {{ in_array('Impreso', $types) ? 'checked="checked"' : '' }} />
+                                    <input class="form-check-input h-25px w-25px media_type_checkbox" type="checkbox" name="media_type_print" value="media_type_print" data-label="Impreso" {{ $profile->media_type_print ? 'checked="checked"' : '' }} />
                                     <label class="form-check-label fw-semibold">Impreso</label>
                                 </div>
                                 <div class="form-check form-check-custom mb-3">
-                                    <input class="form-check-input h-25px w-25px" type="checkbox" name="media_type[]" value="Digital" {{ in_array('Digital', $types) ? 'checked="checked"' : '' }} />
+                                    <input class="form-check-input h-25px w-25px media_type_checkbox" type="checkbox" name="media_type_digital" value="media_type_digital" data-label="Digital" {{ $profile->media_type_digital ? 'checked="checked"' : '' }} />
                                     <label class="form-check-label fw-semibold">Digital</label>
                                 </div>
                             </div>
 
-                            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                <div class="col">
-                                    <div class="fv-row mb-7">
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span class="required">Cobertura</span>
-                                        </label>
-                                        <div class="w-100">
-                                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Seleccione una opción"
-                                                    id="kt_media_coverage_select" name="media_coverage">
-                                                <option></option>
-                                                <option value="Nacional" {{ $profile->coverage == 'Nacional' ? 'selected="selected"' : '' }}>Nacional</option>
-                                                <option value="La Paz" {{ $profile->coverage == 'La Paz' ? 'selected="selected"' : '' }}>La Paz</option>
-                                                <option value="Cochabamba" {{ $profile->coverage == 'Cochabamba' ? 'selected="selected"' : '' }}>Cochabamba</option>
-                                                <option value="Santa Cruz" {{ $profile->coverage == 'Santa Cruz' ? 'selected="selected"' : '' }}>Santa Cruz</option>
-                                                <option value="Chuquisaca" {{ $profile->coverage == 'Chuquisaca' ? 'selected="selected"' : '' }}>Chuquisaca</option>
-                                                <option value="Tarija" {{ $profile->coverage == 'Tarija' ? 'selected="selected"' : '' }}>Tarija</option>
-                                                <option value="Oruro" {{ $profile->coverage == 'Oruro' ? 'selected="selected"' : '' }}>Oruro</option>
-                                                <option value="Potosí" {{ $profile->coverage == 'Potosí' ? 'selected="selected"' : '' }}>Potosí</option>
-                                                <option value="Beni" {{ $profile->coverage == 'Beni' ? 'selected="selected"' : '' }}>Beni</option>
-                                                <option value="Pando" {{ $profile->coverage == 'Pando' ? 'selected="selected"' : '' }}>Pando</option>
-                                            </select>
-                                        </div>
-                                        <div class="text-muted fs-7 mt-1">Marque el departamento al que abarca la cobertura del medio. Si es de alcance Nacional marque la opción Nacional.</div>
-                                    </div>
-                                </div>
-                                <div class="col">
+                            <div class="mb-7 pt-10">
+                                <div class="card-title">
+                                    <h3>Cobertura y Alcance</h3>
                                 </div>
                             </div>
 
-                            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                <div class="col">
-                                    <div class="fv-row mb-7">
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span class="required">Alcance</span>
-                                        </label>
-                                        <div class="w-100">
-                                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Seleccione una opción"
-                                                    id="kt_media_scope_select" name="media_scope">
-                                                <option></option>
-                                                <option value="Nacional" {{ $profile->scope == 'Nacional' ? 'selected="selected"' : '' }}>Nacional</option>
-                                                <option value="Departamental" {{ $profile->scope == 'Departamental' ? 'selected="selected"' : '' }}>Departamental</option>
-                                                <option value="Municipal" {{ $profile->scope == 'Municipal' ? 'selected="selected"' : '' }}>Municipal</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                            <div class="row fv-row mb-7">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-bordered" id="table_media_types">
+                                        <thead>
+                                            <tr class="fw-bold fs-6 text-gray-800">
+                                                <th class="text-center">#</th>
+                                                <th>TIPO DE MEDIO</th>
+                                                <th>COBERTURA</th>
+                                                <th>ALCANCE</th>
+                                                <th>DEPARTAMENTO</th>
+                                                <th>MUNICIPIO/REGIÓN/AIOC</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($profile->mediaTypes as $type)
+                                                @php
+                                                    $type_text = "";
+                                                    switch ($type->type) {
+                                                        case 'Televisivo':
+                                                        $type_text = "media_type_television";
+                                                        break;
+                                                        case 'Radial':
+                                                        $type_text = "media_type_radio";
+                                                        break;
+                                                        case 'Impreso':
+                                                        $type_text = "media_type_print";
+                                                        break;
+                                                        case 'Digital':
+                                                        $type_text = "media_type_digital";
+                                                        break;
+                                                    }
+                                                @endphp
+                                                <tr data-type="{{ $type_text }}" data-valid="1">
+                                                    <td class="text-center"><a href="javascript:void(0)" class="btn btn-sm btn-icon btn-primary kt_trigger_media_type_modal"><i class="ki-outline ki-pencil fs-2"></i></a></td>
+                                                    <td class="d_label">
+                                                        {{ strtoupper($type->type) }}
+                                                    </td>
+                                                    <td class="d_coverage">{{ $type->coverage }}</td>
+                                                    <td class="d_scope">{{ $type->scope }}</td>
+                                                    <td class="d_department" data-val="{{ $type->scope_department }}">{{ $type->scope_department }}</td>
+                                                    <td class="d_area" data-val="{{ $type->scope_area }}">{{ $type->scope_area ? $type->scope_area : '-' }}</td>
+                                                </tr>
+                                            @endforeach
+{{--                                            <tr data-type="media_type_radio">--}}
+{{--                                                <td class="text-center"><a href="javascript:void(0)" class="btn btn-sm btn-icon btn-primary kt_trigger_media_type_modal"><i class="ki-outline ki-pencil fs-2"></i></a></td>--}}
+{{--                                                <td>RADIAL</td>--}}
+{{--                                                <td>La Paz</td>--}}
+{{--                                                <td>Departamental</td>--}}
+{{--                                                <td>La Paz</td>--}}
+{{--                                                <td>Murillo</td>--}}
+{{--                                            </tr>--}}
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="col">
-                                </div>
+                                <input type="hidden" name="media_types" value="">
                             </div>
 
-                            <div id="kt_wrapper_media_profile_scope_national" class="d-none">
-                            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                <div class="col">
-                                    <div class="fv-row mb-7">
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span class="required">Departamentos</span>
-                                        </label>
-                                        <div class="w-100">
-                                            @php
-                                                $states = [];
-                                                if ($profile->scope === 'Nacional' && $profile->scope_department) {
-                                                    $states = json_decode($profile->scope_department);
-                                                }
-                                            @endphp
-                                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Selecciona los departamentos" data-allow-clear="true" multiple="multiple"
-                                                    id="kt_media_scope_states_select" name="media_scope_states[]">
-                                                <option></option>
-                                                <option value="La Paz" {{ in_array('La Paz', $states) ? 'selected="selected"' : '' }}>La Paz</option>
-                                                <option value="Cochabamba" {{ in_array('Cochabamba', $states) ? 'selected="selected"' : '' }}>Cochabamba</option>
-                                                <option value="Santa Cruz" {{ in_array('Santa Cruz', $states) ? 'selected="selected"' : '' }}>Santa Cruz</option>
-                                                <option value="Chuquisaca" {{ in_array('Chuquisaca', $states) ? 'selected="selected"' : '' }}>Chuquisaca</option>
-                                                <option value="Tarija" {{ in_array('Tarija', $states) ? 'selected="selected"' : '' }}>Tarija</option>
-                                                <option value="Oruro" {{ in_array('Oruro', $states) ? 'selected="selected"' : '' }}>Oruro</option>
-                                                <option value="Potosi" {{ in_array('Potosi', $states) ? 'selected="selected"' : '' }}>Potosi</option>
-                                                <option value="Beni" {{ in_array('Beni', $states) ? 'selected="selected"' : '' }}>Beni</option>
-                                                <option value="Pando" {{ in_array('Pando', $states) ? 'selected="selected"' : '' }}>Pando</option>
-                                            </select>
-                                        </div>
-                                        <div class="text-muted fs-7 mt-1">Debe seleccionar al menos 2 o más departamentos.</div>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
 
-                            <div id="kt_wrapper_media_profile_scope_state" class="d-none">
-                            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                <div class="col">
-                                    <div class="fv-row mb-7">
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span class="required">Departamento</span>
-                                        </label>
-                                        <div class="w-100">
-                                            @php
-                                                $state = '';
-                                                if ($profile->scope === 'Departamental' && $profile->scope_department) {
-                                                    $state = json_decode($profile->scope_department)[0];
-                                                }
-                                            @endphp
-                                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Selecciona un departamento"
-                                                    id="kt_media_scope_state_select" name="media_scope_state">
-                                                <option></option>
-                                                <option value="La Paz" {{ $state == 'La Paz' ? 'selected="selected"' : '' }}>La Paz</option>
-                                                <option value="Cochabamba" {{ $state == 'Cochabamba' ? 'selected="selected"' : '' }}>Cochabamba</option>
-                                                <option value="Santa Cruz" {{ $state == 'Santa Cruz' ? 'selected="selected"' : '' }}>Santa Cruz</option>
-                                                <option value="Chuquisaca" {{ $state == 'Chuquisaca' ? 'selected="selected"' : '' }}>Chuquisaca</option>
-                                                <option value="Tarija" {{ $state == 'Tarija' ? 'selected="selected"' : '' }}>Tarija</option>
-                                                <option value="Oruro" {{ $state == 'Oruro' ? 'selected="selected"' : '' }}>Oruro</option>
-                                                <option value="Potosí" {{ $state == 'Potosí' ? 'selected="selected"' : '' }}>Potosí</option>
-                                                <option value="Beni" {{ $state == 'Beni' ? 'selected="selected"' : '' }}>Beni</option>
-                                                <option value="Pando" {{ $state == 'Pando' ? 'selected="selected"' : '' }}>Pando</option>
-                                            </select>
-                                        </div>
-                                        <div class="text-muted fs-7 mt-1">Marque el departamento de cobertura del medio.</div>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-
-                            <div id="kt_wrapper_media_profile_scope_municipality" class="d-none">
-                            <div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
-                                <div class="col">
-                                    <div class="fv-row mb-7">
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span class="required">Municipio</span>
-                                        </label>
-                                        @php
-                                            $municipality = '';
-                                            if ($profile->scope === 'Municipal' && $profile->scope_municipality) {
-                                                $municipality = $profile->scope_municipality;
-                                            }
-                                        @endphp
-                                        <input type="text" class="form-control" name="media_scope_municipality" value="{{ $municipality }}" />
-                                        <div class="text-muted fs-7 mt-1">Describa el municipio que abarca la cobertura el medio.</div>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
 
                             <div class="separator mb-6"></div>
 
@@ -266,6 +191,154 @@
                         </form>
                         <!--end::Form-->
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('modals')
+    <div class="modal fade" id="kt_modal_media_type" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mw-650px">
+            <div class="modal-content rounded">
+                <div class="modal-header pb-0 border-0 justify-content-end">
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <i class="ki-duotone ki-cross fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                </div>
+                <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+
+                    <form id="kt_form_media_type" class="form" method="post" autocomplete="off">
+
+                        <div class="mb-13 text-center">
+                            <h3 class="mb-3">Cobertura y alcance</h3>
+                            <div class="text-muted fw-semibold fs-5">Seleccione la cobertura y alcance del tipo de medio</div>
+                        </div>
+
+                        <div class="d-flex flex-column mb-7 fv-row">
+                            <label class="required d-flex align-items-center fs-6 fw-semibold mb-2">Medio</label>
+                            <input type="text" class="form-control form-control-solid" placeholder="" name="media_type_name" value="" readonly />
+                            <input type="hidden" class="form-control" name="media_type_id" value="" />
+                        </div>
+
+                        <div class="d-flex flex-column mb-7 fv-row">
+                            <label class="fs-6 fw-semibold form-label mt-3">
+                                <span class="required">Cobertura</span>
+                            </label>
+                            <div class="w-100">
+                                <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Seleccione una opción"
+                                        id="kt_media_coverage_select" name="media_coverage">
+                                    <option></option>
+                                    <option value="Nacional">Nacional</option>
+                                    <option value="La Paz">La Paz</option>
+                                    <option value="Cochabamba">Cochabamba</option>
+                                    <option value="Santa Cruz">Santa Cruz</option>
+                                    <option value="Chuquisaca">Chuquisaca</option>
+                                    <option value="Tarija">Tarija</option>
+                                    <option value="Oruro">Oruro</option>
+                                    <option value="Potosí">Potosí</option>
+                                    <option value="Beni">Beni</option>
+                                    <option value="Pando">Pando</option>
+                                </select>
+                            </div>
+                            <div class="text-muted fs-7 mt-1">Marque el departamento al que abarca la cobertura del medio. Si es de alcance Nacional marque la opción Nacional.</div>
+                        </div>
+
+                        <div class="d-flex flex-column mb-7 fv-row">
+                            <label class="fs-6 fw-semibold form-label mt-3">
+                                <span class="required">Alcance</span>
+                            </label>
+                            <div class="w-100">
+                                <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Seleccione una opción"
+                                        id="kt_media_scope_select" name="media_scope">
+                                    <option></option>
+                                    <option value="Nacional">Nacional</option>
+                                    <option value="Departamental">Departamental</option>
+                                    <option value="Regional">Regional</option>
+                                    <option value="Municipal">Municipal</option>
+                                    <option value="AIOC">AIOC</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="kt_wrapper_media_profile_scope_national" class="d-none">
+                            <div class="d-flex flex-column mb-7 fv-row">
+                                <label class="fs-6 fw-semibold form-label mt-3">
+                                    <span class="required">Departamentos</span>
+                                </label>
+                                <div class="w-100">
+                                    @php
+                                        $states = [];
+                                        if ($profile->scope === 'Nacional' && $profile->scope_department) {
+                                            $states = json_decode($profile->scope_department);
+                                        }
+                                    @endphp
+                                    <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Selecciona los departamentos" data-allow-clear="true" multiple="multiple"
+                                            id="kt_media_scope_states_select" name="media_scope_states[]">
+                                        <option></option>
+                                        <option value="La Paz">La Paz</option>
+                                        <option value="Cochabamba">Cochabamba</option>
+                                        <option value="Santa Cruz">Santa Cruz</option>
+                                        <option value="Chuquisaca">Chuquisaca</option>
+                                        <option value="Tarija">Tarija</option>
+                                        <option value="Oruro">Oruro</option>
+                                        <option value="Potosi">Potosi</option>
+                                        <option value="Beni">Beni</option>
+                                        <option value="Pando">Pando</option>
+                                    </select>
+                                </div>
+                                <div class="text-muted fs-7 mt-1">Debe seleccionar al menos 2 o más departamentos.</div>
+                            </div>
+                        </div>
+
+                        <div id="kt_wrapper_media_profile_scope_state" class="d-none">
+                            <div class="d-flex flex-column fv-row mb-7">
+                                <label class="fs-6 fw-semibold form-label mt-3">
+                                    <span class="required">Departamento</span>
+                                </label>
+                                <div class="w-100">
+                                    <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Selecciona un departamento"
+                                            id="kt_media_scope_state_select" name="media_scope_state">
+                                        <option></option>
+                                        <option value="La Paz">La Paz</option>
+                                        <option value="Cochabamba">Cochabamba</option>
+                                        <option value="Santa Cruz">Santa Cruz</option>
+                                        <option value="Chuquisaca">Chuquisaca</option>
+                                        <option value="Tarija">Tarija</option>
+                                        <option value="Oruro">Oruro</option>
+                                        <option value="Potosí">Potosí</option>
+                                        <option value="Beni">Beni</option>
+                                        <option value="Pando">Pando</option>
+                                    </select>
+                                </div>
+                                <div class="text-muted fs-7 mt-1">Marque el departamento de cobertura del medio.</div>
+                            </div>
+                        </div>
+
+                        <div id="kt_wrapper_media_profile_scope_area" class="d-none">
+                            <div class="d-flex flex-column fv-row mb-7">
+                                <label class="fs-6 fw-semibold form-label mt-3">
+                                    <span class="required">Region/Municipio/AIOC</span>
+                                </label>
+                                <input type="text" class="form-control" id="kt_media_scope_area" name="media_scope_area" value="" />
+                            </div>
+                        </div>
+
+                        <div class="separator mb-6"></div>
+
+                        <div class="text-center">
+                            <button type="reset" id="kt_button_media_type_cancel" class="btn btn-light me-3">Cancelar</button>
+                            <button type="submit" id="kt_button_media_type_submit" class="btn btn-primary">
+                                <span class="indicator-label">Guardar</span>
+                                <span class="indicator-progress">Espere por favor...
+									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>

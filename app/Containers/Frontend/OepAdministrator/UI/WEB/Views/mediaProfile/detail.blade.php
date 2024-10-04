@@ -111,62 +111,67 @@
 
                         <div class="m-0 pb-5">
                             <div class="fw-bold fs-3 text-primary mb-8">Clasificación</div>
+
                             <div class="row g-5 mb-11">
-                                <div class="col-sm-6">
-                                    @php
-                                        $scope_content = "";
-                                        $types = json_decode($profile->type);
-                                    @endphp
-                                    <div class="fw-semibold fs-7 text-gray-600 mb-1">Tipo de Medio:</div>
-                                    <div class="fw-bold fs-6 text-gray-800">{{ implode(', ', $types) }}</div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="fw-semibold fs-7 text-gray-600 mb-1">Cobertura:</div>
-                                    <div class="fw-bold fs-6 text-gray-800">{{ $profile->coverage }}</div>
-                                </div>
-                            </div>
-                            <div class="row g-5 mb-12">
-                                <div class="col-sm-6">
-                                    <div class="fw-semibold fs-7 text-gray-600 mb-1">Alcance:</div>
-                                    <div class="fw-bold fs-6 text-gray-800">{{ $profile->scope }}</div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="fw-semibold fs-7 text-gray-600 mb-1">
-                                        @switch($profile->scope)
-                                            @case('Nacional')
-                                            @php
-                                                $states = [];
-                                                if ($profile->scope_department) {
-                                                    $states = json_decode($profile->scope_department);
-                                                }
-                                                $scope_content = implode(', ', $states);
-                                            @endphp
-                                            <span>Departamentos:</span>
-                                            @break
-                                            @case('Departamental')
-                                            @php
-                                                $state = '';
-                                                if ($profile->scope === 'Departamental' && $profile->scope_department) {
-                                                    $state = json_decode($profile->scope_department)[0];
-                                                }
-                                                $scope_content = $state;
-                                            @endphp
-                                            <span>Departamento:</span>
-                                            @break
-                                            @case('Municipal')
-                                            @php
-                                                $scope_content = $profile->municipality;
-                                            @endphp
-                                            <span>Municipio:</span>
-                                            @break
-                                            @default
-                                            <span>-</span>
-                                        @endswitch
+
+                                    <div class="flex-grow-1">
+                                        <div class="table-responsive border-bottom mb-9">
+                                            <table class="table align-middle gs-0 gy-4 mb-3">
+                                                <thead>
+                                                <tr class="border-bottom bg-light fs-6 fw-bold text-muted">
+                                                    <th class="ps-4 rounded-start min-w-175px">Tipo</th>
+                                                    <th class="min-w-70px text-start">Cobertura</th>
+                                                    <th class="min-w-80px text-start">Alcance</th>
+                                                    <th class="min-w-100px text-start">Departamento(s)</th>
+                                                    <th class="min-w-70px text-start rounded-end">Municipio/Región<br/>/AIOC</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    @php
+
+                                                        $media_items = [
+                                                            'TELEVISIVO' => [
+                                                                'ENABLE' => $profile->media_type_television,
+                                                                'ITEM' => $profile->mediaTypes->where('type', 'Televisivo')->first()
+                                                            ],
+                                                            'RADIAL' => [
+                                                                'ENABLE' => $profile->media_type_radio,
+                                                                'ITEM' => $profile->mediaTypes->where('type', 'Radial')->first()
+                                                            ],
+                                                            'IMPRESO' => [
+                                                                'ENABLE' => $profile->media_type_print,
+                                                                'ITEM' => $profile->mediaTypes->where('type', 'Impreso')->first()
+                                                            ],
+                                                            'DIGITAL' => [
+                                                                'ENABLE' => $profile->media_type_digital,
+                                                                'ITEM' => $profile->mediaTypes->where('type', 'Digital')->first()
+                                                            ],
+                                                        ];
+                                                    @endphp
+
+                                                    @foreach($media_items as $key => $media)
+                                                        @if($media['ENABLE'])
+                                                        <tr class="fw-bold text-gray-700 fs-7 text-end">
+                                                            <td class="text-start pt-6">
+                                                                <i class="fa fa-genderless text-info fs-2 me-2"></i>
+                                                                <span>{{$key}}</span>
+                                                            </td>
+                                                            <td class="text-start pt-6">{{$media['ITEM']->coverage}}</td>
+                                                            <td class="text-start pt-6">{{$media['ITEM']->scope}}</td>
+                                                            <td class="text-start pt-6">{{$media['ITEM']->scope_department}}</td>
+                                                            <td class="text-start pt-6">{{ ($media['ITEM']->scope !== 'Nacional' && $media['ITEM']->scope !== 'Departamental' ? $media['ITEM']->scope_area : '-') }}</td>
+                                                        </tr>
+                                                        @endif
+                                                    @endforeach
+
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                    <div class="fw-bold fs-6 text-gray-800">{{ $scope_content }}</div>
-                                    {{--<div class="fw-semibold fs-7 text-gray-600"></div>--}}
-                                </div>
+
                             </div>
+
                         </div>
 
                         <div class="m-0">

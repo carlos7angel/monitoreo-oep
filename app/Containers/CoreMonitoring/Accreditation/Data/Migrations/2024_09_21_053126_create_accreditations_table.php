@@ -17,7 +17,7 @@ return new class() extends Migration {
             $table->foreign('fid_user')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('fid_media_profile')->nullable();
             $table->foreign('fid_media_profile')->references('id')->on('media_profiles')->onDelete('cascade');
-            $table->enum('status', ['new', 'observed', 'accredited', 'archived', 'rejected'])->default('new');
+            $table->enum('status', ['draft', 'new', 'observed', 'accredited', 'archived', 'rejected'])->default('new');
             $table->text('observations')->nullable();
             $table->text('status_activity')->nullable();
             $table->string('file_affidavit', 50)->nullable();
@@ -27,7 +27,7 @@ return new class() extends Migration {
             $table->unsignedBigInteger('accredited_by')->nullable();
             $table->foreign('accredited_by')->references('id')->on('users')->onDelete('cascade');
             $table->dateTime('due_date_observed')->nullable();
-            $table->dateTime('submitted_at');
+            $table->dateTime('submitted_at')->nullable();
             $table->dateTime('accredited_at')->nullable();
             $table->timestamps();
             // $table->softDeletes();

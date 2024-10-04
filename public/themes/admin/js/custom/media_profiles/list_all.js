@@ -113,12 +113,20 @@ var KTMediaList = function () {
                     orderable: false,
                     className: 'text-center pe-0',
                     render: function (data, type, full, meta) {
-                        let types = JSON.parse(data);
-                        let text = ``;
-                        types.forEach((el) => {
-                            text = text + `<div class="badge badge-secondary py-2 px-4 me-2">${el}</div>`
-                        });
-                        return `${text}`;
+                        let types = ``;
+                        if (full.media_type_television) {
+                            types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Televisivo</div>`
+                        }
+                        if (full.media_type_radio) {
+                            types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Radial</div>`
+                        }
+                        if (full.media_type_print) {
+                            types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Impreso</div>`
+                        }
+                        if (full.media_type_digital) {
+                            types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Digital</div>`
+                        }
+                        return `<span>${types}</span>`;
                     },
                 },
                 {

@@ -61,7 +61,7 @@ class AccreditationController extends WebController
         $profile = app(ConvertJsonDataToProfileDataTask::class)->run($accreditation->data);
         return view('frontend@oepAdministrator::accreditation.detailAccreditation', [
             'accreditation' => $accreditation,
-            'profile' => $profile
+            'profile_data' => $profile
         ], compact('page_title'));
     }
 

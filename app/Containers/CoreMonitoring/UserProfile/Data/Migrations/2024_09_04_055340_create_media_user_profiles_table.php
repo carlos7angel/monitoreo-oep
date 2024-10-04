@@ -15,7 +15,7 @@ return new class() extends Migration {
             $table->string('name', 100);
             $table->string('business_name', 100);
             $table->text('description')->nullable();
-            $table->string('type', 150);
+            // $table->string('type', 150);
             $table->string('email', 100);
             $table->string('logo', 150)->nullable();
             $table->dateTime('registration_date');
@@ -36,10 +36,15 @@ return new class() extends Migration {
             $table->string('file_rep_document', 50)->nullable();
             $table->string('file_nit', 50)->nullable();
 
-            $table->enum('coverage', ['Nacional', 'La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro', 'Potosi', 'Beni', 'Chuquisaca', 'Pando', 'Tarija'])->nullable();
-            $table->enum('scope', ['Nacional', 'Departamental', 'Municipal'])->nullable();
-            $table->string('scope_department', 150)->nullable(); // ARRAY
-            $table->string('scope_municipality', 150)->nullable();
+//            $table->enum('coverage', ['Nacional', 'La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro', 'Potosi', 'Beni', 'Chuquisaca', 'Pando', 'Tarija'])->nullable();
+//            $table->enum('scope', ['Nacional', 'Departamental', 'Municipal'])->nullable();
+//            $table->string('scope_department', 150)->nullable(); // ARRAY
+//            $table->string('scope_municipality', 150)->nullable();
+
+            $table->boolean('media_type_television')->default(false);
+            $table->boolean('media_type_radio')->default(false);
+            $table->boolean('media_type_print')->default(false);
+            $table->boolean('media_type_digital')->default(false);
 
             $table->enum('status', ['created', 'active', 'archived'])->default('created');
             $table->boolean('credentials_sent')->default(false);

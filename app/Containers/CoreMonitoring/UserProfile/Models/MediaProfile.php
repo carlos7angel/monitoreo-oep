@@ -14,7 +14,6 @@ class MediaProfile extends ParentModel
     protected $table = 'media_profiles';
 
     protected $fillable = [
-        'type',
         'name',
         'business_name',
         'description',
@@ -40,6 +39,10 @@ class MediaProfile extends ParentModel
         'status',
         'credentials_sent',
         'fid_user',
+        'media_type_television',
+        'media_type_radio',
+        'media_type_print',
+        'media_type_digital',
     ];
 
     protected $attributes = [
@@ -89,5 +92,10 @@ class MediaProfile extends ParentModel
     public function fileNit()
     {
         return $this->hasOne(File::class, 'unique_code', 'file_nit');
+    }
+
+    public function mediaTypes()
+    {
+        return $this->hasMany(MediaType::class, 'fid_media_profile');
     }
 }

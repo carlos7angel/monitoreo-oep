@@ -32,7 +32,6 @@ class RegisterMediaProfileAction extends ParentAction
             'media_name',
             'media_business_name',
             'media_nit',
-            'media_type',
             'media_rep_name',
             'media_cellphone',
             'media_email',
@@ -48,12 +47,15 @@ class RegisterMediaProfileAction extends ParentAction
             'name' => $sanitizedData['media_name'],
             'business_name' => $sanitizedData['media_business_name'],
             'nit' => $sanitizedData['media_nit'],
-            'type' => json_encode($sanitizedData['media_type']),
             'rep_full_name' => $sanitizedData['media_rep_name'],
             'cellphone' => $sanitizedData['media_cellphone'],
             'email' => $sanitizedData['media_email'],
             'registration_date' => Carbon::now(),
             'status' => 'created',
+            'media_type_television' => $request->has('media_type_television'),
+            'media_type_radio' => $request->has('media_type_radio'),
+            'media_type_print' => $request->has('media_type_print'),
+            'media_type_digital' => $request->has('media_type_digital'),
         ];
 
         return $this->createUserMediaProfileTask->run($data);

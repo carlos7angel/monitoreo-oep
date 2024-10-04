@@ -131,11 +131,12 @@ var KTAccreditationList = function () {
                             'observed': {'title': 'Observado', 'class': 'badge-warning'},
                             'rejected': {'title': 'Rechazado', 'class': 'badge-danger'},
                             'accredited': {'title': 'Acreditado', 'class': 'badge-success'},
+                            'draft': {'title': 'Borrador', 'class': 'badge-info'},
                         };
                         if (typeof status[data] === 'undefined') {
                             return data;
                         }
-                        return `<span class="badge ${status[data].class} fs-8 fw-bold py-1 px-2">${status[data].title}</span>`;
+                        return `<span class="badge ${status[data].class} fs-8 fw-bold py-2 px-4">${status[data].title}</span>`;
                     },
                 },
                 {
@@ -167,6 +168,10 @@ var KTAccreditationList = function () {
                                 var toEditUrl = "/medios/admin/acreditaciones/editar/" + full.id;
                                 return `<a href="${toDetailUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-eye fs-2"></i></a>
                                         <a href="${toEditUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-pencil fs-2"></i></a>`;
+                                break;
+                            case 'draft':
+                                var toEditUrl = "/medios/admin/acreditaciones/editar/" + full.id;
+                                return `<a href="${toEditUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-pencil fs-2"></i></a>`;
                                 break;
                             default:
                                 return `-`;

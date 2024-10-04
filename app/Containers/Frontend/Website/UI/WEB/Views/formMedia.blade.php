@@ -69,19 +69,19 @@
                                 </div>
                                 <div class="d-flex justify-content-between mt-4">
                                     <label class="form-check form-check-custom">
-                                        <input class="form-check-input h-25px w-25px" type="checkbox" name="media_type[]" value="Televisivo" />
+                                        <input class="form-check-input h-25px w-25px" type="checkbox" name="media_type_television" value="Televisivo" />
                                         <span class="form-check-label fw-semibold">Televisión</span>
                                     </label>
                                     <label class="form-check form-check-custom">
-                                        <input class="form-check-input h-25px w-25px" type="checkbox" name="media_type[]" value="Radial" />
+                                        <input class="form-check-input h-25px w-25px" type="checkbox" name="media_type_radio" value="Radial" />
                                         <span class="form-check-label fw-semibold">Radio</span>
                                     </label>
                                     <label class="form-check form-check-custom">
-                                        <input class="form-check-input h-25px w-25px" type="checkbox" name="media_type[]" value="Impreso" />
+                                        <input class="form-check-input h-25px w-25px" type="checkbox" name="media_type_print" value="Impreso" />
                                         <span class="form-check-label fw-semibold">Impreso</span>
                                     </label>
                                     <label class="form-check form-check-custom">
-                                        <input class="form-check-input h-25px w-25px" type="checkbox" name="media_type[]" value="Digital" />
+                                        <input class="form-check-input h-25px w-25px" type="checkbox" name="media_type_digital" value="Digital" />
                                         <span class="form-check-label fw-semibold">Digital</span>
                                     </label>
                                 </div>

@@ -19,7 +19,19 @@
                 <div class="d-flex align-items-center">Tipo</div>
             </td>
             <td class="fw-bold text-end">
-                <span class="text-gray-800">{{ $media_profile->type }}</span>
+                @if($media_profile->media_type_television)
+                    <div class="badge badge-secondary py-2 px-4 ms-2">Televisivo</div>
+                @endif
+                @if($media_profile->media_type_radio)
+                    <div class="badge badge-secondary py-2 px-4 ms-2">Radial</div>
+                @endif
+                @if($media_profile->media_type_print)
+                    <div class="badge badge-secondary py-2 px-4 ms-2">Impreso</div>
+                @endif
+                @if($media_profile->media_type_digital)
+                    <div class="badge badge-secondary py-2 px-4 ms-2">Digital</div>
+                @endif
+
             </td>
         </tr>
         <tr>

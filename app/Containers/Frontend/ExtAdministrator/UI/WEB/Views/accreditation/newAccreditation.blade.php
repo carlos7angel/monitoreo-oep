@@ -93,6 +93,19 @@
                                         <span class="stepper-number">3</span>
                                     </div>
                                     <div class="stepper-label">
+                                        <h3 class="stepper-title fs-6">Tarifario</h3>
+                                        <div class="stepper-desc fw-semibold"></div>
+                                    </div>
+                                </div>
+                                <div class="stepper-line h-20px"></div>
+                            </div>
+                            <div class="stepper-item" data-kt-stepper-element="nav">
+                                <div class="stepper-wrapper">
+                                    <div class="stepper-icon w-40px h-40px">
+                                        <i class="ki-outline ki-check fs-2 stepper-check"></i>
+                                        <span class="stepper-number">4</span>
+                                    </div>
+                                    <div class="stepper-label">
                                         <h3 class="stepper-title fs-6">Resumen</h3>
                                         <div class="stepper-desc fw-semibold"></div>
                                     </div>
@@ -103,7 +116,7 @@
                                 <div class="stepper-wrapper">
                                     <div class="stepper-icon w-40px h-40px">
                                         <i class="ki-outline ki-check fs-2 stepper-check"></i>
-                                        <span class="stepper-number">4</span>
+                                        <span class="stepper-number">5</span>
                                     </div>
                                     <div class="stepper-label">
                                         <h3 class="stepper-title fs-6">Confirmación</h3>
@@ -198,29 +211,9 @@
                                         <span class="text-muted">NIT</span>
                                         <span class="fs-5">{{ $profile->nit }}</span>
                                     </div>
-
-                                </div>
-
-                                <div class="d-flex flex-column flex-sm-row gap-7 gap-md-10 fw-bold">
-                                    <div class="flex-root d-flex flex-column">
-                                        @php
-                                            $types = json_decode($profile->type);
-                                        @endphp
-                                        <span class="text-muted">Tipo de Medio</span>
-                                        <span class="fs-6">{{ implode(', ', $types) }}</span>
-                                    </div>
-                                    <div class="flex-root d-flex flex-column">
-                                        <span class="text-muted">Cobertura</span>
-                                        <span class="fs-5">{{ $profile->coverage }}</span>
-                                    </div>
-                                    <div class="flex-root d-flex flex-column">
-                                        <span class="text-muted">Alcance</span>
-                                        <span class="fs-6">{{ $profile->scope }}</span>
-                                    </div>
                                 </div>
 
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -231,43 +224,33 @@
                     <div class="card d-flex flex-row-fluid flex-center mb-10">
                         <div class="card-body p-12 w-100">
 
-                        <div class="pb-10 pb-lg-15">
-                            <h2 class="fw-bold text-gray-900 fs-4 text-uppercase d-flex align-items-center">
-                                <i class="ki-outline ki-document text-gray-700 fs-1 me-2"></i>
-                                <span>Documentos</span>
-                            </h2>
-                            <div class="text-muted fw-semibold fs-7">Adjunte los documentos necesarios para la acreditación</div>
-                        </div>
+                            <div class="pb-10 pb-lg-15">
+                                <h2 class="fw-bold text-gray-900 fs-4 text-uppercase d-flex align-items-center">
+                                    <i class="ki-outline ki-document text-gray-700 fs-1 me-2"></i>
+                                    <span>Documentos</span>
+                                </h2>
+                                <div class="text-muted fw-semibold fs-7">Adjunte los documentos necesarios para la acreditación</div>
+                            </div>
 
-                        <div class="mb-10 fv-row">
-                            <label class="fs-6 fw-semibold form-label mt-3">
-                                <span class="required">Carta de Solicitud</span>
-                            </label>
-                            <div class="text-muted fs-7 mb-3">Carta de solicitud dirigida al Tribunal Electoral correspondiente, firmada por la persona propietaria o representante legal del medio de comunicación.</div>
-                            <input type="file" name="media_file_request_letter" class="files"
-                                   id="kt_media_file_request_letter" data-maxsize="5" data-maxfiles="1" data-accept="pdf">
-                            <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
-                        </div>
+                            <div class="mb-10 fv-row">
+                                <label class="fs-6 fw-semibold form-label mt-3">
+                                    <span class="required">Carta de Solicitud</span>
+                                </label>
+                                <div class="text-muted fs-7 mb-3">Carta de solicitud dirigida al Tribunal Electoral correspondiente, firmada por la persona propietaria o representante legal del medio de comunicación.</div>
+                                <input type="file" name="media_file_request_letter" class="files"
+                                       id="kt_media_file_request_letter" data-maxsize="5" data-maxfiles="1" data-accept="pdf">
+                                <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
+                            </div>
 
-                        <div class="fv-row mb-10">
-                            <label class="fs-6 fw-semibold form-label mt-3">
-                                <span class="required">Declaración Jurada</span>
-                            </label>
-                            <div class="text-muted fs-7 mb-3">Declaración jurada en la que señale que no tiene impedimento para difundir propaganda electoral, cobertura efectiva del medio y del tarifario (Documento que puede descargarse aquí).</div>
-                            <input type="file" name="media_file_affidavit" class="files"
-                                   id="kt_media_file_affidavit" data-maxsize="5" data-maxfiles="1" data-accept="pdf">
-                            <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
-                        </div>
-
-                        <div class="fv-row mb-10">
-                            <label class="fs-6 fw-semibold form-label mt-3">
-                                <span class="required">Tarifario</span>
-                            </label>
-                            <div class="text-muted fs-7 mb-3">Tarifario del medio expresado en moneda nacional. Las tarifas inscritas no pueden ser superiores al promedio de las tarifas cobradas efectivamente por concepto de publicidad comercial durante el semestre previo al acto electoral.</div>
-                            <input type="file" name="media_file_pricing_list" class="files"
-                                   id="kt_media_file_pricing_list" data-maxsize="5" data-maxfiles="1" data-accept="pdf">
-                            <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
-                        </div>
+                            <div class="fv-row mb-10">
+                                <label class="fs-6 fw-semibold form-label mt-3">
+                                    <span class="required">Declaración Jurada</span>
+                                </label>
+                                <div class="text-muted fs-7 mb-3">Declaración jurada en la que señale que no tiene impedimento para difundir propaganda electoral, cobertura efectiva del medio y del tarifario (Documento que puede descargarse aquí).</div>
+                                <input type="file" name="media_file_affidavit" class="files"
+                                       id="kt_media_file_affidavit" data-maxsize="5" data-maxfiles="1" data-accept="pdf">
+                                <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
+                            </div>
 
                         </div>
                     </div>
@@ -275,307 +258,141 @@
                 <!--end::Step 2-->
 
                 <!--begin::Step 3-->
-                <div class="flex-column wrapper_content_step_3" data-kt-stepper-element="content">
+                <div class="current__ flex-column" data-kt-stepper-element="content">
                     <div class="card d-flex flex-row-fluid flex-center mb-10">
                         <div class="card-body p-12 w-100">
 
-                            <div class="pb-10 pb-lg-12">
+                            <div class="pb-10 pb-lg-15">
                                 <h2 class="fw-bold text-gray-900 fs-4 text-uppercase d-flex align-items-center">
                                     <i class="ki-outline ki-document text-gray-700 fs-1 me-2"></i>
-                                    <span>Resumen</span>
+                                    <span>Tarifarios</span>
                                 </h2>
-                                <div class="text-muted fw-semibold fs-7">Revise la información antes de ser enviada.</div>
+                                <div class="text-muted fw-semibold fs-7">Adjunte los documentos de las tarifas según el tipo de medio</div>
                             </div>
 
-                            <div class="fv-row"><input type="hidden" name="terms_and_conditions" value="true"></div>
-
-                            <h6 class="mb-5 fw-bolder text-gray-600 text-hover-primary">DATOS GENERALES</h6>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Nombre del Medio:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <p class="form-control form-control-plaintext">{{ $profile->name }}</p>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Razón Social:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <p class="form-control form-control-plaintext">{{ $profile->business_name }}</p>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">NIT:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <p class="form-control form-control-plaintext">{{ $profile->nit }}</p>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Representante Legal:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <p class="form-control form-control-plaintext">{{ $profile->rep_full_name }}</p>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Documento Representante Legal:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <p class="form-control form-control-plaintext">{{ $profile->rep_document }} {{ $profile->rep_exp }}</p>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <h6 class="mb-5 mt-10 fw-bolder text-gray-600 text-hover-primary">CLASIFICACIÓN DEL MEDIO</h6>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Tipo de Medio:</label>
-                                </div>
+                            @if($profile->media_type_television)
                                 @php
-                                    $types = json_decode($profile->type);
+                                    $item_type_television = $profile->mediaTypes->where('type', 'Televisivo')->first();
+                                    $states = $item_type_television ? explode(', ', $item_type_television->scope_department) : [];
                                 @endphp
-                                <div class="col-md-8">
-                                    <p class="form-control form-control-plaintext">{{ implode(', ', $types) }}</p>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Cobertura General:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <p class="form-control form-control-plaintext">{{ $profile->coverage }}</p>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Alcance del Medio:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <p class="form-control form-control-plaintext">{{ $profile->scope }}</p>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">
-                                        @switch($profile->scope)
-                                            @case('Nacional')
-                                            @php
-                                                $states = [];
-                                                if ($profile->scope_department) {
-                                                    $states = json_decode($profile->scope_department);
-                                                }
-                                                $scope_content = implode(', ', $states);
-                                            @endphp
-                                            <span>Departamentos:</span>
-                                            @break
-                                            @case('Departamental')
-                                            @php
-                                                $state = '';
-                                                if ($profile->scope === 'Departamental' && $profile->scope_department) {
-                                                    $state = json_decode($profile->scope_department)[0];
-                                                }
-                                                $scope_content = $state;
-                                            @endphp
-                                            <span>Departamento:</span>
-                                            @break
-                                            @case('Municipal')
-                                            @php
-                                                $scope_content = $profile->scope_municipality;
-                                            @endphp
-                                            <span>Municipio:</span>
-                                            @break
-                                            @default
-                                            <span>-</span>
-                                        @endswitch
-                                    </label>
-                                </div>
-                                <div class="col-md-8">
-                                    <p class="form-control form-control-plaintext">{{ $scope_content }}</p>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <h6 class="mb-5 mt-10 fw-bolder text-gray-600 text-hover-primary">DATOS DE CONTACTO</h6>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Domicilio Legal del Medio:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <p class="form-control form-control-plaintext">{{ $profile->legal_address }}</p>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Celular:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <p class="form-control form-control-plaintext">{{ $profile->cellphone }}</p>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Página web:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <p class="form-control form-control-plaintext">{{ $profile->website ? $profile->website : '-' }}</p>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Redes Sociales:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    @php
-                                        $rrss = $profile->rrss ? json_decode($profile->rrss) : [];
-                                    @endphp
-                                    <p class="form-control form-control-plaintext">
-                                        @if(count($rrss) > 0)
-                                            @foreach($rrss as $red)
-                                                <a href="{{ $red->rrss_value }}" target="_blank" class="fs-6">{{ $red->rrss_option }}</a><br>
-                                            @endforeach
-                                        @else
-                                            <span>-</span>
-                                        @endif
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <h6 class="mb-5 mt-10 fw-bolder text-gray-600 text-hover-primary">DOCUMENTOS ADJUNTOS</h6>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Carta de Solicitud:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="">
-                                        <input type="file" name="media_file_ro_request_letter" class="files" id="kt_media_file_ro_request_letter">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            @if($profile->fileLegalAttorney)
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Poder Notariado (Si corresponde):</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="">
-                                        @if($profile->fileLegalAttorney)
-                                            <input type="hidden" name="file_ro_legal_attorney" data-name="{{ $profile->fileLegalAttorney->origin_name }}" data-size="{{ $profile->fileLegalAttorney->size }}"
-                                                   data-mimetype="{{ $profile->fileLegalAttorney->mime_type }}" data-path="{{ $profile->fileLegalAttorney->url_file }}">
-                                        @endif
-                                        <input type="file" name="media_file_ro_legal_attorney" class="files" id="kt_media_file_ro_legal_attorney">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
+                                @if($item_type_television)
+                                    <h3 class="fw-bold text-gray-900 fs-4 text-uppercase d-flex align-items-center">
+                                        <span>Televisión</span>
+                                    </h3>
+                                    @if($item_type_television->scope === 'Nacional')
+                                        <div class="fv-row mb-10">
+                                            <label class="fs-6 fw-semibold form-label mt-3">
+                                                <span class="required">Tarifario Nacional</span>
+                                            </label>
+                                            <input type="file" name="media_television_file_rate[Nacional]" class="files kt_media_file_rates"
+                                                   data-maxsize="5" data-maxfiles="1" data-accept="pdf">
+                                            <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
+                                        </div>
+                                    @endif
+                                    @foreach($states as $state)
+                                        <div class="fv-row mb-10">
+                                            <label class="fs-6 fw-semibold form-label mt-3">
+                                                <span class="required">Tarifario {{ $state }} {{ ($item_type_television->scope !== 'Nacional' && $item_type_television->scope !== 'Departamental') ? '(' . $item_type_television->scope_area . ')' : '' }}</span>
+                                            </label>
+                                            <input type="file" name="media_television_file_rate[{{$state}}]" class="files kt_media_file_rates"
+                                                   data-maxsize="5" data-maxfiles="1" data-accept="pdf">
+                                            <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
+                                        </div>
+                                    @endforeach
+                                @endif
                             @endif
 
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Cédula de Identidad:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="">
-                                        @if($profile->fileRepDocument)
-                                            <input type="hidden" name="file_ro_rep_document" data-name="{{ $profile->fileRepDocument->origin_name }}" data-size="{{ $profile->fileRepDocument->size }}"
-                                                   data-mimetype="{{ $profile->fileRepDocument->mime_type }}" data-path="{{ $profile->fileRepDocument->url_file }}">
-                                        @endif
-                                        <input type="file" name="media_file_ro_rep_document" class="files" id="kt_media_file_ro_rep_document">
-                                    </div>
-                                </div>
-                            </div>
+                            @if($profile->media_type_radio)
+                                @php
+                                    $item_type_radio = $profile->mediaTypes->where('type', 'Radial')->first();
+                                    $states = $item_type_radio ? explode(', ', $item_type_radio->scope_department) : [];
+                                @endphp
+                                @if($item_type_radio)
+                                    <h3 class="fw-bold text-gray-900 fs-4 text-uppercase d-flex align-items-center">
+                                        <span>Radio</span>
+                                    </h3>
+                                    @if($item_type_radio->scope === 'Nacional')
+                                        <div class="fv-row mb-10">
+                                            <label class="fs-6 fw-semibold form-label mt-3">
+                                                <span class="required">Tarifario Nacional</span>
+                                            </label>
+                                            <input type="file" name="media_radio_file_rate[Nacional]" class="files kt_media_file_rates"
+                                                   data-maxsize="5" data-maxfiles="1" data-accept="pdf">
+                                            <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
+                                        </div>
+                                    @endif
+                                    @foreach($states as $state)
+                                        <div class="fv-row mb-10">
+                                            <label class="fs-6 fw-semibold form-label mt-3">
+                                                <span class="required">Tarifario {{ $state }} {{ ($item_type_radio->scope !== 'Nacional' && $item_type_radio->scope !== 'Departamental') ? '(' . $item_type_radio->scope_area . ')' : '' }}</span>
+                                            </label>
+                                            <input type="file" name="media_radio_file_rate[{{$state}}]" class="files kt_media_file_rates"
+                                                   data-maxsize="5" data-maxfiles="1" data-accept="pdf">
+                                            <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            @endif
 
-                            <div class="separator separator-dashed border-muted"></div>
+                            @if($profile->media_type_print)
+                                @php
+                                    $item_type_print = $profile->mediaTypes->where('type', 'Impreso')->first();
+                                    $states = $item_type_print ? explode(', ', $item_type_print->scope_department) : [];
+                                @endphp
+                                @if($item_type_print)
+                                    <h3 class="fw-bold text-gray-900 fs-4 text-uppercase d-flex align-items-center">
+                                        <span>Impresos</span>
+                                    </h3>
+                                    @if($item_type_print->scope === 'Nacional')
+                                        <div class="fv-row mb-10">
+                                            <label class="fs-6 fw-semibold form-label mt-3">
+                                                <span class="required">Tarifario Nacional</span>
+                                            </label>
+                                            <input type="file" name="media_print_file_rate[Nacional]" class="files kt_media_file_rates" data-maxsize="5" data-maxfiles="1" data-accept="pdf">
+                                            <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
+                                        </div>
+                                    @endif
+                                    @foreach($states as $state)
+                                        <div class="fv-row mb-10">
+                                            <label class="fs-6 fw-semibold form-label mt-3">
+                                                <span class="required">Tarifario {{ $state }} {{ ($item_type_print->scope !== 'Nacional' && $item_type_print->scope !== 'Departamental') ? '(' . $item_type_print->scope_area . ')' : '' }}</span>
+                                            </label>
+                                            <input type="file" name="media_print_file_rate[{{$state}}]" class="files kt_media_file_rates" data-maxsize="5" data-maxfiles="1" data-accept="pdf">
+                                            <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            @endif
 
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">NIT:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="">
-                                        @if($profile->fileNit)
-                                            <input type="hidden" name="file_ro_nit" data-name="{{ $profile->fileNit->origin_name }}" data-size="{{ $profile->fileNit->size }}"
-                                                   data-mimetype="{{ $profile->fileNit->mime_type }}" data-path="{{ $profile->fileNit->url_file }}">
-                                        @endif
-                                        <input type="file" name="media_file_ro_nit" class="files" id="kt_media_file_ro_nit">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Declaración Jurada:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="">
-                                        <input type="file" name="media_file_ro_affidavit" class="files" id="kt_media_file_ro_affidavit">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
-
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
-                                    <label class="fw-semibold fs-7 text-gray-600">Tarifario:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="">
-                                        <input type="file" name="media_file_ro_pricing_list" class="files" id="kt_media_file_ro_pricing_list">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="separator separator-dashed border-muted"></div>
+                            @if($profile->media_type_digital)
+                                @php
+                                    $item_type_digital = $profile->mediaTypes->where('type', 'Digital')->first();
+                                    $states = $item_type_digital ? explode(', ', $item_type_digital->scope_department) : [];
+                                @endphp
+                                @if($item_type_digital)
+                                    <h3 class="fw-bold text-gray-900 fs-4 text-uppercase d-flex align-items-center">
+                                        <span>Digital</span>
+                                    </h3>
+                                    @if($item_type_digital->scope === 'Nacional')
+                                        <div class="fv-row mb-10">
+                                            <label class="fs-6 fw-semibold form-label mt-3">
+                                                <span class="required">Tarifario Nacional</span>
+                                            </label>
+                                            <input type="file" name="media_digital_file_rate[Nacional]" class="files kt_media_file_rates" data-maxsize="5" data-maxfiles="1" data-accept="pdf">
+                                            <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
+                                        </div>
+                                    @endif
+                                    @foreach($states as $state)
+                                        <div class="fv-row mb-10">
+                                            <label class="fs-6 fw-semibold form-label mt-3">
+                                                <span class="required">Tarifario {{ $state }} {{ ($item_type_digital->scope !== 'Nacional' && $item_type_digital->scope !== 'Departamental') ? '(' . $item_type_digital->scope_area . ')' : '' }}</span>
+                                            </label>
+                                            <input type="file" name="media_digital_file_rate[{{$state}}]" class="files kt_media_file_rates" data-maxsize="5" data-maxfiles="1" data-accept="pdf">
+                                            <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            @endif
 
                         </div>
                     </div>
@@ -583,41 +400,24 @@
                 <!--end::Step 3-->
 
                 <!--begin::Step 4-->
-                <div class="flex-column" data-kt-stepper-element="content">
+                <div class="flex-column wrapper_content_step_3" data-kt-stepper-element="content">
                     <div class="card d-flex flex-row-fluid flex-center mb-10">
                         <div class="card-body p-12 w-100">
-                            <div class="pb-8 pb-lg-10">
-                                <h2 class="fw-bold text-gray-900 fs-4 text-uppercase d-flex align-items-center">
-                                    <i class="ki-outline ki-document text-gray-700 fs-1 me-2"></i>
-                                    <span>CONFIRMACIÓN</span>
-                                </h2>
-                                <div class="text-muted fw-semibold fs-7"></div>
-                            </div>
-                            <div class="mb-0">
 
-                                <div style="text-align:center; margin:0 15px 34px 15px">
-
-                                    <div class="mb-15">
-                                        <img alt="Logo" src="{{ asset('themes/external/media/icons/success_icon.png') }}" class="h-100px" />
-                                    </div>
-
-                                    <h2 class="fw-bolder mb-5">Formulario enviado satisfactoriamente</h2>
-
-                                    <div class="text-muted mb-10 fs-6">
-                                        Su formulario de solicitud de acreditación fue enviado satisfactoriamente. </br>
-                                        Personal del TSE procederá a revisar su información y documentación enviada, </br>
-                                        en caso de presentar alguna observación se le notificará </br> al correo electrónico proporcionado.
-                                    </div>
-
-                                    <a href="{{ route('ext_admin_accreditations_list') }}" class="btn btn-secondary">Volver</a>
-
-                                </div>
-
-                            </div>
                         </div>
                     </div>
                 </div>
                 <!--end::Step 4-->
+
+                <!--begin::Step 5-->
+                <div class="flex-column" data-kt-stepper-element="content">
+                    <div class="card d-flex flex-row-fluid flex-center mb-10">
+                        <div class="card-body p-12 w-100">
+
+                        </div>
+                    </div>
+                </div>
+                <!--end::Step 5-->
 
                 <div class="d-flex flex-stack pt-10">
                     <div class="mr-2">
@@ -634,8 +434,14 @@
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                             </span>
                         </button>
-                        <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Siguiente
-                            <i class="ki-outline ki-arrow-right fs-4 ms-1 me-0"></i>
+                        <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">
+                            <span class="indicator-label">Siguiente
+                                <i class="ki-outline ki-arrow-right fs-4 ms-1 me-0"></i>
+                            </span>
+                            <span class="indicator-progress">Por favor espere...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+
                         </button>
                     </div>
                 </div>

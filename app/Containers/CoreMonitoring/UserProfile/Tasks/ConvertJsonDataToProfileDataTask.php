@@ -25,7 +25,21 @@ class ConvertJsonDataToProfileDataTask extends ParentTask
         $data['fileLegalAttorney'] = app(FindFileByCodeTask::class)->run($data['file_power_attorney']);
         $data['fileRepDocument'] = app(FindFileByCodeTask::class)->run($data['file_rep_document']);
         $data['fileNit'] = app(FindFileByCodeTask::class)->run($data['file_nit']);
+
+        $data['mediaTypes'] = [];
+
+        foreach ($data['media_types'] as $key => $item) {
+            $data['mediaTypes'][$key] = (object) [
+                'type' => $key,
+                'coverage' => $item['coverage'],
+                'scope' => $item['scope'],
+                'scope_department' => $item['scope_department'],
+                'scope_area' => $item['scope_area'],
+            ];
+        }
+
         $result = (object)$data;
+
         return $result;
 
     }
