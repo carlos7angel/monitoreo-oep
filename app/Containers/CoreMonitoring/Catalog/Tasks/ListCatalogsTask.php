@@ -10,7 +10,7 @@ use Prettus\Repository\Exceptions\RepositoryException;
 class ListCatalogsTask extends ParentTask
 {
     public function __construct(
-        protected readonly CatalogRepository $repository,
+        protected CatalogRepository $repository,
     ) {
     }
 
@@ -18,8 +18,8 @@ class ListCatalogsTask extends ParentTask
      * @throws CoreInternalErrorException
      * @throws RepositoryException
      */
-    public function run(): mixed
+    public function run($skipPagination = false): mixed
     {
-        return $this->repository->addRequestCriteria()->paginate();
+        return $skipPagination ? $this->repository->addRequestCriteria()->all() : $this->repository->addRequestCriteria()->paginate();
     }
 }

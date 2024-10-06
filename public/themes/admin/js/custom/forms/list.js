@@ -128,7 +128,8 @@ var KTFormsList = function () {
                     className: 'text-end',
                     render: function (data, type, full, meta) {
                         var toDetailUrl = "/admin/formularios/" + full.id + "/";
-                        return `<a href="${toDetailUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="las la-eye fs-2"></i></a>`;
+                        var toBuilderUrl = "/admin/formularios/" + full.id + "/constructor";
+                        return `<a href="${toBuilderUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="las la-edit fs-2"></i></a>`;
                     },
                 },
             ],

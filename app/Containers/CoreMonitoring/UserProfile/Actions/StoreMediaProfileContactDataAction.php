@@ -56,7 +56,7 @@ class StoreMediaProfileContactDataAction extends ParentAction
                     );
                 }
             }
-            if (count($rrss_item) > 0) {
+            if (count($rrss) > 0) {
                 $data['rrss'] = json_encode($rrss);
             }
         }

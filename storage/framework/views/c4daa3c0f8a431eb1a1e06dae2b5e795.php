@@ -216,12 +216,13 @@
                                                         </td>
                                                         <td class="text-end">
                                                             <?php
-                                                                $types = json_decode($accreditation->media->type);
+                                                                // $types = json_decode($accreditation->media->type);
+                                                                $types = [];
                                                             ?>
                                                             <span>
-                                                        <?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                    <div class="badge badge-secondary py-2 px-4 me-1"><?php echo e($type); ?></div>
-                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                <div class="badge badge-secondary py-2 px-4 me-1"><?php echo e($type); ?></div>
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                     </span>
                                                         </td>
                                                         <td class="text-end">#<?php echo e($accreditation->code); ?></td>

@@ -4,21 +4,21 @@ namespace App\Containers\CoreMonitoring\Election\Actions;
 
 use App\Containers\CoreMonitoring\Election\Models\Election;
 use App\Containers\CoreMonitoring\Election\Tasks\FindElectionByIdTask;
-use App\Containers\CoreMonitoring\Election\UI\WEB\Requests\FindElectionByIdRequest;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Actions\Action as ParentAction;
+use App\Ship\Parents\Requests\Request;
 
 class FindElectionByIdAction extends ParentAction
 {
     public function __construct(
-        private readonly FindElectionByIdTask $findElectionByIdTask,
+        private FindElectionByIdTask $findElectionByIdTask,
     ) {
     }
 
     /**
      * @throws NotFoundException
      */
-    public function run(FindElectionByIdRequest $request): Election
+    public function run(Request $request): Election
     {
         return $this->findElectionByIdTask->run($request->id);
     }

@@ -29,7 +29,6 @@ class CreateFormAction extends ParentAction
             "form_type",
             "form_code",
             "form_description",
-            "form_schema_web",
         ]);
 
         $data = [
@@ -37,7 +36,6 @@ class CreateFormAction extends ParentAction
             'name' => $sanitizedData['form_name'],
             'description' => $sanitizedData['form_description'],
             'type' => $sanitizedData['form_type'],
-            'form_schema_web' => $sanitizedData['form_schema_web'],
             'created_by' => Auth::guard('web')->user()->id
         ];
 

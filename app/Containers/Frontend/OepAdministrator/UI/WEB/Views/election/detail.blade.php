@@ -216,12 +216,13 @@
                                                         </td>
                                                         <td class="text-end">
                                                             @php
-                                                                $types = json_decode($accreditation->media->type);
+                                                                // $types = json_decode($accreditation->media->type);
+                                                                $types = [];
                                                             @endphp
                                                             <span>
-                                                        @foreach($types as $type)
-                                                                    <div class="badge badge-secondary py-2 px-4 me-1">{{ $type }}</div>
-                                                                @endforeach
+                                                            @foreach($types as $type)
+                                                                <div class="badge badge-secondary py-2 px-4 me-1">{{ $type }}</div>
+                                                            @endforeach
                                                     </span>
                                                         </td>
                                                         <td class="text-end">#{{ $accreditation->code }}</td>
