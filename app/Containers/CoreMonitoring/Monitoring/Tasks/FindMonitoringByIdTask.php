@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Containers\CoreMonitoring\Catalog\Tasks;
+namespace App\Containers\CoreMonitoring\Monitoring\Tasks;
 
-use App\Containers\CoreMonitoring\Catalog\Data\Repositories\CatalogRepository;
-use App\Containers\CoreMonitoring\Catalog\Models\Catalog;
+use App\Containers\CoreMonitoring\Monitoring\Data\Repositories\MonitoringRepository;
+use App\Containers\CoreMonitoring\Monitoring\Models\Monitoring;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task as ParentTask;
 
-class FindCatalogByIdTask extends ParentTask
+class FindMonitoringByIdTask extends ParentTask
 {
     public function __construct(
-        protected CatalogRepository $repository,
+        protected readonly MonitoringRepository $repository,
     ) {
     }
 
     /**
      * @throws NotFoundException
      */
-    public function run($id): Catalog
+    public function run($id): Monitoring
     {
         try {
             return $this->repository->find($id);

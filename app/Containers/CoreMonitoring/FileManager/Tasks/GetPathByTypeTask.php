@@ -6,6 +6,7 @@ use Apiato\Core\Exceptions\CoreInternalErrorException;
 use App\Containers\CoreMonitoring\Accreditation\Models\Accreditation;
 use App\Containers\CoreMonitoring\Accreditation\Models\AccreditationRate;
 use App\Containers\CoreMonitoring\Election\Models\Election;
+use App\Containers\CoreMonitoring\Monitoring\Models\Monitoring;
 use App\Containers\CoreMonitoring\UserProfile\Models\MediaProfile;
 use App\Ship\Parents\Tasks\Task as ParentTask;
 use Prettus\Repository\Exceptions\RepositoryException;
@@ -14,10 +15,6 @@ class GetPathByTypeTask extends ParentTask
 {
     public function __construct() { }
 
-    /**
-     * @throws CoreInternalErrorException
-     * @throws RepositoryException
-     */
     public function run($type, $id, $user = null): mixed
     {
         switch (strtolower($type))
@@ -45,6 +42,12 @@ class GetPathByTypeTask extends ParentTask
 //                $fileable_type = AccreditationRate::class;
 //                $path = '/medios/m-'.$user->profile_data->id.'/acreditaciones/'.$fileable_id; // (?) !!!
 //                break;
+
+            case 'monitoring':
+                $fileable_id = $id;
+                $fileable_type = Monitoring::class;
+                $path = '/monitoreo/d-'.$fileable_id;
+                break;
 
             default:
                 break;

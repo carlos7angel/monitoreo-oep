@@ -9,16 +9,16 @@ return new class() extends Migration {
     {
         Schema::create('catalog_items', function (Blueprint $table) {
             $table->id();
-
-            $table->string('catalog_code', 3);
-            $table->foreign('catalog_code')->references('code')->on('catalogs');
-
-            $table->string('code')->unique();
+            $table->unsignedBigInteger('fid_catalog')->nullable();
+            $table->foreign('fid_catalog')->references('id')->on('catalogs')->onDelete('cascade');
+            $table->string('catalog_code', 10)->nullable();
+            // $table->foreign('catalog_code')->references('code')->on('catalogs');
+            $table->string('code', 10)->nullable();
             $table->string('name', 100);
             $table->text('description')->nullable();
             $table->boolean('active')->default(true);
             $table->string('parent_code', 3)->nullable();
-            $table->string('icon')->nullable();
+            $table->string('icon', 20)->nullable();
             $table->integer('sort')->nullable();
             $table->timestamps();
             // $table->softDeletes();

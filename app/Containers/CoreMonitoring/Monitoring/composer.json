@@ -1,0 +1,6 @@
+{
+    "name": "apiato/monitoring",
+    "description": "Monitoring Container for apiato.",
+    "require": {
+    }
+}
