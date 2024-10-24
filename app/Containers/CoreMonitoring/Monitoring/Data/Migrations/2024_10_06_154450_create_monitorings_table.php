@@ -20,8 +20,11 @@ return new class() extends Migration {
             $table->foreign('fid_form')->references('id')->on('forms')->onDelete('cascade');
             $table->json('data')->nullable();
             $table->json('render')->nullable();
-            $table->enum('status', ['CREATED','ANALYSIS','ARCHIVED'])->default('CREATED');
-            $table->enum('analysis', ['QUALIFIED','UNQUALIFIED'])->nullable();
+            $table->enum('status', ['CREATED','SELECTED','ARCHIVED'])->default('CREATED');
+
+            $table->enum('scope_type', ['TED','TSE'])->nullable();
+            $table->string('scope_department', 50)->nullable();
+
             $table->unsignedBigInteger('registered_by');
             $table->foreign('registered_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamp('registered_at')->nullable();

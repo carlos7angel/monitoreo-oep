@@ -2,7 +2,7 @@
 
 namespace App\Containers\CoreMonitoring\UserProfile\Tasks;
 
-use App\Containers\CoreMonitoring\UserProfile\Data\Repositories\UserProfileRepository;
+use App\Containers\CoreMonitoring\UserProfile\Data\Repositories\PoliticalGroupProfileRepository;
 use App\Containers\CoreMonitoring\UserProfile\Models\MediaProfile;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task as ParentTask;

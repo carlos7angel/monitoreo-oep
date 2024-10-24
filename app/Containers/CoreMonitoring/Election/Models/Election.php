@@ -6,6 +6,7 @@ use App\Containers\CoreMonitoring\FileManager\Models\File;
 use App\Containers\CoreMonitoring\FormBuilder\Models\Form;
 use App\Ship\Parents\Models\Model as ParentModel;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Election extends ParentModel
@@ -38,6 +39,13 @@ class Election extends ParentModel
         'enable_monitoring_digital_media',
         'enable_monitoring_print_media',
         'enable_monitoring_social_media',
+
+        'enable_for_political_registration',
+        'start_date_political_registration',
+        'end_date_political_registration',
+        'description_for_political_registration',
+        'max_size_for_political_registration',
+        'mime_types_for_political_registration',
     ];
 
     protected $attributes = [
@@ -111,5 +119,21 @@ class Election extends ParentModel
 
     public function getEndDateMediaRegistrationAttribute($value) {
         return $value ? Carbon::parse($value)->format('d/m/Y') : null;
+    }
+
+    protected function startDatePoliticalRegistration(): Attribute
+    {
+        return new Attribute(
+            get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y H:i'),
+            set: static fn (string|null $value): string|null => null === $value ? null : Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 00:00:00')
+        );
+    }
+
+    protected function endDatePoliticalRegistration(): Attribute
+    {
+        return new Attribute(
+            get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y H:i'),
+            set: static fn (string|null $value): string|null => null === $value ? null : Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 23:59:59')
+        );
     }
 }

@@ -10,17 +10,17 @@ use App\Ship\Parents\Tasks\Task as ParentTask;
 class FindUserByEmailTask extends ParentTask
 {
     public function __construct(
-        private readonly UserRepository $repository,
+        private UserRepository $repository,
     ) {
     }
 
     /**
      * @throws NotFoundException
      */
-    public function run(string $email): User
+    public function run(string $email): User|null
     {
         $user = $this->repository->findByField('email', $email)->first();
 
-        return $user ?? throw new NotFoundException();
+        return $user;
     }
 }

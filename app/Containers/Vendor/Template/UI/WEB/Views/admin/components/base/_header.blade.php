@@ -32,7 +32,10 @@
                                 <a class="nav-link {{ in_array($page, ['election_list', 'election_create']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_4">Procesos Electorales</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ in_array($page, ['form_list', 'user_list']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_5">Preferencias</a>
+                                <a class="nav-link {{ in_array($page, ['political_group_list', 'political_group_create']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_5">Partidos Políticos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ in_array($page, ['form_list', 'user_list']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_6">Preferencias</a>
                             </li>
                         </ul>
                     </div>
@@ -164,7 +167,7 @@
                             <div class="menu menu-rounded menu-column menu-lg-row menu-root-here-bg-desktop menu-active-bg menu-title-gray-700 menu-state-primary menu-arrow-gray-500 fw-semibold align-items-stretch flex-grow-1 px-2 px-lg-0" id="#kt_header_menu" data-kt-menu="true">
                                 <a href="{{ route('oep_admin_media_elections_list_for_monitoring') }}" class="menu-item {{ $page === 'monitoring_list' ? 'here' : '' }} me-0 me-lg-2">
                                     <span class="menu-link py-3">
-                                        <span class="menu-title">Procesos Electorales</span>
+                                        <span class="menu-title">Monitoreo por Proceso Electoral</span>
                                         <span class="menu-arrow d-lg-none"></span>
                                     </span>
                                 </a>
@@ -197,7 +200,29 @@
                     </div>
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade {{ in_array($page, ['form_list', 'user_list']) ? 'active show' : ''  }}" id="kt_header_navs_tab_5">
+                    <div class="tab-pane fade {{ in_array($page, ['political_group_list', 'political_group_create']) ? 'active show' : ''  }}" id="kt_header_navs_tab_5">
+                        <!--begin::Menu wrapper-->
+                        <div class="header-menu flex-column align-items-stretch flex-lg-row">
+                            <div class="menu menu-rounded menu-column menu-lg-row menu-root-here-bg-desktop menu-active-bg menu-title-gray-700 menu-state-primary menu-arrow-gray-500 fw-semibold align-items-stretch flex-grow-1 px-2 px-lg-0" id="#kt_header_menu" data-kt-menu="true">
+                                <a href="{{ route('oep_admin_political_group_list') }}" class="menu-item {{ $page === '' ? 'here' : ''  }} me-0 me-lg-2">
+                                    <span class="menu-link py-3">
+                                        <span class="menu-title">Todos los registros</span>
+                                        <span class="menu-arrow d-lg-none"></span>
+                                    </span>
+                                </a>
+                                <a href="{{ route('oep_admin_political_group_create') }}" class="menu-item {{ $page === 'political_group_create' ? 'here' : ''  }} me-0 me-lg-2">
+                                    <span class="menu-link py-3">
+                                        <span class="menu-title">Nuevo</span>
+                                        <span class="menu-arrow d-lg-none"></span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <!--end::Menu wrapper-->
+                    </div>
+                    <!--end::Tab panel-->
+                    <!--begin::Tab panel-->
+                    <div class="tab-pane fade {{ in_array($page, ['form_list', 'user_list']) ? 'active show' : ''  }}" id="kt_header_navs_tab_6">
                         <!--begin::Menu wrapper-->
                         <div class="header-menu flex-column align-items-stretch flex-lg-row">
                             <div class="menu menu-rounded menu-column menu-lg-row menu-root-here-bg-desktop menu-active-bg menu-title-gray-700 menu-state-primary menu-arrow-gray-500 fw-semibold align-items-stretch flex-grow-1 px-2 px-lg-0" id="#kt_header_menu" data-kt-menu="true">

@@ -70,18 +70,34 @@ class UpdateElectionAction extends ParentAction
 
         if($request->has('election_enable_monitoring')) {
             $data['enable_for_monitoring'] = true;
-            $data['enable_monitoring_television_media'] = $request->has('election_monitoring_media_television');
-            $data['enable_monitoring_radio_media'] = $request->has('election_monitoring_media_radio');
-            $data['enable_monitoring_digital_media'] = $request->has('election_monitoring_media_digital');
-            $data['enable_monitoring_print_media'] = $request->has('election_monitoring_media_print');
-            $data['enable_monitoring_social_media'] = $request->has('election_monitoring_media_social');
+            $data['fid_form_tv_media'] = $request->get('election_form_tv_media') ? $request->get('election_form_tv_media') : null;
+            $data['fid_form_radio_media'] = $request->get('election_form_radio_media') ? $request->get('election_form_radio_media') : null;
+            $data['fid_form_print_media'] = $request->get('election_form_print_media') ? $request->get('election_form_print_media') : null;
+            $data['fid_form_digital_media'] = $request->get('election_form_digital_media') ? $request->get('election_form_digital_media') : null;
+            $data['fid_form_rrss_media'] = $request->get('election_form_rrss_media') ? $request->get('election_form_rrss_media') : null;
         } else {
             $data['enable_for_monitoring'] = false;
-            $data['enable_monitoring_television_media'] = false;
-            $data['enable_monitoring_radio_media'] = false;
-            $data['enable_monitoring_digital_media'] = false;
-            $data['enable_monitoring_print_media'] = false;
-            $data['enable_monitoring_social_media'] = false;
+            $data['fid_form_tv_media'] = null;
+            $data['fid_form_radio_media'] = null;
+            $data['fid_form_print_media'] = null;
+            $data['fid_form_digital_media'] = null;
+            $data['fid_form_rrss_media'] = null;
+        }
+
+        if($request->has('election_enable_political_registration')) {
+            $data['enable_for_political_registration'] = true;
+            $data['end_date_political_registration'] = $request->get('election_end_date_political_registration');
+            $data['description_for_political_registration'] = $request->get('election_description_political_registration');
+            $data['max_size_for_political_registration'] = (int) $request->get('election_max_size_political_registration');
+            if($request->has('election_mime_type_political_registration')) {
+                $data['mime_types_for_political_registration'] = is_array($request->get('election_mime_type_political_registration')) ? json_encode($request->get('election_mime_type_political_registration')) : null;
+            }
+        } else {
+            $data['enable_for_political_registration'] = false;
+            $data['end_date_political_registration'] = null;
+            $data['description_for_political_registration'] = null;
+            $data['max_size_for_political_registration'] = null;
+            $data['mime_types_for_political_registration'] = null;
         }
 
         if($request->file('election_logo')) {

@@ -20,15 +20,25 @@
         <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper">
             <div class="app-header-menu app-header-mobile-drawer align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="app-header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="250px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_header_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="{default: 'append', lg: 'prepend'}" data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}">
                 <div class="menu menu-rounded menu-active-bg menu-state-primary menu-column menu-lg-row menu-title-gray-700 menu-icon-gray-500 menu-arrow-gray-500 menu-bullet-gray-500 my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0" id="kt_app_header_menu" data-kt-menu="true">
+
                     <a href="<?php echo e(route('ext_admin_media_profile_general_data_show')); ?>" class="menu-item <?php echo e(in_array($page, ['media_data']) ? 'here' : ''); ?> menu-lg-down-accordion me-0 me-lg-2">
                         <span class="menu-link">
                             <span class="menu-title">Medio de Comunicación</span>
-                            <span class="menu-arrow d-lg-none"></span>
                         </span>
                     </a>
+
                     <a href="<?php echo e(route('ext_admin_accreditations_list')); ?>" class="menu-item <?php echo e(in_array($page, ['media_accreditations']) ? 'here' : ''); ?> menu-lg-down-accordion me-0 me-lg-2">
-                        <span class="menu-link"><span class="menu-title">Acreditaciones Procesos Electorales</span></span>
+                        <span class="menu-link">
+                            <span class="menu-title">Acreditaciones Procesos Electorales</span>
+                        </span>
                     </a>
+
+                    <a href="<?php echo e(route('ext_admin_registration_elections_list')); ?>" class="menu-item <?php echo e(in_array($page, ['political_group_registrations']) ? 'here' : ''); ?> menu-lg-down-accordion me-0 me-lg-2">
+                        <span class="menu-link">
+                            <span class="menu-title">Propaganda Electoral</span>
+                        </span>
+                    </a>
+
 
 
 

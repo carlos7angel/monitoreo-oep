@@ -232,6 +232,16 @@ var KTFormsCreate = function () {
             }
         });
 
+        $(document).on('change', 'input[name="election_enable_political_registration"]', function (e) {
+            e.preventDefault();
+            var enable_registration = $(this).is(':checked');
+            if (enable_registration) {
+                $('#kt_wrapper_enable_political_registration').removeClass('d-none').addClass('d-block');
+            } else {
+                $('#kt_wrapper_enable_political_registration').addClass('d-none').removeClass('d-block');
+            }
+        });
+
     };
 
     return {

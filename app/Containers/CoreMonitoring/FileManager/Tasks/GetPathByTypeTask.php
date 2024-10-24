@@ -7,6 +7,7 @@ use App\Containers\CoreMonitoring\Accreditation\Models\Accreditation;
 use App\Containers\CoreMonitoring\Accreditation\Models\AccreditationRate;
 use App\Containers\CoreMonitoring\Election\Models\Election;
 use App\Containers\CoreMonitoring\Monitoring\Models\Monitoring;
+use App\Containers\CoreMonitoring\Registration\Models\PropagandaMaterial;
 use App\Containers\CoreMonitoring\UserProfile\Models\MediaProfile;
 use App\Ship\Parents\Tasks\Task as ParentTask;
 use Prettus\Repository\Exceptions\RepositoryException;
@@ -47,6 +48,12 @@ class GetPathByTypeTask extends ParentTask
                 $fileable_id = $id;
                 $fileable_type = Monitoring::class;
                 $path = '/monitoreo/d-'.$fileable_id;
+                break;
+
+            case 'propaganda':
+                $fileable_id = $id;
+                $fileable_type = PropagandaMaterial::class;
+                $path = '/partidos-politicos/m-'.$user->profile_data->id.'/material/e-'.$fileable_id;
                 break;
 
             default:

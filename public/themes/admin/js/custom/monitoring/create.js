@@ -66,7 +66,7 @@ var KTFormBuilder = function () {
                                         }
                                     }).then(function(result){
                                         if (result.isConfirmed) {
-                                            window.location = result.redirect;
+                                            window.location = response.redirect;
                                         }
                                     });
                                 } else {

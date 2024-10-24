@@ -5,7 +5,9 @@ namespace App\Containers\AppSection\User\Actions;
 use App\Containers\AppSection\Authorization\Tasks\FindRoleTask;
 use App\Containers\AppSection\User\Models\User;
 use App\Containers\AppSection\User\Tasks\CreateUserTask;
+use App\Containers\AppSection\User\Tasks\FindUserByEmailTask;
 use App\Ship\Exceptions\CreateResourceFailedException;
+use App\Ship\Exceptions\EmailAlreadyExistsException;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
@@ -31,6 +33,11 @@ class CreateAdminUserAction extends ParentAction
             // add your request data hereh
         ]);
 
+        $existing_user = app(FindUserByEmailTask::class)->run($request->user_email);
+        if ($existing_user) {
+            throw new EmailAlreadyExistsException('El correo electrónico ya existe, intente con otro.');
+        }
+
         $data = [
             'email' => $request->user_email,
             'name' => $request->user_name,
@@ -41,8 +48,14 @@ class CreateAdminUserAction extends ParentAction
 
         $adminRole = app(FindRoleTask::class)->run($request->user_role, 'web');
 
-        if ($adminRole->name === 'media') {
-            $data['department'] = $request->user_department;
+        if ($adminRole->name === 'plenary') {
+            $data['type'] = 'TSE';
+            $data['department'] = 'Nacional';
+        }
+
+        if ($adminRole->name === 'media' || $adminRole->name === 'monitor' || $adminRole->name === 'analyst' || $adminRole->name === 'secretariat') {
+            $data['type'] = $request->user_type;
+            $data['department'] = $request->user_type === 'TSE' ? 'Nacional' : $request->user_department;
         }
 
         return DB::transaction(function () use ($data, $adminRole) {

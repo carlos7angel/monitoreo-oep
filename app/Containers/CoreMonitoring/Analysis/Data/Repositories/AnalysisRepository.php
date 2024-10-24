@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Containers\CoreMonitoring\UserProfile\Data\Repositories;
+namespace App\Containers\CoreMonitoring\Analysis\Data\Repositories;
 
 use App\Ship\Parents\Repositories\Repository as ParentRepository;
 
-class UserProfileRepository extends ParentRepository
+class AnalysisRepository extends ParentRepository
 {
     protected $fieldSearchable = [
         'id' => '=',

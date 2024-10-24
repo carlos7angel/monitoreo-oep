@@ -3,7 +3,7 @@
 namespace App\Containers\CoreMonitoring\UserProfile\Tasks;
 
 use Apiato\Core\Exceptions\CoreInternalErrorException;
-use App\Containers\CoreMonitoring\UserProfile\Data\Repositories\UserProfileRepository;
+use App\Containers\CoreMonitoring\UserProfile\Data\Repositories\PoliticalGroupProfileRepository;
 use App\Ship\Parents\Tasks\Task as ParentTask;
 use Prettus\Repository\Exceptions\RepositoryException;
 

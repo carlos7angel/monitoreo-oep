@@ -16,12 +16,14 @@ class AuthorizationRolesSeeder_2 extends ParentSeeder
         // OEP
         $task->run('admin', 'Usuario super administrador', 'Administrador OEP', 'web');
         $task->run('media', 'Usuario de administración de medios de comunicación', 'Administrador de Medios', 'web');
-        $task->run('monitor', 'Usuario de monitoreo', 'Monitor', 'web');
-        $task->run('analyst', 'Usuario analista de monitoreo', 'Analista', 'web');
+        $task->run('monitor', 'Usuario de Monitoreo', 'Monitor', 'web');
+        $task->run('analyst', 'Usuario de Comisión de Análisis', 'Comisión de Análisis', 'web');
+        $task->run('secretariat', 'Usuario de Secretaría de Cámara', 'Secretaría de Cámara', 'web');
+        $task->run('plenary', 'Usuario de Sala Plena', 'Sala Plena', 'web');
 
         // EXTERNAL
         $task->run('user_media', 'Usuario externo Medio de Comunicación', 'Medio de Comunicación', 'external');
-        // $task->run('user_political', 'Usuario externo Partido Político', 'Partido Político', 'external');
+        $task->run('user_political', 'Usuario externo Partido Político', 'Partido Político', 'external');
 
     }
 }

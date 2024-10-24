@@ -58,32 +58,7 @@
                     </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">
-{{--                    <tr>--}}
-{{--                        <td><span class="fw-bold">1</span></td>--}}
-{{--                        <td class="pe-0">--}}
-{{--                            <div class="d-flex align-items-center">--}}
-{{--                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">--}}
-{{--                                    <div class="symbol-label">--}}
-{{--                                        <img src="{{ asset('themes/common/media/images/blank-user.jpg') }}" alt="Emma Smith" class="w-100">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="d-flex flex-column">--}}
-{{--                                    <a class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>--}}
-{{--                                    <span>smith@kpmg.com</span>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-center pe-0">--}}
-{{--                            <div class="badge badge-secondary px-4 py-1 fw-bold">Administrador de Medios</div>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-center pe-0">--}}
-{{--                            <div class="badge badge-light-danger">Inactivo</div>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-center pe-0">02/10/2024 12:52 pm</td>--}}
-{{--                        <td class="text-end">--}}
-{{--                            <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="las la-wallet fs-2"></i></a>--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
+
                     </tbody>
                 </table>
             </div>
@@ -97,21 +72,16 @@
         <div class="modal-dialog modal-dialog-centered mw-650px">
             <div class="modal-content rounded">
                 <div class="modal-header" id="kt_modal_add_user_header">
-                    <!--begin::Modal title-->
                     <h2 class="fw-bold">Nuevo Usuario</h2>
-                    <!--end::Modal title-->
-                    <!--begin::Close-->
                     <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
                         <i class="ki-duotone ki-cross fs-1">
                             <span class="path1"></span>
                             <span class="path2"></span>
                         </i>
                     </div>
-                    <!--end::Close-->
                 </div>
                 <div class="modal-body scroll-y__ my-7 px-5 px-lg-10 pt-0 pb-15">
                     <form id="kt_form_new_user" class="form" action="{{ route('oep_admin_users_store') }}" method="post" autocomplete="off">
-                        <!--begin::Scroll-->
                         <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
 
                             <div class="fv-row mb-7">
@@ -133,10 +103,10 @@
                                 <label class="required fw-semibold fs-6 mb-5">Rol:</label>
                                 <div class="d-flex fv-row">
                                     <div class="form-check form-check-custom form-check-solid">
-                                        <input class="form-check-input me-3" name="user_role" type="radio" value="media" id="kt_modal_update_role_option_0" checked='checked' />
+                                        <input class="form-check-input me-3" name="user_role" type="radio" value="media" id="kt_modal_update_role_option_0" />
                                         <label class="form-check-label" for="kt_modal_update_role_option_0">
-                                            <div class="fw-bold text-gray-800">Administrator de Medios</div>
-                                            <div class="text-gray-600">Usuario encargado de la Gestión de información de los Medios de Comunicación</div>
+                                            <div class="fw-bold text-gray-800">Usuario gestor de Medios</div>
+                                            <div class="text-gray-600">Usuario encargado de la Gestión de los Medios de Comunicación</div>
                                         </label>
                                     </div>
                                 </div>
@@ -145,8 +115,8 @@
                                     <div class="form-check form-check-custom form-check-solid">
                                         <input class="form-check-input me-3" name="user_role" type="radio" value="monitor" id="kt_modal_update_role_option_1" />
                                         <label class="form-check-label" for="kt_modal_update_role_option_1">
-                                            <div class="fw-bold text-gray-800">Monitor</div>
-                                            <div class="text-gray-600">Usuario encargado del monitoreo de propaganda electoral</div>
+                                            <div class="fw-bold text-gray-800">Usuario Monitor</div>
+                                            <div class="text-gray-600">Usuario encargado del registro y monitoreo de propaganda electoral</div>
                                         </label>
                                     </div>
                                 </div>
@@ -155,30 +125,58 @@
                                     <div class="form-check form-check-custom form-check-solid">
                                         <input class="form-check-input me-3" name="user_role" type="radio" value="analyst" id="kt_modal_update_role_option_2" />
                                         <label class="form-check-label" for="kt_modal_update_role_option_2">
-                                            <div class="fw-bold text-gray-800">Analista</div>
-                                            <div class="text-gray-600">Usuario encargado del análisis de los registros de monitoreo de propaganda electoral</div>
+                                            <div class="fw-bold text-gray-800">Usuario Comisión de Análisis</div>
+                                            <div class="text-gray-600">Usuario encargado del análisis de los registros de monitoreo</div>
                                         </label>
                                     </div>
                                 </div>
                                 <div class='separator separator-dashed my-5'></div>
-
                                 <div class="d-flex fv-row">
                                     <div class="form-check form-check-custom form-check-solid">
-                                        <input class="form-check-input me-3" name="user_role" type="radio" value="political" id="kt_modal_update_role_option_3" />
+                                        <input class="form-check-input me-3" name="user_role" type="radio" value="secretariat" id="kt_modal_update_role_option_3" />
                                         <label class="form-check-label" for="kt_modal_update_role_option_3">
-                                            <div class="fw-bold text-gray-800">Administrador de Partidos</div>
-                                            <div class="text-gray-600">Usuario encargado de la gestión de información de los Partidos Políticos</div>
+                                            <div class="fw-bold text-gray-800">Usuario Secretaría de Cámara</div>
+                                            <div class="text-gray-600">Usuario encargado del análisis y gestión de informe de vulneraciones</div>
                                         </label>
                                     </div>
                                 </div>
+                                <div class='separator separator-dashed my-5'></div>
+                                <div class="d-flex fv-row">
+                                    <div class="form-check form-check-custom form-check-solid">
+                                        <input class="form-check-input me-3" name="user_role" type="radio" value="plenary" id="kt_modal_update_role_option_4" />
+                                        <label class="form-check-label" for="kt_modal_update_role_option_4">
+                                            <div class="fw-bold text-gray-800">Usuario Sala Plena</div>
+                                            <div class="text-gray-600">Usuario encargado del análisis y gestión de informe de vulneraciones</div>
+                                        </label>
+                                    </div>
+                                </div>
+
                             </div>
 
-                            <div id="kt_department_select_for_admin_media">
+                            <div id="kt_type_select_for_user_admin" class="d-none">
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-semibold fs-6 mb-2">Tipo:</label>
+                                    <select class="form-select" data-control="select2" data-hide-search="true" data-placeholder="Seleccionar" name="user_type">
+                                        <option value=""></option>
+                                        <option value="TED">TED</option>
+                                        <option value="TSE">TSE</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div id="kt_department_select_for_user_admin" class="d-none">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Departamento:</label>
-                                    <select class="form-select" data-control="select2" data-hide-search="false" data-placeholder="" name="user_department">
-                                        <option value="Nacional">Nacional</option>
+                                    <select class="form-select" data-control="select2" data-hide-search="true" data-placeholder="Seleccionar" name="user_department">
                                         <option value="La Paz">La Paz</option>
+                                        <option value="Oruro">Oruro</option>
+                                        <option value="Potosí">Potosí</option>
+                                        <option value="Cochabamba">Cochabamba</option>
+                                        <option value="Chuquisaca">Chuquisaca</option>
+                                        <option value="Tarija">Tarija</option>
+                                        <option value="Pando">Pando</option>
+                                        <option value="Beni">Beni</option>
+                                        <option value="Santa Cruz">Santa Cruz</option>
                                     </select>
                                 </div>
                             </div>

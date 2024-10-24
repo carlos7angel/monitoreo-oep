@@ -10,7 +10,7 @@ use App\Ship\Parents\Tasks\Task as ParentTask;
 class FindMonitoringByIdTask extends ParentTask
 {
     public function __construct(
-        protected readonly MonitoringRepository $repository,
+        protected MonitoringRepository $repository,
     ) {
     }
 

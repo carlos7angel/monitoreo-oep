@@ -31,21 +31,30 @@
               action="{{ route('oep_admin_media_monitoring_store', ['id' => $election->id, 'media' => $media_type]) }}">
 
             <input type="hidden" name="oep_election_id" value="{{ $election->id }}">
+            <input type="hidden" name="oep_media_type" value="{{ $media_type }}">
 
             <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
 
-                <div class="card card-flush py-4">
-{{--                    <div class="card-header">--}}
-{{--                        <div class="card-title">--}}
-{{--                            <h2>Categoría</h2>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                <div class="card card-flush mb-5 mb-xl-8">
+
                     <div class="card-body">
-                        <div class="fv-row">
-                            <label for="kt_add_election_type" class="form-label">Proceso Electoral</label>
-                            <p>Elecciones Judiciales 2024</p>
+                        <div class="d-flex flex-column py-5">
+                            <h6 class="mb-8 fw-bolder text-gray-600 text-hover-primary">DATOS DEL PROCESO</h6>
+                            <div class="mb-6">
+                                <div class="fw-semibold text-gray-600 fs-7">Proceso Electoral:</div>
+                                <div class="fw-bold text-gray-800 fs-6">{{ $election->name }}</div>
+                            </div>
+                            <div class="mb-6">
+                                <div class="fw-semibold text-gray-600 fs-7">Categoría:</div>
+                                <div class="fw-bold text-gray-800 fs-6">{{ $election->type }}</div>
+                            </div>
+                            <div class="mb-6">
+                                <div class="fw-semibold text-gray-600 fs-7">Fecha del Proceso:</div>
+                                <div class="fw-bold text-gray-800 fs-6">{{ $election->election_date }}</div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
@@ -55,13 +64,31 @@
                 <div class="card card-flush py-4">
                     <div class="card-header">
                         <div class="card-title">
-                            <h2>NUEVO REGISTRO <span class="text-info">MEDIO TELEVISIVO</span></h2>
+                            <h2>NUEVO REGISTRO
+                                @switch($media_type)
+                                    @case('TV')
+                                    <span class="text-info">MEDIO TELEVISIVO</span>
+                                    @break
+                                    @case('RADIO')
+                                    <span class="text-info">MEDIO RADIAL</span>
+                                    @break
+                                    @case('PRINT')
+                                    <span class="text-info">MEDIO IMPRESO</span>
+                                    @break
+                                    @case('DIGITAL')
+                                    <span class="text-info">MEDIO DIGITAL</span>
+                                    @break
+                                    @case('RRSS')
+                                    <span class="text-info">REDES SOCIALES</span>
+                                    @break
+                                @endswitch
+                            </h2>
                         </div>
                     </div>
                     <div class="card-body pt-0">
                         <div class="mb-10 fv-row">
                             <label class="required form-label">Tipo de Medio:</label>
-                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="" name="oep_media_type" readonly>
+                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="" name="oep_media_type_text" readonly disabled>
                                 <option value="TV" {{ $media_type === 'TV' ? 'selected="selected"' : '' }}>MEDIO TELEVISIVO</option>
                                 <option value="RADIO" {{ $media_type === 'RADIO' ? 'selected="selected"' : '' }}>MEDIO RADIAL</option>
                                 <option value="PRINT" {{ $media_type === 'PRINT' ? 'selected="selected"' : '' }}>MEDIO IMPRESO</option>

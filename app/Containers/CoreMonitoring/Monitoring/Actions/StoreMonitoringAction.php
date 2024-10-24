@@ -30,7 +30,6 @@ class StoreMonitoringAction extends ParentAction
      */
     public function run(Request $request): Monitoring
     {
-        // dd($request->all());
         $election = app(FindElectionByIdTask::class)->run($request->oep_election_id);
 
         $form_id = null;
@@ -67,11 +66,25 @@ class StoreMonitoringAction extends ParentAction
             'registered_at' => Carbon::now()
         ];
 
+        if($user->type === 'TSE' || empty($user->type)) {
+            $data['scope_type'] = 'TSE';
+            $data['scope_department'] = 'Nacional';
+        }
+        if($user->type === 'TED') {
+            $data['scope_type'] = $user->type ;
+            $data['scope_department'] = $user->department;
+        }
+
         $monitoring = $this->createMonitoringTask->run($data);
         $data_form = app(StoreDataFieldsFormTask::class)->run($form, $request, $monitoring);
-        $data['code'] = 'M-' . strtoupper(substr(md5($monitoring->id . $monitoring->created_at . $monitoring->code),0,6)) . '-' . Carbon::now()->format('y');
-        $data['data'] = json_encode($data_form);
+        $monitoring->code = 'M-' . strtoupper(substr(md5($monitoring->id . $monitoring->created_at . $monitoring->code),0,6)) . '-' . Carbon::now()->format('y');
+        $monitoring->data = json_encode($data_form);
+        $monitoring->save();
 
-        return $this->updateMonitoringTask->run($data, $monitoring->id);
+        return $monitoring;
+
+        // $data['code'] = 'M-' . strtoupper(substr(md5($monitoring->id . $monitoring->created_at . $monitoring->code),0,6)) . '-' . Carbon::now()->format('y');
+        // $data['data'] = json_encode($data_form);
+        // return $this->updateMonitoringTask->run($data, $monitoring->id);
     }
 }

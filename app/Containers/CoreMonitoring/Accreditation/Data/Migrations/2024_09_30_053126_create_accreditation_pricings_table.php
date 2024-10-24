@@ -16,7 +16,7 @@ return new class() extends Migration {
 
             $table->enum('type', ['Televisivo', 'Radial', 'Digital', 'Impreso']); //ENGLISH
 
-            $table->enum('scope', ['Nacional', 'La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro', 'Potosi', 'Beni', 'Chuquisaca', 'Pando', 'Tarija']);
+            $table->enum('scope', ['Nacional', 'La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro', 'Potosí', 'Beni', 'Chuquisaca', 'Pando', 'Tarija']);
 
             $table->string('file_rate', 50)->nullable();
 

@@ -14,7 +14,7 @@ return new class() extends Migration {
             $table->foreign('fid_media_profile')->references('id')->on('media_profiles')->onDelete('cascade');
             $table->enum('type', ['Televisivo', 'Radial', 'Digital', 'Impreso']); //ENGLISH
 
-            $table->enum('coverage', ['Nacional', 'La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro', 'Potosi', 'Beni', 'Chuquisaca', 'Pando', 'Tarija'])->nullable();
+            $table->enum('coverage', ['Nacional', 'La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro', 'Potosí', 'Beni', 'Chuquisaca', 'Pando', 'Tarija'])->nullable();
             $table->enum('scope', ['Nacional', 'Departamental', 'Regional', 'Municipal', 'AIOC'])->nullable();
             $table->string('scope_department', 150)->nullable(); // 'Nacional', 'Departamental' => ARRAY ALWAYS
             $table->string('scope_area', 150)->nullable(); // 'Regional', 'Municipal', 'AIOC'

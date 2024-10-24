@@ -11,7 +11,7 @@ use App\Ship\Parents\Actions\Action as ParentAction;
 class DeleteElectionAction extends ParentAction
 {
     public function __construct(
-        private readonly DeleteElectionTask $deleteElectionTask,
+        private DeleteElectionTask $deleteElectionTask,
     ) {
     }
 

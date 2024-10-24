@@ -56,7 +56,7 @@ var KTFormBuilder = function () {
                             success: function (response) {
                                 if (response.success) {
                                     Swal.fire({
-                                        text: "Registro guardado satisfactoriamente",
+                                        text: "Registro actualizado satisfactoriamente",
                                         icon: "success",
                                         buttonsStyling: false,
                                         confirmButtonText: "Aceptar",
@@ -66,7 +66,7 @@ var KTFormBuilder = function () {
                                         }
                                     }).then(function(result){
                                         if (result.isConfirmed) {
-                                            window.location = result.redirect;
+                                            window.location = response.redirect;
                                         }
                                     });
                                 } else {

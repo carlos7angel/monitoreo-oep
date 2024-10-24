@@ -23,7 +23,8 @@ class Monitoring extends ParentModel
         'data',
         'render',
         'status',
-        'analysis',
+        'scope_type',
+        'scope_department',
         'registered_by',
         'registered_at',
     ];

@@ -17,6 +17,7 @@ class User extends ParentUserModel implements MustVerifyEmail
         'device',
         'platform',
         'confirmed',
+        'type',
         'department',
         'email_verified_at',
         'profile_data_id',
@@ -71,7 +72,7 @@ class User extends ParentUserModel implements MustVerifyEmail
 
     public function hasExternalAdminMediaRole(): bool
     {
-        return $this->hasRole('user_media');
+        return $this->hasRole(['user_media', 'user_political']);
     }
 
     public function hasAdminMediaRole(): bool

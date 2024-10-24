@@ -33,18 +33,15 @@ class UpdateMonitoringAction extends ParentAction
     public function run(Request $request): Monitoring
     {
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
-
         $monitoring = $this->findMonitoringByIdTask->run($request->id);
-
         $form = app(FindFormByIdTask::class)->run($monitoring->fid_form);
 
-        $data = [
-            'fid_media_profile' => $request->media_profile,
-        ];
-
+        $monitoring->fid_media_profile = $request->media_profile;
         $data_form = $this->storeDataFieldsFormTask->run($form, $request, $monitoring, json_decode($monitoring->data, true));
-        $data['data'] = json_encode($data_form);
+        $monitoring->data = json_encode($data_form);
+        $monitoring->save();
 
-        return $this->updateMonitoringTask->run($data, $monitoring->id);
+        return  $monitoring;
+        //return $this->updateMonitoringTask->run($data, $monitoring->id);
     }
 }

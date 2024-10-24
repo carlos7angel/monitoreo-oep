@@ -36,7 +36,7 @@ return new class() extends Migration {
             $table->string('file_rep_document', 50)->nullable();
             $table->string('file_nit', 50)->nullable();
 
-//            $table->enum('coverage', ['Nacional', 'La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro', 'Potosi', 'Beni', 'Chuquisaca', 'Pando', 'Tarija'])->nullable();
+//            $table->enum('coverage', ['Nacional', 'La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro', 'Potosí', 'Beni', 'Chuquisaca', 'Pando', 'Tarija'])->nullable();
 //            $table->enum('scope', ['Nacional', 'Departamental', 'Municipal'])->nullable();
 //            $table->string('scope_department', 150)->nullable(); // ARRAY
 //            $table->string('scope_municipality', 150)->nullable();

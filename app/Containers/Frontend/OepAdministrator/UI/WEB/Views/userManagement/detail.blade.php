@@ -43,7 +43,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-9 mt-5">
+                            <div class="mb-5 mt-5">
                                 <span class="text-muted">Estado:</span>
                                 @if($user->active)
                                 <div class="badge badge-lg badge-success d-inline">Activo</div>
@@ -51,6 +51,16 @@
                                 <div class="badge badge-lg badge-danger d-inline">Inactivo</div>
                                 @endif
                             </div>
+
+                            <div class="mb-3">
+                                <span class="text-muted">Tipo:</span>
+                                <span>{{ $user->type }}</span>
+                            </div>
+                            <div class="mb-3">
+                                <span class="text-muted">Departamento:</span>
+                                <span>{{ $user->department }}</span>
+                            </div>
+
                         </div>
 
                     </div>

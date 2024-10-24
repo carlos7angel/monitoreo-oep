@@ -47,6 +47,20 @@ var KTUserCreate = function () {
                             }
                         }
                     },
+                    user_type: {
+                        validators: {
+                            notEmpty: {
+                                message: 'El campo es obligatorio'
+                            },
+                        }
+                    },
+                    user_department: {
+                        validators: {
+                            notEmpty: {
+                                message: 'El campo es obligatorio'
+                            },
+                        }
+                    },
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
@@ -130,10 +144,26 @@ var KTUserCreate = function () {
         $('input[name="user_role"]').on('change', function (e) {
             e.preventDefault();
             var el = $(this).val();
-            if (el === 'media') {
-                $('#kt_department_select_for_admin_media').removeClass('d-none').addClass('d-block');
+            if (el === 'plenary') {
+                $('#kt_type_select_for_user_admin').removeClass('d-block').addClass('d-none');
+                validator.disableValidator('user_type');
+                validator.disableValidator('user_department');
             } else {
-                $('#kt_department_select_for_admin_media').removeClass('d-block').addClass('d-none');
+                $('#kt_type_select_for_user_admin').removeClass('d-none').addClass('d-block');
+                validator.enableValidator('user_type');
+            }
+        });
+
+        $('select[name="user_type"]').on('change', function (e) {
+            e.preventDefault();
+            var el = $(this).val();
+            if (el === 'TED') {
+                $('#kt_department_select_for_user_admin').removeClass('d-none').addClass('d-block');
+                validator.enableValidator('user_department');
+            }
+            if (el === 'TSE') {
+                $('#kt_department_select_for_user_admin').removeClass('d-block').addClass('d-none');
+                validator.disableValidator('user_department');
             }
         });
     }

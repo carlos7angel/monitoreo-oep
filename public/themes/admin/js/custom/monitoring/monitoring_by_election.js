@@ -86,6 +86,15 @@ var KTMonitoringList = function () {
                     searchable: true,
                     className: 'pe-0',
                     render: function (data, type, full, meta) {
+                        return `<span>${data}</span>`;
+                    },
+                },
+                {
+                    targets: 2,
+                    orderable: true,
+                    searchable: true,
+                    className: 'pe-0',
+                    render: function (data, type, full, meta) {
                         let logo = '/storage/' + full.media_logo;
                         /*
                         <a class="symbol symbol-50px">
@@ -93,7 +102,7 @@ var KTMonitoringList = function () {
                         </a>
                         */
                         return `<div class="d-flex align-items-center">
-                                    <div class="ms-3">
+                                    <div class="ms-0">
                                         <div class="text-gray-800 text-hover-primary fs-6 fw-bold mb-0">${data}</div>
                                         <div class="text-muted fs-7">${full.media_business_name}</div>
                                     </div>
@@ -101,13 +110,13 @@ var KTMonitoringList = function () {
                     },
                 },
                 {
-                    targets: 2,
+                    targets: 3,
                     orderable: false,
                     searchable: false,
                     className: 'text-center pe-0',
                     render: function (data, type, full, meta) {
                         var status = {
-                            'TV': {'title': 'M. Radiales', 'class': 'badge-secondary'},
+                            'TV': {'title': 'M. Televisivos', 'class': 'badge-secondary'},
                             'RADIO': {'title': 'M. Radiales', 'class': 'badge-secondary'},
                             'PRINT': {'title': 'M. Impresos', 'class': 'badge-secondary'},
                             'DIGITAL': {'title': 'M. Digitales', 'class': 'badge-secondary'},
@@ -120,26 +129,12 @@ var KTMonitoringList = function () {
                     },
                 },
                 {
-                    targets: 3,
-                    orderable: true,
-                    searchable: true,
-                    className: 'text-center pe-0',
-                    render: function (data, type, full, meta) {
-                        return `<span>${data}</span>`;
-                    },
-                },
-                {
                     targets: 4,
                     orderable: true,
                     searchable: true,
                     className: 'dt-center pe-0',
                     render: function (data, type, full, meta) {
-                        //return moment(data).format('DD/MM/YYYY HH:mm');
-                        // return `<span class="fs-7 pe-2">Del</span>
-                        //         <div class="badge badge-secondary py-2 px-4">${full.start_date_media_registration}</div>
-                        //         <span class="fs-7 px-2">al</span>
-                        //         <div class="badge badge-secondary py-2 px-4">${full.end_date_media_registration}</div>`;
-                        return data;
+                        return moment(data).format('DD/MM/YYYY HH:mm');
                     },
                 },
                 {
@@ -197,17 +192,17 @@ var KTMonitoringList = function () {
             datatable.table().draw();
         });
 
-        $('.kt_btn_select_status').on('click', function (e) {
+        $('.kt_btn_select_media').on('click', function (e) {
             e.preventDefault();
 
             let status = $(this).data('status');
-            $('input[name="dt_search_by_status"]').val(status);
+            $('input[name="dt_search_by_media_type"]').val(status);
 
-            $('.kt_btn_select_status').removeClass('active');
+            $('.kt_btn_select_media').removeClass('active');
             $(this).addClass('active');
 
             $("input[name='dt_search_input']").val('');
-            datatable.column(5).search(status, false, false);
+            datatable.column(3).search(status, false, false);
             datatable.search('', false, false);
             datatable.table().draw();
         });

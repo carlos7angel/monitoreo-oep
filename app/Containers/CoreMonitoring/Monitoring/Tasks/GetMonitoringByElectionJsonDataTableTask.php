@@ -37,13 +37,13 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
         $pageSize = $length != null ? intval($length) : 0;
         $skip = $start != null ? intval($start) : 0;
 
-        $searchFieldStatus = $requestData['columns'][5]['search']['value'];
+        $searchFieldMediaType = $requestData['columns'][3]['search']['value'];
 
         $election_id = $request->id;
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
-        $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $election_id, $searchFieldStatus, $user) {
+        $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $election_id, $searchFieldMediaType, $user) {
             $query = $query->join('media_profiles', 'media_monitoring.fid_media_profile', 'media_profiles.id');
             $query = $query->where('fid_election', $election_id);
             if(! empty($searchValue)) {
@@ -51,12 +51,23 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
                                 ->orWhere('media_profiles.business_name', 'like', '%'.$searchValue.'%');
             }
 
-            if(! empty($searchFieldStatus)) {
-                $query = $query->where('media_monitoring.status', $searchFieldStatus);
+            if(! empty($searchFieldMediaType)) {
+                $query = $query->where('media_monitoring.media_type', $searchFieldMediaType);
             }
 
-            if ($user->roles->first()->name === 'media') {
-                $query = $query->where('media_profiles.coverage', '=', $user->department);
+            // if ($user->roles->first()->name === 'media') {
+            //     $query = $query->where('media_profiles.coverage', '=', $user->department);
+            // }
+
+            if ($user) {
+                if ($user->type === 'TSE' || empty($user->type)) {
+                    $query = $query->where('media_monitoring.scope_type', '=', 'TSE')
+                                    ->where('media_monitoring.scope_department', '=', 'Nacional');
+                }
+                if ($user->type === 'TED') {
+                    $query = $query->where('media_monitoring.scope_type', '=', 'TED')
+                                    ->where('media_monitoring.scope_department', '=', $user->department);
+                }
             }
 
             // $query = $query->whereIn('status', ['active', 'finished']);

@@ -1,0 +1,6 @@
+{
+    "name": "apiato/registration",
+    "description": "Registration Container for apiato.",
+    "require": {
+    }
+}
