@@ -41,54 +41,6 @@
                         </span>
                     </a>
                     <?php endif; ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
             <div class="app-navbar flex-shrink-0">
@@ -112,7 +64,7 @@
                                     <div class="symbol symbol-50px me-5">
                                         <div class="w-50px h-50px" style="background-image: url(<?php echo e(asset('storage') . Auth::guard('external')->user()->profile_data->logo); ?>);
                                                 background-size: cover; background-position: center"></div>
-
+                                        
                                     </div>
                                 <?php else: ?>
                                     <div class="symbol symbol-50px me-5">

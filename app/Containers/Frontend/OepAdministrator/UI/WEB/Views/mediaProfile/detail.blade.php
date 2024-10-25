@@ -151,7 +151,7 @@
                                                     @endphp
 
                                                     @foreach($media_items as $key => $media)
-                                                        @if($media['ENABLE'])
+                                                        @if($media['ENABLE'] && $media['ITEM'])
                                                         <tr class="fw-bold text-gray-700 fs-7 text-end">
                                                             <td class="text-start pt-6">
                                                                 <i class="fa fa-genderless text-info fs-2 me-2"></i>

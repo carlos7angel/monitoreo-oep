@@ -286,7 +286,7 @@
                                         <option value="Chuquisaca">Chuquisaca</option>
                                         <option value="Tarija">Tarija</option>
                                         <option value="Oruro">Oruro</option>
-                                        <option value="Potosi">Potosi</option>
+                                        <option value="Potosí">Potosí</option>
                                         <option value="Beni">Beni</option>
                                         <option value="Pando">Pando</option>
                                     </select>
