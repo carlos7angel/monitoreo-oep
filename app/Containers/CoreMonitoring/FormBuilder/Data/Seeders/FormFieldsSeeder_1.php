@@ -13,7 +13,7 @@ class FormFieldsSeeder_1 extends ParentSeeder
     {
         Model::unguard();
 
-        $filePath = database_path('../SQL/fieldTypes.sql');
+        $filePath = database_path('SQL/fieldTypes.sql');
 
         if(File::exists($filePath)){
             DB::unprepared(file_get_contents($filePath));
