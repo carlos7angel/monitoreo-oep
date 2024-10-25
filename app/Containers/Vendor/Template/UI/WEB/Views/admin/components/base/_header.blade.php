@@ -31,7 +31,7 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ in_array($page, ['election_list', 'election_create']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_4">Procesos Electorales</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item d-none">
                                 <a class="nav-link {{ in_array($page, ['political_group_list', 'political_group_create']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_5">Partidos Políticos</a>
                             </li>
                             <li class="nav-item">
