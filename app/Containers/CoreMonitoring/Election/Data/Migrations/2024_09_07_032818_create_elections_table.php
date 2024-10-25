@@ -35,7 +35,7 @@ return new class() extends Migration {
             // MONITORING SETTINGS
             $table->boolean('enable_for_monitoring')->default(false);
             $table->unsignedBigInteger('fid_form_tv_media')->nullable();
-            $table->foreign('fid_form_television_media')->references('id')->on('forms')->onDelete('cascade');
+            $table->foreign('fid_form_tv_media')->references('id')->on('forms')->onDelete('cascade');
             $table->unsignedBigInteger('fid_form_radio_media')->nullable();
             $table->foreign('fid_form_radio_media')->references('id')->on('forms')->onDelete('cascade');
             $table->unsignedBigInteger('fid_form_print_media')->nullable();
@@ -44,11 +44,6 @@ return new class() extends Migration {
             $table->foreign('fid_form_digital_media')->references('id')->on('forms')->onDelete('cascade');
             $table->unsignedBigInteger('fid_form_rrss_media')->nullable();
             $table->foreign('fid_form_rrss_media')->references('id')->on('forms')->onDelete('cascade');
-//            $table->boolean('enable_monitoring_tv_media')->default(false);
-//            $table->boolean('enable_monitoring_radio_media')->default(false);
-//            $table->boolean('enable_monitoring_digital_media')->default(false);
-//            $table->boolean('enable_monitoring_print_media')->default(false);
-//            $table->boolean('enable_monitoring_rrss_media')->default(false);
 
             // PP SETTINGS
             $table->boolean('enable_for_political_registration')->default(false);

@@ -21,6 +21,7 @@
             <div class="app-header-menu app-header-mobile-drawer align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="app-header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="250px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_header_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="{default: 'append', lg: 'prepend'}" data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}">
                 <div class="menu menu-rounded menu-active-bg menu-state-primary menu-column menu-lg-row menu-title-gray-700 menu-icon-gray-500 menu-arrow-gray-500 menu-bullet-gray-500 my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0" id="kt_app_header_menu" data-kt-menu="true">
 
+                    @hasrole('user_media')
                     <a href="{{ route('ext_admin_media_profile_general_data_show') }}" class="menu-item {{ in_array($page, ['media_data']) ? 'here' : '' }} menu-lg-down-accordion me-0 me-lg-2">
                         <span class="menu-link">
                             <span class="menu-title">Medio de Comunicación</span>
@@ -32,61 +33,14 @@
                             <span class="menu-title">Acreditaciones Procesos Electorales</span>
                         </span>
                     </a>
-
+                    @endhasrole
+                    @hasrole('user_political')
                     <a href="{{ route('ext_admin_registration_elections_list') }}" class="menu-item {{ in_array($page, ['political_group_registrations']) ? 'here' : '' }} menu-lg-down-accordion me-0 me-lg-2">
                         <span class="menu-link">
                             <span class="menu-title">Propaganda Electoral</span>
                         </span>
                     </a>
-
-{{--                    <!--begin:Menu item-->--}}
-{{--                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">--}}
-{{--                        <!--begin:Menu link-->--}}
-{{--                        <span class="menu-link">--}}
-{{--                            <span class="menu-title">Preferencias</span>--}}
-{{--                            <span class="menu-arrow d-lg-none"></span>--}}
-{{--                        </span>--}}
-{{--                        <!--end:Menu link-->--}}
-{{--                    </div>--}}
-{{--                    <!--end:Menu item-->--}}
-{{--                    <!--begin:Menu item-->--}}
-{{--                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">--}}
-{{--                        <!--begin:Menu link-->--}}
-{{--                        <span class="menu-link">--}}
-{{--                            <span class="menu-title">Ayuda</span>--}}
-{{--                            <span class="menu-arrow d-lg-none"></span>--}}
-{{--                        </span>--}}
-{{--                        <!--end:Menu link-->--}}
-{{--                        <!--begin:Menu sub-->--}}
-{{--                        <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">--}}
-{{--                            <!--begin:Menu item-->--}}
-{{--                            <div class="menu-item">--}}
-{{--                                <!--begin:Menu link-->--}}
-{{--                                <a class="menu-link" href="#" target="_blank" title="Check out over 200 in-house components, plugins and ready for use solutions" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">--}}
-{{--                                    <span class="menu-icon">--}}
-{{--                                        <i class="ki-outline ki-rocket fs-2"></i>--}}
-{{--                                    </span>--}}
-{{--                                    <span class="menu-title">Components</span>--}}
-{{--                                </a>--}}
-{{--                                <!--end:Menu link-->--}}
-{{--                            </div>--}}
-{{--                            <!--end:Menu item-->--}}
-{{--                            <!--begin:Menu item-->--}}
-{{--                            <div class="menu-item">--}}
-{{--                                <!--begin:Menu link-->--}}
-{{--                                <a class="menu-link" href="#" target="_blank" title="Check out the complete documentation" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">--}}
-{{--                                    <span class="menu-icon">--}}
-{{--                                        <i class="ki-outline ki-abstract-26 fs-2"></i>--}}
-{{--                                    </span>--}}
-{{--                                    <span class="menu-title">Documentation</span>--}}
-{{--                                </a>--}}
-{{--                                <!--end:Menu link-->--}}
-{{--                            </div>--}}
-{{--                            <!--end:Menu item-->--}}
-{{--                        </div>--}}
-{{--                        <!--end:Menu sub-->--}}
-{{--                    </div>--}}
-{{--                    <!--end:Menu item-->--}}
+                    @endhasrole
                 </div>
             </div>
             <div class="app-navbar flex-shrink-0">
@@ -110,7 +64,7 @@
                                     <div class="symbol symbol-50px me-5">
                                         <div class="w-50px h-50px" style="background-image: url({{ asset('storage') . Auth::guard('external')->user()->profile_data->logo}});
                                                 background-size: cover; background-position: center"></div>
-{{--                                        <img alt="Logo Medio" src="{{ asset('storage') . Auth::guard('external')->user()->profile_data->logo}}" />--}}
+                                        {{--<img alt="Logo Medio" src="{{ asset('storage') . Auth::guard('external')->user()->profile_data->logo}}" />--}}
                                     </div>
                                 @else
                                     <div class="symbol symbol-50px me-5">
