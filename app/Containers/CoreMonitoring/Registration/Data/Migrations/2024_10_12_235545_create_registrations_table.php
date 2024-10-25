@@ -24,7 +24,7 @@ return new class() extends Migration {
             $table->timestamps();
             // $table->softDeletes();
 
-            $table->index(['fid_election', 'fid_user', 'fid_political_group_profile']);
+            $table->index(['fid_election', 'fid_user', 'fid_political_group_profile'], 'registrations_fid_election_fid_user_fid_political_group_index');
         });
     }
 
