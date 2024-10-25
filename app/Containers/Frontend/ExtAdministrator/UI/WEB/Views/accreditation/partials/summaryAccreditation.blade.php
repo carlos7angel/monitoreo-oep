@@ -85,15 +85,15 @@
                             ],
                             'RADIAL' => [
                                 'ENABLE' => $profile_data->media_type_radio,
-                                'ITEM' => $profile_data->mediaTypes['Radial']
+                                'ITEM' => isset($profile_data->mediaTypes['Radial']) ? $profile_data->mediaTypes['Radial'] : null
                             ],
                             'IMPRESO' => [
                                 'ENABLE' => $profile_data->media_type_print,
-                                'ITEM' => $profile_data->mediaTypes['Impreso']
+                                'ITEM' => isset($profile_data->mediaTypes['Impreso']) ? $profile_data->mediaTypes['Impreso'] : null
                             ],
                             'DIGITAL' => [
                                 'ENABLE' => $profile_data->media_type_digital,
-                                'ITEM' => $profile_data->mediaTypes['Digital']
+                                'ITEM' => isset($profile_data->mediaTypes['Digital']) ? $profile_data->mediaTypes['Digital'] : null
                             ],
                         ];
                     @endphp
@@ -269,13 +269,13 @@
 
     <h6 class="mb-5 mt-10 fw-bolder text-gray-600 text-hover-primary">TARIFARIOS</h6>
 
-    @if($profile_data->media_type_television)
-        @php
+    @php
+        $item_type_television = null;
+        if($profile_data->media_type_television) {
             $item_type_television = $profile_data->mediaTypes['Televisivo'];
             $states = $item_type_television ? explode(', ', $item_type_television->scope_department) : [];
-        @endphp
-    @endif
-
+        }
+    @endphp
     @if($item_type_television)
         <div class="row"><h7 class="mb-5 mt-10 fw-bolder text-gray-900">TELEVISIÓN</h7></div>
         @if($item_type_television->scope === 'Nacional')
@@ -328,12 +328,13 @@
 
 
 
-    @if($profile_data->media_type_radio)
-        @php
+    @php
+        $item_type_radio = null;
+        if($profile_data->media_type_radio) {
             $item_type_radio = $profile_data->mediaTypes['Radial'];
             $states = $item_type_radio ? explode(', ', $item_type_radio->scope_department) : [];
-        @endphp
-    @endif
+        }
+    @endphp
     @if($item_type_radio)
         <div class="row"><h7 class="mb-5 mt-10 fw-bolder text-gray-900">RADIO</h7></div>
         @if($item_type_radio->scope === 'Nacional')
@@ -384,12 +385,13 @@
 
 
 
-    @if($profile_data->media_type_print)
-        @php
+    @php
+        $item_type_print = null;
+        if($profile_data->media_type_print) {
             $item_type_print = $profile_data->mediaTypes['Impreso'];
             $states = $item_type_print ? explode(', ', $item_type_print->scope_department) : [];
-        @endphp
-    @endif
+        }
+    @endphp
     @if($item_type_print)
         <div class="row"><h7 class="mb-5 mt-10 fw-bolder text-gray-900">IMPRESO</h7></div>
         @if($item_type_print->scope === 'Nacional')
@@ -441,12 +443,13 @@
 
 
 
-    @if($profile_data->media_type_digital)
-        @php
+    @php
+        $item_type_digital = null;
+        if($profile_data->media_type_digital) {
             $item_type_digital = $profile_data->mediaTypes['Digital'];
             $states = $item_type_digital ? explode(', ', $item_type_digital->scope_department) : [];
-        @endphp
-    @endif
+        }
+    @endphp
     @if($item_type_digital)
         <div class="row"><h7 class="mb-5 mt-10 fw-bolder text-gray-900">DIGITAL</h7></div>
         @if($item_type_digital->scope === 'Nacional')

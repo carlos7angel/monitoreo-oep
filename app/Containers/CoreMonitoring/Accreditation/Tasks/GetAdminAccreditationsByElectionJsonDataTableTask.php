@@ -53,13 +53,15 @@ class GetAdminAccreditationsByElectionJsonDataTableTask extends ParentTask
 
             if(! empty($searchFieldStatus)) {
                 $query = $query->where('media_accreditations.status', $searchFieldStatus);
+            } else {
+                $query = $query->whereIn('media_accreditations.status', ['new', 'observed', 'accredited', 'archived', 'rejected']);
             }
 
             if ($user->roles->first()->name === 'media') {
                 $query = $query->where('media_profiles.coverage', '=', $user->department);
             }
 
-            // $query = $query->whereIn('status', ['active', 'finished']);
+
             return $query->distinct()->select(['media_accreditations.*', 'media_profiles.name as media_name', 'media_profiles.business_name as media_business_name',
                 'media_profiles.logo as media_logo', 'media_profiles.media_type_television', 'media_profiles.media_type_radio', 'media_profiles.media_type_print', 'media_profiles.media_type_digital']);
         });
