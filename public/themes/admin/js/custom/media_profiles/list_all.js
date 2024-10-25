@@ -113,6 +113,9 @@ var KTMediaList = function () {
                     orderable: false,
                     className: 'text-center pe-0',
                     render: function (data, type, full, meta) {
+
+                        console.log(full);
+
                         let types = ``;
                         if (full.media_type_television) {
                             types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Televisivo</div>`

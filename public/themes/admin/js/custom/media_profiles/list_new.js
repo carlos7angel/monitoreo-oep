@@ -111,7 +111,7 @@ var KTMediaList = function () {
                     className: 'pe-0',
                     render: function (data, type, full, meta) {
 
-                        console.log()
+                        console.log(full);
 
                         let types = ``;
                         if (full.media_type_television) {
