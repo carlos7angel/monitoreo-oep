@@ -31,6 +31,7 @@ class UpdateElectionAction extends ParentAction
      */
     public function run(Request $request): Election
     {
+        // dd($request->all());
         $data = $request->sanitizeInput([
             // add your request data here
         ]);

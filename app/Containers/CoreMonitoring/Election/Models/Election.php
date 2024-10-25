@@ -34,11 +34,11 @@ class Election extends ParentModel
         'logo_image',
 
         'enable_for_monitoring',
-        'enable_monitoring_television_media',
-        'enable_monitoring_radio_media',
-        'enable_monitoring_digital_media',
-        'enable_monitoring_print_media',
-        'enable_monitoring_social_media',
+        'fid_form_tv_media',
+        'fid_form_radio_media',
+        'fid_form_print_media',
+        'fid_form_digital_media',
+        'fid_form_rrss_media',
 
         'enable_for_political_registration',
         'start_date_political_registration',
