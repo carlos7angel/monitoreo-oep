@@ -117,16 +117,16 @@ var KTMediaList = function () {
                         console.log(full);
 
                         let types = ``;
-                        if (full.media_type_television) {
+                        if (parseInt(full.media_type_television)) {
                             types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Televisivo</div>`
                         }
-                        if (full.media_type_radio) {
+                        if (parseInt(full.media_type_radio)) {
                             types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Radial</div>`
                         }
-                        if (full.media_type_print) {
+                        if (parseInt(full.media_type_print)) {
                             types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Impreso</div>`
                         }
-                        if (full.media_type_digital) {
+                        if (parseInt(full.media_type_digital)) {
                             types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Digital</div>`
                         }
                         return `<span>${types}</span>`;
