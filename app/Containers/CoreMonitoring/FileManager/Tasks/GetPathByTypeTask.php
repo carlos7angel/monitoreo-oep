@@ -6,7 +6,7 @@ use Apiato\Core\Exceptions\CoreInternalErrorException;
 use App\Containers\CoreMonitoring\Accreditation\Models\Accreditation;
 use App\Containers\CoreMonitoring\Accreditation\Models\AccreditationRate;
 use App\Containers\CoreMonitoring\Election\Models\Election;
-use App\Containers\CoreMonitoring\Monitoring\Models\Monitoring;
+use App\Containers\CoreMonitoring\Monitoring\Models\MonitoringItem;
 use App\Containers\CoreMonitoring\Registration\Models\PropagandaMaterial;
 use App\Containers\CoreMonitoring\UserProfile\Models\MediaProfile;
 use App\Ship\Parents\Tasks\Task as ParentTask;
@@ -46,7 +46,7 @@ class GetPathByTypeTask extends ParentTask
 
             case 'monitoring':
                 $fileable_id = $id;
-                $fileable_type = Monitoring::class;
+                $fileable_type = MonitoringItem::class;
                 $path = '/monitoreo/d-'.$fileable_id;
                 break;
 

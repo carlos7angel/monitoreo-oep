@@ -2,8 +2,8 @@
 
 namespace App\Containers\CoreMonitoring\Analysis\Tasks;
 
-use App\Containers\CoreMonitoring\Analysis\Data\Repositories\AnalysisRepository;
-use App\Containers\CoreMonitoring\Analysis\Models\Analysis;
+use App\Containers\CoreMonitoring\Analysis\Data\Repositories\AnalysisReportRepository;
+use App\Containers\CoreMonitoring\Analysis\Models\AnalysisReport;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Parents\Tasks\Task as ParentTask;
 
@@ -17,7 +17,7 @@ class CreateAnalysisTask extends ParentTask
     /**
      * @throws CreateResourceFailedException
      */
-    public function run(array $data): Analysis
+    public function run(array $data): AnalysisReport
     {
         try {
             return $this->repository->create($data);

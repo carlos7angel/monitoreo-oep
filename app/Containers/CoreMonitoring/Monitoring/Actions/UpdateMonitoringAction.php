@@ -7,7 +7,7 @@ use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTa
 use App\Containers\CoreMonitoring\Election\Tasks\FindElectionByIdTask;
 use App\Containers\CoreMonitoring\FormBuilder\Tasks\FindFormByIdTask;
 use App\Containers\CoreMonitoring\FormBuilder\Tasks\StoreDataFieldsFormTask;
-use App\Containers\CoreMonitoring\Monitoring\Models\Monitoring;
+use App\Containers\CoreMonitoring\Monitoring\Models\MonitoringItem;
 use App\Containers\CoreMonitoring\Monitoring\Tasks\FindMonitoringByIdTask;
 use App\Containers\CoreMonitoring\Monitoring\Tasks\UpdateMonitoringTask;
 use App\Ship\Exceptions\NotFoundException;
@@ -30,7 +30,7 @@ class UpdateMonitoringAction extends ParentAction
      * @throws IncorrectIdException
      * @throws NotFoundException
      */
-    public function run(Request $request): Monitoring
+    public function run(Request $request): MonitoringItem
     {
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
         $monitoring = $this->findMonitoringByIdTask->run($request->id);

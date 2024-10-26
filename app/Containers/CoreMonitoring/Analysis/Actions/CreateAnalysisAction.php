@@ -3,7 +3,7 @@
 namespace App\Containers\CoreMonitoring\Analysis\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
-use App\Containers\CoreMonitoring\Analysis\Models\Analysis;
+use App\Containers\CoreMonitoring\Analysis\Models\AnalysisReport;
 use App\Containers\CoreMonitoring\Analysis\Tasks\CreateAnalysisTask;
 use App\Containers\CoreMonitoring\Analysis\UI\WEB\Requests\CreateAnalysisRequest;
 use App\Ship\Exceptions\CreateResourceFailedException;
@@ -20,7 +20,7 @@ class CreateAnalysisAction extends ParentAction
      * @throws CreateResourceFailedException
      * @throws IncorrectIdException
      */
-    public function run(CreateAnalysisRequest $request): Analysis
+    public function run(CreateAnalysisRequest $request): AnalysisReport
     {
         $data = $request->sanitizeInput([
             // add your request data here

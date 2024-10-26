@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create('media_monitoring', function (Blueprint $table) {
+        Schema::create('monitoring_items', function (Blueprint $table) {
 
             $table->id();
             $table->string('code', 50)->unique();
@@ -35,6 +35,6 @@ return new class() extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('monitorings');
+        Schema::dropIfExists('monitoring_items');
     }
 };

@@ -3,7 +3,7 @@
 namespace App\Containers\CoreMonitoring\Analysis\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
-use App\Containers\CoreMonitoring\Analysis\Models\Analysis;
+use App\Containers\CoreMonitoring\Analysis\Models\AnalysisReport;
 use App\Containers\CoreMonitoring\Analysis\Tasks\UpdateAnalysisTask;
 use App\Containers\CoreMonitoring\Analysis\UI\WEB\Requests\UpdateAnalysisRequest;
 use App\Ship\Exceptions\NotFoundException;
@@ -22,7 +22,7 @@ class UpdateAnalysisAction extends ParentAction
      * @throws IncorrectIdException
      * @throws NotFoundException
      */
-    public function run(UpdateAnalysisRequest $request): Analysis
+    public function run(UpdateAnalysisRequest $request): AnalysisReport
     {
         $data = $request->sanitizeInput([
             // add your request data here

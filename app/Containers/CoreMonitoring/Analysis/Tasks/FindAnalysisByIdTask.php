@@ -2,8 +2,8 @@
 
 namespace App\Containers\CoreMonitoring\Analysis\Tasks;
 
-use App\Containers\CoreMonitoring\Analysis\Data\Repositories\AnalysisRepository;
-use App\Containers\CoreMonitoring\Analysis\Models\Analysis;
+use App\Containers\CoreMonitoring\Analysis\Data\Repositories\AnalysisReportRepository;
+use App\Containers\CoreMonitoring\Analysis\Models\AnalysisReport;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task as ParentTask;
 
@@ -17,7 +17,7 @@ class FindAnalysisByIdTask extends ParentTask
     /**
      * @throws NotFoundException
      */
-    public function run($id): Analysis
+    public function run($id): AnalysisReport
     {
         try {
             return $this->repository->find($id);

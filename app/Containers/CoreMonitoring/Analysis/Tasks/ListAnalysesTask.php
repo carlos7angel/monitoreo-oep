@@ -3,7 +3,7 @@
 namespace App\Containers\CoreMonitoring\Analysis\Tasks;
 
 use Apiato\Core\Exceptions\CoreInternalErrorException;
-use App\Containers\CoreMonitoring\Analysis\Data\Repositories\AnalysisRepository;
+use App\Containers\CoreMonitoring\Analysis\Data\Repositories\AnalysisReportRepository;
 use App\Ship\Parents\Tasks\Task as ParentTask;
 use Prettus\Repository\Exceptions\RepositoryException;
 

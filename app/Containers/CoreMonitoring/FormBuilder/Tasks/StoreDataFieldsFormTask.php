@@ -6,7 +6,7 @@ use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTa
 use App\Containers\CoreMonitoring\FileManager\Tasks\CreateFileTask;
 use App\Containers\CoreMonitoring\FormBuilder\Data\Repositories\FieldRepository;
 use App\Containers\CoreMonitoring\FormBuilder\Models\Form;
-use App\Containers\CoreMonitoring\Monitoring\Models\Monitoring;
+use App\Containers\CoreMonitoring\Monitoring\Models\MonitoringItem;
 use App\Ship\Parents\Requests\Request;
 use App\Ship\Parents\Tasks\Task as ParentTask;
 
@@ -17,7 +17,7 @@ class StoreDataFieldsFormTask extends ParentTask
     ) {
     }
 
-    public function run(Form $form, Request $request, Monitoring $monitoring, $load = null): mixed
+    public function run(Form $form, Request $request, MonitoringItem $monitoring, $load = null): mixed
     {
         $input = $request->all();
 

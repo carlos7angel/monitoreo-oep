@@ -2,8 +2,8 @@
 
 namespace App\Containers\CoreMonitoring\Analysis\Tasks;
 
-use App\Containers\CoreMonitoring\Analysis\Data\Repositories\AnalysisRepository;
-use App\Containers\CoreMonitoring\Analysis\Models\Analysis;
+use App\Containers\CoreMonitoring\Analysis\Data\Repositories\AnalysisReportRepository;
+use App\Containers\CoreMonitoring\Analysis\Models\AnalysisReport;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Tasks\Task as ParentTask;
@@ -20,7 +20,7 @@ class UpdateAnalysisTask extends ParentTask
      * @throws NotFoundException
      * @throws UpdateResourceFailedException
      */
-    public function run(array $data, $id): Analysis
+    public function run(array $data, $id): AnalysisReport
     {
         try {
             return $this->repository->update($data, $id);

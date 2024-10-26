@@ -31,7 +31,7 @@
                             <li class="nav-item">
                                 <a class="nav-link <?php echo e(in_array($page, ['election_list', 'election_create']) ? 'active' : ''); ?>" data-bs-toggle="tab" href="#kt_header_navs_tab_4">Procesos Electorales</a>
                             </li>
-                            <li class="nav-item d-none">
+                            <li class="nav-item">
                                 <a class="nav-link <?php echo e(in_array($page, ['political_group_list', 'political_group_create']) ? 'active' : ''); ?>" data-bs-toggle="tab" href="#kt_header_navs_tab_5">Partidos Políticos</a>
                             </li>
                             <li class="nav-item">
@@ -170,6 +170,12 @@
                                 <a href="<?php echo e(route('oep_admin_media_elections_list_for_monitoring')); ?>" class="menu-item <?php echo e($page === 'monitoring_list' ? 'here' : ''); ?> me-0 me-lg-2">
                                     <span class="menu-link py-3">
                                         <span class="menu-title">Monitoreo por Proceso Electoral</span>
+                                        <span class="menu-arrow d-lg-none"></span>
+                                    </span>
+                                </a>
+                                <a href="<?php echo e(route('oep_admin_media_elections_list_for_monitoring')); ?>" class="menu-item <?php echo e($page === 'report_monitoring_list' ? 'here' : ''); ?> me-0 me-lg-2">
+                                    <span class="menu-link py-3">
+                                        <span class="menu-title">Reportes de Monitoreo</span>
                                         <span class="menu-arrow d-lg-none"></span>
                                     </span>
                                 </a>

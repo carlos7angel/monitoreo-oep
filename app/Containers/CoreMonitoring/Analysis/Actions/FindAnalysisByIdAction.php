@@ -2,7 +2,7 @@
 
 namespace App\Containers\CoreMonitoring\Analysis\Actions;
 
-use App\Containers\CoreMonitoring\Analysis\Models\Analysis;
+use App\Containers\CoreMonitoring\Analysis\Models\AnalysisReport;
 use App\Containers\CoreMonitoring\Analysis\Tasks\FindAnalysisByIdTask;
 use App\Containers\CoreMonitoring\Analysis\UI\WEB\Requests\FindAnalysisByIdRequest;
 use App\Ship\Exceptions\NotFoundException;
@@ -18,7 +18,7 @@ class FindAnalysisByIdAction extends ParentAction
     /**
      * @throws NotFoundException
      */
-    public function run(FindAnalysisByIdRequest $request): Analysis
+    public function run(FindAnalysisByIdRequest $request): AnalysisReport
     {
         return $this->findAnalysisByIdTask->run($request->id);
     }

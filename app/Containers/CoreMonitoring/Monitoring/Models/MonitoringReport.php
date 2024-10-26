@@ -3,30 +3,21 @@
 namespace App\Containers\CoreMonitoring\Monitoring\Models;
 
 use App\Containers\CoreMonitoring\Election\Models\Election;
-use App\Containers\CoreMonitoring\UserProfile\Models\MediaProfile;
 use App\Ship\Parents\Models\Model as ParentModel;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Monitoring extends ParentModel
+class MonitoringReport extends ParentModel
 {
-    use SoftDeletes;
-
-    protected $table = 'media_monitoring';
+    protected $table = 'monitoring_reports';
 
     protected $fillable = [
-
         'code',
-        'media_type',
         'fid_election',
-        'fid_media_profile',
-        'fid_form',
-        'data',
-        'render',
         'status',
+        'created_by',
+        'submitted_at',
+        'observations',
         'scope_type',
         'scope_department',
-        'registered_by',
-        'registered_at',
     ];
 
     protected $attributes = [
@@ -42,21 +33,20 @@ class Monitoring extends ParentModel
     ];
 
     protected $dates = [
-        'registered_at',
+        'submitted_at',
         'created_at',
         'updated_at',
-        'deleted_at',
     ];
 
-    protected string $resourceKey = 'Monitoring';
+    protected string $resourceKey = 'monitoring_report';
 
     public function election()
     {
         return $this->belongsTo(Election::class, 'fid_election');
     }
 
-    public function mediaProfile()
+    public function monitoringItems()
     {
-        return $this->belongsTo(MediaProfile::class, 'fid_media_profile');
+        return $this->belongsToMany(MonitoringItem::class, 'monitoring_item_report', 'fid_monitoring_report', 'fid_monitoring_item');
     }
 }

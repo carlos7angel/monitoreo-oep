@@ -44,7 +44,7 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
         $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $election_id, $searchFieldMediaType, $user) {
-            $query = $query->join('media_profiles', 'media_monitoring.fid_media_profile', 'media_profiles.id');
+            $query = $query->join('media_profiles', 'monitoring_items.fid_media_profile', 'media_profiles.id');
             $query = $query->where('fid_election', $election_id);
             if(! empty($searchValue)) {
                 $query = $query->where('media_profiles.name', 'like', '%'.$searchValue.'%')
@@ -52,7 +52,7 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
             }
 
             if(! empty($searchFieldMediaType)) {
-                $query = $query->where('media_monitoring.media_type', $searchFieldMediaType);
+                $query = $query->where('monitoring_items.media_type', $searchFieldMediaType);
             }
 
             // if ($user->roles->first()->name === 'media') {
@@ -61,18 +61,18 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
 
             if ($user) {
                 if ($user->type === 'TSE' || empty($user->type)) {
-                    $query = $query->where('media_monitoring.scope_type', '=', 'TSE')
-                                    ->where('media_monitoring.scope_department', '=', 'Nacional');
+                    $query = $query->where('monitoring_items.scope_type', '=', 'TSE')
+                                    ->where('monitoring_items.scope_department', '=', 'Nacional');
                 }
                 if ($user->type === 'TED') {
-                    $query = $query->where('media_monitoring.scope_type', '=', 'TED')
-                                    ->where('media_monitoring.scope_department', '=', $user->department);
+                    $query = $query->where('monitoring_items.scope_type', '=', 'TED')
+                                    ->where('monitoring_items.scope_department', '=', $user->department);
                 }
             }
 
             // $query = $query->whereIn('status', ['active', 'finished']);
             return $query->distinct()->select([
-                'media_monitoring.*',
+                'monitoring_items.*',
                 'media_profiles.name as media_name',
                 'media_profiles.business_name as media_business_name',
                 'media_profiles.logo as media_logo',
