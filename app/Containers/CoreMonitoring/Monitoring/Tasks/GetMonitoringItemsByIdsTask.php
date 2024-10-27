@@ -7,7 +7,7 @@ use App\Containers\CoreMonitoring\Monitoring\Data\Repositories\MonitoringItemRep
 use App\Ship\Parents\Tasks\Task as ParentTask;
 use Prettus\Repository\Exceptions\RepositoryException;
 
-class ListMonitoringsTask extends ParentTask
+class GetMonitoringItemsByIdsTask extends ParentTask
 {
     public function __construct(
         protected MonitoringItemRepository $repository,
@@ -18,8 +18,10 @@ class ListMonitoringsTask extends ParentTask
      * @throws CoreInternalErrorException
      * @throws RepositoryException
      */
-    public function run(): mixed
+    public function run($ids): mixed
     {
-        return $this->repository->addRequestCriteria()->paginate();
+        return $this->repository->findWhere([
+            ['id', 'IN', $ids]
+        ]);
     }
 }

@@ -4,6 +4,8 @@ namespace App\Containers\CoreMonitoring\Monitoring\Models;
 
 use App\Containers\CoreMonitoring\Election\Models\Election;
 use App\Ship\Parents\Models\Model as ParentModel;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class MonitoringReport extends ParentModel
 {
@@ -48,5 +50,22 @@ class MonitoringReport extends ParentModel
     public function monitoringItems()
     {
         return $this->belongsToMany(MonitoringItem::class, 'monitoring_item_report', 'fid_monitoring_report', 'fid_monitoring_item');
+    }
+
+    /**
+     * Mutators
+     */
+    protected function createdAt(): Attribute
+    {
+        return new Attribute(
+            get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y h:i A'),
+        );
+    }
+
+    protected function submittedAt(): Attribute
+    {
+        return new Attribute(
+            get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y h:i A'),
+        );
     }
 }

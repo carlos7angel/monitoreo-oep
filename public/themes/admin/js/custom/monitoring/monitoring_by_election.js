@@ -144,9 +144,9 @@ var KTMonitoringList = function () {
                     className: 'text-center pe-0',
                     render: function (data, type, full, meta) {
                         var status = {
-                            'CREATED': {'title': 'Nuevo', 'class': 'badge-info'},
-                            'ANALYSIS': {'title': 'En análisis', 'class': 'badge-info'},
-                            'ARCHIVED': {'title': 'Archivado', 'class': 'badge-danger'},
+                            'CREATED': {'title': 'Nuevo', 'class': 'badge-light-info'},
+                            'SELECTED': {'title': 'En análisis', 'class': 'badge-light-success'},
+                            'ARCHIVED': {'title': 'Archivado', 'class': 'badge-light-danger'},
                         };
                         if (typeof status[data] === 'undefined') {
                             return data;

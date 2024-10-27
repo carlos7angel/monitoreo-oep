@@ -51,12 +51,12 @@ class MonitoringController extends WebController
 
     public function listMonitoringByElectionJsonDt(ListMonitoringByElectionJsonDtRequest $request)
     {
-        try {
+//        try {
             $data = app(GetMonitoringByElectionJsonDataTableAction::class)->run($request);
             return response()->json($data);
-        } catch (Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()]);
-        }
+//        } catch (Exception $e) {
+//            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+//        }
     }
 
     public function createMonitoring(CreateMonitoringRequest $request)

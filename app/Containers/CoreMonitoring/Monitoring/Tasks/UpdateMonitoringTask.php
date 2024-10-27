@@ -2,7 +2,7 @@
 
 namespace App\Containers\CoreMonitoring\Monitoring\Tasks;
 
-use App\Containers\CoreMonitoring\Monitoring\Data\Repositories\MonitoringRepository;
+use App\Containers\CoreMonitoring\Monitoring\Data\Repositories\MonitoringItemRepository;
 use App\Containers\CoreMonitoring\Monitoring\Models\MonitoringItem;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Exceptions\UpdateResourceFailedException;
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class UpdateMonitoringTask extends ParentTask
 {
     public function __construct(
-        protected readonly MonitoringRepository $repository,
+        protected MonitoringItemRepository $repository,
     ) {
     }
 

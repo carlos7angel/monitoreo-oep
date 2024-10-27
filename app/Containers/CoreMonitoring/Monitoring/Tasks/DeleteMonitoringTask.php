@@ -2,7 +2,7 @@
 
 namespace App\Containers\CoreMonitoring\Monitoring\Tasks;
 
-use App\Containers\CoreMonitoring\Monitoring\Data\Repositories\MonitoringRepository;
+use App\Containers\CoreMonitoring\Monitoring\Data\Repositories\MonitoringItemRepository;
 use App\Ship\Exceptions\DeleteResourceFailedException;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Tasks\Task as ParentTask;
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class DeleteMonitoringTask extends ParentTask
 {
     public function __construct(
-        protected readonly MonitoringRepository $repository,
+        protected MonitoringItemRepository $repository,
     ) {
     }
 

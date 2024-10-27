@@ -8,6 +8,10 @@
         <?php if(is_array($fields) && count($fields) > 0): ?>
             <?php $__currentLoopData = $fields; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $field): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
+                <?php if(!isset($input[$field->unique_fieldname])): ?>
+                    <?php continue; ?>
+                <?php endif; ?>
+
                 <?php switch($field->fieldType->type):
 
                     case ('textbox'): ?>

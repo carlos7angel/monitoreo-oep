@@ -14,6 +14,7 @@ use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
 use Carbon\Carbon;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Str;
 
 class StoreMonitoringAction extends ParentAction
@@ -54,6 +55,9 @@ class StoreMonitoringAction extends ParentAction
         $form = app(FindFormByIdTask::class)->run($form_id);
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
+        if (! $user->hasRole(['monitor', 'admin'])) { // TODO: Remove admin and only let to monitor role
+            throw new AuthorizationException('No tiene los permisos para realizar esta acción');
+        }
 
         $data = [
             'code' => md5(Carbon::now()->timestamp . $user->id .  $request->media_profile . Str::random(24)),

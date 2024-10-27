@@ -8,6 +8,10 @@
         @if(is_array($fields) && count($fields) > 0)
             @foreach($fields as $field)
 
+                @if(!isset($input[$field->unique_fieldname]))
+                    @continue
+                @endif
+
                 @switch($field->fieldType->type)
 
                     @case('textbox')

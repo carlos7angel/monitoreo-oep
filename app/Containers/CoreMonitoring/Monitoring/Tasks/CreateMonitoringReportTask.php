@@ -2,22 +2,22 @@
 
 namespace App\Containers\CoreMonitoring\Monitoring\Tasks;
 
-use App\Containers\CoreMonitoring\Monitoring\Data\Repositories\MonitoringItemRepository;
-use App\Containers\CoreMonitoring\Monitoring\Models\MonitoringItem;
+use App\Containers\CoreMonitoring\Monitoring\Data\Repositories\MonitoringReportRepository;
+use App\Containers\CoreMonitoring\Monitoring\Models\MonitoringReport;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Parents\Tasks\Task as ParentTask;
 
-class CreateMonitoringTask extends ParentTask
+class CreateMonitoringReportTask extends ParentTask
 {
     public function __construct(
-        protected MonitoringItemRepository $repository,
+        protected MonitoringReportRepository $repository,
     ) {
     }
 
     /**
      * @throws CreateResourceFailedException
      */
-    public function run(array $data): MonitoringItem
+    public function run(array $data): MonitoringReport
     {
         try {
             return $this->repository->create($data);
