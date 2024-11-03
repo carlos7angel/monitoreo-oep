@@ -28,3 +28,13 @@
     font-weight: 600 !important;
     color: #ff0000;
 }
+
+
+:root{
+    --bs-text-primary: #883f7e;
+    --bs-primary: #883f7e;
+}
+
+.text-primary {
+
+}

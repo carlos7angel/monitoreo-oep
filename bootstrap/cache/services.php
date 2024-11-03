@@ -37,10 +37,11 @@
     33 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     34 => 'Termwind\\Laravel\\TermwindServiceProvider',
     35 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
-    36 => 'Spatie\\Fractal\\FractalServiceProvider',
-    37 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
-    38 => 'Spatie\\Permission\\PermissionServiceProvider',
-    39 => 'Vinkla\\Hashids\\HashidsServiceProvider',
+    36 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+    37 => 'Spatie\\Fractal\\FractalServiceProvider',
+    38 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
+    39 => 'Spatie\\Permission\\PermissionServiceProvider',
+    40 => 'Vinkla\\Hashids\\HashidsServiceProvider',
   ),
   'eager' => 
   array (
@@ -66,10 +67,11 @@
     19 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     20 => 'Termwind\\Laravel\\TermwindServiceProvider',
     21 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
-    22 => 'Spatie\\Fractal\\FractalServiceProvider',
-    23 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
-    24 => 'Spatie\\Permission\\PermissionServiceProvider',
-    25 => 'Vinkla\\Hashids\\HashidsServiceProvider',
+    22 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+    23 => 'Spatie\\Fractal\\FractalServiceProvider',
+    24 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
+    25 => 'Spatie\\Permission\\PermissionServiceProvider',
+    26 => 'Vinkla\\Hashids\\HashidsServiceProvider',
   ),
   'deferred' => 
   array (

@@ -21,8 +21,8 @@ class SendMediaAccountEnabled extends ParentMail implements ShouldQueue
 
     public function build(): static
     {
-        return $this->view('appSection@coreMonitoring::enableAccount')
-            ->subject('Habilitar cuenta')
+        return $this->view('coreMonitoring@userProfile::enableAccount')
+            ->subject('Habilitación de cuenta | OEP')
             ->to($this->recipient->email, $this->recipient->name)
             ->with([
                 'user' => $this->recipient,

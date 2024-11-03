@@ -35,7 +35,7 @@
                                 <a class="nav-link {{ in_array($page, ['political_group_list', 'political_group_create']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_5">Partidos Políticos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ in_array($page, ['form_list', 'user_list']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_6">Preferencias</a>
+                                <a class="nav-link {{ in_array($page, ['form_list', 'user_list', 'log_list']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_6">Preferencias</a>
                             </li>
                         </ul>
                     </div>
@@ -234,7 +234,7 @@
                     </div>
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade {{ in_array($page, ['form_list', 'user_list']) ? 'active show' : ''  }}" id="kt_header_navs_tab_6">
+                    <div class="tab-pane fade {{ in_array($page, ['form_list', 'user_list', 'log_list']) ? 'active show' : ''  }}" id="kt_header_navs_tab_6">
                         <!--begin::Menu wrapper-->
                         <div class="header-menu flex-column align-items-stretch flex-lg-row">
                             <div class="menu menu-rounded menu-column menu-lg-row menu-root-here-bg-desktop menu-active-bg menu-title-gray-700 menu-state-primary menu-arrow-gray-500 fw-semibold align-items-stretch flex-grow-1 px-2 px-lg-0" id="#kt_header_menu" data-kt-menu="true">
@@ -247,6 +247,12 @@
                                 <a href="{{ route('oep_admin_users_list') }}" class="menu-item {{ $page === 'user_list' ? 'here' : ''  }} me-0 me-lg-2">
                                     <span class="menu-link py-3">
                                         <span class="menu-title">Gestión de Usuarios</span>
+                                        <span class="menu-arrow d-lg-none"></span>
+                                    </span>
+                                </a>
+                                <a href="{{ route('oep_admin_activity_logs') }}" class="menu-item {{ $page === 'log_list' ? 'here' : ''  }} me-0 me-lg-2">
+                                    <span class="menu-link py-3">
+                                        <span class="menu-title">Logs de Actividad</span>
                                         <span class="menu-arrow d-lg-none"></span>
                                     </span>
                                 </a>

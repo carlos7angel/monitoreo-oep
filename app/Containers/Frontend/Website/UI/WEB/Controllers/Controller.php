@@ -64,11 +64,7 @@ class Controller extends WebController
         $page_title = "Lista de Medios Habilitados";
         $election = app(FindElectionByIdTask::class)->run($request->id);
         $data = app(ListMediaAccreditationRatesScopeByElectionAction::class)->run($election->id);
-
-
-        dd($data);
-
-        return view('frontend@website::listAccreditationRates', ['election' => $election, 'rates' => $data], compact('page_title'));
+        return view('frontend@website::listAccreditationRates', ['election' => $election, 'data' => $data], compact('page_title'));
     }
 
 }
