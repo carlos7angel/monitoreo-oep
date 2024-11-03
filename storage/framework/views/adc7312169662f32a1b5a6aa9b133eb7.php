@@ -26,7 +26,7 @@
                                 <a class="nav-link <?php echo e(in_array($page, ['media_list_news', 'media_list_all', 'media_accreditations']) ? 'active' : ''); ?>" data-bs-toggle="tab" href="#kt_header_navs_tab_2">Medios</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?php echo e(in_array($page, ['monitoring_list', 'monitoring_report_list']) ? 'active' : ''); ?>" data-bs-toggle="tab" href="#kt_header_navs_tab_3">Monitoreo</a>
+                                <a class="nav-link <?php echo e(in_array($page, ['monitoring_list', 'monitoring_report_list', 'analysis_report_list']) ? 'active' : ''); ?>" data-bs-toggle="tab" href="#kt_header_navs_tab_3">Monitoreo y Análisis</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link <?php echo e(in_array($page, ['election_list', 'election_create']) ? 'active' : ''); ?>" data-bs-toggle="tab" href="#kt_header_navs_tab_4">Procesos Electorales</a>
@@ -162,7 +162,7 @@
                     </div>
                     <!--end::Tab panel-->
                     <!--begin::Tab panel-->
-                    <div class="tab-pane fade <?php echo e(in_array($page, ['monitoring_list', 'monitoring_report_list']) ? 'active show' : ''); ?>" id="kt_header_navs_tab_3">
+                    <div class="tab-pane fade <?php echo e(in_array($page, ['monitoring_list', 'monitoring_report_list', 'analysis_report_list']) ? 'active show' : ''); ?>" id="kt_header_navs_tab_3">
                         <!--begin::Menu wrapper-->
                         <div class="header-menu flex-column align-items-stretch flex-lg-row">
                             <!--begin::Menu-->
@@ -176,6 +176,12 @@
                                 <a href="<?php echo e(route('oep_admin_monitoring_report_list')); ?>" class="menu-item <?php echo e($page === 'monitoring_report_list' ? 'here' : ''); ?> me-0 me-lg-2">
                                     <span class="menu-link py-3">
                                         <span class="menu-title">Reportes de Monitoreo</span>
+                                        <span class="menu-arrow d-lg-none"></span>
+                                    </span>
+                                </a>
+                                <a href="<?php echo e(route('oep_admin_analysis_report_list')); ?>" class="menu-item <?php echo e($page === 'analysis_report_list' ? 'here' : ''); ?> me-0 me-lg-2">
+                                    <span class="menu-link py-3">
+                                        <span class="menu-title">Informes de Análisis</span>
                                         <span class="menu-arrow d-lg-none"></span>
                                     </span>
                                 </a>

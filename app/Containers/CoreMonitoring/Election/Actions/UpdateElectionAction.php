@@ -105,6 +105,10 @@ class UpdateElectionAction extends ParentAction
             $data['logo_image'] = $this->createLogoImageElectionTask->run($request->file('election_logo'), $election->id);
         }
 
+        if($request->file('election_banner')) {
+            $data['banner'] = $this->createLogoImageElectionTask->run($request->file('election_banner'), $election->id);
+        }
+
         return $this->updateElectionTask->run($data, $election->id);
     }
 }

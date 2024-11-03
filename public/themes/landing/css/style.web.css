@@ -1,5 +1,9 @@
+.landing-header {
+    height: 75px;
+}
 .landing-dark-bg {
     background-color: #883f7e;
+    /*background-color: #6d6d6d;*/
 }
 .landing-footer-dark-bg {
     background-color: rgb(80,80,80);

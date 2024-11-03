@@ -36,6 +36,13 @@
                         </div>
                         <?php break; ?>
                         <?php case ('SUBMITTED'): ?>
+                            <?php if(auth()->user()->hasRole('analyst') || true): ?>
+                            <div class="mb-5">
+                                <button type="button" data-url="<?php echo e(route('oep_admin_analysis_report_create', ['id' => $monitoring_report->id])); ?>" class="kt_btn_analysis_report_create btn btn-primary btn-sm me-1 fs-8">
+                                    <i class="ki-outline ki-send fs-3 me-1"></i>Crear Informe de Análisis
+                                </button>
+                            </div>
+                            <?php endif; ?>
                         <?php break; ?>
                         <?php case ('IN_PROGRESS'): ?>
                         <?php break; ?>
@@ -400,5 +407,6 @@
 
 <?php $__env->startSection('scripts'); ?>
     <script src="<?php echo e(asset('themes/admin/js/custom/monitoring_report/detail.js')); ?>"></script>
+    <script src="<?php echo e(asset('themes/admin/js/custom/analysis_report/monitoring-detail.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('vendor@template::admin.layouts.master', ['page' => 'monitoring_report_list'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Development Environment\PHP Environment\Laragon\www\monitoreo-oep\app\Containers\Frontend\OepAdministrator/UI/WEB/Views//monitoringReport/detail.blade.php ENDPATH**/ ?>

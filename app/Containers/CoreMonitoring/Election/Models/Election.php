@@ -32,6 +32,7 @@ class Election extends ParentModel
         'file_affidavit_media_registration',
         'due_days_observed_media_registration',
         'logo_image',
+        'banner',
 
         'enable_for_monitoring',
         'fid_form_tv_media',

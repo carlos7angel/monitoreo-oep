@@ -4,7 +4,7 @@ namespace App\Containers\Frontend\Website\Actions;
 
 use App\Containers\Frontend\Website\Models\Website;
 use App\Containers\Frontend\Website\Tasks\FindWebsiteByIdTask;
-use App\Containers\Frontend\Website\UI\WEB\Requests\FindWebsiteByIdRequest;
+use App\Containers\Frontend\Website\UI\WEB\Requests\ShowElectionPageRequest;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 
@@ -18,7 +18,7 @@ class FindWebsiteByIdAction extends ParentAction
     /**
      * @throws NotFoundException
      */
-    public function run(FindWebsiteByIdRequest $request): Website
+    public function run(ShowElectionPageRequest $request): Website
     {
         return $this->findWebsiteByIdTask->run($request->id);
     }

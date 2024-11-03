@@ -36,6 +36,13 @@
                         </div>
                         @break
                         @case('SUBMITTED')
+                            @if(auth()->user()->hasRole('analyst') || true)
+                            <div class="mb-5">
+                                <button type="button" data-url="{{ route('oep_admin_analysis_report_create', ['id' => $monitoring_report->id]) }}" class="kt_btn_analysis_report_create btn btn-primary btn-sm me-1 fs-8">
+                                    <i class="ki-outline ki-send fs-3 me-1"></i>Crear Informe de Análisis
+                                </button>
+                            </div>
+                            @endif
                         @break
                         @case('IN_PROGRESS')
                         @break
@@ -400,4 +407,5 @@
 
 @section('scripts')
     <script src="{{ asset('themes/admin/js/custom/monitoring_report/detail.js') }}"></script>
+    <script src="{{ asset('themes/admin/js/custom/analysis_report/monitoring-detail.js') }}"></script>
 @endsection

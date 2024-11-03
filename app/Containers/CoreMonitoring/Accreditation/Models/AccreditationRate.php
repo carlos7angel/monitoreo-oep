@@ -47,10 +47,10 @@ class AccreditationRate extends ParentModel
      * Eloquent Relationships
      */
 
-//    public function accreditation()
-//    {
-//        return $this->belongsTo(Accreditation::class, 'fid_accreditation',);
-//    }
+    public function accreditation()
+    {
+        return $this->belongsTo(Accreditation::class, 'fid_accreditation');
+    }
 
     public function fileRate()
     {

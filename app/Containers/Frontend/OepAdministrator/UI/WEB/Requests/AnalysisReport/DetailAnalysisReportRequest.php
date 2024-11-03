@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Containers\Frontend\Website\UI\WEB\Requests;
+namespace App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport;
 
 use App\Ship\Parents\Requests\Request as ParentRequest;
 
-class FindWebsiteByIdRequest extends ParentRequest
+class DetailAnalysisReportRequest extends ParentRequest
 {
     protected array $access = [
         'permissions' => '',
@@ -12,11 +12,11 @@ class FindWebsiteByIdRequest extends ParentRequest
     ];
 
     protected array $decode = [
-        'id',
+        // 'id',
     ];
 
     protected array $urlParameters = [
-        'id',
+         'id',
     ];
 
     public function rules(): array

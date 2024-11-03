@@ -74,13 +74,18 @@ class CreateElectionAction extends ParentAction
 
         $election = $this->createElectionTask->run($data);
 
-        if($request->file('election_affidavit_file_registration_media') || $request->file('election_logo')) {
+        if($request->file('election_affidavit_file_registration_media') || $request->file('election_logo') || $request->file('election_banner')) {
             $dataU = [];
             if($request->has('election_enable_registration_media') && $request->file('election_affidavit_file_registration_media')) {
                 $file_bases = $this->createFileTask->run($request->file('election_affidavit_file_registration_media'), 'election', $election->id, $user);
                 $dataU['file_affidavit_media_registration'] = $file_bases->unique_code;
             }
             $dataU['logo_image'] = $this->createLogoImageElectionTask->run($request->file('election_logo'), $election->id);
+
+            if($request->file('election_banner')) {
+                $dataU['banner'] = $this->createLogoImageElectionTask->run($request->file('election_banner'), $election->id);
+            }
+
             $election = $this->updateElectionTask->run($dataU, $election->id);
         }
 

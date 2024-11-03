@@ -28,8 +28,9 @@ return new class() extends Migration {
                 'RATIFIED',
             ])->default('NEW');
 
-            $table->string('file_resolution_first', 100)->nullable();
-            $table->string('file_resolution_final', 100)->nullable();
+            $table->string('file_analysis_report', 100)->nullable();
+            $table->string('file_resolution_first_instance', 100)->nullable();
+            $table->string('file_resolution_final_instance', 100)->nullable();
             $table->text('observations')->nullable();
 
             $table->unsignedBigInteger('created_by');

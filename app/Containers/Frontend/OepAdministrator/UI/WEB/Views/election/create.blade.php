@@ -381,7 +381,7 @@
                             .image-input-placeholder { background-image: url("{{ asset('themes/admin/media/svg/files/blank-image.svg') }}"); }
                         </style>
                         <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3 fv-row"  data-kt-image-input="true">
-                            <div class="image-input-wrapper w-200px h-200px"></div>
+                            <div class="image-input-wrapper w-200px h-200px bgi-size-contain bgi-position-center"></div>
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar">
                                 <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span class="path2"></span></i>
                                 <input type="file" name="election_logo" accept=".png, .jpg, .jpeg" />
@@ -397,6 +397,37 @@
                         <div class="text-muted fs-7">Imágen del proceso electoral. Formatos aceptados *.png, *.jpg y *.jpeg</div>
                     </div>
                 </div>
+
+
+                <div class="card card-flush py-4">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h2>Banner</h2>
+                        </div>
+                    </div>
+                    <div class="card-body text-center pt-0">
+                        <style>
+                            .image-input-placeholder { background-image: url("{{ asset('themes/admin/media/svg/files/blank-image.svg') }}"); }
+                        </style>
+                        <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3 fv-row"  data-kt-image-input="true">
+                            <div class="image-input-wrapper w-200px h-200px bgi-size-contain bgi-position-center"></div>
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar">
+                                <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span class="path2"></span></i>
+                                <input type="file" name="election_banner" accept=".png, .jpg, .jpeg" />
+                                <input type="hidden" name="election_banner_remove" />
+                            </label>
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancelar">
+                                <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>
+                            </span>
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remover">
+                                <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>
+                            </span>
+                        </div>
+                        <div class="text-muted fs-7">Formatos aceptados *.png, *.jpg y *.jpeg</div>
+                    </div>
+                </div>
+
+
 
             </div>
 

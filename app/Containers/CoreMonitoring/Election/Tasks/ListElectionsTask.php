@@ -20,6 +20,10 @@ class ListElectionsTask extends ParentTask
      */
     public function run(): mixed
     {
-        return $this->repository->addRequestCriteria()->paginate();
+        return $this->repository->findWhere([
+            ['status','IN', ['active', 'published', 'finished']]
+        ])->all();
+
+        //return $this->repository->addRequestCriteria()->paginate();
     }
 }
