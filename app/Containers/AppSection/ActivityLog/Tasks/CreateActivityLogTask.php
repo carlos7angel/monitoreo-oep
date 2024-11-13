@@ -28,7 +28,11 @@ class CreateActivityLogTask extends ParentTask
             switch ($_log) {
                 case LogConstants::ENABLED_USER_MEDIA_ACCOUNT:
                     $log = 'CUENTA HABILITADA';
-                    $message = "La cuenta de usuario para " . $_subject->email . " ha sido habilitada";
+                    $message = "La cuenta de usuario (Medio de Comunicación) para " . $_subject->email . " ha sido habilitada";
+                    break;
+                case LogConstants::ENABLED_USER_POLITICAL_ACCOUNT:
+                    $log = 'CUENTA HABILITADA';
+                    $message = "La cuenta de usuario (Partido Político) para " . $_subject->email . " ha sido habilitada";
                     break;
                 case LogConstants::SUBMIT_MONITORING_TO_REPORT:
                     $log = 'MONITOREO ENVIADO';

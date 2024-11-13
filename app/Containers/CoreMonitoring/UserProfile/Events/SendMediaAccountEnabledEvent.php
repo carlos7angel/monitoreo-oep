@@ -17,7 +17,7 @@ class SendMediaAccountEnabledEvent extends ParentEvent implements ShouldQueue
     protected $profile;
     protected $password;
 
-    public function __construct(User $user, MediaProfile $profile, string $password)
+    public function __construct(User $user, $profile, string $password)
     {
         $this->user = $user;
         $this->profile = $profile;
@@ -26,7 +26,7 @@ class SendMediaAccountEnabledEvent extends ParentEvent implements ShouldQueue
 
     public function handle()
     {
-        Mail::send(new SendMediaAccountEnabled($this->user, $this->profile, $this->password));
+        Mail::send(new SendMediaAccountEnabled($this->user, $this->password));
     }
 
     public function broadcastOn()

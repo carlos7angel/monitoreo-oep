@@ -3,6 +3,8 @@
 namespace App\Containers\CoreMonitoring\UserProfile\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
+use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
+use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\AppSection\Authorization\Tasks\FindRoleTask;
 use App\Containers\AppSection\User\Tasks\CreateUserTask;
 use App\Containers\AppSection\User\Tasks\FindUserByEmailTask;
@@ -35,28 +37,28 @@ class EnableUserPoliticalGroupProfileAccountAction extends ParentAction
      */
     public function run(Request $request): PoliticalGroupProfile
     {
-        $data = $request->sanitizeInput([
-            // add your request data here
-        ]);
+        $sanitizedData = $request->sanitizeInput($request->all());
 
         $pp = app(FindUserPoliticalGroupProfileByIdTask::class)->run($request->id);
 
-        $existing_email = app(FindUserByEmailTask::class)->run($pp->email);
-        if ($existing_email) {
+        if (app(FindUserByEmailTask::class)->run($pp->email)) {
             throw new EmailAlreadyExistsException('El correo electrónico ya existe, intente con otro.');
         }
 
-        // $password = Str::password(12, true, true, true, false);
-        $password = 'admin'; // TODO: CREATE OEN INSTED HARCODED
+        $password = strtoupper(substr(md5(
+            Carbon::now()->timestamp . $pp->email . $pp->name . Str::random(24)
+        ),0,10));
+        // $password = 'admin';
 
         $data = [
             'email' => $pp->email,
             'name' => $pp->name,
             'password' => Hash::make($password),
-            'confirmed' => 1,
+            'confirmed' => true,
             'active' => true,
             'profile_data_id' => $pp->id,
             'profile_data_type' => PoliticalGroupProfile::class,
+            'is_client' => true
         ];
 
         $user = app(CreateUserTask::class)->run($data);
@@ -64,11 +66,16 @@ class EnableUserPoliticalGroupProfileAccountAction extends ParentAction
         $user->assignRole(app(FindRoleTask::class)->run('user_political', 'external'));
 
         $pp = app(UpdateUserPoliticalGroupProfileTask::class)->run([
+            'status' => 'ACTIVE',
             'fid_user' => $user->id,
             'credentials_sent' => true
         ], $pp->id);
 
-        // App::make(Dispatcher::class)->dispatch(New SendMediaAccountEnabledEvent($user, $media_profile, $password));
+        //Activity Log
+        App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::ENABLED_USER_POLITICAL_ACCOUNT, $request->server(), $user));
+
+        //Send Notification
+        App::make(Dispatcher::class)->dispatch(New SendMediaAccountEnabledEvent($user, $pp, $password));
 
         return $pp;
     }

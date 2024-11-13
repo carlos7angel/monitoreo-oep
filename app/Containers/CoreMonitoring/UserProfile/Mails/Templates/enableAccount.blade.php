@@ -15,7 +15,7 @@
                             <p style="margin-top:0; margin-bottom:2px; color:#5E6278">Ahora tiene acceso a la plataforma de
                                 <span style="color:#883f7e; font-weight: 600">Registro de Medios y Propaganda</span>.
                             </p>
-                            <p style="margin-top:0; color:#5E6278; margin-bottom:13px">Esta es su nueva contraseña, se le recomeinda cambiar una vez ingresado al sistema.</p>
+                            <p style="margin-top:0; color:#5E6278; margin-bottom:13px">Esta es su nueva contraseña, se le recomienda cambiar una vez ingresado al sistema.</p>
                         </div>
                         <div style="background: #F9F9F9; border-radius: 12px; padding:15px 30px">
                             <p style="margin-top:0; margin-bottom:0px; color:#181C32; font-size: 22px; font-weight:700">{!! $password !!}</p>

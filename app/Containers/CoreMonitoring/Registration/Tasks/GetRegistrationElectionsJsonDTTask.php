@@ -19,7 +19,6 @@ class GetRegistrationElectionsJsonDTTask extends ParentTask
 
     public function run(Request $request): mixed
     {
-        // dd($request->all());
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('external');
 
         $requestData = $request->all();
@@ -60,11 +59,17 @@ class GetRegistrationElectionsJsonDTTask extends ParentTask
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 
+        $records = $result->all();
+
+        foreach ($records as &$item) {
+            $item->material_count = $item->materials->count();
+        }
+
         $response = [
             'draw' => $draw,
             'recordsFiltered' => $recordsTotal,
             'recordsTotal' => $recordsTotal,
-            'data' => $result->all()
+            'data' => $records
         ];
 
         return $response;

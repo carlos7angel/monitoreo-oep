@@ -5,6 +5,7 @@ namespace App\Containers\Frontend\OepAdministrator\UI\WEB\Controllers;
 use App\Containers\CoreMonitoring\Election\Tasks\GetActiveElectionsForPoliticalRegistrationTask;
 use App\Containers\CoreMonitoring\Registration\Actions\GetElectionsRegisteredByPoliticalGroupJsonDataTableAction;
 use App\Containers\CoreMonitoring\Registration\Actions\RegisterPoliticalGroupProfileElectionAction;
+use App\Containers\CoreMonitoring\Registration\Tasks\FindRegistrationByIdTask;
 use App\Containers\CoreMonitoring\UserProfile\Actions\EnableUserPoliticalGroupProfileAccountAction;
 use App\Containers\CoreMonitoring\UserProfile\Actions\GetUserPoliticalGroupProfilesJsonDataTableAction;
 use App\Containers\CoreMonitoring\UserProfile\Actions\StorePoliticalGroupAction;
@@ -16,6 +17,7 @@ use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\PoliticalGroup\Edit
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\PoliticalGroup\EnableUserPoliticalGroupProfileAccountRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\PoliticalGroup\GetElectionsByPoliticalGroupProfileJsonDataTableRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\PoliticalGroup\GetUserPoliticalGroupProfilesJsonDataTableRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\PoliticalGroup\ListMaterialPoliticalGroupByElectionRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\PoliticalGroup\ListPoliticalGroupProfilesRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\PoliticalGroup\RegisterUserPoliticalGroupProfileElectionRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\PoliticalGroup\StorePoliticalGroupRequest;
@@ -113,5 +115,14 @@ class PoliticalGroupProfileController extends WebController
         }
     }
 
-
+    public function listMaterial(ListMaterialPoliticalGroupByElectionRequest $request)
+    {
+        $page_title = "Material de Propaganda";
+        $registration = app(FindRegistrationByIdTask::class)->run($request->id);
+        return view('frontend@oepAdministrator::politicalGroup.listMaterial', [
+            'election' => $registration->election,
+            'political_group' => $registration->politicalGroup,
+            'materials' => $registration->materials,
+        ], compact('page_title'));
+    }
 }

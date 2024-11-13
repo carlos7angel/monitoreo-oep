@@ -39,10 +39,14 @@ class GetElectionsRegisteredByPoliticalGroupJsonDataTableTask extends ParentTask
 
         $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $political_group_profile_id, $user) {
 
-            $query = $query->join('elections', 'political_registrations.fid_election', 'elections.id');
+            $query = $query->leftJoin('elections', 'political_registrations.fid_election', 'elections.id');
             $query = $query->where('fid_political_group_profile', $political_group_profile_id);
 
-            return $query->distinct()->select(['elections.*']);
+            return $query->distinct()->select([
+                'elections.*',
+                'political_registrations.id as registration_id',
+                'political_registrations.fid_political_group_profile as political_group_profile_id'
+            ]);
         });
 
         $recordsTotal =  (clone $result)->count();
@@ -53,11 +57,17 @@ class GetElectionsRegisteredByPoliticalGroupJsonDataTableTask extends ParentTask
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 
+        $records = $result->all();
+
+        foreach ($records as &$item) {
+            $item->material_count = $item->materials->count();
+        }
+
         $response = [
             'draw' => $draw,
             'recordsFiltered' => $recordsTotal,
             'recordsTotal' => $recordsTotal,
-            'data' => $result->all()
+            'data' => $records
         ];
 
         return $response;

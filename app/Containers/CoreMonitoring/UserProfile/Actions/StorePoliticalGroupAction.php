@@ -56,7 +56,7 @@ class StorePoliticalGroupAction extends ParentAction
             'rep_document' => $request->get('pp_rep_document'),
             'rep_exp' => $request->get('pp_rep_exp'),
 
-            'status' => 'ACTIVE',
+            'status' => 'CREATED',
             'registered_at' => Carbon::now()
         ];
 

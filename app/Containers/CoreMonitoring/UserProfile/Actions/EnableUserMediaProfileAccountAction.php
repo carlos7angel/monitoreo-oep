@@ -41,14 +41,14 @@ class EnableUserMediaProfileAccountAction extends ParentAction
 
         $media_profile = app(FindUserMediaProfileByIdTask::class)->run($request->id);
 
+        if (app(FindUserByEmailTask::class)->run($media_profile->email)) {
+            throw new EmailAlreadyExistsException('El correo electrónico ya existe, intente con otro.');
+        }
+
         $password = strtoupper(substr(md5(
             Carbon::now()->timestamp . $media_profile->email . $media_profile->name . Str::random(24)
         ),0,10));
         // $password = 'admin';
-
-        if (app(FindUserByEmailTask::class)->run($media_profile->email)) {
-            throw new EmailAlreadyExistsException('El correo electrónico ya existe, intente con otro.');
-        }
 
         $data = [
             'email' => $media_profile->email,

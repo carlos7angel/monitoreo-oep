@@ -61,7 +61,7 @@ var KTRegistrationList = function () {
                 {data: 'election_date', name: "election_date"},
                 {data: 'status', name: "status"},
                 {data: 'end_date_material_registration', name: "elections.end_date_material_registration"},
-                {data: 'id', name: "id"},
+                {data: 'material_count', name: "material_count"},
                 {data: null, responsivePriority: -1},
             ],
 
@@ -144,7 +144,8 @@ var KTRegistrationList = function () {
                     searchable: false,
                     className: 'dt-center pe-0',
                     render: function (data, type, full, meta) {
-                        return `<span class="text-gray-700">0</span>`;
+
+                        return `<span class="text-gray-700">${data}</span>`;
                     },
                 },
                 {

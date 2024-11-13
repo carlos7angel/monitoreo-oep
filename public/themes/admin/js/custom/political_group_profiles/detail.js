@@ -67,7 +67,7 @@ var KTPPDetail = function () {
                 {data: 'name', name: "name"},
                 {data: 'election_date', name: "election_date"},
                 {data: 'status', name: "status"},
-                {data: 'count', name: "count"},
+                {data: 'material_count', name: "material_count"},
                 {data: null, responsivePriority: -1},
             ],
 
@@ -138,8 +138,7 @@ var KTPPDetail = function () {
                     searchable: true,
                     className: 'dt-center pe-0',
                     render: function (data, type, full, meta) {
-                        return `<span>0</span>`;
-                        // return `<span>${data}</span>`;
+                        return `<span>${full.materials.length}</span>`;
 
                     },
                 },
@@ -149,7 +148,7 @@ var KTPPDetail = function () {
                     searchable: false,
                     className: 'text-end',
                     render: function (data, type, full, meta) {
-                        let url = '/admin/partidos-politicos/' + full.id + '/eleccion/' + full.id + '/material'
+                        let url = '/admin/partidos-politicos/' + full.registration_id + '/elecciones/' + full.id + '/material'
                         return `<a href="${url}" class="btn btn-sm btn-icon btn-secondary">
                                     <i class="las la-arrow-circle-right fs-2"></i>
                                 </a>`;
