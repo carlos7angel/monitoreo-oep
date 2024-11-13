@@ -2,49 +2,28 @@
 
 namespace App\Containers\Frontend\OepAdministrator\UI\WEB\Controllers;
 
+use App\Containers\CoreMonitoring\Analysis\Actions\ComplementaryAnalysisReportAction;
 use App\Containers\CoreMonitoring\Analysis\Actions\CreateAnalysisReportAction;
+use App\Containers\CoreMonitoring\Analysis\Actions\FinalResolutionAnalysisReportAction;
+use App\Containers\CoreMonitoring\Analysis\Actions\FirstResolutionAnalysisReportAction;
 use App\Containers\CoreMonitoring\Analysis\Actions\GetAnalysisReportsJsonDTAction;
+use App\Containers\CoreMonitoring\Analysis\Actions\InTreatmentAnalysisReportAction;
+use App\Containers\CoreMonitoring\Analysis\Actions\RejectAnalysisReportAction;
+use App\Containers\CoreMonitoring\Analysis\Actions\ToSecretariatAnalysisReportAction;
 use App\Containers\CoreMonitoring\Analysis\Tasks\FindAnalysisReportByIdTask;
-use App\Containers\CoreMonitoring\Election\Tasks\FindElectionByIdTask;
+use App\Containers\CoreMonitoring\Analysis\Tasks\GetActivitiesByAnalysisReportTask;
 use App\Containers\CoreMonitoring\Election\Tasks\GetActiveElectionsForMonitoringTask;
-use App\Containers\CoreMonitoring\Election\Tasks\GetActiveElectionsTask;
-use App\Containers\CoreMonitoring\FormBuilder\Actions\GetFieldsFormByTypeAction;
-use App\Containers\CoreMonitoring\Monitoring\Actions\AddItemsForMonitoringReportAction;
-use App\Containers\CoreMonitoring\Monitoring\Actions\CreateMonitoringReportAction;
-use App\Containers\CoreMonitoring\Monitoring\Actions\GetElectionsForMonitoringJsonDataTableAction;
-use App\Containers\CoreMonitoring\Monitoring\Actions\GetMonitoringByElectionJsonDataTableAction;
-use App\Containers\CoreMonitoring\Monitoring\Actions\GetMonitoringReportsJsonDTAction;
-use App\Containers\CoreMonitoring\Monitoring\Actions\ListAvailableMonitoringItemsAction;
-use App\Containers\CoreMonitoring\Monitoring\Actions\RemoveItemFromMonitoringReportAction;
-use App\Containers\CoreMonitoring\Monitoring\Actions\StoreMonitoringAction;
-use App\Containers\CoreMonitoring\Monitoring\Actions\UpdateMonitoringAction;
-use App\Containers\CoreMonitoring\Monitoring\Actions\UpdateStatusMonitoringReportAction;
-use App\Containers\CoreMonitoring\Monitoring\Tasks\FindMonitoringByIdTask;
-use App\Containers\CoreMonitoring\Monitoring\Tasks\FindMonitoringReportByIdTask;
-use App\Containers\CoreMonitoring\UserProfile\Tasks\GetAccreditedUserMediaProfilesByElectionTask;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\ComplementaryAnalysisReportRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\FinalResolutionAnalysisReportRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\FirstResolutionAnalysisReportRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\InTreatmentAnalysisReportRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\CreateAnalysisReportRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\DetailAnalysisReportRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\EditFormAnalysisReportRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\ListAnalysisReportJsonDtRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\ListAnalysisReportRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\CreateMonitoringRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\DetailMonitoringRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\EditMonitoringRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\ListElectionsForMonitoringJsonDtRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\ListElectionsForMonitoringRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\ListMonitoringByElectionJsonDtRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\ListMonitoringByElectionRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\StoreMonitoringRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\UpdateMonitoringRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\MonitoringReport\AddMonitoringItemsForMonitoringReportRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\MonitoringReport\ChangeStatusMonitoringReportRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\MonitoringReport\CreateMonitoringReportRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\MonitoringReport\DetailMonitoringItemFromMonitoringReportRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\MonitoringReport\DetailMonitoringReportRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\MonitoringReport\ListAvailableMonitoringItemsForReportRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\MonitoringReport\ListMonitoringReportJsonDtRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\MonitoringReport\ListMonitoringReportRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\MonitoringReport\RemoveMonitoringItemFromMonitoringReportRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\MonitoringReport\ShowPartialActiveElectionsForReportRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\RejectAnalysisReportRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\ToSecretariatAnalysisReportRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Exception;
 
@@ -81,34 +60,16 @@ class AnalysisReportController extends WebController
     {
         $page_title = "Detalle Informe de Análisis";
         $analysis_report = app(FindAnalysisReportByIdTask::class)->run($request->id);
-        return view('frontend@oepAdministrator::analysisReport.detail', ['analysis_report' => $analysis_report], compact('page_title'));
+        $activities = app(GetActivitiesByAnalysisReportTask::class)->run($analysis_report->id);
+        return view('frontend@oepAdministrator::analysisReport.detail', ['analysis_report' => $analysis_report, 'activities' => $activities], compact('page_title'));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function showElections(ShowPartialActiveElectionsForReportRequest $request)
+    public function editFormAnalysis(EditFormAnalysisReportRequest $request)
     {
         try {
-            $elections = app(GetActiveElectionsForMonitoringTask::class)->run();
-            $render = view('frontend@oepAdministrator::monitoringReport.partials.listElections')->with([
-                'elections' => $elections,
+            $analysis_report = app(FindAnalysisReportByIdTask::class)->run($request->id);
+            $render = view('frontend@oepAdministrator::analysisReport.partials.editForm')->with([
+                'analysis_report' => $analysis_report,
             ])->render();
             return response()->json(['success' => true, 'render' => $render]);
         } catch (Exception $e) {
@@ -116,73 +77,65 @@ class AnalysisReportController extends WebController
         }
     }
 
-
-
-
-    public function removeItem(RemoveMonitoringItemFromMonitoringReportRequest $request)
+    public function rejectAnalysis(RejectAnalysisReportRequest $request)
     {
         try {
-            $report = app(RemoveItemFromMonitoringReportAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => '']);
+            $analysis = app(RejectAnalysisReportAction::class)->run($request);
+            return response()->json(['success' => true, 'data' => $analysis]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
-    public function detailItem(DetailMonitoringItemFromMonitoringReportRequest $request)
+    public function toSecretariatAnalysis(ToSecretariatAnalysisReportRequest $request)
     {
         try {
-            $monitoring_item = app(FindMonitoringByIdTask::class)->run($request->monitoring_item_id);
-            $election = app(FindElectionByIdTask::class)->run($monitoring_item->fid_election);
-            [$form, $fields] = app(GetFieldsFormByTypeAction::class)->run($monitoring_item->media_type, $election);
-            $render = view('frontend@oepAdministrator::monitoring.partials.detailMonitoringItem')->with([
-                'monitoring' => $monitoring_item,
-                'form' => $form,
-                'fields' => $fields,
-            ])->render();
-            return response()->json(['success' => true, 'render' => $render]);
+            $analysis = app(ToSecretariatAnalysisReportAction::class)->run($request);
+            return response()->json(['success' => true, 'data' => $analysis]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
-    public function listAvailableMonitoringItems(ListAvailableMonitoringItemsForReportRequest $request)
+    public function inTreatmentAnalysis(InTreatmentAnalysisReportRequest $request)
     {
         try {
-            $monitoring_report = app(FindMonitoringReportByIdTask::class)->run($request->id);
-            $monitoring_items = app(ListAvailableMonitoringItemsAction::class)->run($request);
-            $render = view('frontend@oepAdministrator::monitoringReport.partials.listMonitoringItems')->with([
-                'monitoring_items' => $monitoring_items,
-                'monitoring_report' => $monitoring_report,
-            ])->render();
-            return response()->json(['success' => true, 'render' => $render]);
+            $analysis = app(InTreatmentAnalysisReportAction::class)->run($request);
+            return response()->json(['success' => true, 'data' => $analysis]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
-    public function addItems(AddMonitoringItemsForMonitoringReportRequest $request)
+    public function complementaryAnalysis(ComplementaryAnalysisReportRequest $request)
     {
         try {
-            $data = app(AddItemsForMonitoringReportAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => '']);
+            $analysis = app(ComplementaryAnalysisReportAction::class)->run($request);
+            return response()->json(['success' => true, 'data' => $analysis]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
-
-    public function changeStatus(ChangeStatusMonitoringReportRequest $request)
+    public function firstResolutionAnalysis(FirstResolutionAnalysisReportRequest $request)
     {
         try {
-            $data = app(UpdateStatusMonitoringReportAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => '']);
+            $analysis = app(FirstResolutionAnalysisReportAction::class)->run($request);
+            return response()->json(['success' => true, 'data' => $analysis]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
-
+    public function finalResolutionAnalysis(FinalResolutionAnalysisReportRequest $request)
+    {
+        try {
+            $analysis = app(FinalResolutionAnalysisReportAction::class)->run($request);
+            return response()->json(['success' => true, 'data' => $analysis]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
 
 
 }

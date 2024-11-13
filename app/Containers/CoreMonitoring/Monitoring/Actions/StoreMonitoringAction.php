@@ -10,6 +10,7 @@ use App\Containers\CoreMonitoring\FormBuilder\Tasks\StoreDataFieldsFormTask;
 use App\Containers\CoreMonitoring\Monitoring\Models\MonitoringItem;
 use App\Containers\CoreMonitoring\Monitoring\Tasks\CreateMonitoringTask;
 use App\Containers\CoreMonitoring\Monitoring\Tasks\UpdateMonitoringTask;
+use App\Containers\CoreMonitoring\UserProfile\Tasks\FindUserMediaProfileByIdTask;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
@@ -55,7 +56,7 @@ class StoreMonitoringAction extends ParentAction
         $form = app(FindFormByIdTask::class)->run($form_id);
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
-        if (! $user->hasRole(['monitor', 'admin'])) { // TODO: Remove admin and only let to monitor role
+        if (! $user->hasRole(['monitor', 'admin', 'super'])) { // TODO: Remove admin and only let to monitor role
             throw new AuthorizationException('No tiene los permisos para realizar esta acción');
         }
 
@@ -63,12 +64,24 @@ class StoreMonitoringAction extends ParentAction
             'code' => md5(Carbon::now()->timestamp . $user->id .  $request->media_profile . Str::random(24)),
             'media_type' => $request->oep_media_type,
             'fid_election' => $election->id,
-            'fid_media_profile' => $request->media_profile,
+//            'fid_media_profile' => $request->media_profile,
+//            'registered_media' => $request->media_registered,
+//            'other_media' => $request->media_profile_text,
             'fid_form' => $form->id,
             'status' => 'CREATED',
             'registered_by' => $user->id,
             'registered_at' => Carbon::now()
         ];
+
+        if ($request->media_registered) {
+            $data['fid_media_profile'] = $request->media_profile;
+            $data['registered_media'] = true;
+            $m = app(FindUserMediaProfileByIdTask::class)->run($request->media_profile);
+            $data['other_media'] = $m ? $m->name : "";
+        } else {
+            $data['registered_media'] = false;
+            $data['other_media'] = $request->media_profile_text;
+        }
 
         if($user->type === 'TSE' || empty($user->type)) {
             $data['scope_type'] = 'TSE';
@@ -87,8 +100,5 @@ class StoreMonitoringAction extends ParentAction
 
         return $monitoring;
 
-        // $data['code'] = 'M-' . strtoupper(substr(md5($monitoring->id . $monitoring->created_at . $monitoring->code),0,6)) . '-' . Carbon::now()->format('y');
-        // $data['data'] = json_encode($data_form);
-        // return $this->updateMonitoringTask->run($data, $monitoring->id);
     }
 }

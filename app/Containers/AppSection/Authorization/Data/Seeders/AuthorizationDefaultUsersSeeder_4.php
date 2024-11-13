@@ -16,23 +16,15 @@ class AuthorizationDefaultUsersSeeder_4 extends ParentSeeder
      */
     public function run(CreateUserTask $task): void
     {
-        $oep_user = $task->run([
-            'email' => 'admin@oep.com',
-            'password' => 'admin',
-            'name' => 'OEP Admin',
-        ]);
-        $oep_user->assignRole(app(FindRoleTask::class)->run('admin', 'web'));
-        $oep_user->email_verified_at = now();
-        $oep_user->save();
+        $super_user = $task->run(['email' => 'super@oep.com', 'password' => 'admin', 'name' => 'OEP Super Admin']);
+        $super_user->assignRole(app(FindRoleTask::class)->run('super', 'web'));
+        $super_user->email_verified_at = now();
+        $super_user->save();
 
-//        $ext_user = $task->run([
-//            'email' => 'ext_media@oep.com',
-//            'password' => 'admin',
-//            'name' => 'EXT Media',
-//        ]);
-//        $ext_user->assignRole(app(FindRoleTask::class)->run('media', 'external'));
-//        $ext_user->email_verified_at = now();
-//        $ext_user->save();
+        $admin_user = $task->run(['email' => 'admin@oep.com', 'password' => 'admin', 'name' => 'OEP Admin']);
+        $admin_user->assignRole(app(FindRoleTask::class)->run('admin', 'web'));
+        $admin_user->email_verified_at = now();
+        $admin_user->save();
 
     }
 }

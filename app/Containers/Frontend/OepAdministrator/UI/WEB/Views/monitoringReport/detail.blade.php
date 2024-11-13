@@ -25,32 +25,14 @@
 
                 <div>
                     @switch($monitoring_report->status)
-                        @case('NEW')
-                        <div class="mb-5">
-                            <button type="button" data-new-status="SUBMITTED" data-new-status-label="ENVIADO A COMISIÓN" class="kt_change_monitoring_report_status btn btn-primary btn-sm me-1 fs-8">
-                                <i class="ki-outline ki-send fs-3 me-1"></i>Enviar a Comisión
-                            </button>
-                            <button type="button" data-new-status="ARCHIVED" data-new-status-label="ARCHIVADO" class="kt_change_monitoring_report_status btn btn-secondary btn-sm me-1 fs-8">
-                                <i class="ki-outline ki-trash fs-3 me-1"></i>Archivar
-                            </button>
-                        </div>
-                        @break
                         @case('SUBMITTED')
-                            @if(auth()->user()->hasRole('analyst') || true)
+                            @if(auth()->user()->hasRole('analyst'))
                             <div class="mb-5">
-                                <button type="button" data-url="{{ route('oep_admin_analysis_report_create', ['id' => $monitoring_report->id]) }}" class="kt_btn_analysis_report_create btn btn-primary btn-sm me-1 fs-8">
-                                    <i class="ki-outline ki-send fs-3 me-1"></i>Crear Informe de Análisis
+                                <button type="button" data-url="{{ route('oep_admin_analysis_report_create', ['id' => $monitoring_report->id]) }}" class="kt_btn_analysis_report_create btn btn-primary w-100 fs-8">
+                                    <i class="ki-outline ki-document fs-3 me-1"></i>Crear Informe de Análisis
                                 </button>
                             </div>
                             @endif
-                        @break
-                        @case('IN_PROGRESS')
-                        @break
-                        @case('REJECTED')
-                        @break
-                        @case('FINISHED')
-                        @break
-                        @case('ARCHIVED')
                         @break
                     @endswitch
                 </div>
@@ -87,7 +69,7 @@
                 <div class="card card-flush mb-6 mb-xl-9">
                     <div class="card-header mt-6">
                         <div class="card-title flex-column">
-                            <h2 class="mb-1">Reporte</h2>
+                            <h2 class="mb-1 text-uppercase">Reporte de Monitoreo</h2>
                             {{--<div class="fs-6 fw-semibold text-muted">Registros reportados</div>--}}
                         </div>
                         <div class="card-toolbar">
@@ -132,11 +114,11 @@
                                     @break
 
                                     @case('SUBMITTED')
-                                    <span class="badge badge-success">Enviado</span>
+                                    <span class="badge badge-info">Nuevo</span>
                                     @break
 
                                     @case('IN_PROGRESS')
-                                    <span class="badge badge-info">En progreso</span>
+                                    <span class="badge badge-success">En progreso</span>
                                     @break
 
                                     @case('REJECTED')
@@ -157,7 +139,6 @@
                         </div>
 
                         <div class="separator separator-dashed border-muted"></div>
-
 
                         @if($monitoring_report->status !== 'NEW' && $monitoring_report->status !== 'ARCHIVED')
                         <div class="row">
@@ -181,108 +162,15 @@
                         <div class="separator separator-dashed border-muted"></div>
                         @endif
 
-                        <h6 class="mb-5 mt-10 fw-bolder text-gray-600 text-hover-primary">REGISTROS DE MONITOREO</h6>
+                        <h2 class="mt-12 mb-12 text-uppercase">Ficha de Registro de Monitoreo</h2>
 
-                        <div class="text-end mb-0">
-                            @if($monitoring_report->status === 'NEW')
-                            <button type="button" class="btn btn-primary btn-sm fs-8" id="kt_btn_add_monitoring_items"
-                            data-url="{{ route('oep_admin_monitoring_report_list_available_items', ['id' => $monitoring_report->id, 'election_id' => $monitoring_report->fid_election]) }}">
-                                <i class="ki-outline ki-plus fs-3 me-1"></i>Agregar registros
-                            </button>
-                            @endif
-                        </div>
+                        @php
+                            [$form, $fields] = app(\App\Containers\CoreMonitoring\FormBuilder\Actions\GetFieldsFormByTypeAction::class)->run($monitoring_report->monitoringItem->media_type, $monitoring_report->election);
+                            $monitoring = $monitoring_report->monitoringItem;
+                        @endphp
 
-                        <div class="row">
+                        @include('frontend@oepAdministrator::monitoring.partials.detailMonitoringItem')
 
-                            @foreach(['TV','RADIO','PRINT','DIGITAL','RRSS'] as $media_type)
-                                @if($monitoring_report->monitoringItems->where('media_type', $media_type)->count() > 0)
-                                    <div class="d-flex align-items-center mb-3 mt-10">
-                                        <span class="bullet bullet-vertical h-30px bg-primary me-3"></span>
-                                        <div class="flex-grow-1">
-                                            <a class="text-primary fw-bold fs-6">
-                                                @switch($media_type)
-                                                    @case('TV')
-                                                    <span>Medios Televisivos</span>
-                                                    @break
-                                                    @case('RADIO')
-                                                    <span>Medios Radiales</span>
-                                                    @break
-                                                    @case('PRINT')
-                                                    <span>Medios Impresos</span>
-                                                    @break
-                                                    @case('DIGITAL')
-                                                    <span>Medios Digitales</span>
-                                                    @break
-                                                    @case('RRSS')
-                                                    <span>Redes Sociales</span>
-                                                    @break
-                                                @endswitch
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table border align-middle gs-0 gy-4 mb-3">
-                                            <thead>
-                                            <tr class="bg-light fs-6 fw-bold text-muted">
-                                                <th class="ps-4 rounded-start__ min-w-20px text-center">#</th>
-                                                <th class="min-w-70px text-start">Documento</th>
-                                                <th class="min-w-175px">Medio de Comunicación</th>
-                                                <th class="min-w-80px text-center">Tipo de Medio</th>
-                                                <th class="min-w-100px text-center">Fecha de Registro</th>
-                                                <th class="pe-4 min-w-70px text-end rounded-end__">Opciones</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($monitoring_report->monitoringItems->where('media_type', $media_type) as $key => $monitoring_item)
-                                                <tr class="border-bottom fw-bold text-gray-700 fs-7">
-                                                    <td class="text-center">{{ $key + 1 }}</td>
-                                                    <td class="text-start">{{ $monitoring_item->code }}</td>
-                                                    <td class="text-start">
-                                                        <div class="ms-0">
-                                                            <div class="text-gray-800 text-hover-primary fs-6 fw-bold mb-0">{{ $monitoring_item->mediaProfile->name }}</div>
-                                                            <div class="text-muted fs-7">{{ $monitoring_item->mediaProfile->business_name }}</div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        @switch($monitoring_item->media_type)
-                                                            @case('TV')
-                                                            <span>M. Televisivos</span>
-                                                            @break
-                                                            @case('RADIO')
-                                                            <span>M. Radiales</span>
-                                                            @break
-                                                            @case('PRINT')
-                                                            <span>M. Impresos</span>
-                                                            @break
-                                                            @case('DIGITAL')
-                                                            <span>M. Digitales</span>
-                                                            @break
-                                                            @case('RRSS')
-                                                            <span>Redes Sociales</span>
-                                                            @break
-                                                        @endswitch
-                                                    </td>
-                                                    <td class="text-center">{{ $monitoring_item->registered_at }}</td>
-                                                    <td class="text-end">
-                                                        <button type="button" class="btn btn-sm btn-icon btn-secondary kt_btn_monitoring_item_show me-2"
-                                                        data-url="{{ route('oep_admin_monitoring_report_details_item', ['id' => $monitoring_report->id, 'monitoring_item_id' => $monitoring_item->id]) }}">
-                                                            <i class="ki-outline ki-search-list fs-2"></i>
-                                                        </button>
-                                                        @if($monitoring_report->status === 'NEW')
-                                                        <button type="button" class="btn btn-sm btn-icon btn-secondary kt_btn_monitoring_item_remove me-2"
-                                                        data-url="{{ route('oep_admin_monitoring_report_remove_item', ['id' => $monitoring_report->id, 'monitoring_item_id' => $monitoring_item->id]) }}">
-                                                            <i class="ki-outline ki-eraser fs-2"></i>
-                                                        </button>
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                @endif
-                            @endforeach
-                        </div>
                     </div>
                 </div>
             </div>
@@ -336,69 +224,6 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="kt_modal_monitoring_report_item_details" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content rounded">
-                <div class="modal-header justify-content-end border-0 pb-0">
-                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </div>
-                </div>
-                <div class="modal-body pt-0 pb-20 px-20">
-                    <div class="mb-13 text-center">
-                        <h3 class="mb-3 text-uppercase">Detalle del Registro de Monitoreo</h3>
-                        <div class="text-muted fw-semibold fs-5"></div>
-                    </div>
-                    <div class="d-flex__ flex-column__" id="kt_modal_wrapper_monitoring_item">
-
-                    </div>
-                    <div class="d-flex flex-center flex-row-fluid pt-12">
-                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Aceptar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="kt_modal_monitoring_report_select_list_items" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl __mw-650px">
-            <div class="modal-content rounded">
-                <div class="modal-header pb-0 border-0 justify-content-end">
-                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </div>
-                </div>
-                <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-5" >
-                    <div class="text-center mb-13">
-                        <h1 class="d-flex justify-content-center align-items-center mb-3">Registros de Monitoreo</h1>
-                        <div class="text-muted fw-semibold fs-5">Seleccione los registros de monitoreo disponibles</div>
-                    </div>
-                    <div class="mh-475px scroll-y me-n7 pe-7" id="kt_modal_wrapper_monitoring_list_items">
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="text-center">
-                        <button type="button" id="kt_button_add_items_cancel" class="btn btn-light btn-sm me-3">Cancelar</button>
-                        <button type="button" id="kt_button_add_items_submit" class="btn btn-primary btn-sm">
-                            <span class="indicator-label">Guardar</span>
-                            <span class="indicator-progress">Espere por favor...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('styles')
@@ -406,6 +231,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('themes/admin/js/custom/monitoring_report/detail.js') }}"></script>
     <script src="{{ asset('themes/admin/js/custom/analysis_report/monitoring-detail.js') }}"></script>
 @endsection

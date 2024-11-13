@@ -4,21 +4,26 @@ namespace App\Containers\Frontend\OepAdministrator\UI\WEB\Controllers;
 
 use App\Containers\CoreMonitoring\Election\Tasks\FindElectionByIdTask;
 use App\Containers\CoreMonitoring\FormBuilder\Actions\GetFieldsFormByTypeAction;
+use App\Containers\CoreMonitoring\Monitoring\Actions\GeneratePdfMonitoringAction;
 use App\Containers\CoreMonitoring\Monitoring\Actions\GetElectionsForMonitoringJsonDataTableAction;
 use App\Containers\CoreMonitoring\Monitoring\Actions\GetMonitoringByElectionJsonDataTableAction;
 use App\Containers\CoreMonitoring\Monitoring\Actions\StoreMonitoringAction;
+use App\Containers\CoreMonitoring\Monitoring\Actions\SubmitMonitoringAction;
 use App\Containers\CoreMonitoring\Monitoring\Actions\UpdateMonitoringAction;
 use App\Containers\CoreMonitoring\Monitoring\Tasks\FindMonitoringByIdTask;
 use App\Containers\CoreMonitoring\UserProfile\Tasks\GetAccreditedUserMediaProfilesByElectionTask;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\CreateMonitoringRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\DetailMonitoringRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\EditMonitoringRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\GeneratePdfMonitoringRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\ListElectionsForMonitoringJsonDtRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\ListElectionsForMonitoringRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\ListMonitoringByElectionJsonDtRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\ListMonitoringByElectionRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\StoreMonitoringRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\SubmitMonitoringRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\UpdateMonitoringRequest;
+use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Controllers\WebController;
 use Exception;
 
@@ -51,12 +56,12 @@ class MonitoringController extends WebController
 
     public function listMonitoringByElectionJsonDt(ListMonitoringByElectionJsonDtRequest $request)
     {
-//        try {
+        try {
             $data = app(GetMonitoringByElectionJsonDataTableAction::class)->run($request);
             return response()->json($data);
-//        } catch (Exception $e) {
-//            return response()->json(['success' => false, 'message' => $e->getMessage()]);
-//        }
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
     }
 
     public function createMonitoring(CreateMonitoringRequest $request)
@@ -130,5 +135,25 @@ class MonitoringController extends WebController
         ], compact('page_title'));
     }
 
+    public function submitMonitoring(SubmitMonitoringRequest $request)
+    {
+        try {
+            $monitoring = app(SubmitMonitoringAction::class)->run($request);
+            return response()->json([
+                'success' => true,
+                'redirect' => route('oep_admin_monitoring_report_list')
+            ]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
 
+    public function pdfMonitoring(GeneratePdfMonitoringRequest $request)
+    {
+        try {
+            return app(GeneratePdfMonitoringAction::class)->run($request);
+        } catch (Exception $e) {
+            throw new NotFoundException('No se pudo generar el archivo PDF');
+        }
+    }
 }

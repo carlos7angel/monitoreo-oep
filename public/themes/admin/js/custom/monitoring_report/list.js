@@ -63,10 +63,10 @@ var KTMonitoringReportList = function () {
                 {data: 'id', name: "id"},
                 {data: 'code', name: "code"},
                 {data: 'election_name', name: "elections.name"},
-                {data: 'records', name: "records"},
+                {data: 'media_name', name: "monitoring_items.fid_media_profile"},
                 {data: 'status', name: "status"},
                 {data: 'submitted_at', name: "submitted_at"},
-                {data: 'created_at', name: "users.name"},
+                {data: 'created_at', name: "created_at"},
                 {data: null, responsivePriority: -1},
             ],
 
@@ -112,9 +112,9 @@ var KTMonitoringReportList = function () {
                     targets: 3,
                     orderable: false,
                     searchable: false,
-                    className: 'text-center pe-0',
+                    className: 'pe-0',
                     render: function (data, type, full, meta) {
-                        return `<div class="badge badge-light-danger">${data}</div>`;
+                        return `<div>${data}</div>`;
                     },
                 },
                 {
@@ -124,12 +124,11 @@ var KTMonitoringReportList = function () {
                     className: 'text-center pe-0',
                     render: function (data, type, full, meta) {
                         var status = {
-                            'NEW': {'title': 'Nuevo', 'class': 'badge-light-info'},
-                            'SUBMITTED': {'title': 'Enviado', 'class': 'badge-success'},
-                            'IN_PROGRESS': {'title': 'En progreso', 'class': 'badge-light-primary'},
+                            'SUBMITTED': {'title': 'Nuevo', 'class': 'badge-light-info'},
+                            'IN_PROGRESS': {'title': 'En progreso', 'class': 'badge-light-success'},
                             'REJECTED': {'title': 'Rechazado', 'class': 'badge-light-danger'},
                             'FINISHED': {'title': 'Finalizado', 'class': 'badge-light-info'},
-                            'ARCHIVED': {'title': 'Archivado', 'class': 'badge-light-primary'},
+                            'ARCHIVED': {'title': 'Archivado', 'class': 'badge-light-danger'},
                         };
                         if (typeof status[data] === 'undefined') {
                             return data;

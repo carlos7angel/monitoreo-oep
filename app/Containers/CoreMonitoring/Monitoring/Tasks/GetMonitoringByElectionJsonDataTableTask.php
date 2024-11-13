@@ -8,6 +8,7 @@ use App\Containers\CoreMonitoring\Monitoring\Data\Repositories\MonitoringItemRep
 use App\Ship\Criterias\SkipTakeCriteria;
 use App\Ship\Parents\Requests\Request;
 use App\Ship\Parents\Tasks\Task as ParentTask;
+use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Exceptions\RepositoryException;
 
 class GetMonitoringByElectionJsonDataTableTask extends ParentTask
@@ -44,7 +45,8 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
         $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $election_id, $searchFieldMediaType, $user) {
-            $query = $query->join('media_profiles', 'monitoring_items.fid_media_profile', 'media_profiles.id');
+
+            $query = $query->leftJoin('media_profiles', 'monitoring_items.fid_media_profile', 'media_profiles.id');
             $query = $query->where('fid_election', $election_id);
             if(! empty($searchValue)) {
                 $query = $query->where('media_profiles.name', 'like', '%'.$searchValue.'%')
@@ -59,7 +61,7 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
             //     $query = $query->where('media_profiles.coverage', '=', $user->department);
             // }
 
-            if ($user) {
+            if ($user && false) { // Allow all records
                 if ($user->type === 'TSE' || empty($user->type)) {
                     $query = $query->where('monitoring_items.scope_type', '=', 'TSE')
                                     ->where('monitoring_items.scope_department', '=', 'Nacional');
@@ -73,7 +75,8 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
             // $query = $query->whereIn('status', ['active', 'finished']);
             return $query->distinct()->select([
                 'monitoring_items.*',
-                'media_profiles.name as media_name',
+                DB::raw('CASE WHEN monitoring_items.registered_media = 1 THEN media_profiles.name WHEN monitoring_items.registered_media = 0 THEN monitoring_items.other_media ELSE NULL END AS media_name'),
+                // 'media_profiles.name as media_name',
                 'media_profiles.business_name as media_business_name',
                 'media_profiles.logo as media_logo',
                 'media_profiles.media_type_television',
@@ -91,11 +94,17 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 
+        $records = $result->all();
+
+        foreach ($records as &$item) {
+            $item->can_edit = $item->registered_by === $user->id;
+        }
+
         $response = [
             'draw' => $draw,
             'recordsFiltered' => $recordsTotal,
             'recordsTotal' => $recordsTotal,
-            'data' => $result->all()
+            'data' => $records
         ];
 
         return $response;

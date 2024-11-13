@@ -155,6 +155,26 @@ var KTFormBuilder = function () {
 
     }
 
+    var _handleChangeRegistered = function () {
+
+        $(document).on('change', 'input[name="media_registered"]', function (e) {
+            e.preventDefault();
+            var el = $(this).val();
+            if (el === "1") {
+                $('.kt_select_media_input').removeClass('d-none').addClass('d-block');
+                $('.kt_text_media_input').removeClass('d-block').addClass('d-none');
+                validator.enableValidator('media_profile');
+                validator.disableValidator('media_profile_text');
+            } else {
+                $('.kt_text_media_input').removeClass('d-none').addClass('d-block');
+                $('.kt_select_media_input').removeClass('d-block').addClass('d-none');
+                validator.enableValidator('media_profile_text');
+                validator.disableValidator('media_profile');
+            }
+        });
+
+    };
+
     return {
 
         init: function () {
@@ -166,6 +186,8 @@ var KTFormBuilder = function () {
             form = document.querySelector('#kt_create_monitoring_form');
             _validateForm();
             _submitForm();
+
+            _handleChangeRegistered();
         }
     }
 }();

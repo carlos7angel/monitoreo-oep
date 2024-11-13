@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\DB;
 class CreateAdminAction extends ParentAction
 {
     public function __construct(
-        private readonly CreateUserTask $createUserTask,
-        private readonly FindRoleTask $findRoleTask,
+        private CreateUserTask $createUserTask,
+        private FindRoleTask $findRoleTask,
     ) {
     }
 

@@ -10,7 +10,8 @@ var KTAnalysisReport = function () {
             e.preventDefault();
             var url = $(this).data('url');
             Swal.fire({
-                text: "Se creará el registro de informe de análisis",
+                title: 'Informe de Análisis',
+                text: "Se creará un informe de análisis. ¿Esta seguro de continuar?",
                 icon: "info",
                 buttonsStyling: false,
                 confirmButtonText: "Si, continuar",

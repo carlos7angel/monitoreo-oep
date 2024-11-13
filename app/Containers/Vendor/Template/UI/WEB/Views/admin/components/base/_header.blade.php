@@ -22,21 +22,31 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ in_array($page, ['dashboard']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_1">Inicio</a>
                             </li>
+                            @hasanyrole('media|admin|super')
                             <li class="nav-item">
                                 <a class="nav-link {{ in_array($page, ['media_list_news', 'media_list_all', 'media_accreditations']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_2">Medios</a>
                             </li>
+                            @endhasanyrole
+                            @hasanyrole('monitor|analyst|secretariat|plenary|admin|super')
                             <li class="nav-item">
                                 <a class="nav-link {{ in_array($page, ['monitoring_list', 'monitoring_report_list', 'analysis_report_list']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_3">Monitoreo y Análisis</a>
                             </li>
+                            @endhasanyrole
+                            @hasanyrole('admin|super')
                             <li class="nav-item">
                                 <a class="nav-link {{ in_array($page, ['election_list', 'election_create']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_4">Procesos Electorales</a>
                             </li>
+                            @endhasanyrole
+                            @hasanyrole('admin|super')
                             <li class="nav-item">
                                 <a class="nav-link {{ in_array($page, ['political_group_list', 'political_group_create']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_5">Partidos Políticos</a>
                             </li>
+                            @endhasanyrole
+                            @hasanyrole('super')
                             <li class="nav-item">
                                 <a class="nav-link {{ in_array($page, ['form_list', 'user_list', 'log_list']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_6">Preferencias</a>
                             </li>
+                            @endhasanyrole
                         </ul>
                     </div>
                 </div>
@@ -96,13 +106,10 @@
     </div>
 
     <div class="header-navs d-flex align-items-stretch flex-stack h-lg-70px w-100 py-5 py-lg-0 overflow-hidden overflow-lg-visible" id="kt_header_navs" data-kt-drawer="true" data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_header_navs_toggle" data-kt-swapper="true" data-kt-swapper-mode="append" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header'}">
-        <!--begin::Container-->
         <div class="d-lg-flex container-xxl w-100">
-            <!--begin::Wrapper-->
             <div class="d-lg-flex flex-column justify-content-lg-center w-100" id="kt_header_navs_wrapper">
-                <!--begin::Header tab content-->
                 <div class="tab-content" data-kt-scroll="true" data-kt-scroll-activate="{default: true, lg: false}" data-kt-scroll-height="auto" data-kt-scroll-offset="70px">
-                    <!--begin::Tab panel-->
+
                     <div class="tab-pane fade {{ in_array($page, ['dashboard']) ? 'active show' : ''  }}" id="kt_header_navs_tab_1">
                         <!--begin::Menu wrapper-->
                         <div class="header-menu flex-column align-items-stretch flex-lg-row">
@@ -119,8 +126,7 @@
                         </div>
                         <!--end::Menu wrapper-->
                     </div>
-                    <!--end::Tab panel-->
-                    <!--begin::Tab panel-->
+                    @hasanyrole('media|admin|super')
                     <div class="tab-pane fade {{ in_array($page, ['media_list_news', 'media_list_all', 'media_accreditations']) ? 'active show' : ''  }}" id="kt_header_navs_tab_2">
                         <!--begin::Menu wrapper-->
                         <div class="header-menu flex-column align-items-stretch flex-lg-row">
@@ -158,38 +164,40 @@
                         </div>
                         <!--end::Menu wrapper-->
                     </div>
-                    <!--end::Tab panel-->
-                    <!--begin::Tab panel-->
+                    @endhasanyrole
+                    @hasanyrole('monitor|analyst|secretariat|plenary|admin|super')
                     <div class="tab-pane fade {{ in_array($page, ['monitoring_list', 'monitoring_report_list', 'analysis_report_list']) ? 'active show' : ''  }}" id="kt_header_navs_tab_3">
-                        <!--begin::Menu wrapper-->
                         <div class="header-menu flex-column align-items-stretch flex-lg-row">
-                            <!--begin::Menu-->
                             <div class="menu menu-rounded menu-column menu-lg-row menu-root-here-bg-desktop menu-active-bg menu-title-gray-700 menu-state-primary menu-arrow-gray-500 fw-semibold align-items-stretch flex-grow-1 px-2 px-lg-0" id="#kt_header_menu" data-kt-menu="true">
+                                @hasanyrole('monitor|admin|super')
                                 <a href="{{ route('oep_admin_media_elections_list_for_monitoring') }}" class="menu-item {{ $page === 'monitoring_list' ? 'here' : '' }} me-0 me-lg-2">
                                     <span class="menu-link py-3">
                                         <span class="menu-title">Monitoreo por Proceso Electoral</span>
                                         <span class="menu-arrow d-lg-none"></span>
                                     </span>
                                 </a>
+                                @endhasanyrole
+                                @hasanyrole('analyst|admin|super')
                                 <a href="{{ route('oep_admin_monitoring_report_list') }}" class="menu-item {{ $page === 'monitoring_report_list' ? 'here' : '' }} me-0 me-lg-2">
                                     <span class="menu-link py-3">
                                         <span class="menu-title">Reportes de Monitoreo</span>
                                         <span class="menu-arrow d-lg-none"></span>
                                     </span>
                                 </a>
+                                @endhasanyrole
+                                @hasanyrole('analyst|secretariat|plenary|admin|super')
                                 <a href="{{ route('oep_admin_analysis_report_list') }}" class="menu-item {{ $page === 'analysis_report_list' ? 'here' : '' }} me-0 me-lg-2">
                                     <span class="menu-link py-3">
                                         <span class="menu-title">Informes de Análisis</span>
                                         <span class="menu-arrow d-lg-none"></span>
                                     </span>
                                 </a>
+                                @endhasanyrole
                             </div>
-                            <!--end::Menu-->
                         </div>
-                        <!--end::Menu wrapper-->
                     </div>
-                    <!--end::Tab panel-->
-                    <!--begin::Tab panel-->
+                    @endhasanyrole
+                    @hasanyrole('admin|super')
                     <div class="tab-pane fade {{ in_array($page, ['election_list', 'election_create']) ? 'active show' : ''  }}" id="kt_header_navs_tab_4">
                         <!--begin::Menu wrapper-->
                         <div class="header-menu flex-column align-items-stretch flex-lg-row">
@@ -210,8 +218,8 @@
                         </div>
                         <!--end::Menu wrapper-->
                     </div>
-                    <!--end::Tab panel-->
-                    <!--begin::Tab panel-->
+                    @endhasanyrole
+                    @hasanyrole('admin|super')
                     <div class="tab-pane fade {{ in_array($page, ['political_group_list', 'political_group_create']) ? 'active show' : ''  }}" id="kt_header_navs_tab_5">
                         <!--begin::Menu wrapper-->
                         <div class="header-menu flex-column align-items-stretch flex-lg-row">
@@ -232,8 +240,8 @@
                         </div>
                         <!--end::Menu wrapper-->
                     </div>
-                    <!--end::Tab panel-->
-                    <!--begin::Tab panel-->
+                    @endhasanyrole
+                    @hasanyrole('super')
                     <div class="tab-pane fade {{ in_array($page, ['form_list', 'user_list', 'log_list']) ? 'active show' : ''  }}" id="kt_header_navs_tab_6">
                         <!--begin::Menu wrapper-->
                         <div class="header-menu flex-column align-items-stretch flex-lg-row">
@@ -260,13 +268,10 @@
                         </div>
                         <!--end::Menu wrapper-->
                     </div>
-                    <!--end::Tab panel-->
+                    @endhasanyrole
+
                 </div>
-                <!--end::Header tab content-->
             </div>
-            <!--end::Wrapper-->
         </div>
-        <!--end::Container-->
     </div>
-    <!--end::Header navs-->
 </div>

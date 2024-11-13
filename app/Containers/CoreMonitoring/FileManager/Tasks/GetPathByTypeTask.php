@@ -5,6 +5,7 @@ namespace App\Containers\CoreMonitoring\FileManager\Tasks;
 use Apiato\Core\Exceptions\CoreInternalErrorException;
 use App\Containers\CoreMonitoring\Accreditation\Models\Accreditation;
 use App\Containers\CoreMonitoring\Accreditation\Models\AccreditationRate;
+use App\Containers\CoreMonitoring\Analysis\Models\AnalysisReport;
 use App\Containers\CoreMonitoring\Election\Models\Election;
 use App\Containers\CoreMonitoring\Monitoring\Models\MonitoringItem;
 use App\Containers\CoreMonitoring\Registration\Models\PropagandaMaterial;
@@ -54,6 +55,12 @@ class GetPathByTypeTask extends ParentTask
                 $fileable_id = $id;
                 $fileable_type = PropagandaMaterial::class;
                 $path = '/partidos-politicos/m-'.$user->profile_data->id.'/material/e-'.$fileable_id;
+                break;
+
+            case 'analysis-report':
+                $fileable_id = $id;
+                $fileable_type = AnalysisReport::class;
+                $path = '/analisis/a-'.$fileable_id;
                 break;
 
             default:

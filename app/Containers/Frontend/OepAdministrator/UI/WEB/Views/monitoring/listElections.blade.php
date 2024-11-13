@@ -46,7 +46,7 @@
                         <th class="min-w-200px">Proceso Electoral</th>
                         <th class="text-center min-w-70px">Fecha del Proceso</th>
                         <th class="text-center min-w-70px">Estado</th>
-                        <th class="text-center min-w-70px">Plazo de Monitoreo</th>
+                        {{--<th class="text-center min-w-70px">Plazo de Monitoreo</th>--}}
                         <th class="text-end min-w-70px">Opciones</th>
                     </tr>
                     </thead>

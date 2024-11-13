@@ -9,7 +9,11 @@
         <label class="fw-semibold fs-7 text-gray-600">Nombre del Medio:</label>
     </div>
     <div class="col-md-8">
-        <p class="form-control form-control-plaintext">RED UNO (//TODO:)</p>
+        <?php if($monitoring->registered_media): ?>
+            <p class="form-control form-control-plaintext"><?php echo e($monitoring->mediaProfile->name); ?> - <?php echo e($monitoring->mediaProfile->business_name); ?></p>
+        <?php else: ?>
+            <p class="form-control form-control-plaintext"><?php echo e($monitoring->other_media); ?> </p>
+        <?php endif; ?>
     </div>
 </div>
 

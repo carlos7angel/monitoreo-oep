@@ -78,41 +78,17 @@
                     <thead>
                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                         <th class="w-10px pe-2">#</th>
-                        <th class="min-w-70px">ID Documento</th>
+                        <th class="min-w-70px">Nro Documento</th>
                         <th class="min-w-200px">Proceso Electoral</th>
+                        <th class="min-w-10px">Medio de Comunicación</th>
+                        <th class="text-center min-w-70px">Ubicación</th>
                         <th class="text-center min-w-70px">Estado</th>
-                        <th class="text-center min-w-70px">Fecha de Registro</th>
-                        <th class="text-center min-w-70px">Registrado por</th>
+                        <th class="text-center min-w-70px">Último Registro</th>
                         <th class="text-end min-w-70px">Opciones</th>
                     </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">
-{{--                        <tr>--}}
-{{--                            <td><span class="fw-bold"></span></td>--}}
-{{--                            <td class="pe-0">R-DRF101/24</td>--}}
-{{--                            <td>--}}
-{{--                                <div class="d-flex align-items-center">--}}
-{{--                                    <div>--}}
-{{--                                        <a class="text-gray-700 fs-6 fw-bold mb-1">Elecciones Generales</a>--}}
-{{--                                        <div class="text-muted fs-7 fw-bold">EJUD-2024</div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </td>--}}
-{{--                            <td class="text-center pe-0">--}}
-{{--                                <div class="badge badge-light-danger">En progreso</div>--}}
-{{--                            </td>--}}
-{{--                            <td class="text-center pe-0">02/10/2024 12:52 pm</td>--}}
-{{--                            <td class="text-center">--}}
-{{--                                <div>--}}
-{{--                                    <a class="text-gray-700 fs-6 fw-bold mb-1">Carlos Alejo</a>--}}
-{{--                                    <div class="text-muted fs-7 fw-bold">02/10/2024 12:52 pm</div>--}}
-{{--                                </div>--}}
-{{--                            </td>--}}
-{{--                            <td class="text-center pe-0"><div class="badge badge-light-danger">2</div></td>--}}
-{{--                            <td class="text-end">--}}
-{{--                                <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="las la-edit fs-2"></i></a>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
+
                     </tbody>
                 </table>
             </div>

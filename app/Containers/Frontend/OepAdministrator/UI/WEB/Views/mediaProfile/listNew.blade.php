@@ -93,5 +93,5 @@
 
 @section('scripts')
     <script src="{{ asset('themes/common/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('P') }}"></script>
+    <script src="{{ asset('themes/admin/js/custom/media_profiles/list_new.js') }}"></script>
 @endsection

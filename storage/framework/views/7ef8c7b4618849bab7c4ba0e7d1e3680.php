@@ -78,40 +78,16 @@
                     <thead>
                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                         <th class="w-10px pe-2">#</th>
-                        <th class="min-w-70px">ID Documento</th>
+                        <th class="min-w-70px">Nro Documento</th>
                         <th class="min-w-200px">Proceso Electoral</th>
+                        <th class="min-w-10px">Medio de Comunicación</th>
+                        <th class="text-center min-w-70px">Ubicación</th>
                         <th class="text-center min-w-70px">Estado</th>
-                        <th class="text-center min-w-70px">Fecha de Registro</th>
-                        <th class="text-center min-w-70px">Registrado por</th>
+                        <th class="text-center min-w-70px">Último Registro</th>
                         <th class="text-end min-w-70px">Opciones</th>
                     </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                     </tbody>
                 </table>

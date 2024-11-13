@@ -9,7 +9,11 @@
         <label class="fw-semibold fs-7 text-gray-600">Nombre del Medio:</label>
     </div>
     <div class="col-md-8">
-        <p class="form-control form-control-plaintext">RED UNO (//TODO:)</p>
+        @if($monitoring->registered_media)
+            <p class="form-control form-control-plaintext">{{ $monitoring->mediaProfile->name }} - {{ $monitoring->mediaProfile->business_name }}</p>
+        @else
+            <p class="form-control form-control-plaintext">{{ $monitoring->other_media }} </p>
+        @endif
     </div>
 </div>
 

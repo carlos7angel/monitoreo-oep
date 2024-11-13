@@ -8,7 +8,6 @@ use App\Containers\CoreMonitoring\Analysis\Data\Repositories\AnalysisReportRepos
 use App\Ship\Criterias\SkipTakeCriteria;
 use App\Ship\Parents\Requests\Request;
 use App\Ship\Parents\Tasks\Task as ParentTask;
-use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Exceptions\RepositoryException;
 
 class GetAnalysisReportsJsonDTTask extends ParentTask
@@ -46,7 +45,14 @@ class GetAnalysisReportsJsonDTTask extends ParentTask
 
         $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $searchFieldCode, $searchFieldElection, $searchFieldStatus, $user) {
 
-            $query = $query->join('elections', 'analysis_reports.fid_election', 'elections.id');
+            $query = $query->leftJoin('elections', 'analysis_reports.fid_election', 'elections.id');
+
+            $query = $query->leftJoin('monitoring_reports', 'analysis_reports.fid_monitoring_report', 'monitoring_reports.id');
+            $query = $query->leftJoin('monitoring_items', 'monitoring_reports.fid_monitoring_item', 'monitoring_items.id');
+
+            $query = $query->leftJoin('analysis_report_status_activity', 'analysis_reports.fid_last_analysis_report_activity', 'analysis_report_status_activity.id');
+            $query = $query->leftJoin('users', 'analysis_report_status_activity.registered_by', 'users.id');
+
 
             if(! empty($searchValue)) {
                 $query = $query->where('analysis_reports.code', 'like', '%'.$searchValue.'%')
@@ -69,22 +75,27 @@ class GetAnalysisReportsJsonDTTask extends ParentTask
             //     $query = $query->where('media_profiles.coverage', '=', $user->department);
             // }
 
-            if ($user) {
-                if ($user->type === 'TSE' || empty($user->type)) {
-                    $query = $query->where('analysis_reports.scope_type', '=', 'TSE')
-                                    ->where('analysis_reports.scope_department', '=', 'Nacional');
-                }
-                if ($user->type === 'TED') {
-                    $query = $query->where('analysis_reports.scope_type', '=', 'TED')
-                                    ->where('analysis_reports.scope_department', '=', $user->department);
-                }
-            }
+//            if ($user) {
+//                if ($user->type === 'TSE' || empty($user->type)) {
+//                    $query = $query->where('analysis_reports.scope_type', '=', 'TSE')
+//                                    ->where('analysis_reports.scope_department', '=', 'Nacional');
+//                }
+//                if ($user->type === 'TED') {
+//                    $query = $query->where('analysis_reports.scope_type', '=', 'TED')
+//                                    ->where('analysis_reports.scope_department', '=', $user->department);
+//                }
+//            }
 
-            // $query = $query->whereIn('status', []);
+            // $query = $query->whereIn('analysis_reports.status', []);
 
             return $query->distinct()->select([
-                'analysis_reports.*', 'elections.name as election_name', 'elections.code as election_code',
-                // DB::raw('(select count(*) as total from monitoring_item_report where fid_monitoring_report = monitoring_reports.id) as records')
+                'analysis_reports.*',
+                'elections.name as election_name',
+                'elections.code as election_code',
+                'monitoring_items.other_media as media_name',
+                'monitoring_items.registered_media as media_registered',
+                'analysis_report_status_activity.registered_at as activity_date',
+                'users.name as activity_user',
             ]);
         });
 

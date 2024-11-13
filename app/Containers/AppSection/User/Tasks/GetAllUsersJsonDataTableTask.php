@@ -37,6 +37,7 @@ class GetAllUsersJsonDataTableTask extends ParentTask
             if(! empty($searchValue)) {
                 $query = $query->where('name', 'like', '%'.$searchValue.'%')->orWhere('email', 'like', '%'.$searchValue.'%');
             }
+
             return $query->distinct()->select(['users.*']);
         });
 

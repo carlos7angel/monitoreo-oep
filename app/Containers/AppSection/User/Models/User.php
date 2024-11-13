@@ -77,7 +77,7 @@ class User extends ParentUserModel implements MustVerifyEmail
 
     public function hasAdminMediaRole(): bool
     {
-        return $this->hasRole(['admin', 'media', 'monitor', 'analyst']);
+        return $this->hasRole(['super', 'admin', 'media', 'monitor', 'analyst', 'secretariat', 'plenary']);
     }
 
     protected function email(): Attribute

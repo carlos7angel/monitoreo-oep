@@ -3,6 +3,7 @@
 namespace App\Containers\CoreMonitoring\Analysis\Models;
 
 use App\Containers\CoreMonitoring\Election\Models\Election;
+use App\Containers\CoreMonitoring\FileManager\Models\File;
 use App\Containers\CoreMonitoring\Monitoring\Models\MonitoringReport;
 use App\Ship\Parents\Models\Model as ParentModel;
 
@@ -17,10 +18,17 @@ class AnalysisReport extends ParentModel
         'status',
         'created_by',
         'scope_type',
+        'scope_type_secretariat',
+        'scope_type_plenary',
         'scope_department',
+        'scope_department_secretariat',
+        'scope_department_plenary',
+        'fid_last_analysis_report_activity',
 
-        'file_resolution_first',
-        'file_resolution_final',
+        'file_analysis_report',
+        'file_analysis_report_complementary',
+        'file_resolution_first_instance',
+        'file_resolution_final_instance',
         'observations',
     ];
 
@@ -53,9 +61,43 @@ class AnalysisReport extends ParentModel
         return $this->belongsTo(MonitoringReport::class, 'fid_monitoring_report');
     }
 
-    public function statusActivity()
+    public function statusActivities()
     {
-        return $this->hasMany(AnalysisReportStatusActivity::class, 'fid_analysis_report');
+        return $this->hasMany(ActivityAnalysisReport::class, 'fid_analysis_report');
+    }
+
+    public function lastStatusActivity()
+    {
+        return $this->belongsTo(ActivityAnalysisReport::class, 'fid_last_analysis_report_activity');
+    }
+
+    /**
+     * Files
+     */
+
+    public function fileAnalysisReport()
+    {
+        return $this->hasOne(File::class, 'unique_code', 'file_analysis_report');
+    }
+
+    public function fileAnalysisComplementaryReport()
+    {
+        return $this->hasOne(File::class, 'unique_code', 'file_analysis_report_complementary');
+    }
+
+    public function fileAnalysisComplementaryReportPlenary()
+    {
+        return $this->hasOne(File::class, 'unique_code', 'file_analysis_report_complementary_plenary');
+    }
+
+    public function fileAnalysisResolutionFirstInstance()
+    {
+        return $this->hasOne(File::class, 'unique_code', 'file_resolution_first_instance');
+    }
+
+    public function fileAnalysisResolutionFinalInstance()
+    {
+        return $this->hasOne(File::class, 'unique_code', 'file_resolution_final_instance');
     }
 
 }

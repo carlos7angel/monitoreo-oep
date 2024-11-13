@@ -14,11 +14,13 @@ return new class() extends Migration {
             $table->unsignedBigInteger('fid_analysis_report')->nullable();
             $table->foreign('fid_analysis_report')->references('id')->on('analysis_reports')->onDelete('cascade');
 
-            $table->string('current_status', 50);
-            $table->string('new_status', 50);
+            $table->string('status', 50);
+            $table->string('previous_status', 50)->nullable();
 
             $table->unsignedBigInteger('registered_by');
             $table->foreign('registered_by')->references('id')->on('users')->onDelete('cascade');
+
+            $table->text('observations')->nullable();
 
             $table->timestamp('registered_at');
 
@@ -29,6 +31,6 @@ return new class() extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('analyses');
+        Schema::dropIfExists('analysis_report_status_activity');
     }
 };

@@ -60,7 +60,7 @@ var KTElectionsList = function () {
                 {data: 'name', name: "name"},
                 {data: 'election_date', name: "election_date"},
                 {data: 'status', name: "status"},
-                {data: 'start_date_media_registration', name: "start_date_media_registration"},
+                // {data: 'start_date_media_registration', name: "start_date_media_registration"},
                 {data: null, responsivePriority: -1},
             ],
 
@@ -122,19 +122,19 @@ var KTElectionsList = function () {
                         return `<span class="badge ${status[data].class} py-2 px-4">${status[data].title}</span>`;
                     },
                 },
-                {
-                    targets: 4,
-                    orderable: true,
-                    searchable: true,
-                    className: 'dt-center pe-0',
-                    render: function (data, type, full, meta) {
-                        //return moment(data).format('DD/MM/YYYY HH:mm');
-                        return `<span class="fs-7 pe-2">Del</span>
-                                <div class="badge badge-secondary py-2 px-4">${full.start_date_media_registration}</div>
-                                <span class="fs-7 px-2">al</span>
-                                <div class="badge badge-secondary py-2 px-4">${full.end_date_media_registration}</div>`;
-                    },
-                },
+                // {
+                //     targets: 4,
+                //     orderable: true,
+                //     searchable: true,
+                //     className: 'dt-center pe-0',
+                //     render: function (data, type, full, meta) {
+                //         //return moment(data).format('DD/MM/YYYY HH:mm');
+                //         return `<span class="fs-7 pe-2">Del</span>
+                //                 <div class="badge badge-secondary py-2 px-4">${full.start_date_media_registration}</div>
+                //                 <span class="fs-7 px-2">al</span>
+                //                 <div class="badge badge-secondary py-2 px-4">${full.end_date_media_registration}</div>`;
+                //     },
+                // },
                 {
                     targets: -1,
                     orderable: false,
@@ -143,7 +143,7 @@ var KTElectionsList = function () {
                     render: function (data, type, full, meta) {
                         let url = '/admin/monitoreo/procesos-electorales/' + full.id + '/registros'
                         return `<a href="${url}" class="btn btn-sm btn-icon btn-secondary">
-                                    <i class="las la-arrow-circle-right fs-2"></i>
+                                    <i class="ki-outline ki-arrow-right text-gray-600 fs-2"></i>
                                 </a>`;
                     },
                 },

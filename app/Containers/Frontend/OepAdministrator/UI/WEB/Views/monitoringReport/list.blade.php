@@ -12,7 +12,7 @@
         </ul>
     </div>
     <div class="d-flex align-items-center">
-        <a href="javascript:void(0)" data-url="{{ route('ext_admin_monitoring_report_show_active_elections_partial') }}" class="btn btn-primary px-5" id="kt_btn_select_election"><i class="ki-outline ki-add-files me-2 fs-3"></i> Generar Nuevo Reporte</a>
+
     </div>
 @endsection
 
@@ -56,9 +56,8 @@
                             <label class="fs-6 form-label fw-bold text-gray-900">Estado</label>
                             <select class="form-select form-select-solid datatable-input" data-col-index="4" name="kt_search_status" data-control="select2" data-placeholder="Seleccionar" data-hide-search="true">
                                 <option value=""></option>
-                                <option value="NEW">Nuevos</option>
-                                <option value="SUBMITTED">Enviados a análisis</option>
-                                <option value="IN_PROGRESS">En progreso</option>
+                                <option value="SUBMITTED">Nuevos</option>
+                                <option value="IN_PROGRESS">En Progreso</option>
                                 <option value="REJECTED">Rechazados</option>
                                 <option value="FINISHED">Finalizados</option>
                                 <option value="ARCHIVED">Archivados</option>
@@ -84,7 +83,7 @@
                         <th class="w-10px pe-2">#</th>
                         <th class="min-w-70px">ID Documento</th>
                         <th class="min-w-200px">Proceso Electoral</th>
-                        <th class="text-center min-w-70px">Registros</th>
+                        <th class="min-w-70px">Medio</th>
                         <th class="text-center min-w-70px">Estado</th>
                         <th class="text-center min-w-70px">Fecha de envío</th>
                         <th class="text-center min-w-70px">Creación</th>
@@ -92,32 +91,7 @@
                     </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">
-{{--                        <tr>--}}
-{{--                            <td><span class="fw-bold"></span></td>--}}
-{{--                            <td class="pe-0">R-DRF101/24</td>--}}
-{{--                            <td>--}}
-{{--                                <div class="d-flex align-items-center">--}}
-{{--                                    <div>--}}
-{{--                                        <a class="text-gray-700 fs-6 fw-bold mb-1">Elecciones Generales</a>--}}
-{{--                                        <div class="text-muted fs-7 fw-bold">EJUD-2024</div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </td>--}}
-{{--                            <td class="text-center pe-0">--}}
-{{--                                <div class="badge badge-light-danger">En progreso</div>--}}
-{{--                            </td>--}}
-{{--                            <td class="text-center pe-0">02/10/2024 12:52 pm</td>--}}
-{{--                            <td class="text-center">--}}
-{{--                                <div>--}}
-{{--                                    <a class="text-gray-700 fs-6 fw-bold mb-1">Carlos Alejo</a>--}}
-{{--                                    <div class="text-muted fs-7 fw-bold">02/10/2024 12:52 pm</div>--}}
-{{--                                </div>--}}
-{{--                            </td>--}}
-{{--                            <td class="text-center pe-0"><div class="badge badge-light-danger">2</div></td>--}}
-{{--                            <td class="text-end">--}}
-{{--                                <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="las la-edit fs-2"></i></a>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
+
                     </tbody>
                 </table>
             </div>

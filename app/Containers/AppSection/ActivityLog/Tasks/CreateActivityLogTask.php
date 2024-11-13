@@ -30,6 +30,22 @@ class CreateActivityLogTask extends ParentTask
                     $log = 'CUENTA HABILITADA';
                     $message = "La cuenta de usuario para " . $_subject->email . " ha sido habilitada";
                     break;
+                case LogConstants::SUBMIT_MONITORING_TO_REPORT:
+                    $log = 'MONITOREO ENVIADO';
+                    $message = "Reporte de monitoreo creado y enviado. Documento: " . $_subject->code . "";
+                    break;
+                case LogConstants::CREATE_ANALYSIS_REPORT:
+                    $log = 'INFORME ANÁLISIS CREADO';
+                    $message = "Informe de análisis de monitoreo creado. Documento: " . $_subject->code . "";
+                    break;
+                case LogConstants::SUBMIT_ANALYSIS_TO_SECRETARIAT:
+                    $log = 'INFORME ANÁLISIS ENVIADO A SECRETARÍA';
+                    $message = "Informe de análisis de monitoreo enviado a Secretaría de Cámara. Documento: " . $_subject->code . "";
+                    break;
+                case LogConstants::SUBMIT_ANALYSIS_TO_PLENARY:
+                    $log = 'INFORME ANÁLISIS ENVIADO A SALA PLENA';
+                    $message = "Informe de análisis de monitoreo enviado a Sala Plena. Documento: " . $_subject->code . "";
+                    break;
                 default:
                     throw new NotFoundException('Activity Log Type Not Found');
                     break;

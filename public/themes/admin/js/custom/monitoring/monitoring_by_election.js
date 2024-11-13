@@ -95,18 +95,23 @@ var KTMonitoringList = function () {
                     searchable: true,
                     className: 'pe-0',
                     render: function (data, type, full, meta) {
-                        let logo = '/storage/' + full.media_logo;
-                        /*
-                        <a class="symbol symbol-50px">
-                            <span class="symbol-label" style="background-image:url(${logo});"></span>
-                        </a>
-                        */
-                        return `<div class="d-flex align-items-center">
+                        var content = '';
+                        if (full.registered_media == 1) {
+                            content = `<div class="d-flex align-items-center">
                                     <div class="ms-0">
                                         <div class="text-gray-800 text-hover-primary fs-6 fw-bold mb-0">${data}</div>
                                         <div class="text-muted fs-7">${full.media_business_name}</div>
                                     </div>
                                 </div>`;
+                        } else if (full.registered_media == 0) {
+                            content = `<div class="d-flex align-items-center">
+                                    <div class="ms-0">
+                                        <div class="text-gray-800 text-hover-primary fs-6 fw-bold mb-0">${data}</div>
+                                        <div class="text-muted fs-7"><i>Medio no registrado</i></div>
+                                    </div>
+                                </div>`
+                        }
+                        return content;
                     },
                 },
                 {
@@ -134,7 +139,8 @@ var KTMonitoringList = function () {
                     searchable: true,
                     className: 'dt-center pe-0',
                     render: function (data, type, full, meta) {
-                        return moment(data).format('DD/MM/YYYY HH:mm');
+                        // return moment(data).format('DD/MM/YYYY HH:mm');
+                        return data;
                     },
                 },
                 {
@@ -163,12 +169,17 @@ var KTMonitoringList = function () {
                     render: function (data, type, full, meta) {
                         let detailUrl = `/admin/monitoreo/procesos-electorales/${full.fid_election}/registro-monitoreo/${full.id}/detalle`;
                         let editUrl = `/admin/monitoreo/procesos-electorales/${full.fid_election}/registro-monitoreo/${full.id}/editar`;
-                        return `<a href="${detailUrl}" class="btn btn-sm btn-icon btn-secondary me-2">
-                                    <i class="las la-arrow-circle-right fs-2"></i>
-                                </a>
-                                <a href="${editUrl}" class="btn btn-sm btn-icon btn-secondary">
+                        let actions = ``;
+                        if (full.status === 'CREATED' && full.can_edit) {
+                            actions += `<a href="${editUrl}" class="btn btn-sm btn-icon btn-secondary me-2">
                                     <i class="las la-edit fs-2"></i>
                                 </a>`;
+                        }
+                         actions += `<a href="${detailUrl}" class="btn btn-sm btn-icon btn-secondary">
+                                    <i class="las la-arrow-circle-right fs-2"></i>
+                                </a>`;
+
+                        return actions;
                     },
                 },
             ],

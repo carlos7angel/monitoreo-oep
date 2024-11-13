@@ -15,29 +15,87 @@ return new class() extends Migration {
             $table->foreign('fid_monitoring_report')->references('id')->on('monitoring_reports')->onDelete('cascade');
             $table->unsignedBigInteger('fid_election')->nullable();
             $table->foreign('fid_election')->references('id')->on('elections')->onDelete('cascade');
+
+            $table->enum('place', ['IN_ANALYST', 'IN_SECRETARIAT', 'IN_PLENARY'])->default('IN_ANALYST');
+
             $table->enum('status', [
+//                'NEW',
+//                'SUBMITTED_SECRETARIAT',
+//                'RECEIVED_SECRETARIAT',
+//                'UNTREATED',
+//                'RADICADO',
+//                'FIRST_INSTANCE_RESOLUTION',
+//                'FINAL_RESOLUTION',
+//                'SUBMITTED_PLENARY',
+//                'REJECTED',
+//                'RATIFIED',
+
+
                 'NEW',
-                'SUBMITTED_SECRETARIAT',
-                'RECEIVED_SECRETARIAT',
-                'UNTREATED',
-                'RADICADO',
-                'FIRST_INSTANCE_RESOLUTION',
-                'FINAL_RESOLUTION',
-                'SUBMITTED_PLENARY',
                 'REJECTED',
-                'RATIFIED',
+
+                'UNTREATED',
+                'IN_TREATMENT',
+                'COMPLEMENTARY_REPORT',
+
+                //'FIRST_INSTANCE_RESOLUTION',
+
+                'UNTREATED_PLENARY',
+                'IN_TREATMENT_PLENARY',
+                'COMPLEMENTARY_REPORT_PLENARY',
+
+                //'FINAL_RESOLUTION',
+                'FINALIZED',
+
+                'ARCHIVED',
+
             ])->default('NEW');
 
+//            $table->enum('status', ['NEW', 'REJECTED', 'IN_SECRETARIAT', 'IN_PLENARY', 'FINALIZED', 'ARCHIVED']);
+
+//            $table->enum('sub_status_analyst', [
+//                'NEW',
+//                'REJECTED',
+//            ])->nullable();
+
+//            $table->enum('sub_status', [
+//                'UNTREATED',
+//                'TREATED',
+//                'COMPLEMENTARY_REPORT',
+//                'FIRST_INSTANCE_RESOLUTION',
+//                'FINAL_RESOLUTION'
+//            ])->nullable();
+
+//            $table->enum('sub_status_plenary', [
+//                'UNTREATED_PLENARY',
+//                'TREATED_PLENARY',
+//                'COMPLEMENTARY_REPORT_PLENARY',
+//                'FINAL_RESOLUTION_PLENARY'
+//            ])->nullable();
+
+
             $table->string('file_analysis_report', 100)->nullable();
+            $table->string('file_analysis_report_complementary', 100)->nullable();
+            $table->string('file_analysis_report_complementary_plenary', 100)->nullable();
+
+
             $table->string('file_resolution_first_instance', 100)->nullable();
             $table->string('file_resolution_final_instance', 100)->nullable();
             $table->text('observations')->nullable();
 
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('fid_last_analysis_report_activity')->nullable();
+            // $table->foreign('fid_last_analysis_report_activity')->references('id')->on('analysis_report_status_activity')->onDelete('cascade');
 
             $table->enum('scope_type', ['TED','TSE'])->nullable();
             $table->string('scope_department', 50)->nullable();
+
+            $table->enum('scope_type_secretariat', ['TED','TSE'])->nullable();
+            $table->string('scope_department_secretariat', 50)->nullable();
+
+            $table->enum('scope_type_plenary', ['TED','TSE'])->nullable();
+            $table->string('scope_department_plenary', 50)->nullable();
             $table->timestamps();
 
         });

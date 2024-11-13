@@ -21,6 +21,8 @@ return new class() extends Migration {
 
             $table->enum('scope_type', ['TED','TSE'])->nullable();
             $table->string('scope_department', 50)->nullable();
+            $table->unsignedBigInteger('fid_monitoring_item');
+            $table->foreign('fid_monitoring_item')->references('id')->on('monitoring_items')->onDelete('cascade');
 
             $table->timestamps();
         });

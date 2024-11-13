@@ -63,9 +63,11 @@ var KTAnalysisReportList = function () {
                 {data: 'id', name: "id"},
                 {data: 'code', name: "code"},
                 {data: 'election_name', name: "elections.name"},
+                {data: 'media_name', name: "monitoring_items.other_media"},
+                {data: 'place', name: "place"},
                 {data: 'status', name: "status"},
-                {data: 'registered_date', name: "registered_date"},
-                {data: 'registered_user', name: "registered_user"},
+                {data: 'activity_date', name: "analysis_report_status_activity.registered_at"},
+                // {data: 'activity_user', name: "users.name"},
                 {data: null, responsivePriority: -1},
             ],
 
@@ -111,15 +113,37 @@ var KTAnalysisReportList = function () {
                     targets: 3,
                     orderable: true,
                     searchable: false,
+                    className: 'pe-0',
+                    render: function (data, type, full, meta) {
+                        var content = '';
+                        if (full.media_registered == 1) {
+                            content = `<div class="d-flex align-items-center">
+                                    <div class="ms-0">
+                                        <div class="text-gray-800 text-hover-primary fs-6 fw-bold mb-0">${data}</div>
+                                        <div class="text-muted fs-7"></div>
+                                    </div>
+                                </div>`;
+                        } else if (full.media_registered == 0) {
+                            content = `<div class="d-flex align-items-center">
+                                    <div class="ms-0">
+                                        <div class="text-gray-800 text-hover-primary fs-6 fw-bold mb-0">${data}</div>
+                                        <div class="text-muted fs-7"><i>Medio no registrado</i></div>
+                                    </div>
+                                </div>`
+                        }
+                        return content;
+                    },
+                },
+                {
+                    targets: 4,
+                    orderable: true,
+                    searchable: false,
                     className: 'text-center pe-0',
                     render: function (data, type, full, meta) {
                         var status = {
-                            'NEW': {'title': 'Nuevo', 'class': 'badge-light-info'},
-                            // 'SUBMITTED': {'title': 'Enviado', 'class': 'badge-success'},
-                            // 'IN_PROGRESS': {'title': 'En progreso', 'class': 'badge-light-primary'},
-                            // 'REJECTED': {'title': 'Rechazado', 'class': 'badge-light-danger'},
-                            // 'FINISHED': {'title': 'Finalizado', 'class': 'badge-light-info'},
-                            // 'ARCHIVED': {'title': 'Archivado', 'class': 'badge-light-primary'},
+                            'IN_ANALYST': {'title': 'Comisión de Análisis', 'class': 'badge-secondary'},
+                            'IN_SECRETARIAT': {'title': 'Secretaría de Cámara', 'class': 'badge-secondary'},
+                            'IN_PLENARY': {'title': 'Sala Plena', 'class': 'badge-secondary'},
                         };
                         if (typeof status[data] === 'undefined') {
                             return data;
@@ -128,23 +152,53 @@ var KTAnalysisReportList = function () {
                     },
                 },
                 {
-                    targets: 4,
+                    targets: 5,
+                    orderable: true,
+                    searchable: false,
+                    className: 'text-center pe-0',
+                    render: function (data, type, full, meta) {
+                        var status = {
+                            'NEW': {'title': 'Nuevo', 'class': 'badge-info'},
+                            'REJECTED': {'title': 'Rechazado', 'class': 'badge-danger'},
+                            'UNTREATED': {'title': 'No Tratado', 'class': 'badge-primary'},
+                            'IN_TREATMENT': {'title': 'En Tratamiento', 'class': 'badge-primary'},
+                            'COMPLEMENTARY_REPORT': {'title': 'Informe Complementario', 'class': 'badge-primary'},
+                            'UNTREATED_PLENARY': {'title': 'No Tratado', 'class': 'badge-primary'},
+                            'IN_TREATMENT_PLENARY': {'title': 'En Tratamiento', 'class': 'badge-primary'},
+                            'COMPLEMENTARY_REPORT_PLENARY': {'title': 'Informe Complementario', 'class': 'badge-primary'},
+                            'FINALIZED': {'title': 'Con Resolución Final', 'class': 'badge-success'},
+                            'ARCHIVED': {'title': 'Archivado', 'class': 'badge-danger'},
+                        };
+                        if (typeof status[data] === 'undefined') {
+                            return data;
+                        }
+                        return `<span class="badge ${status[data].class} fs-8 fw-bold px-4 py-2">${status[data].title}</span>`;
+                    },
+                },
+                {
+                    targets: 6,
                     orderable: false,
                     searchable: false,
                     className: 'text-center pe-0',
                     render: function (data, type, full, meta) {
-                        return `<span>${data}</span>`;
+                        return `<div class="ms-0">
+                                    <a class="text-gray-700 fs-6 fw-bold mb-1">${full.activity_user}</a>
+                                    <div class="text-muted fs-7 fw-bold">${moment(data).format('DD/MM/YYYY hh:mm A')}</div>
+                                </div>`;
                     },
                 },
-                {
-                    targets: 5,
-                    orderable: true,
-                    searchable: true,
-                    className: 'dt-center pe-0',
-                    render: function (data, type, full, meta) {
-                        return `<span>${data}</span>`;
-                    },
-                },
+                // {
+                //     targets: 6,
+                //     orderable: true,
+                //     searchable: true,
+                //     className: 'dt-center pe-0',
+                //     render: function (data, type, full, meta) {
+                //         if (data !== null && data !== '') {
+                //             return `<span>${data}</span>`;
+                //         }
+                //         return `-`;
+                //     },
+                // },
                 {
                     targets: -1,
                     orderable: false,
@@ -193,79 +247,6 @@ var KTAnalysisReportList = function () {
         });
     }
 
-    var _handleModalSelectElection = function () {
-
-        $(document).on('click', '#kt_btn_select_election', function (e) {
-            e.preventDefault();
-            var url = $(this).data('url');
-            var blockUI = new KTBlockUI(document.querySelector('#kt_content'));
-            $.ajax({
-                type: 'GET',
-                url: url,
-                dataType: 'json',
-                data: {},
-                beforeSend: function (response) {
-                    blockUI.block();
-                },
-                success: function (response) {
-                    if (! response.success) {
-                        $(modalContent).html('');
-                        toastr.warning('Hubo un problema al cargar la información.');
-                        return;
-                    }
-                    $(modalContent).html(response.render);
-                    modal.show();
-                },
-                complete: function (response) {
-                    blockUI.release();
-                    blockUI.destroy();
-                },
-                error: function (response) {
-                    toastr.error(response.hasOwnProperty('responseJSON') ? response.responseJSON.message : "", "Ocurrió un problema");
-                }
-            });
-
-        });
-
-
-        $(document).on('click', '.kt_btn_select_election_item', function (e) {
-            e.preventDefault();
-            var url = $(this).data('url');
-            var blockUI = new KTBlockUI(document.querySelector('#kt_modal_users_search_handler'));
-
-            $.ajax({
-                type: 'POST',
-                url: url,
-                contentType: false,
-                processData: false,
-                data: {},
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                beforeSend: function (response) {
-                    blockUI.block();
-                },
-                success: function (response) {
-                    if (! response.success) {
-                        toastr.warning(response.message);
-                        return;
-                    }
-                    toastr.success("Reporte generado satisfactoriamente");
-                    setTimeout(function(){
-                        modal.hide();
-                        window.location.reload();
-                    }, 350);
-                },
-                complete: function (response) {
-                    blockUI.release();
-                    blockUI.destroy();
-                },
-                error: function (response) {
-                    toastr.error(response.hasOwnProperty('responseJSON') ? response.responseJSON.message : "", "Ocurrió un problema");
-                }
-            });
-        });
-
-    };
-
     return {
         init: function () {
             if (!table) {
@@ -278,7 +259,7 @@ var KTAnalysisReportList = function () {
             if (!modalEl) { return; }
             modal = new bootstrap.Modal(modalEl);
             modalContent = document.querySelector('#kt_modal_elections_search_content');
-            // _handleModalSelectElection();
+
         }
     }
 }();

@@ -20,6 +20,7 @@ class MonitoringReport extends ParentModel
         'observations',
         'scope_type',
         'scope_department',
+        'fid_monitoring_item',
     ];
 
     protected $attributes = [
@@ -45,6 +46,11 @@ class MonitoringReport extends ParentModel
     public function election()
     {
         return $this->belongsTo(Election::class, 'fid_election');
+    }
+
+    public function monitoringItem()
+    {
+        return $this->belongsTo(MonitoringItem::class, 'fid_monitoring_item');
     }
 
     public function monitoringItems()

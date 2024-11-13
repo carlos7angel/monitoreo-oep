@@ -4,24 +4,24 @@ namespace App\Containers\CoreMonitoring\Monitoring\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
-use App\Containers\CoreMonitoring\Election\Tasks\FindElectionByIdTask;
 use App\Containers\CoreMonitoring\FormBuilder\Tasks\FindFormByIdTask;
 use App\Containers\CoreMonitoring\FormBuilder\Tasks\StoreDataFieldsFormTask;
 use App\Containers\CoreMonitoring\Monitoring\Models\MonitoringItem;
 use App\Containers\CoreMonitoring\Monitoring\Tasks\FindMonitoringByIdTask;
-use App\Containers\CoreMonitoring\Monitoring\Tasks\UpdateMonitoringTask;
+use App\Containers\CoreMonitoring\UserProfile\Tasks\FindUserMediaProfileByIdTask;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class UpdateMonitoringAction extends ParentAction
 {
     public function __construct(
-        private UpdateMonitoringTask $updateMonitoringTask,
         private FindMonitoringByIdTask $findMonitoringByIdTask,
         private StoreDataFieldsFormTask $storeDataFieldsFormTask,
-        private FindElectionByIdTask $findElectionByIdTask,
+        private FindFormByIdTask $findFormByIdTask,
+        private FindUserMediaProfileByIdTask $findUserMediaProfileByIdTask,
     ) {
     }
 
@@ -32,16 +32,29 @@ class UpdateMonitoringAction extends ParentAction
      */
     public function run(Request $request): MonitoringItem
     {
-        $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
         $monitoring = $this->findMonitoringByIdTask->run($request->id);
-        $form = app(FindFormByIdTask::class)->run($monitoring->fid_form);
+        $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
+        if($user->id !== $monitoring->registered_by) {
+            throw new AuthorizationException('No tiene los permisos para realizar esta acción.');
+        }
 
-        $monitoring->fid_media_profile = $request->media_profile;
+        $form = $this->findFormByIdTask->run($monitoring->fid_form);
+
+        $monitoring->registered_media = $request->media_registered;
+        if ($request->media_registered) {
+            $monitoring->fid_media_profile = $request->media_profile;
+            $m = $this->findUserMediaProfileByIdTask->run($request->media_profile);
+            $monitoring->other_media = $m ? $m->name : "";
+        } else {
+            $monitoring->fid_media_profile = null;
+            $monitoring->other_media = $request->media_profile_text;
+        }
+
         $data_form = $this->storeDataFieldsFormTask->run($form, $request, $monitoring, json_decode($monitoring->data, true));
         $monitoring->data = json_encode($data_form);
         $monitoring->save();
 
         return  $monitoring;
-        //return $this->updateMonitoringTask->run($data, $monitoring->id);
+
     }
 }

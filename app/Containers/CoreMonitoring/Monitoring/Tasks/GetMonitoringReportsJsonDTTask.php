@@ -4,6 +4,8 @@ namespace App\Containers\CoreMonitoring\Monitoring\Tasks;
 
 use Apiato\Core\Exceptions\CoreInternalErrorException;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
+use App\Containers\CoreMonitoring\Analysis\Data\Repositories\AnalysisReportRepository;
+use App\Containers\CoreMonitoring\Analysis\Models\AnalysisReport;
 use App\Containers\CoreMonitoring\Monitoring\Data\Repositories\MonitoringReportRepository;
 use App\Ship\Criterias\SkipTakeCriteria;
 use App\Ship\Parents\Requests\Request;
@@ -15,6 +17,7 @@ class GetMonitoringReportsJsonDTTask extends ParentTask
 {
     public function __construct(
         protected MonitoringReportRepository $repository,
+        protected AnalysisReportRepository $analysisRepository,
     ) {
     }
 
@@ -44,10 +47,27 @@ class GetMonitoringReportsJsonDTTask extends ParentTask
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
-        $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $searchFieldCode, $searchFieldElection, $searchFieldStatus, $user) {
+        $scope_type = $scope_department = null;
+        if ($user->type === 'TSE' || empty($user->type)) {
+            $scope_type = 'TSE';
+            $scope_department = 'Nacional';
+        }
+        if ($user->type === 'TED') {
+            $scope_type = 'TED';
+            $scope_department = $user->department;
+        }
+
+
+        $exclude = $this->analysisRepository->findWhere([
+            ['scope_type','=', $scope_type],
+            ['scope_department','=', $scope_department]
+        ])->pluck('fid_monitoring_report')->toArray();
+
+        $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $searchFieldCode, $searchFieldElection, $searchFieldStatus, $user, $scope_type, $scope_department, $exclude) {
 
             $query = $query->join('elections', 'monitoring_reports.fid_election', 'elections.id');
             $query = $query->join('users', 'monitoring_reports.created_by', 'users.id');
+            $query = $query->join('monitoring_items', 'monitoring_reports.fid_monitoring_item', 'monitoring_items.id');
 
             if(! empty($searchValue)) {
                 $query = $query->where('monitoring_reports.code', 'like', '%'.$searchValue.'%');
@@ -69,21 +89,23 @@ class GetMonitoringReportsJsonDTTask extends ParentTask
             //     $query = $query->where('media_profiles.coverage', '=', $user->department);
             // }
 
-            if ($user) {
-                if ($user->type === 'TSE' || empty($user->type)) {
-                    $query = $query->where('monitoring_reports.scope_type', '=', 'TSE')
-                                    ->where('monitoring_reports.scope_department', '=', 'Nacional');
-                }
-                if ($user->type === 'TED') {
-                    $query = $query->where('monitoring_reports.scope_type', '=', 'TED')
-                                    ->where('monitoring_reports.scope_department', '=', $user->department);
-                }
+            if (!empty($scope_type) && !empty($scope_department)) {
+                $query = $query->where('monitoring_reports.scope_type', '=', $scope_type)
+                                ->where('monitoring_reports.scope_department', '=', $scope_department);
             }
 
-            // $query = $query->whereIn('status', []);
+            $query = $query->whereNotIn('monitoring_reports.status', ['NEW']);
 
-            return $query->distinct()->select(['monitoring_reports.*', 'elections.name as election_name', 'elections.code as election_code', 'users.name as user_name',
-                DB::raw('(select count(*) as total from monitoring_item_report where fid_monitoring_report = monitoring_reports.id) as records')]);
+            $query = $query->whereNotIn('monitoring_reports.id', $exclude);
+
+            return $query->distinct()->select([
+                'monitoring_reports.*',
+                'elections.name as election_name',
+                'elections.code as election_code',
+                'users.name as user_name',
+                'monitoring_items.other_media as media_name'
+                // DB::raw('(select count(*) as total from monitoring_item_report where fid_monitoring_report = monitoring_reports.id) as records')
+            ]);
         });
 
         $recordsTotal =  (clone $result)->count();
