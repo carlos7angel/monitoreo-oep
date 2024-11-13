@@ -9,6 +9,9 @@ use App\Containers\CoreMonitoring\Election\Actions\UpdateElectionAction;
 use App\Containers\CoreMonitoring\Election\Actions\UpdateStatusElectionAction;
 use App\Containers\CoreMonitoring\Election\Tasks\FindElectionByIdTask;
 use App\Containers\CoreMonitoring\FormBuilder\Actions\GetAllFormsAction;
+use App\Containers\CoreMonitoring\Monitoring\Actions\ListAvailableMonitoringItemsAction;
+use App\Containers\CoreMonitoring\Monitoring\Tasks\ListMonitoringsTask;
+use App\Containers\CoreMonitoring\Registration\Tasks\ListRegistrationsTask;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Election\CreateElectionRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Election\DetailElectionRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Election\EditElectionRequest;
@@ -17,6 +20,7 @@ use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Election\ListElecti
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Election\StoreElectionRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Election\UpdateElectionRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Election\UpdateStatusElectionRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\ListMonitoringByElectionRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Exception;
 
@@ -78,9 +82,14 @@ class ElectionController extends WebController
         $page_title = "Proceso Electoral";
         $election = app(FindElectionByIdTask::class)->run($request->id);
         $accreditations = app(ListAccreditationsByElectionTask::class)->run($election->id);
+        $monitoring_items = app(ListMonitoringsTask::class)->run($election->id);
+        $registrations = app(ListRegistrationsTask::class)->run($election->id);
+
         return view('frontend@oepAdministrator::election.detail', [
             'election' => $election,
-            'accreditations' => $accreditations
+            'accreditations' => $accreditations,
+            'monitoring_items' => $monitoring_items,
+            'registrations' => $registrations,
         ], compact('page_title'));
     }
 

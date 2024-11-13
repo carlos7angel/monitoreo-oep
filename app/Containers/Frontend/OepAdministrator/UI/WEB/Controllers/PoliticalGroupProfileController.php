@@ -6,7 +6,6 @@ use App\Containers\CoreMonitoring\Election\Tasks\GetActiveElectionsForPoliticalR
 use App\Containers\CoreMonitoring\Registration\Actions\GetElectionsRegisteredByPoliticalGroupJsonDataTableAction;
 use App\Containers\CoreMonitoring\Registration\Actions\RegisterPoliticalGroupProfileElectionAction;
 use App\Containers\CoreMonitoring\UserProfile\Actions\EnableUserPoliticalGroupProfileAccountAction;
-use App\Containers\CoreMonitoring\UserProfile\Actions\GetElectionsByPoliticalGroupProfileJsonDataTableAction;
 use App\Containers\CoreMonitoring\UserProfile\Actions\GetUserPoliticalGroupProfilesJsonDataTableAction;
 use App\Containers\CoreMonitoring\UserProfile\Actions\StorePoliticalGroupAction;
 use App\Containers\CoreMonitoring\UserProfile\Actions\UpdatePoliticalGroupAction;
@@ -114,28 +113,5 @@ class PoliticalGroupProfileController extends WebController
         }
     }
 
-//    public function showDetailNew(ShowDetailNewUserMediaProfileRequest $request)
-//    {
-//        try {
-//            $media = app(FindUserMediaProfileByIdTask::class)->run($request->id);
-//            $render = view('frontend@oepAdministrator::mediaProfile.partials.detailsNew')->with([
-//                'media_profile' => $media,
-//            ])->render();
-//            return response()->json(['success' => true, 'render' => $render]);
-//        } catch (Exception $e) {
-//            return response()->json(['success' => false, 'render' => null, 'message' => $e->getMessage()]);
-//        }
-//    }
-//
-//    public function showDetail(ShowDetailUserMediaProfileRequest $request)
-//    {
-//        $page_title = "Medio de Comunicación";
-//        $media = app(FindUserMediaProfileByIdTask::class)->run($request->id);
-//        $accreditations = app(ListAccreditationsByUserMediaProfileTask::class)->run($media->id);
-//        return view('frontend@oepAdministrator::mediaProfile.detail', [
-//            'profile' => $media,
-//            'accreditations' => $accreditations
-//        ], compact('page_title'));
-//    }
 
 }

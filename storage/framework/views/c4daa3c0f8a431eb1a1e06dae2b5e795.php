@@ -223,7 +223,7 @@
                                                             <?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <div class="badge badge-secondary py-2 px-4 me-1"><?php echo e($type); ?></div>
                                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                    </span>
+                                                            </span>
                                                         </td>
                                                         <td class="text-end">#<?php echo e($accreditation->code); ?></td>
                                                         <td class="text-end"><?php echo e($accreditation->submitted_at); ?></td>
@@ -284,25 +284,296 @@
 
         <div class="tab-content">
             <div class="tab-pane fade" id="kt_monitoring_tab" role="tab-panel">
-                <div class="card mb-5 mb-xxl-8">
-                    <div class="card-body">
 
-                        En construccion... (MONITOREO)
+                <div class="d-flex flex-column flex-lg-row">
+                    <div class="flex-column flex-lg-row-auto w-lg-250px w-xl-350px mb-10">
+                        <div class="card mb-5 mb-xl-8">
+                            <div class="card-body">
+
+                                <div class="d-flex flex-stack mb-5">
+                                    <div class="fw-bold fs-2">Preferencias</div>
+                                    <?php if($election->enable_for_monitoring): ?>
+                                        <span class="badge badge-info" >Activado</span>
+                                    <?php else: ?>
+                                        <span class="badge badge-secondary" >Desactivado</span>
+                                    <?php endif; ?>
+                                </div>
+
+                                <?php if($election->enable_for_monitoring): ?>
+                                    <div class="separator"></div>
+                                    <div class="pb-5 fs-6">
+                                        <div class="fw-bold mt-5">Tipo de Medio habilitado(s):</div>
+                                        <div class="text-gray-600">
+                                            <?php if($election->fid_form_tv_media): ?>
+                                                <p>- Medios Televisivos</p>
+                                            <?php endif; ?>
+                                            <?php if($election->fid_form_radio_media): ?>
+                                                <p>- Medios Radiales</p>
+                                            <?php endif; ?>
+                                            <?php if($election->fid_form_print_media): ?>
+                                                <p>- Medios Impresos</p>
+                                            <?php endif; ?>
+                                            <?php if($election->fid_form_digital_media): ?>
+                                                <p>- Medios Digitales</p>
+                                            <?php endif; ?>
+                                            <?php if($election->fid_form_rrss_media): ?>
+                                                <p>- Redes Sociales</p>
+                                            <?php endif; ?>
+                                        </div>
+
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="flex-lg-row-fluid ms-lg-15">
+
+                        <?php if($election->enable_for_monitoring): ?>
+                            <div class="card card-flush flex-row-fluid">
+
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <span class="fw-bold fs-2">Últimos Registros de Monitoreo</span>
+                                    </div>
+                                </div>
+
+                                <div class="card-body pt-0">
+                                    <div class="table-responsive">
+                                        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
+                                            <thead>
+                                            <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                                <th class="min-w-175px">Medio de Comunicación</th>
+                                                <th class="min-w-100px text-center">Tipo de Medio</th>
+                                                <th class="min-w-100px text-center">Documento</th>
+                                                <th class="min-w-70px text-center">Registro</th>
+                                                <th class="min-w-100px text-end">Estado</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="fw-semibold text-gray-600">
+
+                                            <?php if(count($monitoring_items) > 0): ?>
+                                                <?php $__currentLoopData = $monitoring_items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $monitoring_item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <?php if($monitoring_item->mediaProfile): ?>
+                                                                <a class="symbol symbol-50px">
+                                                                    <span class="symbol-label" style="background-image:url(<?php echo e(asset('storage') . $monitoring_item->mediaProfile->logo); ?>);"></span>
+                                                                </a>
+                                                                <div class="ms-5">
+                                                                    <a class="fw-bold text-gray-900"><?php echo e($monitoring_item->mediaProfile->name); ?></a>
+                                                                    <div class="fs-7 text-muted"><?php echo e($monitoring_item->mediaProfile->business_name); ?></div>
+                                                                </div>
+                                                                <?php else: ?>
+                                                                <div class="ms-0">
+                                                                    <a class="fw-bold text-gray-900"><?php echo e($monitoring_item->other_media); ?></a>
+                                                                    <div class="fs-7 text-muted"><i class="text-muted">Medio no registrado</i></div>
+                                                                </div>
+                                                                <?php endif; ?>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="badge badge-secondary py-2 px-4 me-1">
+                                                                <?php switch($monitoring_item->media_type):
+                                                                    case ('TV'): ?>
+                                                                    <span>Medio Televisivo</span>
+                                                                    <?php break; ?>
+                                                                    <?php case ('RADIO'): ?>
+                                                                    <span>Medio Radial</span>
+                                                                    <?php break; ?>
+                                                                    <?php case ('PRINT'): ?>
+                                                                    <span>Medio Impreso</span>
+                                                                    <?php break; ?>
+                                                                    <?php case ('DIGITAL'): ?>
+                                                                    <span>Medio Digital</span>
+                                                                    <?php break; ?>
+                                                                    <?php case ('RRSS'): ?>
+                                                                    <span>Redes Sociales</span>
+                                                                    <?php break; ?>
+                                                                <?php endswitch; ?>
+                                                            </div>
+                                                        </span>
+                                                        </td>
+                                                        <td class="text-end">#<?php echo e($monitoring_item->code); ?></td>
+                                                        <td class="text-end"><?php echo e($monitoring_item->registered_at); ?></td>
+                                                        <td class="text-end">
+                                                            <?php switch($monitoring_item->status):
+                                                                case ('CREATED'): ?>
+                                                                <span class="badge badge-info py-1 px-4">Nuevo</span>
+                                                                <?php break; ?>
+                                                                <?php case ('SELECTED'): ?>
+                                                                <span class="badge badge-info py-1 px-4">En análisis</span>
+                                                                <?php break; ?>
+                                                                <?php case ('ARCHIVED'): ?>
+                                                                <span class="badge badge-secondary py-1 px-4">Archivado</span>
+                                                                <?php break; ?>
+                                                                <?php case ('REJECTED'): ?>
+                                                                <span class="badge badge-danger py-1 px-4">Rechazado</span>
+                                                                <?php break; ?>
+                                                                <?php case ('FINISHED'): ?>
+                                                                <span class="badge badge-success py-1 px-4">Finalizado</span>
+                                                                <?php break; ?>
+                                                            <?php endswitch; ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                                <tr>
+                                                    <td colspan="5" class="text-end"><a href="#" class="btn btn-sm btn-secondary">Ver más</a></td>
+                                                </tr>
+                                            <?php else: ?>
+                                                <tr>
+                                                    <td colspan="5" class="text-center"><span class="text-muted">No existen registros</span></td>
+                                                </tr>
+                                            <?php endif; ?>
+
+                                            </tbody>
+                                        </table>
+                                        <!--end::Table-->
+                                    </div>
+                                </div>
+                                <!--end::Card body-->
+                            </div>
+                        <?php else: ?>
+                            <div class="notice d-flex bg-secondary rounded border-info border border-dashed mb-9 p-6">
+                                <i class="ki-duotone ki-design-1 fs-2tx text-primary me-4"></i>
+                                <div class="d-flex flex-stack flex-grow-1">
+                                    <div class="fw-semibold">
+                                        <div class="fs-6 text-gray-700">No existen datos para mostrar</div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
 
                     </div>
                 </div>
+
             </div>
         </div>
 
         <div class="tab-content">
             <div class="tab-pane fade" id="kt_political_tab" role="tab-panel">
-                <div class="card mb-5 mb-xxl-8">
-                    <div class="card-body">
 
-                        En construcción (PARTIDOS POLITICOS)
+                <div class="d-flex flex-column flex-lg-row">
+                    <div class="flex-column flex-lg-row-auto w-lg-250px w-xl-350px mb-10">
+                        <div class="card mb-5 mb-xl-8">
+                            <div class="card-body">
+
+                                <div class="d-flex flex-stack mb-5">
+                                    <div class="fw-bold fs-2">Preferencias</div>
+                                    <?php if($election->enable_for_political_registration): ?>
+                                        <span class="badge badge-info" >Activado</span>
+                                    <?php else: ?>
+                                        <span class="badge badge-secondary" >Desactivado</span>
+                                    <?php endif; ?>
+                                </div>
+
+                                <?php if($election->enable_for_political_registration): ?>
+                                    <div class="separator"></div>
+                                    <div class="pb-5 fs-6">
+                                        <div class="fw-bold mt-5">Fecha Límite de Registro:</div>
+                                        <div class="text-gray-600"><?php echo e($election->end_date_political_registration); ?></div>
+                                        <div class="fw-bold mt-5">Tamaño máx. de subir archivos:</div>
+                                        <div class="text-gray-600"><?php echo e($election->max_size_for_political_registration); ?> MB</div>
+                                        <div class="fw-bold mt-5">Tipo de archivo permitidos:</div>
+                                        <div class="text-gray-600">
+                                            <?php
+                                              $mime_types = is_array(json_decode($election->mime_types_for_political_registration)) ?  json_decode($election->mime_types_for_political_registration) : [];
+                                            ?>
+                                            <?php $__currentLoopData = $mime_types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mime_type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <p>- <?php echo e($mime_type); ?></p>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="flex-lg-row-fluid ms-lg-15">
+
+                        <?php if($election->enable_for_political_registration): ?>
+                            <div class="card card-flush flex-row-fluid">
+
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <span class="fw-bold fs-2">Últimos Registros</span>
+                                    </div>
+                                </div>
+
+                                <div class="card-body pt-0">
+                                    <div class="table-responsive">
+                                        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
+                                            <thead>
+                                            <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                                <th class="min-w-175px">Partido Político</th>
+                                                <th class="min-w-100px text-center">Correo</th>
+                                                <th class="min-w-70px text-center">Registro</th>
+                                                <th class="min-w-100px text-end">Estado</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="fw-semibold text-gray-600">
+
+                                            <?php if(count($registrations) > 0): ?>
+                                                <?php $__currentLoopData = $registrations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $registration): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="ms-5">
+                                                                    <a class="fw-bold text-gray-900"><?php echo e($registration->politicalGroup->name); ?></a>
+                                                                    <div class="fs-7 text-muted"><?php echo e($registration->politicalGroup->initials); ?></div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-end">#<?php echo e($registration->email); ?></td>
+                                                        <td class="text-end"><?php echo e($registration->registered_at); ?></td>
+                                                        <td class="text-end">
+                                                            <?php switch($registration->status):
+                                                                case ('CREATED'): ?>
+                                                                <span class="badge badge-info py-1 px-4">Nuevo</span>
+                                                                <?php break; ?>
+                                                                <?php case ('ACTIVE'): ?>
+                                                                <span class="badge badge-success py-1 px-4">Activo</span>
+                                                                <?php break; ?>
+                                                                <?php case ('ARCHIVED'): ?>
+                                                                <span class="badge badge-danger py-1 px-4">Archivado</span>
+                                                                <?php break; ?>
+                                                            <?php endswitch; ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                                <tr>
+                                                    <td colspan="5" class="text-end"><a href="#" class="btn btn-sm btn-secondary">Ver más</a></td>
+                                                </tr>
+                                            <?php else: ?>
+                                                <tr>
+                                                    <td colspan="5" class="text-center"><span class="text-muted">No existen registros</span></td>
+                                                </tr>
+                                            <?php endif; ?>
+
+                                            </tbody>
+                                        </table>
+                                        <!--end::Table-->
+                                    </div>
+                                </div>
+                                <!--end::Card body-->
+                            </div>
+                        <?php else: ?>
+                            <div class="notice d-flex bg-secondary rounded border-info border border-dashed mb-9 p-6">
+                                <i class="ki-duotone ki-design-1 fs-2tx text-primary me-4"></i>
+                                <div class="d-flex flex-stack flex-grow-1">
+                                    <div class="fw-semibold">
+                                        <div class="fs-6 text-gray-700">No existen datos para mostrar</div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
 
                     </div>
                 </div>
+
             </div>
         </div>
 
