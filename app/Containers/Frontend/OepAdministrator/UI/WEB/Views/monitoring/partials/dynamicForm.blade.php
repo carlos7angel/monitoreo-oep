@@ -110,6 +110,7 @@
 
                             @php
                                 $mimes = is_array(json_decode($field->file_mimetypes)) ? implode(',',json_decode($field->file_mimetypes)) : '';
+// dd($mimes);
                             @endphp
 
 {{--                            @if($accreditation->fileRequestLetter)--}}
@@ -117,7 +118,7 @@
 {{--                                       data-mimetype="{{ $accreditation->fileRequestLetter->mime_type }}" data-path="{{ $accreditation->fileRequestLetter->url_file }}">--}}
 {{--                            @endif--}}
                             <div class="text-muted fs-7 mb-3"></div>
-                            <input type="file" name="{{ $field->unique_fieldname }}" class="files kt_form_field_fileupload" data-maxsize="{{ $field->file_maxsize ? $field->file_maxsize : '3' }}" data-maxfiles="{{ $field->maxfiles }}" data-accept="{{ $mimes }}"
+                            <input type="file" name="{{ $field->unique_fieldname }}" class="files kt_form_field_fileupload" data-maxsize="{{ $field->file_maxsize ? $field->file_maxsize : '3' }}" data-maxfiles="{{ $field->maxfiles ? $field->maxfiles : '1' }}" data-accept="{{ $mimes }}"
                             {!! $field->required ? 'data-fv-not-empty="true" data-fv-not-empty___message="El campo es obligatorio"' : '' !!}>
                             <div class="text-muted fs-7">Máximo tamaño permitido {{ $field->file_maxsize ? $field->file_maxsize : '3' }}MB. Formatos aceptados: {{ $mimes }}</div>
 

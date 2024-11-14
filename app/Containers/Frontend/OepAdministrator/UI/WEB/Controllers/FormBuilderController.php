@@ -4,12 +4,12 @@ namespace App\Containers\Frontend\OepAdministrator\UI\WEB\Controllers;
 
 use App\Containers\CoreMonitoring\Catalog\Tasks\ListCatalogsTask;
 use App\Containers\CoreMonitoring\FormBuilder\Actions\CreateFieldFormAction;
-use App\Containers\CoreMonitoring\FormBuilder\Actions\CreateFieldTypeFormAction;
 use App\Containers\CoreMonitoring\FormBuilder\Actions\CreateFormAction;
 use App\Containers\CoreMonitoring\FormBuilder\Actions\DeleteFieldFormAction;
 use App\Containers\CoreMonitoring\FormBuilder\Actions\FindFormByIdAction;
 use App\Containers\CoreMonitoring\FormBuilder\Actions\GetAllFieldTypesAction;
 use App\Containers\CoreMonitoring\FormBuilder\Actions\GetAllFormsJsonDataTableAction;
+use App\Containers\CoreMonitoring\FormBuilder\Actions\SortFieldsByFormAction;
 use App\Containers\CoreMonitoring\FormBuilder\Actions\UpdateFieldFormAction;
 use App\Containers\CoreMonitoring\FormBuilder\Tasks\FindFieldByIdTask;
 use App\Containers\CoreMonitoring\FormBuilder\Tasks\GetFieldsByFormTask;
@@ -19,6 +19,7 @@ use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\FormBuilder\EditFor
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\FormBuilder\GetAllFormsDataTableRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\FormBuilder\ListFormsRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\FormBuilder\ShowBuilderPageRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\FormBuilder\SortFieldFormRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\FormBuilder\StoreFormRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\FormBuilder\UpdateFieldFormRequest;
 use App\Ship\Parents\Controllers\WebController;
@@ -113,6 +114,16 @@ class FormBuilderController extends WebController
                 'fields' => $form_fields,
             ])->render();
             return response()->json(['success' => true, 'render' => $render]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function sortFormFields(SortFieldFormRequest $request)
+    {
+        try {
+            app(SortFieldsByFormAction::class)->run($request);
+            return response()->json(['success' => true, 'data' => '']);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }

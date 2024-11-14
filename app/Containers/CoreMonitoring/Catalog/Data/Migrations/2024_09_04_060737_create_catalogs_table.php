@@ -10,7 +10,7 @@ return new class() extends Migration {
         Schema::create('catalogs', function (Blueprint $table) {
             $table->id();
             $table->string('code', 10)->unique();
-            $table->string('name', 100);
+            $table->string('name', 255);
             $table->text('description')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();

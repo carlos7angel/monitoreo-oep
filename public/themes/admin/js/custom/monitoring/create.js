@@ -120,7 +120,7 @@ var KTFormBuilder = function () {
             limit: inputFile.data("maxfiles"),
             fileMaxSize: inputFile.data("maxsize"),
             addMore: true,
-            //extensions: ['jpg', pdf', 'text/plain', 'audio/*'],
+            // extensions: ['jpg', 'pdf', 'text/plain', 'audio/*'],
             changeInput: '<div class="fileuploader-input">' +
                 '<div class="fileuploader-input-inner">' +
                 '<div>${captions.feedback} ${captions.or} <span>${captions.button}</span></div>' +

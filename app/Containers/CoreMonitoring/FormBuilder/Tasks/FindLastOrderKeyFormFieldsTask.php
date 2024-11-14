@@ -4,8 +4,9 @@ namespace App\Containers\CoreMonitoring\FormBuilder\Tasks;
 
 use App\Containers\CoreMonitoring\FormBuilder\Data\Repositories\FieldRepository;
 use App\Ship\Parents\Tasks\Task as ParentTask;
+use Illuminate\Support\Facades\DB;
 
-class GetFieldsByFormTask extends ParentTask
+class FindLastOrderKeyFormFieldsTask extends ParentTask
 {
     public function __construct(
         protected FieldRepository $repository
@@ -14,17 +15,15 @@ class GetFieldsByFormTask extends ParentTask
 
     public function run($form_id): mixed
     {
-//        return $this->repository->findWhere([
-//            'fid_form' => $form_id
-//        ])->all();
-
         $result = $this->repository->scopeQuery(function ($query) use ($form_id) {
             $query = $query->where('fid_form', '=', $form_id);
-            return $query->distinct()->select(['form_fields.*']);
+            return $query->distinct()->select([
+                DB::raw('MAX(form_fields.order) as last_order'),
+            ]);
         });
 
-        $result->orderBy('order', 'asc');
+        $last = $result->all()->pluck('last_order')->toArray();
 
-        return $result->all()->all();
+        return is_array($last) ? $last[0] : false;
     }
 }

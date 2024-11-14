@@ -32,8 +32,14 @@ class CreateDefaultFieldTask extends ParentTask
             'field_type_name' => $type->type,
             'field_subtype' => $options->input->subtype[0],
             'unique_fieldname' => Str::random(24),
-            'label' => $type->name . ' ' . rand(11111, 99999)
+            'label' => $type->name . ' ' . rand(11111, 99999),
+            'order' => 0,
         ];
+
+        $last_order_key = app(FindLastOrderKeyFormFieldsTask::class)->run($form_id);
+        if ($last_order_key !== null) {
+            $data['order'] = (int) $last_order_key + 1;
+        }
 
         try {
             $field = $this->repository->create($data);

@@ -47,7 +47,8 @@
                 <div class="card card-flush mb-6 mb-xl-9">
                     <div class="card-body px-lg-18__ py-lg-15__">
 
-                        <div class="kt_wrapper_form_builder_fields p-10 border-dashed rounded-2">
+                        <div class="dragula-container kt_wrapper_form_builder_fields p-10 border-dashed rounded-2"
+                             data-form-id="<?php echo e($form->id); ?>" data-url="<?php echo e(route('oep_admin_form_sort', ['id' => $form->id])); ?>">
                             <?php echo $__env->make('frontend@oepAdministrator::formBuilder.partials.listFields', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </div>
 
@@ -82,10 +83,13 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('styles'); ?>
+    <link href="<?php echo e(asset('themes/common/plugins/custom/dragula/dragula.min.css')); ?>" media="all" rel="stylesheet">
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
     <script src="<?php echo e(asset('themes/common/plugins/custom/formrepeater/formrepeater.bundle.js')); ?>"></script>
+    <script src="<?php echo e(asset('themes/common/plugins/custom/dragula/dragula.min.js')); ?>"></script>
     <script src="<?php echo e(asset('themes/admin/js/custom/forms/builder.js')); ?>"></script>
+    <script src="<?php echo e(asset('themes/admin/js/custom/forms/builder-draggable.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('vendor@template::admin.layouts.master', ['page' => 'form_list'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Development Environment\PHP Environment\Laragon\www\monitoreo-oep\app\Containers\Frontend\OepAdministrator/UI/WEB/Views//formBuilder/builder.blade.php ENDPATH**/ ?>

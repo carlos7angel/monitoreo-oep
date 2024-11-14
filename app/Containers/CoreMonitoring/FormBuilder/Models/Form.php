@@ -54,4 +54,9 @@ class Form extends ParentModel
     {
         return $this->hasOne(Election::class, 'fid_form_media_registration');
     }
+
+    public function fields()
+    {
+        return $this->hasMany(Field::class, 'fid_form');
+    }
 }

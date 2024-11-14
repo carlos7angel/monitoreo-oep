@@ -47,7 +47,8 @@
                 <div class="card card-flush mb-6 mb-xl-9">
                     <div class="card-body px-lg-18__ py-lg-15__">
 
-                        <div class="kt_wrapper_form_builder_fields p-10 border-dashed rounded-2">
+                        <div class="dragula-container kt_wrapper_form_builder_fields p-10 border-dashed rounded-2"
+                             data-form-id="{{ $form->id }}" data-url="{{ route('oep_admin_form_sort', ['id' => $form->id]) }}">
                             @include('frontend@oepAdministrator::formBuilder.partials.listFields')
                         </div>
 
@@ -82,9 +83,12 @@
 @endsection
 
 @section('styles')
+    <link href="{{ asset('themes/common/plugins/custom/dragula/dragula.min.css') }}" media="all" rel="stylesheet">
 @endsection
 
 @section('scripts')
     <script src="{{ asset('themes/common/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
+    <script src="{{ asset('themes/common/plugins/custom/dragula/dragula.min.js') }}"></script>
     <script src="{{ asset('themes/admin/js/custom/forms/builder.js') }}"></script>
+    <script src="{{ asset('themes/admin/js/custom/forms/builder-draggable.js') }}"></script>
 @endsection

@@ -127,6 +127,7 @@
 
                             <?php
                                 $mimes = is_array(json_decode($field->file_mimetypes)) ? implode(',',json_decode($field->file_mimetypes)) : '';
+// dd($mimes);
                             ?>
 
 
@@ -134,7 +135,7 @@
 
 
                             <div class="text-muted fs-7 mb-3"></div>
-                            <input type="file" name="<?php echo e($field->unique_fieldname); ?>" class="files kt_form_field_fileupload" data-maxsize="<?php echo e($field->file_maxsize ? $field->file_maxsize : '3'); ?>" data-maxfiles="<?php echo e($field->maxfiles); ?>" data-accept="<?php echo e($mimes); ?>"
+                            <input type="file" name="<?php echo e($field->unique_fieldname); ?>" class="files kt_form_field_fileupload" data-maxsize="<?php echo e($field->file_maxsize ? $field->file_maxsize : '3'); ?>" data-maxfiles="<?php echo e($field->maxfiles ? $field->maxfiles : '1'); ?>" data-accept="<?php echo e($mimes); ?>"
                             <?php echo $field->required ? 'data-fv-not-empty="true" data-fv-not-empty___message="El campo es obligatorio"' : ''; ?>>
                             <div class="text-muted fs-7">Máximo tamaño permitido <?php echo e($field->file_maxsize ? $field->file_maxsize : '3'); ?>MB. Formatos aceptados: <?php echo e($mimes); ?></div>
 
