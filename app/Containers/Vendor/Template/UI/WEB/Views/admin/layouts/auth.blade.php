@@ -55,7 +55,7 @@
 <div class="d-flex flex-column flex-root">
     <!--begin::Page bg image-->
     <style>
-        body { background-image: url({{ asset('themes/admin/media/auth/bg6.jpg') }}); }
+        body { background-image: url({{ asset('themes/common/media/auth/bg6.jpg') }}); }
     </style>
     <!--end::Page bg image-->
     <!--begin::Authentication - Sign-in -->

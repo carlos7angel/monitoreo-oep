@@ -31,7 +31,7 @@
 
 
                 </div>
-                <img src="<?php echo e(asset('themes/external/media/misc/hero__.png')); ?>" class="app-hero-img" alt=""/>
+                <img src="" class="app-hero-img" alt=""/>
             </div>
         </div>
     </div>

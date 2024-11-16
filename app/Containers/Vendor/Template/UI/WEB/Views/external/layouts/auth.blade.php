@@ -32,10 +32,8 @@
         <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-color: #883f7e;">
             <div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
                 <a href="#" class="mb-0 mb-lg-12">
-{{--                    <img alt="Logo" src="{{ asset('themes/common/media/logos/logo_oep.png') }}" class="h-120px h-lg-150px" />--}}
                     <img alt="Logo" src="{{ asset('themes/common/media/logos/logo_oep.png') }}" class="h-180px h-lg-200px" />
                 </a>
-{{--                <img class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20" src="{{ asset('themes/external/media/misc/auth-screens.png') }}" alt="" />--}}
                 <h1 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7">Sistema de Registro de Medios</h1>
                 <div class="d-none d-lg-block text-white fs-base text-center">
                     El Sistema de Registro de Medios es la plataforma para<br />

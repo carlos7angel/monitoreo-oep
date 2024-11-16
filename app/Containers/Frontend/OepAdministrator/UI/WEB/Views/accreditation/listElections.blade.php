@@ -51,35 +51,7 @@
                     </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">
-{{--                    <tr>--}}
-{{--                        <td>--}}
-{{--                            <span class="fw-bold">1</span>--}}
-{{--                        </td>--}}
-{{--                        <td>--}}
-{{--                            <div class="d-flex align-items-center">--}}
-{{--                                <a class="symbol symbol-50px">--}}
-{{--                                    <span class="symbol-label" style="background-image:url({{ asset('themes/admin/media/stock/ecommerce/68.png') }});"></span>--}}
-{{--                                </a>--}}
-{{--                                <div class="ms-3">--}}
-{{--                                    <div class="text-gray-800 text-hover-primary fs-6 fw-bold mb-0">Elecciones Judiciales 2024</div>--}}
-{{--                                    <div class="text-muted fs-7">ABC-123</div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-center pe-0__">12 de Junio de 2024</td>--}}
-{{--                        <td class="text-center pe-0__">--}}
-{{--                            <div class="badge badge-info py-2 px-4">Activo</div>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-center pe-0">--}}
-{{--                            <span class="fs-7 pe-2">Del</span>--}}
-{{--                            <div class="badge badge-secondary py-2 px-4">10/12/2024</div>--}}
-{{--                            <span class="fs-7 px-2">al</span>--}}
-{{--                            <div class="badge badge-secondary py-2 px-4">30/12/2024</div>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-end">--}}
-{{--                            <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="las la-arrow-circle-right fs-2"></i></a>--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
+
                     </tbody>
                 </table>
             </div>

@@ -14,7 +14,7 @@ return new class() extends Migration {
             $table->string('catalog_code', 10)->nullable();
             // $table->foreign('catalog_code')->references('code')->on('catalogs');
             $table->string('code', 10)->nullable();
-            $table->string('name', 100);
+            $table->string('name', 255);
             $table->text('description')->nullable();
             $table->boolean('active')->default(true);
             $table->string('parent_code', 3)->nullable();

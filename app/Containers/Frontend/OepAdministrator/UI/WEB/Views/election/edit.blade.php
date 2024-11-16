@@ -408,7 +408,7 @@
                     </div>
                     <div class="card-body text-center pt-0">
                         <style>
-                            .image-input-placeholder { background-image: url("{{ asset('themes/admin/media/svg/files/blank-image.svg') }}"); }
+                            .image-input-placeholder { background-image: url("{{ asset('themes/common/media/svg/files/blank-image.svg') }}"); }
                         </style>
                         <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3 fv-row"  data-kt-image-input="true">
                             @php
@@ -442,7 +442,7 @@
                     </div>
                     <div class="card-body text-center pt-0">
                         <style>
-                            .image-input-placeholder { background-image: url("{{ asset('themes/admin/media/svg/files/blank-image.svg') }}"); }
+                            .image-input-placeholder { background-image: url("{{ asset('themes/common/media/svg/files/blank-image.svg') }}"); }
                         </style>
                         <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3 fv-row"  data-kt-image-input="true">
                             @php

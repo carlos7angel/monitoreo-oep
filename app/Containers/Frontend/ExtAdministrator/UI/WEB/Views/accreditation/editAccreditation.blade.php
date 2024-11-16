@@ -529,7 +529,7 @@
                                     <div style="text-align:center; margin:0 15px 34px 15px">
 
                                         <div class="mb-15">
-                                            <img alt="Logo" src="{{ asset('themes/external/media/icons/success_icon.png') }}" class="h-100px" />
+                                            <img alt="Logo" src="{{ asset('themes/common/media/icons/success_icon.png') }}" class="h-100px" />
                                         </div>
 
                                         <h2 class="fw-bolder mb-5">Formulario enviado satisfactoriamente</h2>

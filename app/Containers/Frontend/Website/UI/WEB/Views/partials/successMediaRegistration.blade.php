@@ -13,7 +13,7 @@
         con los datos de acceso para ingresar a la plataforma.
     </div>
     <div class="mb-0">
-{{--        <img src="{{ asset('themes/external/media/auth/welcome.png') }}" class="mw-100 mh-300px theme-light-show" alt="" />--}}
+
     </div>
     <div class="mb-10">
         <a href="{{ route('web_index') }}" class="btn btn-sm btn-primary">Volver al inicio</a>

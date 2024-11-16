@@ -31,7 +31,7 @@
 {{--                        </a>--}}
 {{--                    </div>--}}
                 </div>
-                <img src="{{ asset('themes/external/media/misc/hero__.png') }}" class="app-hero-img" alt=""/>
+                <img src="" class="app-hero-img" alt=""/>
             </div>
         </div>
     </div>

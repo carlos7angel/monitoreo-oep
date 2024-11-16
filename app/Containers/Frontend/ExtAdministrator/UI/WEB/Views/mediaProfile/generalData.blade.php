@@ -176,7 +176,7 @@
                                 </label>
                                 <div class="mt-1">
                                     <style>
-                                        .image-input-placeholder { background-image: url("{{ asset('themes/external/media/svg/files/blank-image.svg') }}"); }
+                                        .image-input-placeholder { background-image: url("{{ asset('themes/common/media/svg/files/blank-image.svg') }}"); }
                                     </style>
                                     <div class="image-input image-input-outline image-input-placeholder image-input-empty image-input-empty" data-kt-image-input="true">
                                         <!--begin::Preview existing avatar-->

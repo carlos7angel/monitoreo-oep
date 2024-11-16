@@ -47,7 +47,7 @@
                                         <div class="overflow-auto pb-5">
                                             <div class="d-flex align-items-center border border-dashed border-gray-300 rounded p-5">
                                                 <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
-                                                    <img alt="" class="w-30px me-3" src="{{ asset('themes/admin/media/svg/files/upload.svg') }}" />
+                                                    <img alt="" class="w-30px me-3" src="{{ asset('themes/common/media/svg/files/upload.svg') }}" />
                                                     <div class="ms-1 fw-semibold">
                                                         @if($material->type == 'FILE')
                                                             <a href="{{ $material->fileMaterial->url_file }}" target="_blank" class="fs-6 text-hover-primary fw-bold">{{ $material->name }}</a>
@@ -63,18 +63,6 @@
                                         </div>
                                         @endforeach
 
-{{--                                        <div class="overflow-auto pb-5">--}}
-{{--                                            <div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-700px p-5">--}}
-{{--                                                <div class="d-flex flex-aligns-center pe-10 pe-lg-20">--}}
-{{--                                                    <img alt="" class="w-30px me-3" src="{{ asset('themes/admin/media/svg/files/pdf.svg') }}" />--}}
-{{--                                                    <div class="ms-1 fw-semibold">--}}
-{{--                                                        <a href="" class="fs-6 text-hover-primary fw-bold">Finance KPI App Guidelines</a>--}}
-{{--                                                        <div class="text-gray-500">1.9mb</div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-
                                     </div>
                                 </div>
                             </div>
@@ -83,59 +71,6 @@
                         @endforeach
 
                     </div>
-
-
-
-
-{{--                    <div class="d-flex flex-column flex-lg-row">--}}
-{{--                        <div class="flex-column flex-lg-row-auto w-100 w-lg-275px mb-10 me-lg-20">--}}
-{{--                            <div class="mb-15">--}}
-{{--                                <h4 class="text-gray-900 mb-7">Categories</h4>--}}
-{{--                                <div class="menu menu-rounded menu-column menu-title-gray-700 menu-state-title-primary menu-active-bg-light-primary fw-semibold">--}}
-{{--                                    <div class="menu-item mb-1">--}}
-{{--                                        <a href="#" class="menu-link py-3 active">Bootstrap Admin</a>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="flex-lg-row-fluid">--}}
-{{--                            <div class="mb-13">--}}
-{{--                                <div class="mb-15">--}}
-{{--                                    <h4 class="fs-2x text-gray-800 w-bolder mb-6">Frequesntly Asked Questions</h4>--}}
-{{--                                    <p class="fw-semibold fs-4 text-gray-600 mb-2">First, a disclaimer – the entire process of writing a blog post often takes more than a couple of hours, even if you can type eighty words as per minute and your writing skills are sharp.</p>--}}
-{{--                                </div>--}}
-{{--                                <div class="mb-15">--}}
-
-{{--                                    <div class="overflow-auto pb-5">--}}
-{{--                                        <div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-700px p-5">--}}
-{{--                                            <div class="d-flex flex-aligns-center pe-10 pe-lg-20">--}}
-{{--                                                <img alt="" class="w-30px me-3" src="{{ asset('themes/admin/media/svg/files/pdf.svg') }}" />--}}
-{{--                                                <div class="ms-1 fw-semibold">--}}
-{{--                                                    <a href="" class="fs-6 text-hover-primary fw-bold">Finance KPI App Guidelines</a>--}}
-{{--                                                    <div class="text-gray-500">1.9mb</div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-
-{{--                                    <div class="overflow-auto pb-5">--}}
-{{--                                        <div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-700px p-5">--}}
-{{--                                            <div class="d-flex flex-aligns-center pe-10 pe-lg-20">--}}
-{{--                                                <img alt="" class="w-30px me-3" src="{{ asset('themes/admin/media/svg/files/pdf.svg') }}" />--}}
-{{--                                                <div class="ms-1 fw-semibold">--}}
-{{--                                                    <a href="" class="fs-6 text-hover-primary fw-bold">Finance KPI App Guidelines</a>--}}
-{{--                                                    <div class="text-gray-500">1.9mb</div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-
 
                 </div>
             </div>
