@@ -67,7 +67,7 @@ return [
 
     'admin_oep_prefix' => 'admin',
 
-    'admin_external_prefix' => 'medios/admin',
+    'admin_external_prefix' => 'u/admin',
 
     /*
     |--------------------------------------------------------------------------
