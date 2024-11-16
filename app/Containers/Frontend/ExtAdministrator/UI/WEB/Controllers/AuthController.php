@@ -6,10 +6,16 @@ use App\Containers\AppSection\Authentication\Actions\ForgotPasswordAction;
 use App\Containers\AppSection\Authentication\Actions\ResetPasswordAction;
 use App\Containers\AppSection\Authentication\Actions\WebExtAdministratorLoginAction;
 use App\Containers\AppSection\Authentication\Actions\WebExtLogoutAction;
+use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
 use App\Containers\AppSection\Authentication\UI\WEB\Requests\ForgotPasswordRequest;
 use App\Containers\AppSection\Authentication\UI\WEB\Requests\LoginRequest;
 use App\Containers\AppSection\Authentication\UI\WEB\Requests\LogoutRequest;
 use App\Containers\AppSection\Authentication\UI\WEB\Requests\ResetPasswordRequest;
+use App\Containers\AppSection\User\Actions\UpdateUserAdminPasswordAction;
+use App\Containers\AppSection\User\Actions\UpdateUsernameAdminPasswordAction;
+use App\Containers\Frontend\ExtAdministrator\UI\WEB\Requests\Profile\MyProfileRequest;
+use App\Containers\Frontend\ExtAdministrator\UI\WEB\Requests\Profile\UpdatePasswordProfileRequest;
+use App\Containers\Frontend\ExtAdministrator\UI\WEB\Requests\Profile\UpdateUsernameProfileRequest;
 use App\Ship\Parents\Controllers\WebController;
 use App\Ship\Parents\Exceptions\Exception;
 use Illuminate\Http\JsonResponse;
@@ -81,4 +87,32 @@ class AuthController extends WebController
         }
     }
 
+    public function showMyProfile(MyProfileRequest $request)
+    {
+        $page_title = "Mi Perfil";
+        $user = app(GetAuthenticatedUserByGuardTask::class)->run('external');
+        return view('frontend@extAdministrator::authentication.myProfile', ['user' => $user], compact('page_title'));
+    }
+
+    public function updatePasswordProfile(UpdatePasswordProfileRequest $request)
+    {
+        try {
+            $user = app(GetAuthenticatedUserByGuardTask::class)->run('external');
+            $user = app(UpdateUserAdminPasswordAction::class)->run($request);
+            return response()->json(['success' => true]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function updateUsernameProfile(UpdateUsernameProfileRequest $request)
+    {
+        try {
+            $user = app(GetAuthenticatedUserByGuardTask::class)->run('external');
+            $user = app(UpdateUsernameAdminPasswordAction::class)->run($request);
+            return response()->json(['success' => true]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
 }

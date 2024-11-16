@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class UpdateUserTask extends ParentTask
 {
     public function __construct(
-        private readonly UserRepository $repository,
+        private UserRepository $repository,
     ) {
     }
 

@@ -10,7 +10,7 @@ use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
 
-class UpdateUserAdminPasswordAction extends ParentAction
+class UpdateUsernameAdminPasswordAction extends ParentAction
 {
     public function __construct(
         private UpdateUserTask $updateUserTask,
@@ -25,12 +25,10 @@ class UpdateUserAdminPasswordAction extends ParentAction
     public function run(Request $request): User
     {
         $sanitizedData = $request->sanitizeInput([
-            'password',
+            'username',
         ]);
 
-        $user = $this->updateUserTask->run($request->id, ['password' => $sanitizedData['password']]);
-
-        // $user->notify(new PasswordUpdatedNotification());
+        $user = $this->updateUserTask->run($request->id, ['name' => $sanitizedData['username']]);
 
         return $user;
     }

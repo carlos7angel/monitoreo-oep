@@ -91,12 +91,9 @@
                         </div>
                         <div class="separator my-2"></div>
                         <div class="menu-item px-5">
-                            <a href="#" class="menu-link px-5">Mi Perfil</a>
+                            <a href="<?php echo e(route('oep_admin_my_profile')); ?>" class="menu-link px-5">Mi Perfil</a>
                         </div>
                         <div class="separator my-2"></div>
-                        <div class="menu-item px-5 my-1">
-                            <a href="#" class="menu-link px-5">Seguridad</a>
-                        </div>
                         <div class="menu-item px-5">
                             <a href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="menu-link px-5">Salir</a>
                             <form id="logout-form" action="<?php echo e(route('oep_admin_post_logout')); ?>" method="POST" style="display: none;"><?php echo csrf_field(); ?></form>
