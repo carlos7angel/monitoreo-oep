@@ -1,7 +1,7 @@
 "use strict";
 
 // Class definition
-var KTSigninGeneral = function () {
+var KTForgotPassword = function () {
     // Elements
     var form;
     var submitButton;
@@ -25,13 +25,6 @@ var KTSigninGeneral = function () {
                             }
                         }
                     },
-                    'password': {
-                        validators: {
-                            notEmpty: {
-                                message: 'La contraseña es obligatoria'
-                            }
-                        }
-                    }
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
@@ -61,11 +54,9 @@ var KTSigninGeneral = function () {
     return {
         // Initialization
         init: function () {
-            form = document.querySelector('#kt_sign_in_form');
-            submitButton = document.querySelector('#kt_sign_in_submit');
-
+            form = document.querySelector('#kt_password_reset_form');
+            submitButton = document.querySelector('#kt_password_reset_submit');
             handleValidation();
-
             handleSubmit();
         }
     };
@@ -73,5 +64,5 @@ var KTSigninGeneral = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTSigninGeneral.init();
+    KTForgotPassword.init();
 });

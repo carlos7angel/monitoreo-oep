@@ -2,24 +2,25 @@
 
 @section('content')
 
-
     <div class="d-flex flex-center flex-column flex-lg-row-fluid">
         <div class="w-lg-500px p-10">
-            <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="{{ route('ext_admin_post_login') }}" method="post" autocomplete="off">
+            <form class="form w-100" novalidate="novalidate" id="kt_password_reset_form" action="{{ route('ext_admin_post_forgot_password') }}" method="post" autocomplete="off">
 
                 {{ csrf_field() }}
 
+                <input type="hidden" name="reseturl" value="{{ $reseturl }}">
+
                 <div class="text-center mb-11">
-                    <h1 class="text-gray-900 fw-bolder mb-3">INGRESO</h1>
-                    <div class="text-gray-500 fw-semibold fs-6">Sistema de Registro de Medios</div>
+                    <h1 class="text-gray-900 fw-bolder mb-3">¿Olvidaste tu contraseña?</h1>
+                    <div class="text-gray-500 fw-semibold fs-6">Ingresa tu correo para restablecer tu contraseña</div>
                 </div>
 
-                @if (session('status') || $errors->has('email') || $errors->has('password'))
+                @if (session('error'))
                 <div class="alert alert-danger d-flex align-items-center p-5 mb-15">
                     <i class="ki-duotone ki-shield-cross fs-2hx text-danger me-4"><span class="path1"></span><span class="path2"></span></i>
                     <div class="d-flex flex-column">
                         <h4 class="mb-1 text-danger">Advertencia</h4>
-                        <span>{{ session('status') ? session('status') : 'El usuario y/o contraseña con incorrectos' }}</span>
+                        <span>{{ session('error') }}</span>
                     </div>
                 </div>
                 @endif
@@ -28,7 +29,7 @@
                 <div class="alert alert-success d-flex align-items-center p-5 mb-15">
                     <i class="ki-duotone ki-shield-tick fs-2hx text-success me-4"><span class="path1"></span><span class="path2"></span></i>
                     <div class="d-flex flex-column">
-                        <h4 class="mb-1 text-success">Ingreso satisfactorio</h4>
+                        <h4 class="mb-1 text-success">Correo enviado</h4>
                         <span>{{ session('success') }}</span>
                     </div>
                 </div>
@@ -37,23 +38,17 @@
                 <div class="fv-row mb-8">
                     <input type="text" placeholder="Correo electrónico" name="email" value="{{ old('email') }}" autocomplete="off" class="form-control bg-transparent" />
                 </div>
-                <div class="fv-row mb-3">
-                    <input type="password" placeholder="Contraseña" name="password" autocomplete="off" class="form-control bg-transparent" />
-                </div>
-                <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-                    <div></div>
-                    <a href="{{ route('ext_admin_forgot_password') }}" class="link-primary">¿Olvidaste tu contraseña ?</a>
-                </div>
-                <div class="d-grid mb-10">
-                    <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
-                        <span class="indicator-label">Ingresar</span>
+
+                <div class="d-flex flex-wrap justify-content-center pb-lg-0">
+                    <button type="button" id="kt_password_reset_submit" class="btn btn-primary me-4">
+                        <span class="indicator-label">Enviar</span>
                         <span class="indicator-progress">Espere por favor...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                         </span>
                     </button>
+                    <a href="{{ route('ext_admin_login') }}" class="btn btn-light">Cancelar</a>
                 </div>
-                <div class="text-gray-500 text-center fw-semibold fs-6">¿No tienes una cuenta?
-                    <a href="#" class="link-primary">Regístrate</a></div>
+
             </form>
         </div>
     </div>
@@ -73,5 +68,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('themes/external/js/custom/auth/login.js') }}"></script>
+    <script src="{{ asset('themes/external/js/custom/auth/forgot-password.js') }}"></script>
 @endsection

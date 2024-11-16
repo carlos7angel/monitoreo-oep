@@ -1,11 +1,12 @@
 "use strict";
 
 // Class definition
-var KTSigninGeneral = function () {
+var KTResetPassword = function () {
     // Elements
     var form;
     var submitButton;
     var validator;
+    var passwordMeter;
 
     // Handle form
     var handleValidation = function (e) {
@@ -14,27 +15,46 @@ var KTSigninGeneral = function () {
             form,
             {
                 fields: {
-                    'email': {
-                        validators: {
-                            regexp: {
-                                regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: 'Ingrese un correo electrónico válido',
-                            },
-                            notEmpty: {
-                                message: 'El correo electrónico es obligatorio'
-                            }
-                        }
-                    },
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'La contraseña es obligatoria'
+                                message: 'El campo es obligatorio'
+                            },
+                            stringLength: {
+                                mi: 6,
+                                max: 50,
+                                message: 'La contrseña debe tener mínimo 6 caracteres'
+                            },
+                            callback: {
+                                message: 'Ingrese una contraseña válida',
+                                callback: function(input) {
+                                    if (input.value.length > 0) {
+                                        return validatePassword();
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    'confirm_password': {
+                        validators: {
+                            notEmpty: {
+                                message: 'El campo es obligatorio'
+                            },
+                            identical: {
+                                compare: function() {
+                                    return form.querySelector('[name="password"]').value;
+                                },
+                                message: 'La contraseña nueva debe ser la misma'
                             }
                         }
                     }
                 },
                 plugins: {
-                    trigger: new FormValidation.plugins.Trigger(),
+                    trigger: new FormValidation.plugins.Trigger({
+                        event: {
+                            password: false
+                        }
+                    }),
                     bootstrap: new FormValidation.plugins.Bootstrap5({
                         rowSelector: '.fv-row',
                         eleInvalidClass: '',  // comment to enable invalid state icons
@@ -43,6 +63,16 @@ var KTSigninGeneral = function () {
                 }
             }
         );
+
+        form.querySelector('input[name="password"]').addEventListener('input', function() {
+            if (this.value.length > 0) {
+                validator.updateFieldStatus('password', 'NotValidated');
+            }
+        });
+    }
+
+    var validatePassword = function() {
+        return  (passwordMeter.getScore() > 65);
     }
 
     var handleSubmit = function (e) {
@@ -50,6 +80,8 @@ var KTSigninGeneral = function () {
         submitButton.addEventListener('click', function (e) {
             // Prevent button default action
             e.preventDefault();
+
+            validator.revalidateField('password');
 
             // Validate form
             validator.validate().then(function (status) {
@@ -67,10 +99,7 @@ var KTSigninGeneral = function () {
                         data: formData,
                         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                         beforeSend: function (response) {
-                            // Show loading indication
                             submitButton.setAttribute('data-kt-indicator', 'on');
-
-                            // Disable button to avoid multiple click
                             submitButton.disabled = true;
                         },
                         success: function (response) {
@@ -80,7 +109,7 @@ var KTSigninGeneral = function () {
                             }
                             toastr.success(response.message);
                             setTimeout(function(){
-                                form.reset();  // reset form
+                                form.reset();
                                 window.location = response.redirect;
                             }, 350);
                         },
@@ -98,24 +127,14 @@ var KTSigninGeneral = function () {
         });
     }
 
-    var isValidUrl = function(url) {
-        try {
-            new URL(url);
-            return true;
-        } catch (e) {
-            return false;
-        }
-    }
-
     // Public functions
     return {
         // Initialization
         init: function () {
-            form = document.querySelector('#kt_sign_in_form');
-            submitButton = document.querySelector('#kt_sign_in_submit');
-
+            form = document.querySelector('#kt_password_reset_form');
+            submitButton = document.querySelector('#kt_password_reset_submit');
+            passwordMeter = KTPasswordMeter.getInstance(form.querySelector('[data-kt-password-meter="true"]'));
             handleValidation();
-
             handleSubmit();
         }
     };
@@ -123,5 +142,5 @@ var KTSigninGeneral = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTSigninGeneral.init();
+    KTResetPassword.init();
 });

@@ -1,7 +1,7 @@
 "use strict";
 
 // Class definition
-var KTSigninGeneral = function () {
+var KTForgotPassword = function () {
     // Elements
     var form;
     var submitButton;
@@ -25,13 +25,6 @@ var KTSigninGeneral = function () {
                             }
                         }
                     },
-                    'password': {
-                        validators: {
-                            notEmpty: {
-                                message: 'La contraseña es obligatoria'
-                            }
-                        }
-                    }
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
@@ -67,10 +60,7 @@ var KTSigninGeneral = function () {
                         data: formData,
                         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                         beforeSend: function (response) {
-                            // Show loading indication
                             submitButton.setAttribute('data-kt-indicator', 'on');
-
-                            // Disable button to avoid multiple click
                             submitButton.disabled = true;
                         },
                         success: function (response) {
@@ -79,10 +69,7 @@ var KTSigninGeneral = function () {
                                 return;
                             }
                             toastr.success(response.message);
-                            setTimeout(function(){
-                                form.reset();  // reset form
-                                window.location = response.redirect;
-                            }, 350);
+                            form.reset();
                         },
                         complete: function (response) {
                             submitButton.removeAttribute('data-kt-indicator');
@@ -98,21 +85,13 @@ var KTSigninGeneral = function () {
         });
     }
 
-    var isValidUrl = function(url) {
-        try {
-            new URL(url);
-            return true;
-        } catch (e) {
-            return false;
-        }
-    }
 
     // Public functions
     return {
         // Initialization
         init: function () {
-            form = document.querySelector('#kt_sign_in_form');
-            submitButton = document.querySelector('#kt_sign_in_submit');
+            form = document.querySelector('#kt_password_reset_form');
+            submitButton = document.querySelector('#kt_password_reset_submit');
 
             handleValidation();
 
@@ -123,5 +102,5 @@ var KTSigninGeneral = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTSigninGeneral.init();
+    KTForgotPassword.init();
 });
