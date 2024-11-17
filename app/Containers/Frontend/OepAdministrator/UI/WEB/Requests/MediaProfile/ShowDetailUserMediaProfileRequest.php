@@ -8,7 +8,7 @@ class ShowDetailUserMediaProfileRequest extends ParentRequest
 {
     protected array $access = [
         'permissions' => '',
-        'roles' => '',
+        'roles' => 'media|super|admin',
     ];
 
     protected array $decode = [

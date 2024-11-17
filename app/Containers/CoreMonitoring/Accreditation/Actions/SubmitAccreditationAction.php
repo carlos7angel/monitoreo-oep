@@ -3,10 +3,12 @@
 namespace App\Containers\CoreMonitoring\Accreditation\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
+use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
+use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
+use App\Containers\CoreMonitoring\Accreditation\Events\SubmitAccreditationNotificationEvent;
 use App\Containers\CoreMonitoring\Accreditation\Models\Accreditation;
 use App\Containers\CoreMonitoring\Accreditation\Tasks\FindAccreditationByIdTask;
-use App\Containers\CoreMonitoring\Accreditation\Tasks\GenerateAccreditationDataTask;
 use App\Containers\CoreMonitoring\Accreditation\Tasks\UpdateAccreditationTask;
 use App\Containers\CoreMonitoring\Accreditation\Tasks\UpdateStatusActivityAccreditationTask;
 use App\Ship\Exceptions\NotFoundException;
@@ -14,6 +16,9 @@ use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
 use Carbon\Carbon;
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 class SubmitAccreditationAction extends ParentAction
 {
@@ -53,15 +58,23 @@ class SubmitAccreditationAction extends ParentAction
             }
         }
 
-        $data = [
-            'status' => 'new',
-            'submitted_at' => Carbon::now()
-        ];
+        return DB::transaction(function () use ($accreditation, $user, $request) {
+            $data = [
+                'status' => 'new',
+                'submitted_at' => Carbon::now()
+            ];
 
-        $data['status_activity'] = app(UpdateStatusActivityAccreditationTask::class)->run($accreditation->status_activity,'new', '', $user->id);
+            $data['status_activity'] = app(UpdateStatusActivityAccreditationTask::class)->run($accreditation->status_activity, 'new', '', $user->id);
 
-        $accreditation = $this->updateAccreditationTask->run($data, $accreditation->id);
+            $accreditation = $this->updateAccreditationTask->run($data, $accreditation->id);
 
-        return $accreditation;
+            // Add Log
+            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::SUBMITTED_ACCREDITATION, $request->server(), $accreditation));
+
+            // Send Notification
+            App::make(Dispatcher::class)->dispatch(New SubmitAccreditationNotificationEvent($accreditation, $user));
+
+            return $accreditation;
+        });
     }
 }

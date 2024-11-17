@@ -3,10 +3,7 @@
 namespace App\Containers\CoreMonitoring\UserProfile\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
-use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
-use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\AppSection\User\Tasks\GetUserByEmailTask;
-use App\Containers\CoreMonitoring\Analysis\Events\CreateSubmitAnalysisReportNotificationEvent;
 use App\Containers\CoreMonitoring\UserProfile\Events\NewFormMediaNotificationEvent;
 use App\Containers\CoreMonitoring\UserProfile\Tasks\CreateUserMediaProfileTask;
 use App\Containers\CoreMonitoring\UserProfile\Tasks\GetUserMediaProfilesByEmailTask;
@@ -17,6 +14,7 @@ use App\Ship\Parents\Requests\Request;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 class RegisterMediaProfileAction extends ParentAction
 {
@@ -63,11 +61,14 @@ class RegisterMediaProfileAction extends ParentAction
             'media_type_digital' => $request->has('media_type_digital'),
         ];
 
-        $profile = $this->createUserMediaProfileTask->run($data);
+        return DB::transaction(function () use ($data, $request) {
 
-        // Send Notification
-        App::make(Dispatcher::class)->dispatch(New NewFormMediaNotificationEvent($profile));
+            $profile = $this->createUserMediaProfileTask->run($data);
 
-        return $profile;
+            // Send Notification
+            App::make(Dispatcher::class)->dispatch(new NewFormMediaNotificationEvent($profile));
+
+            return $profile;
+        });
     }
 }

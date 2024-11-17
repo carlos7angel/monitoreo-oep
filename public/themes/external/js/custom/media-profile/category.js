@@ -3,7 +3,6 @@
 var KTFormGeneral = function () {
 
     var submitButton;
-    var cancelButton;
     var validator;
     var form;
     var blockUI;
@@ -82,6 +81,12 @@ var KTFormGeneral = function () {
 
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
+
+            if (! _checkDataMediaTypeTable()) {
+                toastr.warning("Debe completar la informacion de cobertura y alcance", "Advertencia");
+                return;
+            }
+
             if (validator) {
                 validator.validate().then(function (status) {
 
@@ -153,17 +158,28 @@ var KTFormGeneral = function () {
             }
         });
 
-        cancelButton.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            // TODO: check if the form has been edited
-
-        });
 
         fieldCoverage.select2().on('change.select2', function () { validator.revalidateField('media_coverage'); });
         fieldScope.select2().on('change.select2', function () { validator.revalidateField('media_scope'); });
         fieldScopeStates.select2().on('change.select2', function () { validator.revalidateField('media_scope_states[]'); });
         fieldScopeState.select2().on('change.select2', function () { validator.revalidateField('media_scope_state'); });
+    }
+
+    var _checkDataMediaTypeTable = function () {
+
+        var table = document.getElementById('table_media_types');
+        var check = true;
+        const rows = table.querySelectorAll('tbody tr');
+        for (let index = 0; index < rows.length; index++) {
+            const row = rows[index];
+            const dataType = row.getAttribute('data-type');
+            const coverageText = row.querySelector('.d_coverage') ? row.querySelector('.d_coverage').textContent : '';
+            if (dataType === null || dataType === '' || coverageText === null || coverageText === '') {
+                check = false;
+                break;
+            }
+        }
+        return check;
     }
 
     var _getDataMediaType = function () {
@@ -513,7 +529,6 @@ var KTFormGeneral = function () {
             blockUI = new KTBlockUI(document.querySelector('#kt_app_content'));
             form = document.querySelector('#kt_media_profile_category_data_form');
             submitButton = document.getElementById('kt_media_profile_submit');
-            cancelButton = document.getElementById('kt_media_profile_cancel');
             _handleForm();
 
             // _initScope();

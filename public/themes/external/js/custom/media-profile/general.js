@@ -3,7 +3,6 @@
 var KTFormGeneral = function () {
 
     var submitButton;
-    var cancelButton;
     var validator;
     var form;
     var blockUI;
@@ -131,12 +130,6 @@ var KTFormGeneral = function () {
             }
         });
 
-        cancelButton.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            // TODO: check if the form has been edited
-
-        });
     }
 
     return {
@@ -144,7 +137,6 @@ var KTFormGeneral = function () {
             blockUI = new KTBlockUI(document.querySelector('#kt_app_content'));
             form = document.querySelector('#kt_media_profile_general_data_form');
             submitButton = document.getElementById('kt_media_profile_submit');
-            cancelButton = document.getElementById('kt_media_profile_cancel');
             _handleForm();
         }
     }

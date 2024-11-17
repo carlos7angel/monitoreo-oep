@@ -7,7 +7,7 @@
                         <button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
                             <i class="ki-outline ki-abstract-14 fs-2hx"></i>
                         </button>
-                        <a href="#">
+                        <a href="<?php echo e(route('web_index')); ?>">
                             <img alt="Logo" src="<?php echo e(asset('themes/common/media/logos/logo_oep_h.png')); ?>" class="logo-default h-35px h-lg-40px" />
                             <img alt="Logo" src="<?php echo e(asset('themes/common/media/logos/logo_oep_h.png')); ?>" class="logo-sticky h-30px h-lg-35px" />
                         </a>

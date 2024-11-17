@@ -8,7 +8,7 @@ class GetNewUserMediaProfilesJsonDataTableRequest extends ParentRequest
 {
     protected array $access = [
         'permissions' => '',
-        'roles' => '',
+        'roles' => 'media|super|media',
     ];
 
     protected array $decode = [

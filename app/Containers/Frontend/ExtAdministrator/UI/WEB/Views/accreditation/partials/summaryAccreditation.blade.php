@@ -81,7 +81,7 @@
                         $media_items = [
                             'TELEVISIVO' => [
                                 'ENABLE' => $profile_data->media_type_television,
-                                'ITEM' => $profile_data->mediaTypes['Televisivo']
+                                'ITEM' => isset($profile_data->mediaTypes['Televisivo']) ? $profile_data->mediaTypes['Televisivo'] : null
                             ],
                             'RADIAL' => [
                                 'ENABLE' => $profile_data->media_type_radio,

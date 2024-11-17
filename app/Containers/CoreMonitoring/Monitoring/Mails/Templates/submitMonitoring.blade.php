@@ -4,5 +4,5 @@
 <p><b>Fecha:</b><span> {{ $report->created_at }}</span></p><br>
 <p>Se le recomienda la atención oportuna.</p><br>
 Atentamente,<br>
-<p>Tribunsal Supremo Electoral<br>
+<p>Tribunal Supremo Electoral<br>
     Sistema de Monitoreo de Propaganda</p>

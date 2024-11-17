@@ -145,6 +145,9 @@ var KTAccreditationList = function () {
                     searchable: false,
                     className: 'dt-center pe-0',
                     render: function (data, type, full, meta) {
+                        if (data == null || data == '') {
+                            return  `-`;
+                        }
                         //return moment(data).format('DD/MM/YYYY HH:mm');
                         return `<span class="text-gray-700">${data}</span>`;
                     },
@@ -160,18 +163,18 @@ var KTAccreditationList = function () {
                             case 'accredited':
                             case 'archived':
                             case 'rejected':
-                                var toUrl = "/medios/admin/acreditaciones/detalle/" + full.id;
-                                return `<a href="${toUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-eye fs-2"></i></a>`;
+                                var toUrl = "/u/admin/acreditaciones/detalle/" + full.id;
+                                return `<a href="${toUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-arrow-right text-gray-600 fs-2"></i></a>`;
                                 break;
                             case 'observed':
-                                var toDetailUrl = "/medios/admin/acreditaciones/detalle/" + full.id;
-                                var toEditUrl = "/medios/admin/acreditaciones/editar/" + full.id;
-                                return `<a href="${toDetailUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-eye fs-2"></i></a>
-                                        <a href="${toEditUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-pencil fs-2"></i></a>`;
+                                var toDetailUrl = "/u/admin/acreditaciones/detalle/" + full.id;
+                                var toEditUrl = "/u/admin/acreditaciones/editar/" + full.id;
+                                return `<a href="${toDetailUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-arrow-right text-gray-600 fs-2"></i></a>
+                                        <a href="${toEditUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-pencil text-gray-600 fs-2"></i></a>`;
                                 break;
                             case 'draft':
-                                var toEditUrl = "/medios/admin/acreditaciones/editar/" + full.id;
-                                return `<a href="${toEditUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-pencil fs-2"></i></a>`;
+                                var toEditUrl = "/u/admin/acreditaciones/editar/" + full.id;
+                                return `<a href="${toEditUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-pencil text-gray-600 fs-2"></i></a>`;
                                 break;
                             default:
                                 return `-`;

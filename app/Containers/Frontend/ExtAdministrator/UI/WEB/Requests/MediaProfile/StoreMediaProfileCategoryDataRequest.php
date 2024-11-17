@@ -8,7 +8,7 @@ class StoreMediaProfileCategoryDataRequest extends ParentRequest
 {
     protected array $access = [
         'permissions' => '',
-        'roles' => '',
+        'roles' => 'user_media',
     ];
 
     protected array $decode = [

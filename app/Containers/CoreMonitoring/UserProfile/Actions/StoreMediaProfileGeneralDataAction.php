@@ -11,6 +11,7 @@ use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
+use Illuminate\Support\Facades\DB;
 
 class StoreMediaProfileGeneralDataAction extends ParentAction
 {
@@ -49,10 +50,12 @@ class StoreMediaProfileGeneralDataAction extends ParentAction
             'description' => $sanitizedData['media_description'],
         ];
 
-        if($request->file('media_logo')) {
-            $data['logo'] = $this->createLogoImageMediaTask->run($request->file('media_logo'), $sanitizedData['media_name']);
-        }
+        return DB::transaction(function () use ($sanitizedData, $data, $user, $request) {
+            if ($request->file('media_logo')) {
+                $data['logo'] = $this->createLogoImageMediaTask->run($request->file('media_logo'), $sanitizedData['media_name']);
+            }
 
-        return $this->updateUserMediaProfileTask->run($data, $user->profile_data->id);
+            return $this->updateUserMediaProfileTask->run($data, $user->profile_data->id);
+        });
     }
 }

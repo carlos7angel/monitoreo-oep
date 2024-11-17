@@ -165,16 +165,11 @@ var KTMediaList = function () {
                     className: 'text-end',
                     render: function (data, type, full, meta) {
                         return `<button class="btn btn-sm btn-icon btn-secondary kt_btn_media_profile_detail me-2" data-id="${full.id}" title="Detalle">
-                                    <i class="las la-eye fs-2"></i>
+                                    <i class="las la-eye text-gray-600 fs-2"></i>
                                 </button>
                                 <button class="btn btn-sm btn-icon btn-secondary kt_btn_media_profile_enable me-0" data-id="${full.id}" title="Habilitar">
-                                    <i class="ki-outline ki-rocket fs-2"></i>
+                                    <i class="ki-outline ki-rocket text-gray-600 fs-2"></i>
                                 </button>`;
-
-                        // <button className="btn btn-sm btn-icon btn-secondary kt_btn_media_profile_archive me-2"
-                        //         data-id="${full.id}" title="Archivar">
-                        //     <i className="ki-outline ki-archive fs-2"></i>
-                        // </button>
                     },
                 },
             ],

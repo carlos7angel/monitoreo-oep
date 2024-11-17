@@ -11,6 +11,7 @@ use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
+use Illuminate\Support\Facades\DB;
 
 class StoreMediaProfileContactDataAction extends ParentAction
 {
@@ -60,7 +61,10 @@ class StoreMediaProfileContactDataAction extends ParentAction
                 $data['rrss'] = json_encode($rrss);
             }
         }
+        return DB::transaction(function () use ($data, $user, $request) {
 
-        return $this->updateUserMediaProfileTask->run($data, $user->profile_data->id);
+            return $this->updateUserMediaProfileTask->run($data, $user->profile_data->id);
+
+        });
     }
 }

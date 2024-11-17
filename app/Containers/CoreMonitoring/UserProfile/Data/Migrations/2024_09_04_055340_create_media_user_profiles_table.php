@@ -11,7 +11,6 @@ return new class() extends Migration {
 
             $table->id();
 
-            //$table->enum('type', ['Televisivo', 'Radial', 'Digital', 'Impreso']);
             $table->string('name', 100);
             $table->string('business_name', 100);
             $table->text('description')->nullable();
@@ -35,11 +34,6 @@ return new class() extends Migration {
             $table->string('file_power_attorney', 50)->nullable();
             $table->string('file_rep_document', 50)->nullable();
             $table->string('file_nit', 50)->nullable();
-
-//            $table->enum('coverage', ['Nacional', 'La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro', 'Potosí', 'Beni', 'Chuquisaca', 'Pando', 'Tarija'])->nullable();
-//            $table->enum('scope', ['Nacional', 'Departamental', 'Municipal'])->nullable();
-//            $table->string('scope_department', 150)->nullable(); // ARRAY
-//            $table->string('scope_municipality', 150)->nullable();
 
             $table->boolean('media_type_television')->default(false);
             $table->boolean('media_type_radio')->default(false);

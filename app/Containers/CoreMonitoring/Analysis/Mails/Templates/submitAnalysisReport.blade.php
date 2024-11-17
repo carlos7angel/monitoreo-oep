@@ -6,5 +6,5 @@ Ha recibido un nuevo Informe de Análisis, con el siguiente detalle:<br>
 <p>Se le recomienda la atención oportuna.</p><br>
 
 Atentamente,<br>
-<p>Tribunsal Supremo Electoral<br>
+<p>Tribunal Supremo Electoral<br>
     Sistema de Monitoreo de Propaganda</p>

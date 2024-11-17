@@ -77,7 +77,22 @@ class CreateActivityLogTask extends ParentTask
                     $log = 'PARTIDO POLÍTICO REGISTRADO';
                     $message = "El Partido Político " . $_subject->politicalGroup->name . " ha sido registrado en el Proceso Electoral " . $_subject->election->name;
                     break;
-
+                case LogConstants::CREATED_ACCREDITATION:
+                    $log = 'NUEVA ACREDITACIÓN CREADA';
+                    $message = "La Acreditación " . $_subject->code . " ha sido creada";
+                    break;
+                case LogConstants::UPDATED_ACCREDITATION:
+                    $log = 'ACREDITACIÓN ACTUALIZADA';
+                    $message = "La Acreditación " . $_subject->code . " ha sido actualizada";
+                    break;
+                case LogConstants::SUBMITTED_ACCREDITATION:
+                    $log = 'ACREDITACIÓN ENVIADA';
+                    $message = "La Acreditación " . $_subject->code . " ha sido enviada";
+                    break;
+                case LogConstants::STATUS_UPDATED_ACCREDITATION:
+                    $log = 'ESTADO DE ACREDITACIÓN ACTUALIZADO';
+                    $message = "El estado de la Acreditación " . $_subject->code . " ha sido actualizado a " . strtoupper($_subject->status);
+                    break;
 
 
                 case LogConstants::ENABLED_USER_MEDIA_ACCOUNT:

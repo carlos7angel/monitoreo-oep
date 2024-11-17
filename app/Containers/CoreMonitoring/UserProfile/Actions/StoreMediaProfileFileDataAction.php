@@ -12,6 +12,7 @@ use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
+use Illuminate\Support\Facades\DB;
 
 class StoreMediaProfileFileDataAction extends ParentAction
 {
@@ -35,26 +36,30 @@ class StoreMediaProfileFileDataAction extends ParentAction
 
         ]);
 
-        $data = [];
+        return DB::transaction(function () use ($user, $request) {
 
-        if($request->file('media_file_power_attorney')) {
-            $file_bases = $this->createFileTask->run($request->file('media_file_power_attorney'), 'profile-media', $user->profile_data->id, $user);
-            $data['file_power_attorney'] = $file_bases->unique_code;
-            // TODO: set status to ARCHIVED the old one
-        }
+            $data = [];
 
-        if($request->file('media_file_rep_document')) {
-            $file_bases = $this->createFileTask->run($request->file('media_file_rep_document'), 'profile-media', $user->profile_data->id, $user);
-            $data['file_rep_document'] = $file_bases->unique_code;
-            // TODO: set status to ARCHIVED the old one
-        }
+            if ($request->file('media_file_power_attorney')) {
+                $file_bases = $this->createFileTask->run($request->file('media_file_power_attorney'), 'profile-media', $user->profile_data->id, $user);
+                $data['file_power_attorney'] = $file_bases->unique_code;
+                // TODO: set status to ARCHIVED the old one
+            }
 
-        if($request->file('media_file_nit')) {
-            $file_bases = $this->createFileTask->run($request->file('media_file_nit'), 'profile-media', $user->profile_data->id, $user);
-            $data['file_nit'] = $file_bases->unique_code;
-            // TODO: set status to ARCHIVED the old one
-        }
+            if ($request->file('media_file_rep_document')) {
+                $file_bases = $this->createFileTask->run($request->file('media_file_rep_document'), 'profile-media', $user->profile_data->id, $user);
+                $data['file_rep_document'] = $file_bases->unique_code;
+                // TODO: set status to ARCHIVED the old one
+            }
 
-        return $this->updateUserMediaProfileTask->run($data, $user->profile_data->id);
+            if ($request->file('media_file_nit')) {
+                $file_bases = $this->createFileTask->run($request->file('media_file_nit'), 'profile-media', $user->profile_data->id, $user);
+                $data['file_nit'] = $file_bases->unique_code;
+                // TODO: set status to ARCHIVED the old one
+            }
+
+            return $this->updateUserMediaProfileTask->run($data, $user->profile_data->id);
+
+        });
     }
 }

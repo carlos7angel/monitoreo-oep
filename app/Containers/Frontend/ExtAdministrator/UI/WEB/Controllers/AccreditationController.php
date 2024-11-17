@@ -43,8 +43,6 @@ class AccreditationController extends WebController
         $page_title = "Nueva Acreditación";
         $user =  app(GetAuthenticatedUserByGuardTask::class)->run('external');
 
-
-
         return view('frontend@extAdministrator::accreditation.newAccreditation', ['profile' => $user->profile_data], compact('page_title'));
     }
 

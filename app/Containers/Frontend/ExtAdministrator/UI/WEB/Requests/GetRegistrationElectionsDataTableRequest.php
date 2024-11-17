@@ -8,7 +8,7 @@ class GetRegistrationElectionsDataTableRequest extends ParentRequest
 {
     protected array $access = [
         'permissions' => '',
-        'roles' => '',
+        'roles' => 'user_political',
     ];
 
     protected array $decode = [

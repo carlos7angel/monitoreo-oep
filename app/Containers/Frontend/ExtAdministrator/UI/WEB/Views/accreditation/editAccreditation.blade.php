@@ -3,7 +3,7 @@
 @section('breadcrumbs')
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
         <li class="breadcrumb-item text-white fw-bold lh-1">
-            <a href="/" class="text-white text-hover-secondary">
+            <a href="{{ route('ext_admin_index') }}" class="text-white text-hover-secondary">
                 <i class="ki-outline ki-ho1me text-white fs-3"></i>
             </a>
         </li>
@@ -11,7 +11,7 @@
             <i class="ki-outline ki-right fs-4 text-white mx-n1"></i>
         </li>
         <li class="breadcrumb-item text-white fw-bold lh-1">
-            <a href="/" class="text-white text-hover-secondary">Acreditaciones</a>
+            <a href="{{ route('ext_admin_accreditations_list') }}" class="text-white text-hover-secondary">Acreditaciones</a>
         </li>
         <li class="breadcrumb-item">
             <i class="ki-outline ki-right fs-4 text-white mx-n1"></i>

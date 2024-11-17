@@ -29,7 +29,7 @@
                                         <div class="fs-7 text-gray-700">
                                             Ingrese sus datos para el registro de un nuevo Medio de Comunicación. Este formulario solo debe ser registrado si no tiene ninguna cuenta o
                                             registro previo. Al finalizar el llenado y una vez enviado el formulario, personal del TSE revisará la información y en caso de ser aprobada
-                                            se le enviará un correo electrónico aprobando su registro y sus accesos para el acceso a la plataforma.
+                                            se le enviará un correo electrónico aprobando su registro y sus accesos para el ingreso a la plataforma.
                                         </div>
                                     </div>
                                 </div>

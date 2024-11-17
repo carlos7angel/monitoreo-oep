@@ -3,6 +3,8 @@
 namespace App\Containers\CoreMonitoring\Accreditation\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
+use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
+use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
 use App\Containers\CoreMonitoring\Accreditation\Models\Accreditation;
 use App\Containers\CoreMonitoring\Accreditation\Tasks\FindAccreditationByIdTask;
@@ -13,6 +15,9 @@ use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
 use Carbon\Carbon;
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 class UpdateStatusAccreditationAction extends ParentAction
 {
@@ -57,15 +62,21 @@ class UpdateStatusAccreditationAction extends ParentAction
             $data['accredited_by'] = $user->id;
         }
 
-        $data['status_activity'] = app(UpdateStatusActivityAccreditationTask::class)->run(
-            $accreditation->status_activity,
-            $request->accreditation_status,
-            $request->accreditation_observations,
-            $user->id
-        );
+        return DB::transaction(function () use ($accreditation, $data, $user, $request) {
 
-        $accreditation = $this->updateAccreditationTask->run($data, $accreditation->id);
+            $data['status_activity'] = app(UpdateStatusActivityAccreditationTask::class)->run(
+                $accreditation->status_activity,
+                $request->accreditation_status,
+                $request->accreditation_observations,
+                $user->id
+            );
 
-        return $accreditation;
+            $accreditation = $this->updateAccreditationTask->run($data, $accreditation->id);
+
+            // Add Log
+            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::STATUS_UPDATED_ACCREDITATION, $request->server(), $accreditation));
+
+            return $accreditation;
+        });
     }
 }

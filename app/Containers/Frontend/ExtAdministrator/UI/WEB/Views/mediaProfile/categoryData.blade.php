@@ -3,7 +3,7 @@
 @section('breadcrumbs')
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
         <li class="breadcrumb-item text-white fw-bold lh-1">
-            <a href="/" class="text-white text-hover-secondary">
+            <a href="{{ route('ext_admin_index') }}" class="text-white text-hover-secondary">
                 <i class="ki-outline ki-home text-white fs-3"></i>
             </a>
         </li>
@@ -11,12 +11,12 @@
             <i class="ki-outline ki-right fs-4 text-white mx-n1"></i>
         </li>
         <li class="breadcrumb-item text-white fw-bold lh-1">
-            <a href="/" class="text-white text-hover-secondary">Medio</a>
+            <a class="text-white text-hover-secondary">Medio</a>
         </li>
         <li class="breadcrumb-item">
             <i class="ki-outline ki-right fs-4 text-white mx-n1"></i>
         </li>
-        <li class="breadcrumb-item text-white fw-bold lh-1">Datos Generales</li>
+        <li class="breadcrumb-item text-white fw-bold lh-1">Datos de Tipo y Alcance</li>
     </ul>
 @endsection
 
@@ -162,14 +162,7 @@
                                                     <td class="d_area" data-val="{{ $type->scope_area }}">{{ $type->scope_area ? $type->scope_area : '-' }}</td>
                                                 </tr>
                                             @endforeach
-{{--                                            <tr data-type="media_type_radio">--}}
-{{--                                                <td class="text-center"><a href="javascript:void(0)" class="btn btn-sm btn-icon btn-primary kt_trigger_media_type_modal"><i class="ki-outline ki-pencil fs-2"></i></a></td>--}}
-{{--                                                <td>RADIAL</td>--}}
-{{--                                                <td>La Paz</td>--}}
-{{--                                                <td>Departamental</td>--}}
-{{--                                                <td>La Paz</td>--}}
-{{--                                                <td>Murillo</td>--}}
-{{--                                            </tr>--}}
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -181,7 +174,6 @@
                             <div class="separator mb-6"></div>
 
                             <div class="d-flex justify-content-end">
-                                <button type="reset" id="kt_media_profile_cancel" class="btn btn-light me-3">Cancelar</button>
                                 <button type="button" id="kt_media_profile_submit" class="btn btn-primary">
                                     <span class="indicator-label">Guardar</span>
                                     <span class="indicator-progress">Espere por favor...<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

@@ -4,7 +4,7 @@ namespace App\Containers\CoreMonitoring\Monitoring\Events;
 
 use App\Containers\AppSection\User\Models\User;
 use App\Containers\AppSection\User\Tasks\GetUsersByRolesScopeTask;
-use App\Containers\CoreMonitoring\Monitoring\Mails\SendSubmitMonitoring;
+use App\Containers\CoreMonitoring\Monitoring\Mails\SendSubmitAccreditation;
 use App\Containers\CoreMonitoring\Monitoring\Models\MonitoringReport;
 use App\Ship\Parents\Events\Event as ParentEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -36,7 +36,7 @@ class SubmitMonitoringNotificationEvent extends ParentEvent implements ShouldQue
 
         $users = app(GetUsersByRolesScopeTask::class)->run(['analyst'], $scope_type, $scope_department);
         foreach ($users as $user) {
-            Mail::send(new SendSubmitMonitoring($user, $this->monitoring_report));
+            Mail::send(new SendSubmitAccreditation($user, $this->monitoring_report));
         }
     }
 
