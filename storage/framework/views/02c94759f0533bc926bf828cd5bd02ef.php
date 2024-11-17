@@ -1,11 +1,12 @@
-@extends('vendor@template::admin.layouts.auth')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 
     <div class="bg-body d-flex flex-column align-items-stretch flex-center rounded-4 w-md-600px p-20">
         <div class="d-flex flex-center flex-column flex-column-fluid px-lg-10 pb-15 pb-lg-20">
-            <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="{{ route('oep_admin_post_login') }}" method="post">
-                {{ csrf_field() }}
+            <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="<?php echo e(route('oep_admin_post_login')); ?>" method="post">
+                <?php echo e(csrf_field()); ?>
+
                 <div class="text-center mb-11">
                     <h1 class="text-gray-900 fw-bolder mb-3">ADMINISTRADOR</h1>
                     <div class="text-gray-500 fw-semibold fs-6">Ingreso al Sistema</div>
@@ -18,7 +19,7 @@
                 </div>
                 <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8 mt-5">
                     <div></div>
-                    <a href="{{ route('oep_admin_login_forgot_password') }}" class="link-primary">¿Olvidó su contraseña?</a>
+                    <a href="<?php echo e(route('oep_admin_login_forgot_password')); ?>" class="link-primary">¿Olvidó su contraseña?</a>
                 </div>
                 <div class="d-grid mb-10">
                     <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
@@ -36,11 +37,13 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('styles')
-@endsection
+<?php $__env->startSection('styles'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
-    <script src="{{ asset('themes/admin/js/custom/auth/login.js') }}"></script>
-@endsection
+<?php $__env->startSection('scripts'); ?>
+    <script src="<?php echo e(asset('themes/admin/js/custom/auth/login.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('vendor@template::admin.layouts.auth', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Development Environment\PHP Environment\Laragon\www\monitoreo-oep\app\Containers\Frontend\OepAdministrator/UI/WEB/Views//authentication/login.blade.php ENDPATH**/ ?>

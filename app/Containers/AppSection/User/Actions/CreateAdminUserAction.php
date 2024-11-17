@@ -2,6 +2,8 @@
 
 namespace App\Containers\AppSection\User\Actions;
 
+use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
+use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\AppSection\Authorization\Tasks\FindRoleTask;
 use App\Containers\AppSection\User\Models\User;
 use App\Containers\AppSection\User\Tasks\CreateUserTask;
@@ -11,6 +13,8 @@ use App\Ship\Exceptions\EmailAlreadyExistsException;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,9 +33,7 @@ class CreateAdminUserAction extends ParentAction
      */
     public function run(Request $request): User
     {
-        $sanitizedData = $request->sanitizeInput([
-            // add your request data hereh
-        ]);
+        $sanitizedData = $request->sanitizeInput($request->all());
 
         $existing_user = app(FindUserByEmailTask::class)->run($request->user_email);
         if ($existing_user) {
@@ -41,7 +43,7 @@ class CreateAdminUserAction extends ParentAction
         $data = [
             'email' => $request->user_email,
             'name' => $request->user_name,
-            'password' => $request->user_password, //Hash::make($request->user_name)
+            'password' => $request->user_password,
             'confirmed' => 1,
             'active' => true,
         ];
@@ -58,12 +60,15 @@ class CreateAdminUserAction extends ParentAction
             $data['department'] = $request->user_type === 'TSE' ? 'Nacional' : $request->user_department;
         }
 
-        return DB::transaction(function () use ($data, $adminRole) {
+        return DB::transaction(function () use ($data, $adminRole, $request) {
 
             $user = $this->createUserTask->run($data);
             $user->assignRole($adminRole);
             $user->email_verified_at = now();
             $user->save();
+
+            // Add Log
+            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::CREATED_USER, $request->server(), $user));
 
             return $user;
         });

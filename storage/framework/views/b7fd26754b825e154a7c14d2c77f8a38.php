@@ -1,23 +1,23 @@
-@extends('vendor@template::admin.layouts.master', ['page' => 'user_list'])
 
-@section('breadcrumbs')
+
+<?php $__env->startSection('breadcrumbs'); ?>
     <div class="page-title d-flex flex-column align-items-start me-3 py-2 py-lg-0 gap-2">
         <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">Usuarios</h1>
         <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
             <li class="breadcrumb-item text-gray-600">
-                <a href="{{ route('oep_admin_index') }}" class="text-gray-600 text-hover-primary">Inicio</a>
+                <a href="<?php echo e(route('oep_admin_index')); ?>" class="text-gray-600 text-hover-primary">Inicio</a>
             </li>
             <li class="breadcrumb-item text-gray-600">
-                <a href="{{ route('oep_admin_users_list') }}" class="text-gray-600 text-hover-primary">Gestión de Usuarios</a>
+                <a href="<?php echo e(route('oep_admin_users_list')); ?>" class="text-gray-600 text-hover-primary">Gestión de Usuarios</a>
             </li>
             <li class="breadcrumb-item text-gray-500">Detalle de la cuenta de Usuario</li>
         </ul>
     </div>
     <div class="d-flex align-items-center">
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="content flex-row-fluid" id="kt_content">
 
         <div class="d-flex flex-column flex-lg-row">
@@ -27,31 +27,31 @@
                     <div class="card-body">
 
                         <div class="d-flex flex-center flex-column py-5">
-                            @if(isset($user->profile_data) && $user->profile_data->logo)
+                            <?php if(isset($user->profile_data) && $user->profile_data->logo): ?>
                                 <div class="symbol symbol-100px symbol-circle mb-7">
-                                    <div class="w-100px h-100px rounded-circle" style="background-image: url({{ asset('storage') . $user->profile_data->logo}}); background-size: cover; background-position: center"></div>
+                                    <div class="w-100px h-100px rounded-circle" style="background-image: url(<?php echo e(asset('storage') . $user->profile_data->logo); ?>); background-size: cover; background-position: center"></div>
                                 </div>
-                            @else
+                            <?php else: ?>
                                 <div class="symbol symbol-100px mb-7">
-                                    <img src="{{ asset('themes/common/media/images/blank-user.jpg') }}" alt="Usuario" />
+                                    <img src="<?php echo e(asset('themes/common/media/images/blank-user.jpg')); ?>" alt="Usuario" />
                                 </div>
-                            @endif
-                            <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">{{ $user->name }}</a>
+                            <?php endif; ?>
+                            <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3"><?php echo e($user->name); ?></a>
                             <div class="mb-9">
-                                <span class="text-muted">Rol:</span> <div class="badge badge-lg badge-light-primary d-inline">{{ $user->roles->first()->display_name }}</div>
+                                <span class="text-muted">Rol:</span> <div class="badge badge-lg badge-light-primary d-inline"><?php echo e($user->roles->first()->display_name); ?></div>
                             </div>
 
                             <div class="py-5__ fs-6 text-center w-100">
                                 <div class="fw-bold mt-5">Estado:</div>
                                 <div>
-                                    @if($user->active)
+                                    <?php if($user->active): ?>
                                         <div class="badge badge-lg badge-success d-inline">Activo</div>
-                                    @else
+                                    <?php else: ?>
                                         <div class="badge badge-lg badge-danger d-inline">Inactivo</div>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
                                 <div class="fw-bold mt-5">Alta:</div>
-                                <div class="text-gray-600">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $user->created_at)->format('d/m/Y H:i A') }}</div>
+                                <div class="text-gray-600"><?php echo e(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $user->created_at)->format('d/m/Y H:i A')); ?></div>
                             </div>
 
                         </div>
@@ -74,13 +74,13 @@
                                 <tbody class="fs-6 fw-semibold text-gray-600">
                                 <tr>
                                     <td>Nombre de usuario</td>
-                                    <td>{{ $user->name }}</td>
+                                    <td><?php echo e($user->name); ?></td>
                                     <td class="text-end">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Correo</td>
-                                    <td>{{ $user->email }}</td>
+                                    <td><?php echo e($user->email); ?></td>
                                     <td class="text-end">
                                     </td>
                                 </tr>
@@ -98,19 +98,19 @@
                                 </tr>
                                 <tr>
                                     <td>Rol</td>
-                                    <td>{{ $user->roles->first()->display_name }}</td>
+                                    <td><?php echo e($user->roles->first()->display_name); ?></td>
                                     <td class="text-end">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Nivel</td>
-                                    <td>{{ $user->type ? $user->type : '-' }}</td>
+                                    <td><?php echo e($user->type ? $user->type : '-'); ?></td>
                                     <td class="text-end">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Departamento</td>
-                                    <td>{{ $user->department ? $user->department : '-' }}</td>
+                                    <td><?php echo e($user->department ? $user->department : '-'); ?></td>
                                     <td class="text-end">
                                     </td>
                                 </tr>
@@ -125,9 +125,9 @@
         </div>
 
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('modals')
+<?php $__env->startSection('modals'); ?>
     <div class="modal fade" id="kt_modal_update_password" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered mw-650px">
             <div class="modal-content" id="kt_wrapper_modal_content_update_password">
@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                    <form id="kt_modal_update_password_form" class="form" method="post" action="{{ route('oep_admin_users_update_password', ['id' => $user->id]) }}" autocomplete="off">
+                    <form id="kt_modal_update_password_form" class="form" method="post" action="<?php echo e(route('oep_admin_users_update_password', ['id' => $user->id])); ?>" autocomplete="off">
                         <div class="mb-10 fv-row" data-kt-password-meter="true">
                             <div class="mb-1">
                                 <label class="form-label fw-semibold fs-6 mb-2">Nueva Contraseña</label>
@@ -188,11 +188,12 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('styles')
-@endsection
+<?php $__env->startSection('styles'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
-    <script src="{{ asset('themes/admin/js/custom/users/detail.js') }}"></script>
-@endsection
+<?php $__env->startSection('scripts'); ?>
+    <script src="<?php echo e(asset('themes/admin/js/custom/users/detail.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('vendor@template::admin.layouts.master', ['page' => 'user_list'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Development Environment\PHP Environment\Laragon\www\monitoreo-oep\app\Containers\Frontend\OepAdministrator/UI/WEB/Views//userManagement/detail.blade.php ENDPATH**/ ?>

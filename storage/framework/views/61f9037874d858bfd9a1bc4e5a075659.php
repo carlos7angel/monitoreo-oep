@@ -1,11 +1,11 @@
-@extends('vendor@template::admin.layouts.master', ['page' => 'user_list'])
 
-@section('breadcrumbs')
+
+<?php $__env->startSection('breadcrumbs'); ?>
     <div class="page-title d-flex flex-column align-items-start me-3 py-2 py-lg-0 gap-2">
         <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">Gestión de Usuarios</h1>
         <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
             <li class="breadcrumb-item text-gray-600">
-                <a href="{{ route('oep_admin_index') }}" class="text-gray-600 text-hover-primary">Inicio</a>
+                <a href="<?php echo e(route('oep_admin_index')); ?>" class="text-gray-600 text-hover-primary">Inicio</a>
             </li>
             <li class="breadcrumb-item text-gray-500">Gestión de Usuarios</li>
         </ul>
@@ -13,9 +13,9 @@
     <div class="d-flex align-items-center">
         <a href="javascript:void(0)" class="btn btn-primary px-5" id="kt_button_new_user"><i class="ki-outline ki-add-files me-2 fs-3"></i> Nuevo Usuario</a>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="content flex-row-fluid" id="kt_content">
 
         <div class="card mb-7">
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users" data-url="{{ route('oep_admin_users_json_dt') }}">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users" data-url="<?php echo e(route('oep_admin_users_json_dt')); ?>">
                     <thead>
                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                         <th class="w-10px pe-2">#</th>
@@ -64,9 +64,9 @@
         </div>
 
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('modals')
+<?php $__env->startSection('modals'); ?>
     <div class="modal fade" id="kt_modal_new_user" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered mw-650px">
             <div class="modal-content rounded">
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="modal-body scroll-y__ my-7 px-5 px-lg-10 pt-0 pb-15">
-                    <form id="kt_form_new_user" class="form" action="{{ route('oep_admin_users_store') }}" method="post" autocomplete="off">
+                    <form id="kt_form_new_user" class="form" action="<?php echo e(route('oep_admin_users_store')); ?>" method="post" autocomplete="off">
                         <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
 
                             <div class="fv-row mb-7">
@@ -195,14 +195,15 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('styles')
-    <link href="{{ asset('themes/common/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-@endsection
+<?php $__env->startSection('styles'); ?>
+    <link href="<?php echo e(asset('themes/common/plugins/custom/datatables/datatables.bundle.css')); ?>" rel="stylesheet" type="text/css" />
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
-    <script src="{{ asset('themes/common/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('themes/admin/js/custom/users/list.js') }}"></script>
-    <script src="{{ asset('themes/admin/js/custom/users/create.js') }}"></script>
-@endsection
+<?php $__env->startSection('scripts'); ?>
+    <script src="<?php echo e(asset('themes/common/plugins/custom/datatables/datatables.bundle.js')); ?>"></script>
+    <script src="<?php echo e(asset('themes/admin/js/custom/users/list.js')); ?>"></script>
+    <script src="<?php echo e(asset('themes/admin/js/custom/users/create.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('vendor@template::admin.layouts.master', ['page' => 'user_list'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Development Environment\PHP Environment\Laragon\www\monitoreo-oep\app\Containers\Frontend\OepAdministrator/UI/WEB/Views//userManagement/list.blade.php ENDPATH**/ ?>

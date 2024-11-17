@@ -18,7 +18,7 @@ class IndexController extends WebController
         $page_title = "Inicio";
         $last_election = app(GetOnlyActiveElectionsTask::class)->run();
         $election = null;
-        $count_accreditations = $count_registrations = $count_monitoring = 0;
+        $count_accreditations = $count_registrations = $count_monitoring = $count_analysis = 0;
         if (count($last_election) > 0) {
             $election = $last_election[0];
             $count_accreditations = app(CountAccreditationsByElectionTask::class)->run($election->id);

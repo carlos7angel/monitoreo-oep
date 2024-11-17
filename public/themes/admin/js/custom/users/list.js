@@ -140,7 +140,9 @@ var KTUsersList = function () {
                     className: 'text-end',
                     render: function (data, type, full, meta) {
                         var toDetailUrl = "/admin/usuarios/" + full.id + "/";
-                        return `<a href="${toDetailUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="las la-eye fs-2"></i></a>`;
+                        return `<a href="${toDetailUrl}" class="btn btn-sm btn-icon btn-secondary">
+                                    <i class="ki-outline ki-arrow-right text-gray-600 fs-2"></i>
+                                </a>`;
                     },
                 },
             ],

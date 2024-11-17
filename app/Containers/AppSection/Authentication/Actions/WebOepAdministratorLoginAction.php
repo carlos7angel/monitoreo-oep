@@ -3,13 +3,17 @@
 namespace App\Containers\AppSection\Authentication\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
+use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
+use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\AppSection\Authentication\Classes\LoginFieldProcessor;
 use App\Containers\AppSection\Authentication\Exceptions\LoginFailedException;
 use App\Containers\AppSection\Authentication\Values\IncomingLoginField;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
+use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class WebOepAdministratorLoginAction extends ParentAction
@@ -37,8 +41,6 @@ class WebOepAdministratorLoginAction extends ParentAction
         $credentials['password'] = $sanitizedData['password'];
         $loggedIn = Auth::guard('web')->attempt($credentials, $sanitizedData['remember']);
 
-        //TODO: Check user-role
-
         if (! $loggedIn) {
             $errorResult = array_reduce(
                 $loginFields,
@@ -65,6 +67,10 @@ class WebOepAdministratorLoginAction extends ParentAction
         }
 
         session()->regenerate();
+
+        // Add Log
+        App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::LOGIN_ADMIN, $request->server(), $user));
+
 
         return $user;
 

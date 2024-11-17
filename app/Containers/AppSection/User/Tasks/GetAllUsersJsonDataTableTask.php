@@ -3,6 +3,7 @@
 namespace App\Containers\AppSection\User\Tasks;
 
 use Apiato\Core\Exceptions\CoreInternalErrorException;
+use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
 use App\Containers\AppSection\User\Data\Repositories\UserRepository;
 use App\Ship\Criterias\SkipTakeCriteria;
 use App\Ship\Parents\Requests\Request;
@@ -33,10 +34,14 @@ class GetAllUsersJsonDataTableTask extends ParentTask
         $pageSize = $length != null ? intval($length) : 0;
         $skip = $start != null ? intval($start) : 0;
 
-        $result = $this->repository->scopeQuery(function ($query) use ($searchValue) {
+        $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
+
+        $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $user) {
             if(! empty($searchValue)) {
                 $query = $query->where('name', 'like', '%'.$searchValue.'%')->orWhere('email', 'like', '%'.$searchValue.'%');
             }
+
+            $query = $query->where('id', '<>', 1)->where('id', '<>', $user->id);
 
             return $query->distinct()->select(['users.*']);
         });

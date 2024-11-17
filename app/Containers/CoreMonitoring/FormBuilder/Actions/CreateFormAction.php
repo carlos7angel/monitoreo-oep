@@ -3,11 +3,15 @@
 namespace App\Containers\CoreMonitoring\FormBuilder\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
+use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
+use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\CoreMonitoring\FormBuilder\Models\Form;
 use App\Containers\CoreMonitoring\FormBuilder\Tasks\CreateFormTask;
 use App\Ship\Exceptions\CreateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class CreateFormAction extends ParentAction
@@ -39,6 +43,11 @@ class CreateFormAction extends ParentAction
             'created_by' => Auth::guard('web')->user()->id
         ];
 
-        return $this->createFormTask->run($data);
+        $form = $this->createFormTask->run($data);
+
+        // Add Log
+        App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::CREATE_DYNAMIC_FORM, $request->server(), $form));
+
+        return $form;
     }
 }

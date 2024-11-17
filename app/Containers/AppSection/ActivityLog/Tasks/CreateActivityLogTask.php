@@ -23,9 +23,37 @@ class CreateActivityLogTask extends ParentTask
     public function run($_log, $_request, $_subject, $_data = null): Activity
     {
         try {
-
+            $log_data = true;
             $log = $message = '';
+            $is_logged = true;
             switch ($_log) {
+                case LogConstants::LOGIN_ADMIN:
+                    $log = 'INGRESO AL SISTEMA';
+                    $message = "El usuario " . $_subject->name . " (" . $_subject->email . ") ha ingresado al sistema";
+                    $log_data = false;
+                    $is_logged = false;
+                    break;
+                case LogConstants::CREATE_DYNAMIC_FORM:
+                    $log = 'FOMULARIO DINÁMICO CREADO';
+                    $message = "Nuevo Formulario " . $_subject->name . " creado";
+                    break;
+                case LogConstants::ADD_FORM_FIELD:
+                    $log = 'CAMPO DE FOMULARIO DINÁMICO NUEVO';
+                    $message = "Nuevo campo " . $_subject->field_type_name . " adicionado al Formulario " . $_subject->form->name;
+                    break;
+                case LogConstants::DELETE_FORM_FIELD:
+                    $log = 'CAMPO DE FOMULARIO DINÁMICO ELIMINADO';
+                    $message = "Campo " . $_subject->field_type_name . " eliminado del Formulario " . $_subject->form->name;
+                    break;
+                case LogConstants::CREATED_USER:
+                    $log = 'NUEVO USUARIO CREADO';
+                    $message = "Usuario " . $_subject->name . " (" . $_subject->email . ") creado";
+                    break;
+                case LogConstants::UPDATED_USER_DATA_PASSWORD:
+                    $log = 'CONTRASEÑA DE USUARIO ACTUALIZADA';
+                    $message = "La contraseña del usuario " . $_subject->name . " (" . $_subject->email . ") ha sido actualizada";
+                    break;
+
                 case LogConstants::ENABLED_USER_MEDIA_ACCOUNT:
                     $log = 'CUENTA HABILITADA';
                     $message = "La cuenta de usuario (Medio de Comunicación) para " . $_subject->email . " ha sido habilitada";
@@ -56,11 +84,14 @@ class CreateActivityLogTask extends ParentTask
             }
 
             $data = [];
-            if (empty($_data)) {
+            if (empty($_data) && $log_data) {
                 $data = $_subject->toArray();
             }
 
-            $causer = app(GetAuthenticatedUserTask::class)->run();
+            $causer = null;
+            if ($is_logged) {
+                $causer = app(GetAuthenticatedUserTask::class)->run();
+            }
 
             activity($log)
                 ->causedBy($causer)

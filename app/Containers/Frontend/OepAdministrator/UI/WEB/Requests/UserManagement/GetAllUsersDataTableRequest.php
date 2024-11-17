@@ -8,7 +8,7 @@ class GetAllUsersDataTableRequest extends ParentRequest
 {
     protected array $access = [
         'permissions' => '',
-        'roles' => '',
+        'roles' => 'super',
     ];
 
     protected array $decode = [

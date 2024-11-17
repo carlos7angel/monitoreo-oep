@@ -2,17 +2,18 @@
 
 @section('breadcrumbs')
     <div class="page-title d-flex flex-column align-items-start me-3 py-2 py-lg-0 gap-2">
-        <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">{{ $form->name }}</h1>
+        <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">Formulario: {{ $form->name }}</h1>
         <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
             <li class="breadcrumb-item text-gray-600">
-                <a href="javascript;" class="text-gray-600 text-hover-primary">Inicio</a>
+                <a href="{{ route('oep_admin_index') }}" class="text-gray-600 text-hover-primary">Inicio</a>
             </li>
-            <li class="breadcrumb-item text-gray-600">Formularios</li>
-            <li class="breadcrumb-item text-gray-500">FormBuilder</li>
+            <li class="breadcrumb-item text-gray-600">
+                <a href="{{ route('oep_admin_forms') }}" class="text-gray-600">Formularios</a>
+            </li>
+            <li class="breadcrumb-item text-gray-500">Editar</li>
         </ul>
     </div>
     <div class="d-flex align-items-center">
-{{--        <a href="javascript:void(0)" class="btn btn-primary px-5" id="kt_button_new_form"><i class="ki-outline ki-add-files me-2 fs-3"></i> Guardar</a>--}}
     </div>
 @endsection
 

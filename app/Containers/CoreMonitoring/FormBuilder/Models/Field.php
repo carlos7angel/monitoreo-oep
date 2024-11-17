@@ -91,4 +91,9 @@ class Field extends ParentModel
     {
         return $this->belongsTo(FieldType::class, 'fid_field_type');
     }
+
+    public function form()
+    {
+        return $this->belongsTo(Form::class, 'fid_form',);
+    }
 }
