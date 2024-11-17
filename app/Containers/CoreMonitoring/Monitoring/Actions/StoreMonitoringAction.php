@@ -3,6 +3,8 @@
 namespace App\Containers\CoreMonitoring\Monitoring\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
+use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
+use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
 use App\Containers\CoreMonitoring\Election\Tasks\FindElectionByIdTask;
 use App\Containers\CoreMonitoring\FormBuilder\Tasks\FindFormByIdTask;
@@ -16,6 +18,9 @@ use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
 use Carbon\Carbon;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class StoreMonitoringAction extends ParentAction
@@ -92,13 +97,19 @@ class StoreMonitoringAction extends ParentAction
             $data['scope_department'] = $user->department;
         }
 
-        $monitoring = $this->createMonitoringTask->run($data);
-        $data_form = app(StoreDataFieldsFormTask::class)->run($form, $request, $monitoring);
-        $monitoring->code = 'M-' . strtoupper(substr(md5($monitoring->id . $monitoring->created_at . $monitoring->code),0,6)) . '-' . Carbon::now()->format('y');
-        $monitoring->data = json_encode($data_form);
-        $monitoring->save();
+        return DB::transaction(function () use ($data, $form, $user, $request) {
 
-        return $monitoring;
+            $monitoring = $this->createMonitoringTask->run($data);
+            $data_form = app(StoreDataFieldsFormTask::class)->run($form, $request, $monitoring);
+            $monitoring->code = 'M-' . strtoupper(substr(md5($monitoring->id . $monitoring->created_at . $monitoring->code), 0, 6)) . '-' . Carbon::now()->format('y');
+            $monitoring->data = json_encode($data_form);
+            $monitoring->save();
+
+            // Add Log
+            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::CREATED_MONITORING, $request->server(), $monitoring));
+
+            return $monitoring;
+        });
 
     }
 }

@@ -127,7 +127,6 @@ class MonitoringReportController extends WebController
         }
     }
 
-
     public function changeStatus(ChangeStatusMonitoringReportRequest $request)
     {
         try {

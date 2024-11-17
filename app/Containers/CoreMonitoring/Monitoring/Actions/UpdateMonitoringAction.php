@@ -3,6 +3,8 @@
 namespace App\Containers\CoreMonitoring\Monitoring\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
+use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
+use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
 use App\Containers\CoreMonitoring\FormBuilder\Tasks\FindFormByIdTask;
 use App\Containers\CoreMonitoring\FormBuilder\Tasks\StoreDataFieldsFormTask;
@@ -14,6 +16,9 @@ use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 class UpdateMonitoringAction extends ParentAction
 {
@@ -50,11 +55,16 @@ class UpdateMonitoringAction extends ParentAction
             $monitoring->other_media = $request->media_profile_text;
         }
 
-        $data_form = $this->storeDataFieldsFormTask->run($form, $request, $monitoring, json_decode($monitoring->data, true));
-        $monitoring->data = json_encode($data_form);
-        $monitoring->save();
+        return DB::transaction(function () use ($monitoring, $form, $user, $request) {
+            $data_form = $this->storeDataFieldsFormTask->run($form, $request, $monitoring, json_decode($monitoring->data, true));
+            $monitoring->data = json_encode($data_form);
+            $monitoring->save();
 
-        return  $monitoring;
+            // Add Log
+            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::UPDATED_MONITORING, $request->server(), $monitoring));
+
+            return $monitoring;
+        });
 
     }
 }

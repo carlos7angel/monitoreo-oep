@@ -8,7 +8,7 @@ class ListMonitoringByElectionRequest extends ParentRequest
 {
     protected array $access = [
         'permissions' => '',
-        'roles' => '',
+        'roles' => 'monitor|super|admin',
     ];
 
     protected array $decode = [

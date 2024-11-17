@@ -93,7 +93,14 @@ class CreateActivityLogTask extends ParentTask
                     $log = 'ESTADO DE ACREDITACIÓN ACTUALIZADO';
                     $message = "El estado de la Acreditación " . $_subject->code . " ha sido actualizado a " . strtoupper($_subject->status);
                     break;
-
+                case LogConstants::CREATED_MONITORING:
+                    $log = 'NUEVO REGISTRO DE MONITOREO';
+                    $message = "Nuevo registro de Monitoreo " . $_subject->code . " creado";
+                    break;
+                case LogConstants::UPDATED_MONITORING:
+                    $log = 'REGISTRO DE MONITOREO ACTUALIZADO';
+                    $message = "El registro de Monitoreo " . $_subject->code . " ha sido actualizado";
+                    break;
 
                 case LogConstants::ENABLED_USER_MEDIA_ACCOUNT:
                     $log = 'CUENTA HABILITADA';

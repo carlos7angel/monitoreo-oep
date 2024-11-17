@@ -172,11 +172,11 @@ var KTMonitoringList = function () {
                         let actions = ``;
                         if (full.status === 'CREATED' && full.can_edit) {
                             actions += `<a href="${editUrl}" class="btn btn-sm btn-icon btn-secondary me-2">
-                                    <i class="las la-edit fs-2"></i>
+                                    <i class="ki-outline ki-pencil text-gray-600 fs-2"></i>
                                 </a>`;
                         }
                          actions += `<a href="${detailUrl}" class="btn btn-sm btn-icon btn-secondary">
-                                    <i class="las la-arrow-circle-right fs-2"></i>
+                                    <i class="ki-outline ki-arrow-right text-gray-600 fs-2"></i>
                                 </a>`;
 
                         return actions;

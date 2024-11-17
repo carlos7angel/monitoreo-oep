@@ -5,10 +5,12 @@
         <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">REGISTRO DE MONITOREO</h1>
         <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
             <li class="breadcrumb-item text-gray-600">
-                <a href="javascript;" class="text-gray-600 text-hover-primary">Inicio</a>
+                <a href="{{ route('oep_admin_index') }}" class="text-gray-600 text-hover-primary">Inicio</a>
             </li>
-            <li class="breadcrumb-item text-gray-600">Monitoreo</li>
-            <li class="breadcrumb-item text-gray-600">Procesos Electorales</li>
+            <li class="breadcrumb-item text-gray-600">
+                <a href="{{ route('oep_admin_media_elections_list_for_monitoring') }}" class="text-gray-600 text-hover-primary">Monitoreo</a>
+            </li>
+            <li class="breadcrumb-item text-gray-600">{{ $election->name }}</li>
             <li class="breadcrumb-item text-gray-500">Detalle</li>
 
         </ul>

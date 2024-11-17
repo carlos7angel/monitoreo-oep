@@ -3,6 +3,8 @@
 namespace App\Containers\CoreMonitoring\Monitoring\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
+use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
+use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
 use App\Containers\CoreMonitoring\Election\Tasks\FindElectionByIdTask;
 use App\Containers\CoreMonitoring\Monitoring\Models\MonitoringReport;
@@ -13,6 +15,8 @@ use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
 use Carbon\Carbon;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -60,7 +64,7 @@ class CreateMonitoringReportAction extends ParentAction
             'scope_department' => $scope_department,
         ];
 
-        return DB::transaction(function () use ($data, $monitoring_items) {
+        return DB::transaction(function () use ($data, $monitoring_items, $request) {
 
             $monitoring_report = $this->createMonitoringReportTask->run($data);
             $monitoring_report->monitoringItems()->sync($monitoring_items->pluck('id')->toArray());

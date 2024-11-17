@@ -5,10 +5,12 @@
         <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">REGISTROS DE MONITOREO</h1>
         <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
             <li class="breadcrumb-item text-gray-600">
-                <a href="javascript;" class="text-gray-600 text-hover-primary">Inicio</a>
+                <a href="{{ route('oep_admin_index') }}" class="text-gray-600 text-hover-primary">Inicio</a>
             </li>
-            <li class="breadcrumb-item text-gray-600">Monitoreo</li>
-            <li class="breadcrumb-item text-gray-500">Proceso Electoral</li>
+            <li class="breadcrumb-item text-gray-600">
+                <a href="{{ route('oep_admin_media_elections_list_for_monitoring') }}" class="text-gray-600 text-hover-primary">Monitoreo</a>
+            </li>
+            <li class="breadcrumb-item text-gray-600">{{ $election->name }}</li>
             <li class="breadcrumb-item text-gray-500">Registros</li>
         </ul>
     </div>
@@ -79,24 +81,7 @@
                         </div>
                         <div class="d-flex flex-wrap justify-content-start">
                             <div class="d-flex flex-wrap">
-{{--                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">--}}
-{{--                                    <div class="d-flex align-items-center">--}}
-{{--                                        <div class="fs-4 fw-bold">-</div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="fw-semibold fs-6 text-gray-500">Plazo</div>--}}
-{{--                                </div>--}}
-{{--                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">--}}
-{{--                                    <div class="d-flex align-items-center">--}}
-{{--                                        <div class="fs-3 fw-bold" data-kt-countup="true" data-kt-countup-value="-">-</div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="fw-semibold fs-6 text-gray-500">Total Registros</div>--}}
-{{--                                </div>--}}
-{{--                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">--}}
-{{--                                    <div class="d-flex align-items-center">--}}
-{{--                                        <div class="fs-3 fw-bold" data-kt-countup="true" data-kt-countup-value="12">0</div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="fw-semibold fs-6 text-gray-500">Acreditados</div>--}}
-{{--                                </div>--}}
+
                             </div>
                         </div>
                     </div>
