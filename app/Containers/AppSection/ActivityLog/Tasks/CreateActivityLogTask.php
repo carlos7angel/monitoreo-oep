@@ -53,7 +53,18 @@ class CreateActivityLogTask extends ParentTask
                     $log = 'CONTRASEÑA DE USUARIO ACTUALIZADA';
                     $message = "La contraseña del usuario " . $_subject->name . " (" . $_subject->email . ") ha sido actualizada";
                     break;
-
+                case LogConstants::CREATED_ELECTION:
+                    $log = 'PROCESO ELECTORAL CREADO';
+                    $message = "Proceso Electoral " . $_subject->name . " creado";
+                    break;
+                case LogConstants::UPDATED_ELECTION:
+                    $log = 'PROCESO ELECTORAL ACTUALIZADO';
+                    $message = "Proceso Electoral " . $_subject->name . " actualizado";
+                    break;
+                case LogConstants::UPDATED_STATUS_ELECTION:
+                    $log = 'ESTADO PROCESO ELECTORAL ACTUALIZADO';
+                    $message = "EL Proceso Electoral ha cambiado su estado a " . strtoupper($_subject->status);
+                    break;
                 case LogConstants::ENABLED_USER_MEDIA_ACCOUNT:
                     $log = 'CUENTA HABILITADA';
                     $message = "La cuenta de usuario (Medio de Comunicación) para " . $_subject->email . " ha sido habilitada";

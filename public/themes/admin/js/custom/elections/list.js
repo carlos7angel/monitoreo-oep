@@ -62,7 +62,7 @@ var KTElectionsList = function () {
                 {data: 'type', name: "type"},
                 {data: 'election_date', name: "election_date"},
                 {data: 'status', name: "status"},
-                {data: 'updated_at', name: "updated_at"},
+                {data: 'created_at', name: "created_at"},
                 {data: null, responsivePriority: -1},
             ],
 
@@ -150,7 +150,7 @@ var KTElectionsList = function () {
                     searchable: true,
                     className: 'dt-center pe-0',
                     render: function (data, type, full, meta) {
-                        return moment(data).format('DD/MM/YYYY HH:mm');
+                        return moment(data).format('DD/MM/YYYY hh:mm A');
                     },
                 },
                 {
@@ -161,8 +161,12 @@ var KTElectionsList = function () {
                     render: function (data, type, full, meta) {
                         var toEditUrl = "/admin/elecciones/" + full.id + "/editar";
                         var toDetailUrl = "/admin/elecciones/" + full.id + "/detalle";
-                        return `<a href="${toDetailUrl}" class="btn btn-sm btn-icon btn-secondary me-2" title="Ver más"><i class="las la-eye fs-2"></i></a>
-                                <a href="${toEditUrl}" class="btn btn-sm btn-icon btn-secondary" title="Editar"><i class="las la-edit fs-2"></i></a>`;
+                        return `<a href="${toDetailUrl}" class="btn btn-sm btn-icon btn-secondary me-2" title="Ver más">
+                                    <i class="ki-outline ki-arrow-right text-gray-600 fs-2"></i>
+                                </a>
+                                <a href="${toEditUrl}" class="btn btn-sm btn-icon btn-secondary" title="Editar">
+                                    <i class="ki-outline ki-pencil text-gray-600 fs-2"></i>
+                                </a>`;
                     },
                 },
             ],

@@ -1,14 +1,14 @@
-@extends('vendor@template::admin.layouts.master', ['page' => 'election_list'])
 
-@section('breadcrumbs')
+
+<?php $__env->startSection('breadcrumbs'); ?>
     <div class="page-title d-flex flex-column align-items-start me-3 py-2 py-lg-0 gap-2">
         <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">PROCESO ELECTORAL</h1>
         <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
             <li class="breadcrumb-item text-gray-600">
-                <a href="{{ route('oep_admin_index') }}" class="text-gray-600 text-hover-primary">Inicio</a>
+                <a href="<?php echo e(route('oep_admin_index')); ?>" class="text-gray-600 text-hover-primary">Inicio</a>
             </li>
             <li class="breadcrumb-item text-gray-600">
-                <a href="{{ route('oep_admin_elections_list') }}" class="text-gray-600 text-hover-primary">Elecciones</a>
+                <a href="<?php echo e(route('oep_admin_elections_list')); ?>" class="text-gray-600 text-hover-primary">Elecciones</a>
             </li>
             <li class="breadcrumb-item text-gray-500">Detalle</li>
         </ul>
@@ -16,78 +16,78 @@
     <div class="d-flex align-items-center">
 
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="content flex-row-fluid" id="kt_content">
 
         <div class="card mb-5 mb-xxl-8">
             <div class="card-body pt-9 pb-0">
                 <div class="d-flex flex-wrap flex-sm-nowrap">
                     <div class="me-7 mb-4">
-                        @php
+                        <?php
                             if ($election->logo_image) {
                                 $logo = asset('storage') . $election->logo_image ;
                             } else {
                                 $logo = asset('themes/common/media/images/blank-image.jpg');
                             }
-                        @endphp
+                        ?>
                         <div class="w-100px h-100px w-lg-150px h-lg-150px position-relative border-1 "
-                             style="background-image: url({{$logo}}); background-size: cover; background-position: center">
+                             style="background-image: url(<?php echo e($logo); ?>); background-size: cover; background-position: center">
                         </div>
                     </div>
                     <div class="flex-grow-1">
                         <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center mb-2">
-                                    <a class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ $election->name }}</a>
+                                    <a class="text-gray-900 text-hover-primary fs-2 fw-bold me-1"><?php echo e($election->name); ?></a>
                                 </div>
                                 <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
                                     <div class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                                         <span class="me-3 fs-7">Estado:</span>
-                                        @switch($election->status)
-                                            @case('draft')
+                                        <?php switch($election->status):
+                                            case ('draft'): ?>
                                             <span class="badge badge-info py-1 px-4">Borrador</span>
-                                            @break
-                                            @case('active')
+                                            <?php break; ?>
+                                            <?php case ('active'): ?>
                                             <span class="badge badge-success py-1 px-4">Activo</span>
-                                            @break
-                                            @case('unpublished')
+                                            <?php break; ?>
+                                            <?php case ('unpublished'): ?>
                                             <span class="badge badge-secondary py-1 px-4">Despublicado</span>
-                                            @break
-                                            @case('finished')
+                                            <?php break; ?>
+                                            <?php case ('finished'): ?>
                                             <span class="badge badge-info py-1 px-4">Finalizado</span>
-                                            @break
-                                            @case('archived')
+                                            <?php break; ?>
+                                            <?php case ('archived'): ?>
                                             <span class="badge badge-danger py-1 px-4">Archivado</span>
-                                            @break
-                                            @case('canceled')
+                                            <?php break; ?>
+                                            <?php case ('canceled'): ?>
                                             <span class="badge badge-danger py-1 px-4">Cancelado</span>
-                                            @break
-                                        @endswitch
+                                            <?php break; ?>
+                                        <?php endswitch; ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex my-4">
-                                @switch($election->status)
-                                    @case('draft')
-                                        <a href="javascript:void(0)" data-url="{{ route('oep_admin_elections_update_status', ['id' => $election->id]) }}" data-status="active" class="btn btn-sm btn-info kt_change_election_status">Publicar</a>
-                                    @break
-                                    @case('active')
-                                        <a href="javascript:void(0)" data-url="{{ route('oep_admin_elections_update_status', ['id' => $election->id]) }}" data-status="unpublished" class="btn btn-sm btn-info kt_change_election_status me-1">Despublicar</a>
-                                        <a href="javascript:void(0)" data-url="{{ route('oep_admin_elections_update_status', ['id' => $election->id]) }}" data-status="finished" class="btn btn-sm btn-info kt_change_election_status">Finalizar</a>
-                                    @break
-                                    @case('unpublished')
-                                        <a href="javascript:void(0)" data-url="{{ route('oep_admin_elections_update_status', ['id' => $election->id]) }}" data-status="active" class="btn btn-sm btn-info kt_change_election_status me-1">Publicar</a>
-                                        <a href="javascript:void(0)" data-url="{{ route('oep_admin_elections_update_status', ['id' => $election->id]) }}" data-status="archived" class="btn btn-sm btn-info kt_change_election_status">Archivar</a>
-                                    @break
-                                    @case('finished')
-                                    @break
-                                    @case('archived')
-                                    @break
-                                    @case('canceled')
-                                    @break
-                                @endswitch
+                                <?php switch($election->status):
+                                    case ('draft'): ?>
+                                        <a href="javascript:void(0)" data-url="<?php echo e(route('oep_admin_elections_update_status', ['id' => $election->id])); ?>" data-status="active" class="btn btn-sm btn-info kt_change_election_status">Publicar</a>
+                                    <?php break; ?>
+                                    <?php case ('active'): ?>
+                                        <a href="javascript:void(0)" data-url="<?php echo e(route('oep_admin_elections_update_status', ['id' => $election->id])); ?>" data-status="unpublished" class="btn btn-sm btn-info kt_change_election_status me-1">Despublicar</a>
+                                        <a href="javascript:void(0)" data-url="<?php echo e(route('oep_admin_elections_update_status', ['id' => $election->id])); ?>" data-status="finished" class="btn btn-sm btn-info kt_change_election_status">Finalizar</a>
+                                    <?php break; ?>
+                                    <?php case ('unpublished'): ?>
+                                        <a href="javascript:void(0)" data-url="<?php echo e(route('oep_admin_elections_update_status', ['id' => $election->id])); ?>" data-status="active" class="btn btn-sm btn-info kt_change_election_status me-1">Publicar</a>
+                                        <a href="javascript:void(0)" data-url="<?php echo e(route('oep_admin_elections_update_status', ['id' => $election->id])); ?>" data-status="archived" class="btn btn-sm btn-info kt_change_election_status">Archivar</a>
+                                    <?php break; ?>
+                                    <?php case ('finished'): ?>
+                                    <?php break; ?>
+                                    <?php case ('archived'): ?>
+                                    <?php break; ?>
+                                    <?php case ('canceled'): ?>
+                                    <?php break; ?>
+                                <?php endswitch; ?>
 
                             </div>
                         </div>
@@ -96,19 +96,19 @@
                                 <div class="d-flex flex-wrap">
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="fs-5 fw-bold">{{ $election->election_date }}</div>
+                                            <div class="fs-5 fw-bold"><?php echo e($election->election_date); ?></div>
                                         </div>
                                         <div class="fw-semibold fs-7 text-gray-500">Fecha del Proceso</div>
                                     </div>
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="fs-5 fw-bold">{{ $election->type }}</div>
+                                            <div class="fs-5 fw-bold"><?php echo e($election->type); ?></div>
                                         </div>
                                         <div class="fw-semibold fs-7 text-gray-500">Categoría</div>
                                     </div>
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="fs-5 fw-bold">{{ $election->code }}</div>
+                                            <div class="fs-5 fw-bold"><?php echo e($election->code); ?></div>
                                         </div>
                                         <div class="fw-semibold fs-7 text-gray-500">Identificador</div>
                                     </div>
@@ -143,43 +143,43 @@
 
                                 <div class="d-flex flex-stack mb-5">
                                     <div class="fw-bold fs-2">Preferencias</div>
-                                    @if($election->enable_for_media_registration)
+                                    <?php if($election->enable_for_media_registration): ?>
                                         <span class="badge badge-info" >Activado</span>
-                                    @else
+                                    <?php else: ?>
                                         <span class="badge badge-secondary" >Desactivado</span>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
 
-                                @if($election->enable_for_media_registration)
+                                <?php if($election->enable_for_media_registration): ?>
                                 <div class="separator"></div>
                                 <div class="pb-5 fs-6">
                                     <div class="fw-bold mt-5">Fecha de Inicio de Registro:</div>
-                                    <div class="text-gray-600">{{ $election->start_date_media_registration }}</div>
+                                    <div class="text-gray-600"><?php echo e($election->start_date_media_registration); ?></div>
                                     <div class="fw-bold mt-5">Fecha Límite de Registro:</div>
-                                    <div class="text-gray-600">{{ $election->end_date_media_registration }}</div>
+                                    <div class="text-gray-600"><?php echo e($election->end_date_media_registration); ?></div>
                                     <div class="fw-bold mt-5">Declaración Jurada:</div>
                                     <div class="text-gray-600">
-                                        @if($election->fileAffidavitMediaRegistration)
-                                            <a target="_blank" href="{{ $election->fileAffidavitMediaRegistration->url_file }}" class="text-primary text-hover-primary">Descargar</a>
-                                        @else
+                                        <?php if($election->fileAffidavitMediaRegistration): ?>
+                                            <a target="_blank" href="<?php echo e($election->fileAffidavitMediaRegistration->url_file); ?>" class="text-primary text-hover-primary">Descargar</a>
+                                        <?php else: ?>
                                             <span>-</span>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
-{{--                                    <div class="fw-bold mt-5">Formato de Declaración Jurada:</div>--}}
-{{--                                    <div class="text-gray-600">--}}
-{{--                                        <a href="#" class="text-primary text-hover-primary">Descargar</a>--}}
-{{--                                    </div>--}}
+
+
+
+
                                     <div class="fw-bold mt-5">Plazo para subir observaciones:</div>
-                                    <div class="text-gray-600">{{ $election->due_days_observed_media_registration ? $election->due_days_observed_media_registration . ' días' : 'Ninguno' }}</div>
+                                    <div class="text-gray-600"><?php echo e($election->due_days_observed_media_registration ? $election->due_days_observed_media_registration . ' días' : 'Ninguno'); ?></div>
                                 </div>
-                                @endif
+                                <?php endif; ?>
                             </div>
                         </div>
 
                     </div>
                     <div class="flex-lg-row-fluid ms-lg-15">
 
-                        @if($election->enable_for_media_registration)
+                        <?php if($election->enable_for_media_registration): ?>
                             <div class="card card-flush flex-row-fluid">
 
                                 <div class="card-header">
@@ -202,63 +202,63 @@
                                             </thead>
                                             <tbody class="fw-semibold text-gray-600">
 
-                                            @if(count($accreditations) > 0)
-                                                @foreach($accreditations as $accreditation)
+                                            <?php if(count($accreditations) > 0): ?>
+                                                <?php $__currentLoopData = $accreditations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $accreditation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <tr>
                                                         <td>
                                                             <div class="d-flex align-items-center">
                                                                 <a class="symbol symbol-50px">
-                                                                    <span class="symbol-label" style="background-image:url({{ asset('storage') . $accreditation->media->logo }});"></span>
+                                                                    <span class="symbol-label" style="background-image:url(<?php echo e(asset('storage') . $accreditation->media->logo); ?>);"></span>
                                                                 </a>
                                                                 <div class="ms-5">
-                                                                    <a class="fw-bold text-gray-900">{{ $accreditation->media->name }}</a>
-                                                                    <div class="fs-7 text-muted">{{ $accreditation->media->business_name }}</div>
+                                                                    <a class="fw-bold text-gray-900"><?php echo e($accreditation->media->name); ?></a>
+                                                                    <div class="fs-7 text-muted"><?php echo e($accreditation->media->business_name); ?></div>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td class="text-end">
-                                                            @php
+                                                            <?php
                                                                 // $types = json_decode($accreditation->media->type);
                                                                 $types = [];
-                                                            @endphp
+                                                            ?>
                                                             <span>
-                                                            @foreach($types as $type)
-                                                                <div class="badge badge-secondary py-2 px-4 me-1">{{ $type }}</div>
-                                                            @endforeach
+                                                            <?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                <div class="badge badge-secondary py-2 px-4 me-1"><?php echo e($type); ?></div>
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                             </span>
                                                         </td>
-                                                        <td class="text-end">#{{ $accreditation->code }}</td>
-                                                        <td class="text-end">{{ $accreditation->submitted_at }}</td>
+                                                        <td class="text-end">#<?php echo e($accreditation->code); ?></td>
+                                                        <td class="text-end"><?php echo e($accreditation->submitted_at); ?></td>
                                                         <td class="text-end">
-                                                            @switch($accreditation->status)
-                                                                @case('new')
+                                                            <?php switch($accreditation->status):
+                                                                case ('new'): ?>
                                                                 <span class="badge badge-info py-1 px-4">Nuevo</span>
-                                                                @break
-                                                                @case('observed')
+                                                                <?php break; ?>
+                                                                <?php case ('observed'): ?>
                                                                 <span class="badge badge-secondary py-1 px-4">Observado</span>
-                                                                @break
-                                                                @case('accredited')
+                                                                <?php break; ?>
+                                                                <?php case ('accredited'): ?>
                                                                 <span class="badge badge-success py-1 px-4">Acreditado</span>
-                                                                @break
-                                                                @case('archived')
+                                                                <?php break; ?>
+                                                                <?php case ('archived'): ?>
                                                                 <span class="badge badge-danger py-1 px-4">Archivado</span>
-                                                                @break
-                                                                @case('rejected')
+                                                                <?php break; ?>
+                                                                <?php case ('rejected'): ?>
                                                                 <span class="badge badge-danger py-1 px-4">Rechazado</span>
-                                                                @break
-                                                            @endswitch
+                                                                <?php break; ?>
+                                                            <?php endswitch; ?>
                                                         </td>
                                                     </tr>
-                                                @endforeach
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                                 <tr>
                                                     <td colspan="5" class="text-end"><a href="#" class="btn btn-sm btn-secondary">Ver más</a></td>
                                                 </tr>
-                                            @else
+                                            <?php else: ?>
                                                 <tr>
                                                     <td colspan="5" class="text-center"><span class="text-muted">No existen registros</span></td>
                                                 </tr>
-                                            @endif
+                                            <?php endif; ?>
 
                                             </tbody>
                                         </table>
@@ -267,7 +267,7 @@
                                 </div>
                                 <!--end::Card body-->
                             </div>
-                        @else
+                        <?php else: ?>
                         <div class="notice d-flex bg-secondary rounded border-info border border-dashed mb-9 p-6">
                             <i class="ki-duotone ki-design-1 fs-2tx text-primary me-4"></i>
                             <div class="d-flex flex-stack flex-grow-1">
@@ -276,7 +276,7 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
+                        <?php endif; ?>
 
                     </div>
                 </div>
@@ -294,44 +294,44 @@
 
                                 <div class="d-flex flex-stack mb-5">
                                     <div class="fw-bold fs-2">Preferencias</div>
-                                    @if($election->enable_for_monitoring)
+                                    <?php if($election->enable_for_monitoring): ?>
                                         <span class="badge badge-info" >Activado</span>
-                                    @else
+                                    <?php else: ?>
                                         <span class="badge badge-secondary" >Desactivado</span>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
 
-                                @if($election->enable_for_monitoring)
+                                <?php if($election->enable_for_monitoring): ?>
                                     <div class="separator"></div>
                                     <div class="pb-5 fs-6">
                                         <div class="fw-bold mt-5">Tipo de Medio habilitado(s):</div>
                                         <div class="text-gray-600">
-                                            @if($election->fid_form_tv_media)
+                                            <?php if($election->fid_form_tv_media): ?>
                                                 <p>- Medios Televisivos</p>
-                                            @endif
-                                            @if($election->fid_form_radio_media)
+                                            <?php endif; ?>
+                                            <?php if($election->fid_form_radio_media): ?>
                                                 <p>- Medios Radiales</p>
-                                            @endif
-                                            @if($election->fid_form_print_media)
+                                            <?php endif; ?>
+                                            <?php if($election->fid_form_print_media): ?>
                                                 <p>- Medios Impresos</p>
-                                            @endif
-                                            @if($election->fid_form_digital_media)
+                                            <?php endif; ?>
+                                            <?php if($election->fid_form_digital_media): ?>
                                                 <p>- Medios Digitales</p>
-                                            @endif
-                                            @if($election->fid_form_rrss_media)
+                                            <?php endif; ?>
+                                            <?php if($election->fid_form_rrss_media): ?>
                                                 <p>- Redes Sociales</p>
-                                            @endif
+                                            <?php endif; ?>
                                         </div>
 
                                     </div>
-                                @endif
+                                <?php endif; ?>
                             </div>
                         </div>
 
                     </div>
                     <div class="flex-lg-row-fluid ms-lg-15">
 
-                        @if($election->enable_for_monitoring)
+                        <?php if($election->enable_for_monitoring): ?>
                             <div class="card card-flush flex-row-fluid">
 
                                 <div class="card-header">
@@ -354,81 +354,81 @@
                                             </thead>
                                             <tbody class="fw-semibold text-gray-600">
 
-                                            @if(count($monitoring_items) > 0)
-                                                @foreach($monitoring_items as $monitoring_item)
+                                            <?php if(count($monitoring_items) > 0): ?>
+                                                <?php $__currentLoopData = $monitoring_items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $monitoring_item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <tr>
                                                         <td>
                                                             <div class="d-flex align-items-center">
-                                                                @if($monitoring_item->mediaProfile)
+                                                                <?php if($monitoring_item->mediaProfile): ?>
                                                                 <a class="symbol symbol-50px">
-                                                                    <span class="symbol-label" style="background-image:url({{ asset('storage') . $monitoring_item->mediaProfile->logo }});"></span>
+                                                                    <span class="symbol-label" style="background-image:url(<?php echo e(asset('storage') . $monitoring_item->mediaProfile->logo); ?>);"></span>
                                                                 </a>
                                                                 <div class="ms-5">
-                                                                    <a class="fw-bold text-gray-900">{{ $monitoring_item->mediaProfile->name }}</a>
-                                                                    <div class="fs-7 text-muted">{{ $monitoring_item->mediaProfile->business_name }}</div>
+                                                                    <a class="fw-bold text-gray-900"><?php echo e($monitoring_item->mediaProfile->name); ?></a>
+                                                                    <div class="fs-7 text-muted"><?php echo e($monitoring_item->mediaProfile->business_name); ?></div>
                                                                 </div>
-                                                                @else
+                                                                <?php else: ?>
                                                                 <div class="ms-0">
-                                                                    <a class="fw-bold text-gray-900">{{ $monitoring_item->other_media }}</a>
+                                                                    <a class="fw-bold text-gray-900"><?php echo e($monitoring_item->other_media); ?></a>
                                                                     <div class="fs-7 text-muted"><i class="text-muted">Medio no registrado</i></div>
                                                                 </div>
-                                                                @endif
+                                                                <?php endif; ?>
                                                             </div>
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="badge badge-secondary py-2 px-4 me-1">
-                                                                @switch($monitoring_item->media_type)
-                                                                    @case('TV')
+                                                                <?php switch($monitoring_item->media_type):
+                                                                    case ('TV'): ?>
                                                                     <span>Medio Televisivo</span>
-                                                                    @break
-                                                                    @case('RADIO')
+                                                                    <?php break; ?>
+                                                                    <?php case ('RADIO'): ?>
                                                                     <span>Medio Radial</span>
-                                                                    @break
-                                                                    @case('PRINT')
+                                                                    <?php break; ?>
+                                                                    <?php case ('PRINT'): ?>
                                                                     <span>Medio Impreso</span>
-                                                                    @break
-                                                                    @case('DIGITAL')
+                                                                    <?php break; ?>
+                                                                    <?php case ('DIGITAL'): ?>
                                                                     <span>Medio Digital</span>
-                                                                    @break
-                                                                    @case('RRSS')
+                                                                    <?php break; ?>
+                                                                    <?php case ('RRSS'): ?>
                                                                     <span>Redes Sociales</span>
-                                                                    @break
-                                                                @endswitch
+                                                                    <?php break; ?>
+                                                                <?php endswitch; ?>
                                                             </div>
                                                         </span>
                                                         </td>
-                                                        <td class="text-end">#{{ $monitoring_item->code }}</td>
-                                                        <td class="text-end">{{ $monitoring_item->registered_at }}</td>
+                                                        <td class="text-end">#<?php echo e($monitoring_item->code); ?></td>
+                                                        <td class="text-end"><?php echo e($monitoring_item->registered_at); ?></td>
                                                         <td class="text-end">
-                                                            @switch($monitoring_item->status)
-                                                                @case('CREATED')
+                                                            <?php switch($monitoring_item->status):
+                                                                case ('CREATED'): ?>
                                                                 <span class="badge badge-info py-1 px-4">Nuevo</span>
-                                                                @break
-                                                                @case('SELECTED')
+                                                                <?php break; ?>
+                                                                <?php case ('SELECTED'): ?>
                                                                 <span class="badge badge-info py-1 px-4">En análisis</span>
-                                                                @break
-                                                                @case('ARCHIVED')
+                                                                <?php break; ?>
+                                                                <?php case ('ARCHIVED'): ?>
                                                                 <span class="badge badge-secondary py-1 px-4">Archivado</span>
-                                                                @break
-                                                                @case('REJECTED')
+                                                                <?php break; ?>
+                                                                <?php case ('REJECTED'): ?>
                                                                 <span class="badge badge-danger py-1 px-4">Rechazado</span>
-                                                                @break
-                                                                @case('FINISHED')
+                                                                <?php break; ?>
+                                                                <?php case ('FINISHED'): ?>
                                                                 <span class="badge badge-success py-1 px-4">Finalizado</span>
-                                                                @break
-                                                            @endswitch
+                                                                <?php break; ?>
+                                                            <?php endswitch; ?>
                                                         </td>
                                                     </tr>
-                                                @endforeach
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                                 <tr>
                                                     <td colspan="5" class="text-end"><a href="#" class="btn btn-sm btn-secondary">Ver más</a></td>
                                                 </tr>
-                                            @else
+                                            <?php else: ?>
                                                 <tr>
                                                     <td colspan="5" class="text-center"><span class="text-muted">No existen registros</span></td>
                                                 </tr>
-                                            @endif
+                                            <?php endif; ?>
 
                                             </tbody>
                                         </table>
@@ -437,7 +437,7 @@
                                 </div>
                                 <!--end::Card body-->
                             </div>
-                        @else
+                        <?php else: ?>
                             <div class="notice d-flex bg-secondary rounded border-info border border-dashed mb-9 p-6">
                                 <i class="ki-duotone ki-design-1 fs-2tx text-primary me-4"></i>
                                 <div class="d-flex flex-stack flex-grow-1">
@@ -446,7 +446,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        <?php endif; ?>
 
                     </div>
                 </div>
@@ -464,38 +464,38 @@
 
                                 <div class="d-flex flex-stack mb-5">
                                     <div class="fw-bold fs-2">Preferencias</div>
-                                    @if($election->enable_for_political_registration)
+                                    <?php if($election->enable_for_political_registration): ?>
                                         <span class="badge badge-info" >Activado</span>
-                                    @else
+                                    <?php else: ?>
                                         <span class="badge badge-secondary" >Desactivado</span>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
 
-                                @if($election->enable_for_political_registration)
+                                <?php if($election->enable_for_political_registration): ?>
                                     <div class="separator"></div>
                                     <div class="pb-5 fs-6">
                                         <div class="fw-bold mt-5">Fecha Límite de Registro:</div>
-                                        <div class="text-gray-600">{{ $election->end_date_political_registration }}</div>
+                                        <div class="text-gray-600"><?php echo e($election->end_date_political_registration); ?></div>
                                         <div class="fw-bold mt-5">Tamaño máx. de subir archivos:</div>
-                                        <div class="text-gray-600">{{ $election->max_size_for_political_registration }} MB</div>
+                                        <div class="text-gray-600"><?php echo e($election->max_size_for_political_registration); ?> MB</div>
                                         <div class="fw-bold mt-5">Tipo de archivo permitidos:</div>
                                         <div class="text-gray-600">
-                                            @php
+                                            <?php
                                               $mime_types = is_array(json_decode($election->mime_types_for_political_registration)) ?  json_decode($election->mime_types_for_political_registration) : [];
-                                            @endphp
-                                            @foreach($mime_types as $mime_type)
-                                                <p>- {{ $mime_type }}</p>
-                                            @endforeach
+                                            ?>
+                                            <?php $__currentLoopData = $mime_types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mime_type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <p>- <?php echo e($mime_type); ?></p>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </div>
                                     </div>
-                                @endif
+                                <?php endif; ?>
                             </div>
                         </div>
 
                     </div>
                     <div class="flex-lg-row-fluid ms-lg-15">
 
-                        @if($election->enable_for_political_registration)
+                        <?php if($election->enable_for_political_registration): ?>
                             <div class="card card-flush flex-row-fluid">
 
                                 <div class="card-header">
@@ -517,43 +517,43 @@
                                             </thead>
                                             <tbody class="fw-semibold text-gray-600">
 
-                                            @if(count($registrations) > 0)
-                                                @foreach($registrations as $registration)
+                                            <?php if(count($registrations) > 0): ?>
+                                                <?php $__currentLoopData = $registrations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $registration): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <tr>
                                                         <td>
                                                             <div class="d-flex align-items-center">
                                                                 <div class="ms-5">
-                                                                    <a class="fw-bold text-gray-900">{{ $registration->politicalGroup->name }}</a>
-                                                                    <div class="fs-7 text-muted">{{ $registration->politicalGroup->initials }}</div>
+                                                                    <a class="fw-bold text-gray-900"><?php echo e($registration->politicalGroup->name); ?></a>
+                                                                    <div class="fs-7 text-muted"><?php echo e($registration->politicalGroup->initials); ?></div>
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td class="text-end">#{{ $registration->email }}</td>
-                                                        <td class="text-end">{{ $registration->registered_at }}</td>
+                                                        <td class="text-end">#<?php echo e($registration->email); ?></td>
+                                                        <td class="text-end"><?php echo e($registration->registered_at); ?></td>
                                                         <td class="text-end">
-                                                            @switch($registration->status)
-                                                                @case('CREATED')
+                                                            <?php switch($registration->status):
+                                                                case ('CREATED'): ?>
                                                                 <span class="badge badge-info py-1 px-4">Nuevo</span>
-                                                                @break
-                                                                @case('ACTIVE')
+                                                                <?php break; ?>
+                                                                <?php case ('ACTIVE'): ?>
                                                                 <span class="badge badge-success py-1 px-4">Activo</span>
-                                                                @break
-                                                                @case('ARCHIVED')
+                                                                <?php break; ?>
+                                                                <?php case ('ARCHIVED'): ?>
                                                                 <span class="badge badge-danger py-1 px-4">Archivado</span>
-                                                                @break
-                                                            @endswitch
+                                                                <?php break; ?>
+                                                            <?php endswitch; ?>
                                                         </td>
                                                     </tr>
-                                                @endforeach
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                                 <tr>
                                                     <td colspan="5" class="text-end"><a href="#" class="btn btn-sm btn-secondary">Ver más</a></td>
                                                 </tr>
-                                            @else
+                                            <?php else: ?>
                                                 <tr>
                                                     <td colspan="5" class="text-center"><span class="text-muted">No existen registros</span></td>
                                                 </tr>
-                                            @endif
+                                            <?php endif; ?>
 
                                             </tbody>
                                         </table>
@@ -562,7 +562,7 @@
                                 </div>
                                 <!--end::Card body-->
                             </div>
-                        @else
+                        <?php else: ?>
                             <div class="notice d-flex bg-secondary rounded border-info border border-dashed mb-9 p-6">
                                 <i class="ki-duotone ki-design-1 fs-2tx text-primary me-4"></i>
                                 <div class="d-flex flex-stack flex-grow-1">
@@ -571,7 +571,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        <?php endif; ?>
 
                     </div>
                 </div>
@@ -580,20 +580,21 @@
         </div>
 
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('modals')
+<?php $__env->startSection('modals'); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('styles')
+<?php $__env->startSection('styles'); ?>
     <!-- fileuploader -->
-    <link href="{{ asset('themes/common/plugins/custom/fileuploader/font/font-fileuploader.css') }}" media="all" rel="stylesheet">
-    <link href="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader.min.css') }}" media="all" rel="stylesheet">
-    <link href="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader-theme-dropin.css') }}" media="all" rel="stylesheet">
-@endsection
+    <link href="<?php echo e(asset('themes/common/plugins/custom/fileuploader/font/font-fileuploader.css')); ?>" media="all" rel="stylesheet">
+    <link href="<?php echo e(asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader.min.css')); ?>" media="all" rel="stylesheet">
+    <link href="<?php echo e(asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader-theme-dropin.css')); ?>" media="all" rel="stylesheet">
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
-    <script src="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('themes/admin/js/custom/elections/detail.js') }}"></script>
-@endsection
+<?php $__env->startSection('scripts'); ?>
+    <script src="<?php echo e(asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader.min.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(asset('themes/admin/js/custom/elections/detail.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('vendor@template::admin.layouts.master', ['page' => 'election_list'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Development Environment\PHP Environment\Laragon\www\monitoreo-oep\app\Containers\Frontend\OepAdministrator/UI/WEB/Views//election/detail.blade.php ENDPATH**/ ?>

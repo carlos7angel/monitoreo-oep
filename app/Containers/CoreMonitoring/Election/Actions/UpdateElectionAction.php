@@ -3,6 +3,8 @@
 namespace App\Containers\CoreMonitoring\Election\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
+use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
+use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
 use App\Containers\CoreMonitoring\Election\Models\Election;
 use App\Containers\CoreMonitoring\Election\Tasks\UpdateElectionTask;
@@ -13,6 +15,9 @@ use App\Containers\CoreMonitoring\FileManager\Tasks\CreateFileTask;
 use App\Containers\CoreMonitoring\Election\Tasks\FindElectionByIdTask;
 use App\Containers\CoreMonitoring\FileManager\Tasks\CreateLogoImageElectionTask;
 use App\Ship\Parents\Requests\Request;
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 class UpdateElectionAction extends ParentAction
 {
@@ -31,10 +36,7 @@ class UpdateElectionAction extends ParentAction
      */
     public function run(Request $request): Election
     {
-        // dd($request->all());
-        $data = $request->sanitizeInput([
-            // add your request data here
-        ]);
+        $data = $request->sanitizeInput($request->all());
 
         $election = $this->findElectionByIdTask->run($request->id);
 
@@ -101,14 +103,19 @@ class UpdateElectionAction extends ParentAction
             $data['mime_types_for_political_registration'] = null;
         }
 
-        if($request->file('election_logo')) {
-            $data['logo_image'] = $this->createLogoImageElectionTask->run($request->file('election_logo'), $election->id);
-        }
+        return DB::transaction(function () use ($data, $election, $request) {
+            if ($request->file('election_logo')) {
+                $data['logo_image'] = $this->createLogoImageElectionTask->run($request->file('election_logo'), $election->id);
+            }
 
-        if($request->file('election_banner')) {
-            $data['banner'] = $this->createLogoImageElectionTask->run($request->file('election_banner'), $election->id);
-        }
+            if ($request->file('election_banner')) {
+                $data['banner'] = $this->createLogoImageElectionTask->run($request->file('election_banner'), $election->id);
+            }
 
-        return $this->updateElectionTask->run($data, $election->id);
+            // Add Log
+            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::UPDATED_ELECTION, $request->server(), $election));
+
+            return $this->updateElectionTask->run($data, $election->id);
+        });
     }
 }

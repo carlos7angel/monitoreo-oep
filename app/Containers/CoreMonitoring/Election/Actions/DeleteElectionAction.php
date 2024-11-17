@@ -3,10 +3,10 @@
 namespace App\Containers\CoreMonitoring\Election\Actions;
 
 use App\Containers\CoreMonitoring\Election\Tasks\DeleteElectionTask;
-use App\Containers\CoreMonitoring\Election\UI\WEB\Requests\DeleteElectionRequest;
 use App\Ship\Exceptions\DeleteResourceFailedException;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Actions\Action as ParentAction;
+use App\Ship\Parents\Requests\Request;
 
 class DeleteElectionAction extends ParentAction
 {
@@ -19,7 +19,7 @@ class DeleteElectionAction extends ParentAction
      * @throws DeleteResourceFailedException
      * @throws NotFoundException
      */
-    public function run(DeleteElectionRequest $request): int
+    public function run(Request $request): int
     {
         return $this->deleteElectionTask->run($request->id);
     }

@@ -9,7 +9,6 @@ use App\Containers\CoreMonitoring\Election\Actions\UpdateElectionAction;
 use App\Containers\CoreMonitoring\Election\Actions\UpdateStatusElectionAction;
 use App\Containers\CoreMonitoring\Election\Tasks\FindElectionByIdTask;
 use App\Containers\CoreMonitoring\FormBuilder\Actions\GetAllFormsAction;
-use App\Containers\CoreMonitoring\Monitoring\Actions\ListAvailableMonitoringItemsAction;
 use App\Containers\CoreMonitoring\Monitoring\Tasks\ListMonitoringsTask;
 use App\Containers\CoreMonitoring\Registration\Tasks\ListRegistrationsTask;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Election\CreateElectionRequest;
@@ -20,7 +19,6 @@ use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Election\ListElecti
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Election\StoreElectionRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Election\UpdateElectionRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Election\UpdateStatusElectionRequest;
-use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Monitoring\ListMonitoringByElectionRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Exception;
 

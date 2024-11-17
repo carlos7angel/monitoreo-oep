@@ -5,9 +5,11 @@
         <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">PROCESO ELECTORAL</h1>
         <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
             <li class="breadcrumb-item text-gray-600">
-                <a href="javascript;" class="text-gray-600 text-hover-primary">Inicio</a>
+                <a href="{{ route('oep_admin_index') }}" class="text-gray-600 text-hover-primary">Inicio</a>
             </li>
-            <li class="breadcrumb-item text-gray-600">Procesos Electorales</li>
+            <li class="breadcrumb-item text-gray-600">
+                <a href="{{ route('oep_admin_elections_list') }}" class="text-gray-600 text-hover-primary">Elecciones</a>
+            </li>
             <li class="breadcrumb-item text-gray-500">Nuevo</li>
         </ul>
     </div>
@@ -94,17 +96,6 @@
                                 <input type="text" class="form-control datepicker_flatpickr" placeholder="" name="election_end_date_registration_media" />
                             </div>
                         </div>
-{{--                        <div class="mb-10 fv-row">--}}
-{{--                            <label for="kt_add_election_registration_media_form" class="form-label">Formulario adicional</label>--}}
-{{--                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Seleccionar"--}}
-{{--                                    id="kt_add_election_registration_media_form" name="election_subform_registration_media">--}}
-{{--                                <option></option>--}}
-{{--                                @foreach($forms as $index => $form)--}}
-{{--                                    <option value="{{ $form->id }}" selected="selected">{{ $form->name }}</option>--}}
-{{--                                @endforeach--}}
-{{--                            </select>--}}
-{{--                            <div class="text-muted fs-7">Seleccione un formulario de registro de datos adicionales.</div>--}}
-{{--                        </div>--}}
 
                         <div class="fv-row mb-10">
                             <label class="form-label">Declaración Jurada (Documento modelo)</label>

@@ -1,21 +1,21 @@
-@extends('vendor@template::admin.layouts.master', ['page' => 'election_list'])
 
-@section('breadcrumbs')
+
+<?php $__env->startSection('breadcrumbs'); ?>
     <div class="page-title d-flex flex-column align-items-start me-3 py-2 py-lg-0 gap-2">
         <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">Procesos Electorales</h1>
         <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
             <li class="breadcrumb-item text-gray-600">
-                <a href="{{ route('oep_admin_index') }}" class="text-gray-600 text-hover-primary">Inicio</a>
+                <a href="<?php echo e(route('oep_admin_index')); ?>" class="text-gray-600 text-hover-primary">Inicio</a>
             </li>
             <li class="breadcrumb-item text-gray-500">Elecciones</li>
         </ul>
     </div>
     <div class="d-flex align-items-center">
-        <a href="{{ route('oep_admin_elections_create') }}" class="btn btn-primary px-5" id="kt_button_new_form"><i class="ki-outline ki-add-files me-2 fs-3"></i> Nuevo Proceso</a>
+        <a href="<?php echo e(route('oep_admin_elections_create')); ?>" class="btn btn-primary px-5" id="kt_button_new_form"><i class="ki-outline ki-add-files me-2 fs-3"></i> Nuevo Proceso</a>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="content flex-row-fluid" id="kt_content">
 
         <div class="card mb-7">
@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_elections" data-url="{{ route('oep_admin_elections_json_dt') }}">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_elections" data-url="<?php echo e(route('oep_admin_elections_json_dt')); ?>">
                     <thead>
                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                         <th class="w-10px pe-2">#</th>
@@ -107,13 +107,14 @@
         </div>
 
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('styles')
-    <link href="{{ asset('themes/common/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-@endsection
+<?php $__env->startSection('styles'); ?>
+    <link href="<?php echo e(asset('themes/common/plugins/custom/datatables/datatables.bundle.css')); ?>" rel="stylesheet" type="text/css" />
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
-    <script src="{{ asset('themes/common/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('themes/admin/js/custom/elections/list.js') }}"></script>
-@endsection
+<?php $__env->startSection('scripts'); ?>
+    <script src="<?php echo e(asset('themes/common/plugins/custom/datatables/datatables.bundle.js')); ?>"></script>
+    <script src="<?php echo e(asset('themes/admin/js/custom/elections/list.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('vendor@template::admin.layouts.master', ['page' => 'election_list'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Development Environment\PHP Environment\Laragon\www\monitoreo-oep\app\Containers\Frontend\OepAdministrator/UI/WEB/Views//election/list.blade.php ENDPATH**/ ?>

@@ -11,7 +11,7 @@ use App\Containers\CoreMonitoring\FormBuilder\Tasks\ListFormsTask;
 class GetAllFormsAction extends ParentAction
 {
     public function __construct(
-        private readonly ListFormsTask $listFormsTask,
+        private ListFormsTask $listFormsTask,
     ) {
     }
 

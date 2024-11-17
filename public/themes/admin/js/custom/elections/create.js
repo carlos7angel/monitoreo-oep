@@ -68,7 +68,13 @@ var KTFormsCreate = function () {
                             }
                         }
                     },
-
+                    election_banner: {
+                        validators: {
+                            notEmpty: {
+                                message: 'El campo es obligatorio'
+                            }
+                        }
+                    },
                     election_end_date_registration_media: {
                         validators: {
                             notEmpty: {

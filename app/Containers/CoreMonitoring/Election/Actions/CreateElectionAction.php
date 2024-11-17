@@ -3,6 +3,8 @@
 namespace App\Containers\CoreMonitoring\Election\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
+use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
+use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
 use App\Containers\CoreMonitoring\Election\Models\Election;
 use App\Containers\CoreMonitoring\Election\Tasks\CreateElectionTask;
@@ -12,6 +14,9 @@ use App\Containers\CoreMonitoring\FileManager\Tasks\CreateFileTask;
 use App\Containers\CoreMonitoring\FileManager\Tasks\CreateLogoImageElectionTask;
 use App\Containers\CoreMonitoring\Election\Tasks\UpdateElectionTask;
 use App\Ship\Parents\Requests\Request;
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 class CreateElectionAction extends ParentAction
 {
@@ -72,23 +77,28 @@ class CreateElectionAction extends ParentAction
             }
         }
 
-        $election = $this->createElectionTask->run($data);
+        return DB::transaction(function () use ($data, $user, $request) {
 
-        if($request->file('election_affidavit_file_registration_media') || $request->file('election_logo') || $request->file('election_banner')) {
-            $dataU = [];
-            if($request->has('election_enable_registration_media') && $request->file('election_affidavit_file_registration_media')) {
-                $file_bases = $this->createFileTask->run($request->file('election_affidavit_file_registration_media'), 'election', $election->id, $user);
-                $dataU['file_affidavit_media_registration'] = $file_bases->unique_code;
+            $election = $this->createElectionTask->run($data);
+
+            if ($request->file('election_affidavit_file_registration_media') || $request->file('election_logo') || $request->file('election_banner')) {
+                if ($request->has('election_enable_registration_media') && $request->file('election_affidavit_file_registration_media')) {
+                    $file_bases = $this->createFileTask->run($request->file('election_affidavit_file_registration_media'), 'election', $election->id, $user);
+                    $election->file_affidavit_media_registration = $file_bases->unique_code;
+                }
+                $election->logo_image = $this->createLogoImageElectionTask->run($request->file('election_logo'), $election->id);
+
+                if ($request->file('election_banner')) {
+                    $election->banner = $this->createLogoImageElectionTask->run($request->file('election_banner'), $election->id);
+                }
+
+                $election->save();
             }
-            $dataU['logo_image'] = $this->createLogoImageElectionTask->run($request->file('election_logo'), $election->id);
 
-            if($request->file('election_banner')) {
-                $dataU['banner'] = $this->createLogoImageElectionTask->run($request->file('election_banner'), $election->id);
-            }
+            // Add Log
+            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::CREATED_ELECTION, $request->server(), $election));
 
-            $election = $this->updateElectionTask->run($dataU, $election->id);
-        }
-
-        return $election;
+            return $election;
+        });
     }
 }
