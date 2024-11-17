@@ -5,7 +5,7 @@
     <div class="landing-footer-dark-bg pt-20">
         <div class="container">
             <div class="row py-10 py-lg-20">
-                <div class="col-lg-6 pe-lg-16 mb-10 mb-lg-0">
+                <div class="col-lg-6 pe-lg-16 mb-10 mb-lg-0 text-center text-lg-start">
                     <img src="<?php echo e(asset('themes/common/media/logos/logo_oep.png')); ?>" alt="" class="h-150px">
                     <h3 class="fw-bold text-gray-100 mt-8 mb-5">Órgano Electoral Plurinacional de Bolivia</h3>
                     <div>

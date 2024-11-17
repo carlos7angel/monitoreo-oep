@@ -6,38 +6,35 @@
         <div id="kt_app_hero_container" class="app-container  container-xxl ">
             <div class="app-hero-wrapper d-flex align-items-stretch py-5 py-lg-20 me-lg-n20">
                 <div class="d-flex flex-column justify-content-center py-5 py-lg-10 ">
-                    <h1 class="text-gray-900 fs-3x fw-bolder letter-spacing">
+                    <h1 class="text-gray-700 fs-3x fw-bolder letter-spacing">
+                        Informacion de
+                    </h1>
+                    <h1 class="d-flex text-warning fs-3x fw-bolder letter-spacing">
                         Procesos Electorales
                     </h1>
-{{--                    <h3 class="d-flex text-gray-900 fs-1 fw-bold letter-spacing">--}}
-{{--                        REGISTRO DE MEDIOS--}}
-{{--                    </h3>--}}
-                    <h4 class="d-flex text-gray-900 fs-1 fw-bold letter-spacing">
+                    <h4 class="d-flex text-gray-500 fs-1 fw-bold letter-spacing">
                         <span class="ms-0 d-inline-flex position-relative">
-                            <span class="px-1">Registro de Medios y Propaganda Electoral</span>
+                            <span class="px-0">Registro de Medios y Propaganda Electoral</span>
                         </span>
                     </h4>
                     <p class="text-gray-600 fs-4 lh-2 fw-semibold py-5 py-lg-6">
-                        Sistema dónde podrás encontrar información de los Procesos <br>
-                        Electorales, Lista de Medios Habilitados y Material de Propaganda <br>
+
+                        Sistema dónde podrás encontrar información de los Procesos
+                        Electorales, Lista de Medios Habilitados y Material de Propaganda
                         Electoral de los Partidos Políticos.
                     </p>
-{{--                    <div class="d-flex align-items-center gap-4">--}}
-{{--                        <a href="#" class="btn btn-dark fw-bolder">--}}
-{{--                            Ingresar--}}
-{{--                        </a>--}}
-{{--                        <a href="#" class="btn btn-outline fw-bolder">--}}
-{{--                            Más información--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
+                    <div class="d-flex align-items-center gap-4">
+                        <a href="{{ route('web_form_media') }}" class="btn btn-outline fw-bolder">
+                            Registro de Medios
+                        </a>
+                    </div>
                 </div>
                 <img src="" class="app-hero-img" alt=""/>
             </div>
         </div>
     </div>
 
-    <!--begin:: Section-->
-    <div class="mt-lg-15 mb-lg-20 position-relative z-index-2">
+    <div class="mt-lg-15 mt-15 mb-lg-20 position-relative z-index-2">
         <div class="container">
 
             <div class="text-center mb-17">
@@ -46,6 +43,7 @@
                 </div>
             </div>
 
+            @if(count($elections)>0)
             @foreach($elections as $election)
 
             <div class="card card-flush__ h-md-100__ mb-8" style="filter: drop-shadow(0px 0px 40px rgba(68, 81, 96, 0.08))">
@@ -101,25 +99,18 @@
             </div>
 
             @endforeach
-
-
-{{--            <div class="card" style="filter: drop-shadow(0px 0px 40px rgba(68, 81, 96, 0.08))">--}}
-{{--                <div class="card-body p-lg-20">--}}
-{{--                    <div class="text-center mb-5 mb-lg-10">--}}
-{{--                        <h3 class="fs-2hx text-gray-900 mb-5" id="portfolio" data-kt-scroll-offset="{default: 100, lg: 250}">INICIO</h3>--}}
-{{--                    </div>--}}
-{{--                    <div class="d-flex flex-center mb-5 mb-lg-15">--}}
-
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-
+            @else
+                <div class="card mb-20" style="filter: drop-shadow(0px 0px 40px rgba(68, 81, 96, 0.08))">
+                    <div class="card-body p-lg-20">
+                        <div class="text-center mb-5">
+                           Aún no existe información de Procesos Electorales para mostrar.
+                        </div>
+                    </div>
+                </div>
+            @endif
 
         </div>
     </div>
-    <!--end:: Section-->
-
 
 @endsection
 

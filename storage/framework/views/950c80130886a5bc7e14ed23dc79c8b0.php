@@ -1,6 +1,6 @@
-@extends('vendor@template::landing.layouts.master')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <div class="mt-lg-15 mb-lg-n15 position-relative z-index-2">
         <div class="container">
             <div class="card" style="filter: drop-shadow(0px 0px 40px rgba(68, 81, 96, 0.08))">
@@ -12,9 +12,10 @@
                     <div class="mx-auto w-100 mw-600px pt-10 pb-10" id="form_media_content">
 
                         <form class="" novalidate="novalidate" autocomplete="off"
-                              id="form_media_register" method="post" action="{{ route('web_form_media_store') }}">
+                              id="form_media_register" method="post" action="<?php echo e(route('web_form_media_store')); ?>">
 
-                            {{ csrf_field() }}
+                            <?php echo e(csrf_field()); ?>
+
 
                             <div class="notice d-flex bg-light-info rounded border-info border border-dashed mb-9 p-6">
                                 <i class="ki-duotone ki-information-2 fs-2tx text-info me-4">
@@ -28,7 +29,7 @@
                                         <div class="fs-7 text-gray-700">
                                             Ingrese sus datos para el registro de un nuevo Medio de Comunicación. Este formulario solo debe ser registrado si no tiene ninguna cuenta o
                                             registro previo. Al finalizar el llenado y una vez enviado el formulario, personal del TSE revisará la información y en caso de ser aprobada
-                                            se le enviará un correo electrónico aprobando su registro y sus accesos para el ingreso a la plataforma.
+                                            se le enviará un correo electrónico aprobando su registro y sus accesos para el acceso a la plataforma.
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +131,7 @@
                             </div>
 
                             <div class="text-gray-500 text-center fw-semibold fs-6">¿Ya tienes una cuenta?
-                                <a href="{{ route('ext_admin_login') }}" class="link-primary fw-semibold">Ingresar</a>
+                                <a href="<?php echo e(route('ext_admin_login')); ?>" class="link-primary fw-semibold">Ingresar</a>
                             </div>
 
                         </form>
@@ -145,11 +146,12 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('styles')
-@endsection
+<?php $__env->startSection('styles'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
-    <script src="{{ asset('themes/landing/js/media-registration.js') }}"></script>
-@endsection
+<?php $__env->startSection('scripts'); ?>
+    <script src="<?php echo e(asset('themes/landing/js/media-registration.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('vendor@template::landing.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Development Environment\PHP Environment\Laragon\www\monitoreo-oep\app\Containers\Frontend\Website/UI/WEB/Views//formMedia.blade.php ENDPATH**/ ?>
