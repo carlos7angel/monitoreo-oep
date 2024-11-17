@@ -223,7 +223,7 @@
                         <!--begin::Menu wrapper-->
                         <div class="header-menu flex-column align-items-stretch flex-lg-row">
                             <div class="menu menu-rounded menu-column menu-lg-row menu-root-here-bg-desktop menu-active-bg menu-title-gray-700 menu-state-primary menu-arrow-gray-500 fw-semibold align-items-stretch flex-grow-1 px-2 px-lg-0" id="#kt_header_menu" data-kt-menu="true">
-                                <a href="<?php echo e(route('oep_admin_political_group_list')); ?>" class="menu-item <?php echo e($page === '' ? 'here' : ''); ?> me-0 me-lg-2">
+                                <a href="<?php echo e(route('oep_admin_political_group_list')); ?>" class="menu-item <?php echo e($page === 'political_group_list' ? 'here' : ''); ?> me-0 me-lg-2">
                                     <span class="menu-link py-3">
                                         <span class="menu-title">Todos los registros</span>
                                         <span class="menu-arrow d-lg-none"></span>

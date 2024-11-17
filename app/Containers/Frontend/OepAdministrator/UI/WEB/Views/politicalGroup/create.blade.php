@@ -5,9 +5,11 @@
         <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">NUEVO REGISTRO PARTIDO POLÍTICO</h1>
         <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
             <li class="breadcrumb-item text-gray-600">
-                <a href="javascript;" class="text-gray-600 text-hover-primary">Inicio</a>
+                <a href="{{ route('oep_admin_index') }}" class="text-gray-600 text-hover-primary">Inicio</a>
             </li>
-            <li class="breadcrumb-item text-gray-600">Partidos Políticos</li>
+            <li class="breadcrumb-item text-gray-600">
+                <a href="{{ route('oep_admin_political_group_list') }}" class="text-gray-600 text-hover-primary">Partidos Políticos</a>
+            </li>
             <li class="breadcrumb-item text-gray-500">Nuevo</li>
         </ul>
     </div>

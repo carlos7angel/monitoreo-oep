@@ -60,7 +60,7 @@ var KTPPList = function () {
                 {data: 'name', name: "name"},
                 {data: 'email', name: "email"},
                 {data: 'fid_user', name: "fid_user"},
-                {data: 'foundation_date', name: "foundation_date"},
+                {data: 'created_at', name: "created_at"},
                 {data: 'status', name: "status"},
                 {data: null, responsivePriority: -1},
             ],
@@ -117,14 +117,6 @@ var KTPPList = function () {
                             return `<span class="badge badge-info py-2 px-4">Habilitado</span>`;
                         }
                         return `<span>-</span>`;
-                        // var status = {
-                        //     'active': {'title': 'Activo', 'class': 'badge-info'},
-                        //     'finished': {'title': 'Finalizado', 'class': 'badge-info'},
-                        // };
-                        // if (typeof status[data] === 'undefined') {
-                        //     return data;
-                        // }
-                        // return `<span class="badge ${status[data].class} py-2 px-4">${status[data].title}</span>`;
                     },
                 },
                 {
@@ -133,8 +125,8 @@ var KTPPList = function () {
                     searchable: true,
                     className: 'dt-center pe-0',
                     render: function (data, type, full, meta) {
-                        return `<span>${data}</span>`;
-                        // return `<span>{moment(data).format('DD/MM/YYYY HH:mm')}</span>`;
+                        //return `<span>${data}</span>`;
+                        return `<span>${moment(data).format('DD/MM/YYYY hh:mm A')}</span>`;
 
                     },
                 },
@@ -162,8 +154,12 @@ var KTPPList = function () {
                     className: 'text-end',
                     render: function (data, type, full, meta) {
                         let url = '/admin/partidos-politicos/' + full.id + '/detalle'
+                        let editUrl = '/admin/partidos-politicos/' + full.id + '/editar'
                         return `<a href="${url}" class="btn btn-sm btn-icon btn-secondary">
-                                    <i class="las la-arrow-circle-right fs-2"></i>
+                                    <i class="ki-outline ki-arrow-right text-gray-600 fs-2"></i>
+                                </a>
+                                <a href="${editUrl}" class="btn btn-sm btn-icon btn-secondary">
+                                    <i class="ki-outline ki-pencil text-gray-600 fs-2"></i>
                                 </a>`;
                     },
                 },

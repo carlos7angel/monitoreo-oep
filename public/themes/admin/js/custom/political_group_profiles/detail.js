@@ -195,7 +195,7 @@ var KTPPDetail = function () {
                         },
                         success: function (response) {
                             if (! response.success) {
-                                toastr.warning('Hubo un problema al procesar la solicitud.');
+                                toastr.warning('Hubo un problema al procesar la solicitud. ' + response.message);
                                 return;
                             }
                             Swal.fire({

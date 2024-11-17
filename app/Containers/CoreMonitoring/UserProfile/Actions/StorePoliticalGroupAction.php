@@ -3,6 +3,8 @@
 namespace App\Containers\CoreMonitoring\UserProfile\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
+use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
+use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
 use App\Containers\AppSection\User\Tasks\FindUserByEmailTask;
 use App\Containers\CoreMonitoring\FileManager\Tasks\CreateLogoImagePoliticalGroupTask;
@@ -14,6 +16,9 @@ use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
 use Carbon\Carbon;
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\DocBlock\Tags\Throws;
 
 class StorePoliticalGroupAction extends ParentAction
@@ -34,9 +39,7 @@ class StorePoliticalGroupAction extends ParentAction
     {
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
-        $sanitizedData = $request->sanitizeInput([
-
-        ]);
+        $sanitizedData = $request->sanitizeInput($request->all());
 
 //        $existing_email = app(FindUserByEmailTask::class)->run($request->get('pp_email'));
 //        if ($existing_email) {
@@ -60,14 +63,19 @@ class StorePoliticalGroupAction extends ParentAction
             'registered_at' => Carbon::now()
         ];
 
-        $pp = $this->createUserPoliticalGroupProfileTask->run($data);
+        return DB::transaction(function () use ($data, $request) {
+            $pp = $this->createUserPoliticalGroupProfileTask->run($data);
 
-        if($request->file('pp_logo')) {
-            $dataU = [];
-            $dataU['logo'] = $this->createLogoImagePoliticalGroupTask->run($request->file('pp_logo'), $pp->initials);
-            $pp = $this->updateUserPoliticalGroupProfileTask->run($dataU, $pp->id);
-        }
+            if ($request->file('pp_logo')) {
+                $dataU = [];
+                $dataU['logo'] = $this->createLogoImagePoliticalGroupTask->run($request->file('pp_logo'), $pp->initials);
+                $pp = $this->updateUserPoliticalGroupProfileTask->run($dataU, $pp->id);
+            }
 
-        return $pp;
+            // Add Log
+            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::CREATED_POLITICAL_GROUP, $request->server(), $pp));
+
+            return $pp;
+        });
     }
 }

@@ -65,6 +65,21 @@ class CreateActivityLogTask extends ParentTask
                     $log = 'ESTADO PROCESO ELECTORAL ACTUALIZADO';
                     $message = "EL Proceso Electoral ha cambiado su estado a " . strtoupper($_subject->status);
                     break;
+                case LogConstants::CREATED_POLITICAL_GROUP:
+                    $log = 'PARTIDO POLÍTICO CREADO';
+                    $message = "Partido Político " . $_subject->name . " creado";
+                    break;
+                case LogConstants::UPDATED_POLITICAL_GROUP:
+                    $log = 'PARTIDO POLÍTICO ACTUALIZADO';
+                    $message = "Partido Político " . $_subject->name . " actualizado";
+                    break;
+                case LogConstants::REGISTERED_POLITICAL_GROUP:
+                    $log = 'PARTIDO POLÍTICO REGISTRADO';
+                    $message = "El Partido Político " . $_subject->politicalGroup->name . " ha sido registrado en el Proceso Electoral " . $_subject->election->name;
+                    break;
+
+
+
                 case LogConstants::ENABLED_USER_MEDIA_ACCOUNT:
                     $log = 'CUENTA HABILITADA';
                     $message = "La cuenta de usuario (Medio de Comunicación) para " . $_subject->email . " ha sido habilitada";

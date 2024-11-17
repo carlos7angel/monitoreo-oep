@@ -8,7 +8,7 @@ class GetElectionsByPoliticalGroupProfileJsonDataTableRequest extends ParentRequ
 {
     protected array $access = [
         'permissions' => '',
-        'roles' => '',
+        'roles' => 'super|admin',
     ];
 
     protected array $decode = [

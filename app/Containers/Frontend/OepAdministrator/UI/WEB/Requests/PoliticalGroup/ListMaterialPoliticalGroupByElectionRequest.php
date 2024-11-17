@@ -8,7 +8,7 @@ class ListMaterialPoliticalGroupByElectionRequest extends ParentRequest
 {
     protected array $access = [
         'permissions' => '',
-        'roles' => '',
+        'roles' => 'super|admin',
     ];
 
     protected array $decode = [

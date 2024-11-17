@@ -1,14 +1,14 @@
-@extends('vendor@template::admin.layouts.master', ['page' => 'political_group_list'])
 
-@section('breadcrumbs')
+
+<?php $__env->startSection('breadcrumbs'); ?>
     <div class="page-title d-flex flex-column align-items-start me-3 py-2 py-lg-0 gap-2">
         <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">DETALLE PARTIDO POLÍTICO</h1>
         <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
             <li class="breadcrumb-item text-gray-600">
-                <a href="{{ route('oep_admin_index') }}" class="text-gray-600 text-hover-primary">Inicio</a>
+                <a href="<?php echo e(route('oep_admin_index')); ?>" class="text-gray-600 text-hover-primary">Inicio</a>
             </li>
             <li class="breadcrumb-item text-gray-600">
-                <a href="{{ route('oep_admin_political_group_list') }}" class="text-gray-600 text-hover-primary">Partidos Políticos</a>
+                <a href="<?php echo e(route('oep_admin_political_group_list')); ?>" class="text-gray-600 text-hover-primary">Partidos Políticos</a>
             </li>
             <li class="breadcrumb-item text-gray-500">Detalle</li>
         </ul>
@@ -16,86 +16,86 @@
     <div class="d-flex align-items-center">
 
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="content flex-row-fluid" id="kt_content">
 
         <div class="card mb-5 mb-xxl-8">
             <div class="card-body">
                 <div class="d-flex flex-wrap flex-sm-nowrap">
                     <div class="me-7 mb-4">
-                        @php
+                        <?php
                             if ($pp->logo) {
                                 $logo = asset('storage') . $pp->logo ;
                             } else {
                                 $logo = asset('themes/common/media/images/blank-image.jpg');
                             }
-                        @endphp
+                        ?>
                         <div class="w-100px h-100px w-lg-150px h-lg-150px position-relative border-1 "
-                             style="background-image: url({{$logo}}); background-size: cover; background-position: center">
+                             style="background-image: url(<?php echo e($logo); ?>); background-size: cover; background-position: center">
                         </div>
                     </div>
                     <div class="flex-grow-1">
                         <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center mb-4">
-                                    <a class="text-gray-900 text-hover-primary fs-2 fw-bold me-2">{{ $pp->name }}</a>
-                                    @switch($pp->status)
-                                        @case('CREATED')
+                                    <a class="text-gray-900 text-hover-primary fs-2 fw-bold me-2"><?php echo e($pp->name); ?></a>
+                                    <?php switch($pp->status):
+                                        case ('CREATED'): ?>
                                         <span class="badge badge-info py-1 px-4">Nuevo</span>
-                                        @break
-                                        @case('ACTIVE')
+                                        <?php break; ?>
+                                        <?php case ('ACTIVE'): ?>
                                         <span class="badge badge-success py-1 px-4">Activo</span>
-                                        @break
-                                        @case('ARCHIVED')
+                                        <?php break; ?>
+                                        <?php case ('ARCHIVED'): ?>
                                         <span class="badge badge-danger py-1 px-4">Archivado</span>
-                                        @break
-                                    @endswitch
+                                        <?php break; ?>
+                                    <?php endswitch; ?>
                                 </div>
 
                                 <div class="d-flex flex-wrap fw-semibold fs-6 mb-3 pe-2">
                                     <div class="d-flex align-items-center text-hover-primary">
                                         <span class="me-3 text-gray-500 fs-7">Representate Legal:</span>
-                                        <span class="fs-6 text-gray-900"> {{ $pp->rep_full_name }}</span>
+                                        <span class="fs-6 text-gray-900"> <?php echo e($pp->rep_full_name); ?></span>
                                     </div>
                                 </div>
 
                                 <div class="d-flex flex-wrap fw-semibold fs-6 mb-3 pe-2">
                                     <div class="d-flex align-items-center text-hover-primary">
                                         <span class="me-3 text-gray-500 fs-7">Documento Representate:</span>
-                                        <span class="fs-6 text-gray-900"> {{ $pp->rep_document }} {{ $pp->rep_exp }}</span>
+                                        <span class="fs-6 text-gray-900"> <?php echo e($pp->rep_document); ?> <?php echo e($pp->rep_exp); ?></span>
                                     </div>
                                 </div>
 
                                 <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
                                     <div class="d-flex align-items-center text-hover-primary">
                                         <span class="me-3 text-gray-500 fs-7">Celular Contacto:</span>
-                                        <span class="fs-6 text-gray-900"> {{ $pp->cellphone }}</span>
+                                        <span class="fs-6 text-gray-900"> <?php echo e($pp->cellphone); ?></span>
                                     </div>
                                 </div>
 
                             </div>
                             <div class="d-flex my-4">
-                                @switch($pp->status)
-                                    @case('draft')
+                                <?php switch($pp->status):
+                                    case ('draft'): ?>
                                         <a href="javascript:void(0)" data-url="" data-status="active" class="btn btn-sm btn-info kt_change_election_status">Publicar</a>
-                                    @break
-                                    @case('active')
+                                    <?php break; ?>
+                                    <?php case ('active'): ?>
                                         <a href="javascript:void(0)" data-url="" data-status="unpublished" class="btn btn-sm btn-info kt_change_election_status me-1">Despublicar</a>
                                         <a href="javascript:void(0)" data-url="" data-status="finished" class="btn btn-sm btn-info kt_change_election_status">Finalizar</a>
-                                    @break
-                                    @case('unpublished')
+                                    <?php break; ?>
+                                    <?php case ('unpublished'): ?>
                                         <a href="javascript:void(0)" data-url="" data-status="active" class="btn btn-sm btn-info kt_change_election_status me-1">Publicar</a>
                                         <a href="javascript:void(0)" data-url="" data-status="archived" class="btn btn-sm btn-info kt_change_election_status">Archivar</a>
-                                    @break
-                                    @case('finished')
-                                    @break
-                                    @case('archived')
-                                    @break
-                                    @case('canceled')
-                                    @break
-                                @endswitch
+                                    <?php break; ?>
+                                    <?php case ('finished'): ?>
+                                    <?php break; ?>
+                                    <?php case ('archived'): ?>
+                                    <?php break; ?>
+                                    <?php case ('canceled'): ?>
+                                    <?php break; ?>
+                                <?php endswitch; ?>
 
                             </div>
                         </div>
@@ -104,14 +104,14 @@
                                 <div class="d-flex flex-wrap">
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="fs-5 fw-bold">{{ $pp->initials }}</div>
+                                            <div class="fs-5 fw-bold"><?php echo e($pp->initials); ?></div>
                                         </div>
                                         <div class="fw-semibold fs-7 text-gray-500">Sigla</div>
                                     </div>
 
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="fs-5 fw-bold">{{ $pp->foundation_date }}</div>
+                                            <div class="fs-5 fw-bold"><?php echo e($pp->foundation_date); ?></div>
                                         </div>
                                         <div class="fw-semibold fs-7 text-gray-500">Fecha de Fundación</div>
                                     </div>
@@ -133,33 +133,33 @@
 
                         <div class="d-flex flex-stack mb-5">
                             <div class="fw-bold fs-2">Cuenta</div>
-                            @if($pp->fid_user && $pp->credentials_sent)
+                            <?php if($pp->fid_user && $pp->credentials_sent): ?>
                                 <span class="badge badge-info" >Habilitada</span>
-                            @else
+                            <?php else: ?>
                                 <span class="badge badge-secondary" >No habilitada</span>
-                            @endif
+                            <?php endif; ?>
                         </div>
 
-                        @if($pp->user)
+                        <?php if($pp->user): ?>
                         <div class="separator"></div>
                         <div class="pb-5 fs-6">
                             <div class="fw-bold mt-5">Correo electrónico:</div>
-                            <div class="text-gray-600">{{ $pp->user->email }}</div>
+                            <div class="text-gray-600"><?php echo e($pp->user->email); ?></div>
                             <div class="fw-bold mt-5">Fecha de registro cuenta:</div>
-                            <div class="text-gray-600">{{ $pp->user->created_at }}</div>
+                            <div class="text-gray-600"><?php echo e($pp->user->created_at); ?></div>
 
                         </div>
-                        @else
+                        <?php else: ?>
                         <div class="separator"></div>
                         <div class="pt-5">
-                            <a href="javascript:void(0)" data-url="{{ route('oep_admin_political_group_profile_enable_account', ['id' => $pp->id]) }}" data-status="active" class="btn btn-sm btn-info kt_enable_pp_account">Habilitar cuenta</a>
+                            <a href="javascript:void(0)" data-url="<?php echo e(route('oep_admin_political_group_profile_enable_account', ['id' => $pp->id])); ?>" data-status="active" class="btn btn-sm btn-info kt_enable_pp_account">Habilitar cuenta</a>
                         </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
 
-            @if ($pp->fid_user && $pp->credentials_sent)
+            <?php if($pp->fid_user && $pp->credentials_sent): ?>
             <div class="flex-lg-row-fluid ms-lg-15">
                 <div class="card card-flush flex-row-fluid">
                     <div class="card-header">
@@ -171,7 +171,7 @@
                         </div>
                     </div>
                     <div class="card-body pt-0">
-                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_elections_by_political_group" data-url="{{ route('oep_admin_political_group_elections_json_dt', ['id' => $pp->id]) }}">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_elections_by_political_group" data-url="<?php echo e(route('oep_admin_political_group_elections_json_dt', ['id' => $pp->id])); ?>">
                             <thead>
                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                 <th class="w-10px pe-2">#</th>
@@ -189,13 +189,13 @@
                     </div>
                 </div>
             </div>
-            @endif
+            <?php endif; ?>
         </div>
 
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('modals')
+<?php $__env->startSection('modals'); ?>
     <div class="modal fade" id="kt_modal_registration_pp" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered mw-650px">
             <div class="modal-content rounded">
@@ -208,7 +208,7 @@
                     </div>
                 </div>
                 <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15" id="kt_wrapper_registration_pp">
-                    <form id="kt_registration_pp_form" class="form" method="post" action="{{ route('oep_admin_political_group_register_election', ['id' => $pp->id]) }}">
+                    <form id="kt_registration_pp_form" class="form" method="post" action="<?php echo e(route('oep_admin_political_group_register_election', ['id' => $pp->id])); ?>">
                         <div class="mb-13 text-center">
                             <h1 class="mb-3">Registrar a Proceso Electoral</h1>
                             <div class="text-muted fw-semibold fs-5">Inscribir al Partido Político a un Proceso Electoral</div>
@@ -217,9 +217,9 @@
                             <label class="required fs-6 fw-semibold mb-2">Proceso Electoral</label>
                             <select class="form-select" data-control="select2" data-dropdown-parent="#kt_modal_registration_pp" data-placeholder="Seleccionar" data-allow-clear="true" name="election_id">
                                 <option></option>
-                                @foreach($elections as $election)
-                                <option value="{{ $election->id }}">{{ $election->name }}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $elections; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $election): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($election->id); ?>"><?php echo e($election->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                         <div class="text-center">
@@ -235,13 +235,14 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('styles')
-    <link href="{{ asset('themes/common/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-@endsection
+<?php $__env->startSection('styles'); ?>
+    <link href="<?php echo e(asset('themes/common/plugins/custom/datatables/datatables.bundle.css')); ?>" rel="stylesheet" type="text/css" />
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
-    <script src="{{ asset('themes/common/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('themes/admin/js/custom/political_group_profiles/detail.js') }}"></script>
-@endsection
+<?php $__env->startSection('scripts'); ?>
+    <script src="<?php echo e(asset('themes/common/plugins/custom/datatables/datatables.bundle.js')); ?>"></script>
+    <script src="<?php echo e(asset('themes/admin/js/custom/political_group_profiles/detail.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('vendor@template::admin.layouts.master', ['page' => 'political_group_list'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Development Environment\PHP Environment\Laragon\www\monitoreo-oep\app\Containers\Frontend\OepAdministrator/UI/WEB/Views//politicalGroup/detail.blade.php ENDPATH**/ ?>
