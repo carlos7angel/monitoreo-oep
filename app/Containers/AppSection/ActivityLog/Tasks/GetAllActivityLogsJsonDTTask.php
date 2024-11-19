@@ -69,7 +69,21 @@ class GetAllActivityLogsJsonDTTask extends ParentTask
                 }
             }
 
-            return $query->distinct()->select(['activity_log.*', 'users.name as user_name']);
+            return $query->distinct()->select([
+                'activity_log.id',
+                'activity_log.log_name',
+                'activity_log.description',
+                'activity_log.subject_type',
+                'activity_log.event',
+                'activity_log.subject_id',
+                'activity_log.causer_type',
+                'activity_log.causer_id',
+                'activity_log.ip_address',
+                'activity_log.user_agent',
+                'activity_log.created_at',
+                'activity_log.updated_at',
+                'users.name as user_name'
+            ]);
         });
 
         $recordsTotal =  (clone $result)->count();

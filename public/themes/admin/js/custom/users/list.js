@@ -116,7 +116,9 @@ var KTUsersList = function () {
                     render: function (data, type, full, meta) {
                         var status = {
                             '1': {'title': 'Activo', 'class': 'badge-success'},
+                            'true': {'title': 'Activo', 'class': 'badge-success'},
                             '0': {'title': 'Inactivo', 'class': 'badge-secondary'},
+                            'false': {'title': 'Inactivo', 'class': 'badge-secondary'},
                         };
                         if (typeof status[data] === 'undefined') {
                             return data;

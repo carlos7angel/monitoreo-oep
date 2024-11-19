@@ -153,6 +153,7 @@ var KTMonitoringList = function () {
                             'CREATED': {'title': 'Nuevo', 'class': 'badge-light-info'},
                             'SELECTED': {'title': 'En análisis', 'class': 'badge-light-success'},
                             'ARCHIVED': {'title': 'Archivado', 'class': 'badge-light-danger'},
+                            'FINISHED': {'title': 'Finalizado', 'class': 'badge-light-info'},
                         };
                         if (typeof status[data] === 'undefined') {
                             return data;
