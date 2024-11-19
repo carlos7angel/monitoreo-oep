@@ -75,6 +75,7 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
             // $query = $query->whereIn('status', ['active', 'finished']);
             return $query->distinct()->select([
                 //'monitoring_items.*',
+                'monitoring_items.id',
                 'monitoring_items.registered_at',
                 'monitoring_items.registered_by',
                 'monitoring_items.code',
