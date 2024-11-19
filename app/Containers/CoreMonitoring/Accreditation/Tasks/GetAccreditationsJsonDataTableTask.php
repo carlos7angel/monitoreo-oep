@@ -50,7 +50,7 @@ class GetAccreditationsJsonDataTableTask extends ParentTask
                     ->orWhere('media_accreditations.code', 'like', '%'.$searchValue.'%');
             }
             return $query->distinct()->select(['media_accreditations.*',
-                DB::raw('IFNULL(UPPER(SUBSTRING(media_accreditations.code, 1, 6)), NULL) as accreditation_code'),
+                // DB::raw('IFNULL(UPPER(SUBSTRING(media_accreditations.code, 1, 6)), NULL) as accreditation_code'),
                 'elections.name as election_name', 'elections.code as election_code',
                 'elections.logo_image as election_logo_image',
                 'elections.start_date_media_registration as election_start_date_media_registration',
