@@ -75,7 +75,7 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
             // $query = $query->whereIn('status', ['active', 'finished']);
             return $query->distinct()->select([
                 'monitoring_items.*',
-                DB::raw('CASE WHEN monitoring_items.registered_media = 1 THEN media_profiles.name WHEN monitoring_items.registered_media = 0 THEN monitoring_items.other_media ELSE NULL END AS media_name'),
+                DB::raw('CASE WHEN monitoring_items.registered_media = TRUE THEN media_profiles.name WHEN monitoring_items.registered_media = FALSE THEN monitoring_items.other_media ELSE NULL END AS media_name'),
                 // 'media_profiles.name as media_name',
                 'media_profiles.business_name as media_business_name',
                 'media_profiles.logo as media_logo',
