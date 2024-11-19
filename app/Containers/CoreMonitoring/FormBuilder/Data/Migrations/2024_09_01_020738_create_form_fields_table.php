@@ -70,7 +70,7 @@ return new class() extends Migration {
             $table->longText('logic_condition')->nullable();
             $table->longText('automatic_calculation')->nullable();
 
-            $table->boolean('active')->default(1);
+            $table->tinyInteger('active')->default(1);
             $table->integer('order')->nullable();
 
             $table->timestamps();
