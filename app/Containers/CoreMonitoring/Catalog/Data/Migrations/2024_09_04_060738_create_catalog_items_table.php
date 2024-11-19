@@ -16,7 +16,7 @@ return new class() extends Migration {
             $table->string('code', 10)->nullable();
             $table->string('name', 255);
             $table->text('description')->nullable();
-            $table->boolean('active')->default(true);
+            $table->tinyInteger('active')->default(1);
             $table->string('parent_code', 3)->nullable();
             $table->string('icon', 20)->nullable();
             $table->integer('sort')->nullable();

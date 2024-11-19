@@ -28,7 +28,7 @@ return new class() extends Migration {
             $table->string('default_value')->nullable();
             $table->integer('textarea_rows')->nullable();
             $table->string('type_url', 20)->nullable(); // nohttps or
-            $table->boolean('select_search')->nullable();
+            $table->tinyInteger('select_search')->nullable();
             $table->string('options_type')->nullable();
             $table->longText('options')->nullable(); // from database or static
             $table->string('file_maxsize', 10)->nullable();
@@ -39,8 +39,8 @@ return new class() extends Migration {
             $table->string('date_preview',20)->nullable();
             $table->text('date_range')->nullable();
             $table->unsignedBigInteger('table_form_id')->nullable(); // foreign key?
-            $table->boolean('table_edit_option')->nullable();
-            $table->boolean('table_delete_option')->nullable();
+            $table->tinyInteger('table_edit_option')->nullable();
+            $table->tinyInteger('table_delete_option')->nullable();
             $table->text('text_html')->nullable();
             $table->string('source_image', 320)->nullable();
             $table->string('title_heading', 5)->nullable();
