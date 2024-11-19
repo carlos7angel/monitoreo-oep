@@ -51,7 +51,7 @@
                     <div class="d-flex flex-column flex-lg-row row_ gx-9_ h-100">
                         <div class="flex-column flex-lg-row-auto w-lg-300px w-xl-300px me-10 mb-10_ order-1__ order-lg-2__ col-sm-6_ mb-10_ mb-sm-0_">
                             <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-400px__ min-h-sm-100 h-100">
-                                <img src="{{ asset('storage') . $election->logo_image }}" class="w-100" style="max-height: 160px" alt="Logo Proceso Electoral">
+                                <img src="{{ asset('storage') . $election->logo_image }}" class="w-100__" style="max-height: 160px; max-width: 100%" alt="Logo Proceso Electoral">
 
                             </div>
                         </div>
