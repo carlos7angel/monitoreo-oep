@@ -138,7 +138,11 @@ var KTPPDetail = function () {
                     searchable: true,
                     className: 'dt-center pe-0',
                     render: function (data, type, full, meta) {
-                        return `<span>${full.materials.length}</span>`;
+                        if (data > 0) {
+                            return `<span>${full.materials.length}</span>`;
+                        } else {
+                            return `<span>-</span>`;
+                        }
 
                     },
                 },

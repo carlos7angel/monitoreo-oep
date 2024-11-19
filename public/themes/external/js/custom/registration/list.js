@@ -144,8 +144,11 @@ var KTRegistrationList = function () {
                     searchable: false,
                     className: 'dt-center pe-0',
                     render: function (data, type, full, meta) {
-
-                        return `<span class="text-gray-700">${data}</span>`;
+                        if (data > 0) {
+                            return `<span class="text-gray-700">${data}</span>`;
+                        } else {
+                            return `<span class="text-gray-700">-</span>`;
+                        }
                     },
                 },
                 {
