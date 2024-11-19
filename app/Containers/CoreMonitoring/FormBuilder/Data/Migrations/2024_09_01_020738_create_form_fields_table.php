@@ -46,11 +46,11 @@ return new class() extends Migration {
             $table->string('title_heading', 5)->nullable();
 
             //validation
-            $table->boolean('required')->default(true);
+            $table->tinyInteger('required')->default(1);
             $table->integer('minlength')->nullable();
             $table->integer('maxlength')->nullable();
             $table->string('regex')->nullable();
-            $table->boolean('readonly')->nullable();
+            $table->tinyInteger('readonly')->nullable();
             $table->integer('min')->nullable();
             $table->integer('max')->nullable();
             $table->integer('minselect')->nullable();
