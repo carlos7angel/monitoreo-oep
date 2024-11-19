@@ -8,7 +8,7 @@ class ListAvailableMonitoringItemsForReportRequest extends ParentRequest
 {
     protected array $access = [
         'permissions' => '',
-        'roles' => 'monitor|super|admin',
+        'roles' => 'analyst|super|admin',
     ];
 
     protected array $decode = [

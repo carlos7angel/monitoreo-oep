@@ -141,7 +141,7 @@ class MonitoringController extends WebController
             $monitoring = app(SubmitMonitoringAction::class)->run($request);
             return response()->json([
                 'success' => true,
-                'redirect' => route('oep_admin_monitoring_report_list')
+                'redirect' => route('oep_admin_media_monitoring_by_election', ['id' => $monitoring->fid_election])
             ]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
