@@ -164,6 +164,13 @@
 
                         <h2 class="mt-12 mb-12 text-uppercase">Ficha de Registro de Monitoreo</h2>
 
+                        <div class="d-flex flex-aligns-center mb-5">
+                            <img alt="" class="w-30px me-3" src="{{ asset('themes/common/media/svg/files/pdf.svg') }}">
+                            <div class="ms-1 fw-semibold">
+                                <a href="{{ route('oep_admin_media_monitoring_generate_pdf', ['id' => $monitoringReport->monitoringItem->id]) }}" target="_blank" class="fs-6 text-hover-primary__ fw-bold">Descargar</a>
+                            </div>
+                        </div>
+
                         @php
                             [$form, $fields] = app(\App\Containers\CoreMonitoring\FormBuilder\Actions\GetFieldsFormByTypeAction::class)->run($monitoring_report->monitoringItem->media_type, $monitoring_report->election);
                             $monitoring = $monitoring_report->monitoringItem;

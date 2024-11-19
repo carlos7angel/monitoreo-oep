@@ -8,7 +8,7 @@ class GeneratePdfMonitoringRequest extends ParentRequest
 {
     protected array $access = [
         'permissions' => '',
-        'roles' => 'monitor|super|admin',
+        'roles' => 'monitor|analyst|secretariat|plenary|super|admin',
     ];
 
     protected array $decode = [

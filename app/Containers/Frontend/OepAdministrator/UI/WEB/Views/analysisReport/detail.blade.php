@@ -201,6 +201,9 @@
 
                                 <h4 class="mt-12 mb-12 text-uppercase">Documentos de Análisis</h4>
 
+                                @if($analysis_report->fileAnalysisReport || $analysis_report->fileAnalysisComplementaryReport ||
+                                    $analysis_report->fileAnalysisComplementaryReportPlenary || $analysis_report->fileAnalysisResolutionFirstInstance ||
+                                    $analysis_report->fileAnalysisResolutionFinalInstance)
                                 <div class="pb-5 wrapper_content_files_ro">
 
                                     @if($analysis_report->fileAnalysisReport)
@@ -278,7 +281,7 @@
                                     <div class="separator separator-dashed border-muted my-2"></div>
                                     @endif
                                 </div>
-
+                                @endif
 
                                 <h4 class="mt-12 mb-12 text-uppercase">Ficha de Registro de Monitoreo</h4>
 
