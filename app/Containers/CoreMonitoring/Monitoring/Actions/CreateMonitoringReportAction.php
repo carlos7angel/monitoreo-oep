@@ -36,7 +36,7 @@ class CreateMonitoringReportAction extends ParentAction
         $election = app(FindElectionByIdTask::class)->run($request->election_id);
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
-        if(! $user->hasRole(['monitor', 'admin'])) { // TODO: Remove admin and only let to monitor role
+        if(! $user->hasRole(['monitor'])) {
             throw new AuthorizationException('No tiene los permisos para realizar esta acción');
         }
         $scope_type = $scope_department = null;

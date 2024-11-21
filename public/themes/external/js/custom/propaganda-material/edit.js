@@ -116,7 +116,6 @@ var KTFormFiles = function () {
         cancelButton.addEventListener('click', function (e) {
             e.preventDefault();
 
-            // TODO: check if the form has been edited
 
         });
     }

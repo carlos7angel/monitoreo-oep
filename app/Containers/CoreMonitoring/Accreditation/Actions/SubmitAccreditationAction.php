@@ -45,7 +45,6 @@ class SubmitAccreditationAction extends ParentAction
         if($accreditation->status !== 'observed' && $accreditation->status !== 'draft') {
             throw new NotFoundException('No se puede enviar el proceso de acreditación');
         } else {
-            // TODO: Check la fecha limite de la configuracion del proceso electoral
 
             if($accreditation->status === 'observed') {
                 if($accreditation->due_date_observed) {

@@ -97,7 +97,6 @@ class LoginFieldProcessor
         return null !== $loginFieldValue;
     }
 
-    // TODO: I think this should be moved to a separate class
     public static function mergeValidationRules(array $rules): array
     {
         $allowedLoginFields = config('appSection-authentication.login.fields', ['email' => []]);

@@ -25,7 +25,6 @@ class GetAccreditationsJsonDataTableTask extends ParentTask
     public function run(Request $request): mixed
     {
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('external');
-        //TODO: By user profile?
 
         $requestData = $request->all();
         $draw = $requestData['draw'];

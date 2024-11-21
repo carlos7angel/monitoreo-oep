@@ -61,7 +61,7 @@ class StoreMonitoringAction extends ParentAction
         $form = app(FindFormByIdTask::class)->run($form_id);
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
-        if (! $user->hasRole(['monitor', 'admin', 'super'])) { // TODO: Remove admin and only let to monitor role
+        if (! $user->hasRole(['monitor'])) {
             throw new AuthorizationException('No tiene los permisos para realizar esta acción');
         }
 
@@ -69,9 +69,6 @@ class StoreMonitoringAction extends ParentAction
             'code' => md5(Carbon::now()->timestamp . $user->id .  $request->media_profile . Str::random(24)),
             'media_type' => $request->oep_media_type,
             'fid_election' => $election->id,
-//            'fid_media_profile' => $request->media_profile,
-//            'registered_media' => $request->media_registered,
-//            'other_media' => $request->media_profile_text,
             'fid_form' => $form->id,
             'status' => 'CREATED',
             'registered_by' => $user->id,

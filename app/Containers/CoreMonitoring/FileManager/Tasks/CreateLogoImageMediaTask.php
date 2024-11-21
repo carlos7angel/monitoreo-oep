@@ -20,7 +20,7 @@ class CreateLogoImageMediaTask extends ParentTask
      */
     public function run($file, $name): mixed
     {
-        $type = 'local'; // TODO: config-file
+        $type = 'local';
 
         //$sanitize_name = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
         $sanitize_name = Str::slug($name);

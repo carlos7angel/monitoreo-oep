@@ -20,7 +20,7 @@ class CreateLogoImageElectionTask extends ParentTask
      */
     public function run($file, $id): mixed
     {
-        $type = 'local'; // TODO: config-file
+        $type = 'local';
 
         $sanitize_name = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
         $unique_code = md5(Carbon::now()->timestamp . $sanitize_name .  $file->getSize() . $file->getMimeType() . Str::random(24));

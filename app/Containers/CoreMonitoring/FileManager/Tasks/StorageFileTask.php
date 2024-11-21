@@ -18,9 +18,9 @@ class StorageFileTask extends ParentTask
      */
     public function run($file, $path, $new_name): array
     {
-        $type = 'local'; // TODO: config-file
+        $type = 'local';
 
-//        try {
+        try {
             switch ($type){
                 case 'local':
                     $upload = Storage::disk('local-uploads')->putFileAs($path, $file, $new_name);
@@ -31,10 +31,10 @@ class StorageFileTask extends ParentTask
                     throw new NotFoundException('El tipo de almacenamiento no existe.');
                     break;
             }
-//        }
-//        catch (Exception $exception) {
-//            throw (new CreateResourceFailedException('Ocurrió un problema al subir un archivo en el servidor.'))->debug($exception);
-//        }
+        }
+        catch (Exception $exception) {
+            throw (new CreateResourceFailedException('Ocurrió un problema al subir un archivo en el servidor.'))->debug($exception);
+        }
 
         if(!$upload) {
             throw new CreateResourceFailedException('No se puede subir el archivo.');

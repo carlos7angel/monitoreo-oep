@@ -78,11 +78,6 @@ var KTAccreditationElection = function () {
                                 success: function (response) {
                                     if (response.success) {
 
-                                        // // render TODO:
-                                        // $('.kt_data_accreditation_code').html(response.accreditation.code);
-                                        // stepper.goNext();
-                                        // KTUtil.scrollTop();
-
                                         window.location = response.redirect;
 
                                     } else {

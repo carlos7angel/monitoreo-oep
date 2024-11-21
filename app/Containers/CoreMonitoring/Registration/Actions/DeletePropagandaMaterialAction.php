@@ -23,8 +23,6 @@ class DeletePropagandaMaterialAction extends ParentAction
     {
         $del = $this->task->run($request->id);
 
-        //TODO: delete file from storage
-
         return $del;
     }
 }

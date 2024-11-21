@@ -20,7 +20,7 @@ class CreateLogoImagePoliticalGroupTask extends ParentTask
      */
     public function run($file, $name): mixed
     {
-        $type = 'local'; // TODO: config-file
+        $type = 'local';
 
         $sanitize_name = Str::slug($name);
         $unique_code = md5(Carbon::now()->timestamp . $sanitize_name .  $file->getSize() . $file->getMimeType() . Str::random(24));

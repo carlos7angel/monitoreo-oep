@@ -59,7 +59,6 @@ class UpdateElectionAction extends ParentAction
             if($request->file('election_affidavit_file_registration_media')) {
                 $file_bases = $this->createFileTask->run($request->file('election_affidavit_file_registration_media'), 'election', $election->id, $user);
                 $data['file_affidavit_media_registration'] = $file_bases->unique_code;
-                // TODO: set status to ARCHIVED the old one
             }
         } else {
             $data['enable_for_media_registration'] = false;
@@ -68,7 +67,6 @@ class UpdateElectionAction extends ParentAction
             $data['fid_form_media_registration'] = null;
             $data['due_days_observed_media_registration'] = null;
             $data['file_affidavit_media_registration'] = null;
-            // TODO: set status to ARCHIVED the old one
         }
 
         if($request->has('election_enable_monitoring')) {

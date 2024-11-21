@@ -45,7 +45,7 @@ class CreateAnalysisReportAction extends ParentAction
         }
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
-        if(! $user->hasRole(['analyst'])) { // TODO: Only let to monitor role && add other kind of actions like just let role with TSE or TED
+        if(! $user->hasRole(['analyst'])) {
             throw new AuthorizationException('No tiene los permisos para realizar esta acción');
         }
 
