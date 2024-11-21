@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Apiato</title>
+    <title>OEP</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -92,20 +92,11 @@
 <body>
 <div class="flex-center position-ref full-height">
     <div class="content">
-        @guest
-{{--            <a href="{{ route('login-page') }}" class="top-right button">Login</a>--}}
-        @endguest
 
-        @auth('web')
-{{--            <form id="form" action="{{ route('logout') }}" method="POST">@csrf</form>--}}
-{{--            <a class="top-right button" href="javascript:void(0)" onclick="document.getElementById('form').submit()">Logout</a>--}}
-        @endauth
-
-        <div class="title m-b-md">Apiato</div>
+        <div class="title m-b-md">OEP</div>
 
         <div class="links m-b-md">
-            <a href="https://apiato.io/">Documentation</a>
-            <a href="https://github.com/apiato/apiato">GitHub</a>
+            <a href="">Documentation</a>
         </div>
 
         <hr class="rounded m-b-md">

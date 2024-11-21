@@ -62,11 +62,6 @@
                             <img src="{{ asset('themes/common/media/images/user_blank.png') }}" alt="" />
                         </div>
 
-{{--                        <div class="symbol symbol-30px symbol-md-40px">--}}
-{{--                            <div class="symbol-label bg-light-primary">--}}
-{{--                                <span class="text-primary">{{ strtoupper(substr(Auth::guard('web')->user()->name, 0, 1)) }}</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
 
 
                     </div>
@@ -147,15 +142,7 @@
                                         <span class="menu-arrow d-lg-none"></span>
                                     </span>
                                 </a>
-                                <!--end:Menu item-->
-                                <!--begin:Menu item-->
-{{--                                <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">--}}
-{{--                                    <span class="menu-link py-3">--}}
-{{--                                        <span class="menu-title">Help</span>--}}
-{{--                                        <span class="menu-arrow d-lg-none"></span>--}}
-{{--                                    </span>--}}
-{{--                                </div>--}}
-                                <!--end:Menu item-->
+
                             </div>
                             <!--end::Menu-->
                         </div>

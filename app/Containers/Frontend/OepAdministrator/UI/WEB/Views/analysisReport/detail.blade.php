@@ -390,25 +390,7 @@
                             </div>
                             @endforeach
 
-{{--                            <div class="timeline-item">--}}
-{{--                                <!--begin::Label-->--}}
-{{--                                <div class="timeline-label fw-bold text-gray-800 fs-6 min-w-175px">21:03</div>--}}
-{{--                                <!--end::Label-->--}}
-{{--                                <!--begin::Badge-->--}}
-{{--                                <div class="timeline-badge">--}}
-{{--                                    <i class="ki-duotone ki-abstract-8 text-gray-600 fs-3">--}}
-{{--                                        <span class="path1"></span>--}}
-{{--                                        <span class="path2"></span>--}}
-{{--                                    </i>--}}
-{{--                                </div>--}}
-{{--                                <!--end::Badge-->--}}
-{{--                                <!--begin::Desc-->--}}
-{{--                                <div class="timeline-content fw-semibold text-gray-800 ps-3">--}}
-{{--                                    New order placed--}}
-{{--                                    <span class="text-primary">#XF-2356</span>.--}}
-{{--                                </div>--}}
-{{--                                <!--end::Desc-->--}}
-{{--                            </div>--}}
+
                         </div>
                     </div>
                 </div>

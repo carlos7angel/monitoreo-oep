@@ -110,7 +110,7 @@
 
                             @php
                                 $mimes = is_array(json_decode($field->file_mimetypes)) ? implode(',',json_decode($field->file_mimetypes)) : '';
-// dd($mimes);
+
                             @endphp
 
 {{--                            @if($accreditation->fileRequestLetter)--}}

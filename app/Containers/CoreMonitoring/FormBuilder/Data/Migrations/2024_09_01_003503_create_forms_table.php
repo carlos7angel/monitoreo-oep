@@ -17,7 +17,7 @@ return new class() extends Migration {
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->enum('form_type', ['form', 'subform'])->default('form');
             $table->unsignedBigInteger('form_parent_id')->nullable();
-            $table->tinyInteger('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->longText('form_schema_config')->nullable();
             $table->longText('form_schema_web')->nullable();
             $table->text('form_settings')->nullable();

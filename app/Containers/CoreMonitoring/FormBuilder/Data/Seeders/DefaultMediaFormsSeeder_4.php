@@ -14,7 +14,7 @@ class DefaultMediaFormsSeeder_4 extends ParentSeeder
         Model::unguard();
 
         $filePath1 = database_path('SQL/forms.sql');
-        $filePath2 = database_path('SQL/form_fields.sql');
+        $filePath2 = database_path('SQL/form_fields_pgsql.sql');
 
         if(File::exists($filePath1) && File::exists($filePath2)){
             DB::unprepared(file_get_contents($filePath1));

@@ -12,7 +12,7 @@ return new class() extends Migration {
             $table->string('code', 10)->unique();
             $table->string('name', 255);
             $table->text('description')->nullable();
-            $table->tinyInteger('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->timestamps();
             // $table->softDeletes();
             $table->index('code');

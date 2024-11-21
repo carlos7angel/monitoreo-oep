@@ -16,7 +16,7 @@ return new class() extends Migration {
             $table->enum('category', ['form_element', 'html_element', 'advanced_element'])->default('form_element');
             $table->text('options')->nullable();
             $table->string('icon', 20);
-            $table->tinyInteger('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

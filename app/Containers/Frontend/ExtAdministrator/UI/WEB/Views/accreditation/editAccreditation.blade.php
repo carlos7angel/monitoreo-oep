@@ -267,19 +267,6 @@
                                 <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>
                             </div>
 
-{{--                            <div class="fv-row mb-10">--}}
-{{--                                @if($accreditation->filePricingList)--}}
-{{--                                    <input type="hidden" name="file_pricing_list" data-name="{{ $accreditation->filePricingList->origin_name }}" data-size="{{ $accreditation->filePricingList->size }}"--}}
-{{--                                           data-mimetype="{{ $accreditation->filePricingList->mime_type }}" data-path="{{ $accreditation->filePricingList->url_file }}">--}}
-{{--                                @endif--}}
-{{--                                <label class="fs-6 fw-semibold form-label mt-3">--}}
-{{--                                    <span class="required">Tarifario</span>--}}
-{{--                                </label>--}}
-{{--                                <div class="text-muted fs-7 mb-3">Tarifario del medio expresado en moneda nacional. Las tarifas inscritas no pueden ser superiores al promedio de las tarifas cobradas efectivamente por concepto de publicidad comercial durante el semestre previo al acto electoral.</div>--}}
-{{--                                <input type="file" name="media_file_pricing_list" class="files"--}}
-{{--                                       id="kt_media_file_pricing_list" data-maxsize="5" data-maxfiles="1" data-accept="pdf">--}}
-{{--                                <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF</div>--}}
-{{--                            </div>--}}
 
                             </div>
                         </div>

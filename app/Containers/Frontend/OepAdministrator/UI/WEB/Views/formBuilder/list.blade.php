@@ -37,13 +37,7 @@
         </div>
 
         <div class="card card-flush">
-{{--            <div class="card-header align-items-center py-5 gap-2 gap-md-5">--}}
-{{--                <div class="card-title">--}}
-{{--                    --}}
-{{--                </div>--}}
-{{--                <div class="card-toolbar flex-row-fluid justify-content-end gap-5">--}}
-{{--                </div>--}}
-{{--            </div>--}}
+
             <div class="card-body">
                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_forms" data-url="{{ route('oep_admin_forms_json_dt') }}">
                     <thead>
@@ -57,34 +51,7 @@
                     </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">
-{{--                    <tr>--}}
-{{--                        <td><span class="fw-bold">1</span></td>--}}
-{{--                        <td class="text-center pe-0">F01001</td>--}}
-{{--                        <td>--}}
-{{--                            <span class="text-gray-800 text-hover-primary-x fs-5 fw-bold">Formulario de Registro de Medios 2024</span>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-center pe-0">--}}
-{{--                            <div class="badge badge-light-danger">Inactive</div>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-center pe-0">02/10/2024 12:52 pm</td>--}}
-{{--                        <td class="text-end">--}}
-{{--                            <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="las la-wallet fs-2"></i></a>--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td><span class="fw-bold">2</span></td>--}}
-{{--                        <td class="text-center pe-0">F01032</td>--}}
-{{--                        <td>--}}
-{{--                            <span class="text-gray-800 text-hover-primary-x fs-5 fw-bold">Formulario de Monitoreo de TV</span>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-center pe-0">--}}
-{{--                            <div class="badge badge-light-success">Publicado</div>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-center pe-0">02/10/2024 12:52 pm</td>--}}
-{{--                        <td class="text-end">--}}
-{{--                            <a href="#" class="btn btn-sm btn-icon btn-secondary"><i class="las la-wallet fs-2"></i></a>--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
+
                     </tbody>
                 </table>
             </div>

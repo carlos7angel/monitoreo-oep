@@ -97,17 +97,6 @@
                                     <input type="text" class="form-control datepicker_flatpickr" placeholder="" name="election_end_date_registration_media" value="{{ $election->end_date_media_registration }}" />
                                 </div>
                             </div>
-    {{--                        <div class="mb-10 fv-row">--}}
-    {{--                            <label for="kt_add_election_registration_media_form" class="form-label">Formulario adicional</label>--}}
-    {{--                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Seleccionar"--}}
-    {{--                                    id="kt_add_election_registration_media_form" name="election_subform_registration_media">--}}
-    {{--                                <option></option>--}}
-    {{--                                @foreach($forms as $index => $form)--}}
-    {{--                                    <option value="{{ $form->id }}" {{ $election->fid_form_media_registration == $form->id ? 'selected="selected"' : '' }} >{{ $form->name }}</option>--}}
-    {{--                                @endforeach--}}
-    {{--                            </select>--}}
-    {{--                            <div class="text-muted fs-7">Seleccione un formulario de registro de datos adicionales.</div>--}}
-    {{--                        </div>--}}
 
                             <div class="fv-row mb-10">
                                 @if($election->fileAffidavitMediaRegistration)
