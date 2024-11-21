@@ -85,7 +85,7 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
                 'monitoring_items.fid_election',
                 'monitoring_items.status',
                 'monitoring_items.created_at',
-                DB::raw('CASE WHEN monitoring_items.registered_media = 1 THEN media_profiles.name WHEN monitoring_items.registered_media = 0 THEN monitoring_items.other_media ELSE NULL END AS media_name'),
+                DB::raw('CASE WHEN monitoring_items.registered_media = TRUE THEN media_profiles.name WHEN monitoring_items.registered_media = FALSE THEN monitoring_items.other_media ELSE NULL END AS media_name'),
                 // 'media_profiles.name as media_name',
                 'media_profiles.business_name as media_business_name',
                 'media_profiles.logo as media_logo',
