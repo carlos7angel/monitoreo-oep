@@ -1,36 +1,24 @@
 {
     "name": "apiato/apiato",
     "type": "project",
-    "description": "A flawless framework for building scalable and testable API-Centric Apps with PHP and Laravel.",
+    "description": "Application for OEP based on flawless framework for building scalable and testable API-Centric Apps with PHP and Laravel.",
     "keywords": [
-        "Apiato",
-        "API",
-        "Framework",
-        "API framework",
-        "API Starter",
-        "PHP API Starter",
+        "OEP",
+        "TSE",
         "Laravel API",
         "PHP",
-        "Porto",
-        "Porto SAP"
     ],
     "license": "MIT",
-    "homepage": "https://apiato.io/",
+    "homepage": "",
     "support": {
-        "issues": "https://github.com/apiato/apiato/issues",
-        "source": "https://github.com/apiato/apiato"
+        "issues": "",
+        "source": ""
     },
     "authors": [
         {
-            "name": "Mahmoud Zalt",
-            "email": "mahmoud@zalt.me",
+            "name": "Carlos Alejo",
+            "email": "carlos7angel@gmail.com",
             "role": "Author"
-        },
-        {
-            "name": "Mohammad Alavi",
-            "email": "mohammad.alavi1990@gmail.com",
-            "homepage": "https://mohammadalavi.com/",
-            "role": "Maintainer"
         }
     ],
     "require": {

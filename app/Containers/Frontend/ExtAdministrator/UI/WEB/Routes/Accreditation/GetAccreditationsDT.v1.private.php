@@ -7,5 +7,5 @@ Route::post('/acreditaciones/json', [AccreditationController::class, 'listAccred
     ->prefix(config('app.admin_external_prefix'))
     ->name('ext_admin_accreditations_list_json_dt')
     ->middleware(['auth:external'])
-    ->domain(parse_url(config('app.admin_ext_url'))['host']);
+    ->domain(parse_url(config('app.url'))['host']);
 

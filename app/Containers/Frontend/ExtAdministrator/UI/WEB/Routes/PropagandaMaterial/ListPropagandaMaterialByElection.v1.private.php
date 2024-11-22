@@ -7,5 +7,5 @@ Route::get('/registros/elecciones/{id}/material-propaganda', [PropagandaMaterial
     ->prefix(config('app.admin_external_prefix'))
     ->name('ext_admin_propaganda_material_by_election_list')
     ->middleware(['auth:external'])
-    ->domain(parse_url(config('app.admin_ext_url'))['host']);
+    ->domain(parse_url(config('app.url'))['host']);
 

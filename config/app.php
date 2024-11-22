@@ -57,12 +57,6 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'admin_oep_url' => env('APP_ADMIN_OEP_URL', 'http://localhost'),
-
-    'admin_ext_url' => env('APP_ADMIN_EXT_URL', 'http://localhost'),
-
-    'guest_web_url' => env('APP_GUEST_WEB_URL', 'http://localhost'),
-
     'asset_url' => env('ASSET_URL'),
 
     'admin_oep_prefix' => 'admin',

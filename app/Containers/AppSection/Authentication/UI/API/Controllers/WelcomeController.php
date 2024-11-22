@@ -9,11 +9,11 @@ class WelcomeController extends ApiController
 {
     public function unversioned(): JsonResponse
     {
-        return response()->json('Welcome to Apiato');
+        return response()->json('Bienvenido al Sistema de Monitoreo y Propaganda Electoral (OEP)');
     }
 
     public function versioned(): JsonResponse
     {
-        return response()->json('Welcome to Apiato (API V1)');
+        return response()->json('Bienvenido al Sistema de Monitoreo y Propaganda Electoral (OEP)(API V1)');
     }
 }

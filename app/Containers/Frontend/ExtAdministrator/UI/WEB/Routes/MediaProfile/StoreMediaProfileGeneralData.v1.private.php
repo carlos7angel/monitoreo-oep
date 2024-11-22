@@ -7,5 +7,5 @@ Route::post('/medio-comunicacion/general', [MediaProfileController::class, 'stor
     ->prefix(config('app.admin_external_prefix'))
     ->name('ext_admin_media_profile_general_data_store')
     ->middleware(['auth:external'])
-    ->domain(parse_url(config('app.admin_ext_url'))['host']);
+    ->domain(parse_url(config('app.url'))['host']);
 

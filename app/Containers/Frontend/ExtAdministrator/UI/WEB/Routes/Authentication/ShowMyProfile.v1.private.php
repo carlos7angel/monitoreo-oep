@@ -7,5 +7,5 @@ Route::prefix(config('app.admin_external_prefix'))->group(function () {
     Route::get('/perfil', [AuthController::class, 'showMyProfile'])
         ->name('ext_admin_media_my_profile')
         ->middleware(['auth:external'])
-        ->domain(parse_url(config('app.admin_ext_url'))['host']);
+        ->domain(parse_url(config('app.url'))['host']);
 });

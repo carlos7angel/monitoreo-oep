@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Apiato</title>
+    <title>OEP</title>
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
@@ -34,9 +34,9 @@
 <body>
 
 <div class="unauthorized-page">
-    <h1 class="center">Access Denied</h1>
-    <p class="center">You are not authorized to access this page.</p>
-    <div class="center"><a href="/">Home</a></div>
+    <h1 class="center">Acceso Denegado</h1>
+    <p class="center">Usted no esta autorizado para acceder a esta página.</p>
+    <div class="center"><a href="/">Inicio</a></div>
 </div>
 
 </body>
