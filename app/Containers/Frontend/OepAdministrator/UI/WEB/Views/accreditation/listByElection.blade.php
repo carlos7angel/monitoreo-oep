@@ -51,22 +51,10 @@
                             <div class="d-flex flex-wrap">
                                 <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                     <div class="d-flex align-items-center">
-                                        <div class="fs-4 fw-bold">{{ $election->end_date_media_registration }}</div>
+                                        <div class="fs-6 fw-bold">{{ $election->end_date_media_registration }}</div>
                                     </div>
                                     <div class="fw-semibold fs-6 text-gray-500">Plazo accreditaciones</div>
                                 </div>
-                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                    <div class="d-flex align-items-center">
-                                        <div class="fs-3 fw-bold" data-kt-countup="true" data-kt-countup-value="-">-</div>
-                                    </div>
-                                    <div class="fw-semibold fs-6 text-gray-500">Total Registros</div>
-                                </div>
-{{--                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">--}}
-{{--                                    <div class="d-flex align-items-center">--}}
-{{--                                        <div class="fs-3 fw-bold" data-kt-countup="true" data-kt-countup-value="12">0</div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="fw-semibold fs-6 text-gray-500">Acreditados</div>--}}
-{{--                                </div>--}}
                             </div>
                         </div>
                     </div>
@@ -100,6 +88,9 @@
                     <div class="d-flex align-items-center">
                         <button type="submit" id="kt_search" class="btn btn-sm btn-secondary fs-7 me-2">Buscar</button>
                         <button type="button" id="kt_reset" class="btn btn-sm btn-light-secondary fs-7 me-5">Limpiar</button>
+                        <a href="{{ route('oep_admin_media_accreditations_by_election_xls', ['id' => $election->id]) }}" target="_blank" class="btn btn-sm btn-secondary fs-7 me-5">
+                            <i class="fa fa-file-excel  me-1"></i> Reporte XLS
+                        </a>
                     </div>
                 </div>
             </div>

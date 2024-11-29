@@ -6,14 +6,10 @@
         "OEP",
         "TSE",
         "Laravel API",
-        "PHP",
+        "PHP"
     ],
     "license": "MIT",
-    "homepage": "",
-    "support": {
-        "issues": "",
-        "source": ""
-    },
+    "homepage": "https://oep.org.bo/",
     "authors": [
         {
             "name": "Carlos Alejo",
@@ -34,6 +30,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",
         "laravel/tinker": "^2.8",
+        "maatwebsite/excel": "^3.1",
         "webmozart/assert": "^1.11",
         "wikimedia/composer-merge-plugin": "^2.1"
     },

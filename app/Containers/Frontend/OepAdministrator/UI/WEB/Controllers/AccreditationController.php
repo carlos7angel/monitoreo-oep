@@ -3,6 +3,7 @@
 namespace App\Containers\Frontend\OepAdministrator\UI\WEB\Controllers;
 
 use App\Containers\CoreMonitoring\Accreditation\Actions\GeneratePdfAccreditationAction;
+use App\Containers\CoreMonitoring\Accreditation\Actions\GenerateXlsAccreditationsByElectionAction;
 use App\Containers\CoreMonitoring\Accreditation\Actions\GetAdminAccreditationsByElectionJsonDataTableAction;
 use App\Containers\CoreMonitoring\Accreditation\Actions\GetAdminElectionsForAccreditationsJsonDataTableAction;
 use App\Containers\CoreMonitoring\Accreditation\Actions\UpdateStatusAccreditationAction;
@@ -15,6 +16,7 @@ use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Accreditation\ListA
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Accreditation\ListElectionsForAccreditationJsonDtRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Accreditation\ListElectionsForAccreditationRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Accreditation\ReportPdfAccreditationRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Accreditation\ReportXlsAccreditationsByElectionRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Accreditation\UpdateStatusAccreditationRequest;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Controllers\WebController;
@@ -80,10 +82,20 @@ class AccreditationController extends WebController
 
     public function pdfAccreditation(ReportPdfAccreditationRequest $request)
     {
-//        try {
+        try {
             return app(GeneratePdfAccreditationAction::class)->run($request);
-//        } catch (Exception $e) {
-//            throw new NotFoundException('No se pudo generar el archivo PDF');
-//        }
+        } catch (Exception $e) {
+            throw new NotFoundException('No se pudo generar el archivo PDF');
+        }
     }
+
+    public function xlsAccreditationsByElection(ReportXlsAccreditationsByElectionRequest $request)
+    {
+        try {
+            return app(GenerateXlsAccreditationsByElectionAction::class)->run($request);
+        } catch (Exception $e) {
+            throw new NotFoundException('No se pudo generar el archivo PDF');
+        }
+    }
+
 }
