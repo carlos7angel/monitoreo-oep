@@ -54,9 +54,19 @@
                         </div>
                         <div class="col-xxl-4">
                             <label class="fs-6 form-label fw-bold text-gray-900">Estado</label>
-                            <select class="form-select form-select-solid datatable-input" data-col-index="4" name="kt_search_status" data-control="select2" data-placeholder="Seleccionar" data-hide-search="true">
+                            <select class="form-select form-select-solid datatable-input" data-col-index="5" name="kt_search_status" data-control="select2" data-placeholder="Seleccionar" data-hide-search="true">
                                 <option value=""></option>
                                 <option value="NEW">Nuevos</option>
+                                <option value="REJECTED">Rechazado</option>
+                                <option value="UNTREATED">No Tratado</option>
+                                <option value="IN_TREATMENT">En Tratamiento</option>
+                                <option value="COMPLEMENTARY_REPORT">Con Informe Complementario</option>
+                                <option value="UNTREATED_PLENARY">No Tratado (Sala Plena)</option>
+                                <option value="IN_TREATMENT_PLENARY">En Tratamiento (Sala Plena)</option>
+                                <option value="COMPLEMENTARY_REPORT_PLENARY">Informe Complementario (Sala Plena)</option>
+                                <option value="SECOND_INSTANCE_RESOLUTION">Con Resolución en 2da Instancia</option>
+                                <option value="FINALIZED">Con Resolución Final</option>
+                                <option value="ARCHIVED">Archivado</option>
                             </select>
                         </div>
                     </div>

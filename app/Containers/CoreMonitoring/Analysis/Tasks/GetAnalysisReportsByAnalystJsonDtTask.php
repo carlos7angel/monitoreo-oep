@@ -39,7 +39,7 @@ class GetAnalysisReportsByAnalystJsonDtTask extends ParentTask
 
         $searchFieldCode = $requestData['columns'][1]['search']['value'];
         $searchFieldElection = $requestData['columns'][2]['search']['value'];
-        $searchFieldStatus = $requestData['columns'][3]['search']['value'];
+        $searchFieldStatus = $requestData['columns'][5]['search']['value'];
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 

@@ -39,7 +39,7 @@ class GetAnalysisReportsByPlenaryJsonDtTask extends ParentTask
 
         $searchFieldCode = $requestData['columns'][1]['search']['value'];
         $searchFieldElection = $requestData['columns'][2]['search']['value'];
-        $searchFieldStatus = $requestData['columns'][3]['search']['value'];
+        $searchFieldStatus = $requestData['columns'][5]['search']['value'];
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
@@ -81,7 +81,8 @@ class GetAnalysisReportsByPlenaryJsonDtTask extends ParentTask
                 $query = $query->where('analysis_reports.status', '=', $searchFieldStatus);
             }
 
-            $query = $query->whereIn('analysis_reports.status', ['REJECTED', 'UNTREATED_PLENARY', 'IN_TREATMENT_PLENARY', 'COMPLEMENTARY_REPORT_PLENARY', 'FINALIZED', 'ARCHIVED']);
+            $query = $query->whereIn('analysis_reports.status', ['REJECTED', 'UNTREATED_PLENARY',
+                'IN_TREATMENT_PLENARY', 'COMPLEMENTARY_REPORT_PLENARY', 'SECOND_INSTANCE_RESOLUTION', 'FINALIZED', 'ARCHIVED']);
 
             return $query->distinct()->select([
                 'analysis_reports.*',

@@ -29,5 +29,7 @@ aliases
 /public/vendor
 .bash_aliases
 .DS_Store
+/bootstrap/cache/
 /storage/app/public/
 /storage/framework/sessions/
+/storage/framework/views/
