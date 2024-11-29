@@ -38,6 +38,7 @@ class RegisterMediaProfileAction extends ParentAction
             'media_rep_name',
             'media_cellphone',
             'media_email',
+            'media_website',
         ]);
 
         $media_profiles = $this->getUserMediaProfilesByEmailTask->run($sanitizedData['media_email']);
@@ -59,6 +60,7 @@ class RegisterMediaProfileAction extends ParentAction
             'media_type_radio' => $request->has('media_type_radio'),
             'media_type_print' => $request->has('media_type_print'),
             'media_type_digital' => $request->has('media_type_digital'),
+            'website' => $sanitizedData['media_website'],
         ];
 
         return DB::transaction(function () use ($data, $request) {

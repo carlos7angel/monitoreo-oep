@@ -111,26 +111,20 @@ var KTMediaList = function () {
                     className: 'pe-0',
                     render: function (data, type, full, meta) {
 
-                        console.log(full);
-
                         let types = ``;
-                        if (parseInt(full.media_type_television)) {
+                        if (full.media_type_television) {
                             types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Televisivo</div>`
                         }
-                        if (parseInt(full.media_type_radio)) {
+                        if (full.media_type_radio) {
                             types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Radial</div>`
                         }
-                        if (parseInt(full.media_type_print)) {
+                        if (full.media_type_print) {
                             types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Impreso</div>`
                         }
-                        if (parseInt(full.media_type_digital)) {
+                        if (full.media_type_digital) {
                             types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Digital</div>`
                         }
-                        // let types = JSON.parse(data);
-                        // let text = ``;
-                        // types.forEach((el) => {
-                        //     text = text + `<div class="badge badge-secondary py-2 px-4 me-2">${el}</div>`
-                        // });
+
                         return `<span>${types}</span>`;
                     },
                 },
@@ -140,7 +134,7 @@ var KTMediaList = function () {
                     searchable: true,
                     className: 'dt-center pe-0',
                     render: function (data, type, full, meta) {
-                        return `<span class="text-gray-900">${moment(data).format('DD/MM/YYYY HH:mm')}</span>`;
+                        return `<span class="text-gray-900">${data}</span>`;
                     },
                 },
                 {

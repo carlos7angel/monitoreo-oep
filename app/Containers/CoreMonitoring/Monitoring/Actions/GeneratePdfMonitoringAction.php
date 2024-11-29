@@ -44,7 +44,6 @@ class GeneratePdfMonitoringAction extends ParentAction
 
         $filename = 'RegistroDeMonitoreo_'. Str::slug($monitoring_item->code).'.pdf';
 
-        //$pdf = Pdf::loadView('frontend@oepAdministrator.monitoring::monitoringPDF', [
         $pdf = Pdf::loadView('pdf.monitoringPDF', [
             'election' => $election,
             'monitoring' => $monitoring_item,

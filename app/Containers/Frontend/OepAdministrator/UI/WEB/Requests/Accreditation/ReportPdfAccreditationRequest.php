@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Containers\Frontend\Website\UI\WEB\Requests;
+namespace App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Accreditation;
 
 use App\Ship\Parents\Requests\Request as ParentRequest;
 
-class StoreFormMediaRequest extends ParentRequest
+class ReportPdfAccreditationRequest extends ParentRequest
 {
     protected array $access = [
         'permissions' => '',
@@ -16,18 +16,13 @@ class StoreFormMediaRequest extends ParentRequest
     ];
 
     protected array $urlParameters = [
-        // 'id',
+        'id',
     ];
 
     public function rules(): array
     {
         return [
-            'media_name' => 'required',
-            'media_business_name' => 'required',
-            'media_nit' => 'required',
-            'media_rep_name' => 'required',
-            'media_cellphone' => 'required',
-            'media_email' => 'required',
+            // 'id' => 'required',
         ];
     }
 

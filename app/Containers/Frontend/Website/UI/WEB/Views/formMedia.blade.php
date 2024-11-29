@@ -99,6 +99,20 @@
                                 </div>
                             </div>
 
+                            <div class="d-flex flex-column mb-8 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                    <span>Sitio web</span>
+                                    <span class="ms-1" data-bs-toggle="tooltip" title="Ingrese la dirección URL del sitio web, en caso de seleccionar tipo de medio Digital">
+                                    <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                </span>
+                                </label>
+                                <input type="text" class="form-control" placeholder="" name="media_website" />
+                            </div>
+
                             <div class="pt-4 pb-12">
                                 <h3 class="fw-bold text-gray-900">Datos de la cuenta</h3>
                             </div>

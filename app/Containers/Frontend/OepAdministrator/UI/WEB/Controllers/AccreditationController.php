@@ -2,6 +2,7 @@
 
 namespace App\Containers\Frontend\OepAdministrator\UI\WEB\Controllers;
 
+use App\Containers\CoreMonitoring\Accreditation\Actions\GeneratePdfAccreditationAction;
 use App\Containers\CoreMonitoring\Accreditation\Actions\GetAdminAccreditationsByElectionJsonDataTableAction;
 use App\Containers\CoreMonitoring\Accreditation\Actions\GetAdminElectionsForAccreditationsJsonDataTableAction;
 use App\Containers\CoreMonitoring\Accreditation\Actions\UpdateStatusAccreditationAction;
@@ -13,7 +14,9 @@ use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Accreditation\ListA
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Accreditation\ListAccreditationsByElectionRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Accreditation\ListElectionsForAccreditationJsonDtRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Accreditation\ListElectionsForAccreditationRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Accreditation\ReportPdfAccreditationRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\Accreditation\UpdateStatusAccreditationRequest;
+use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Controllers\WebController;
 use Exception;
 
@@ -75,5 +78,12 @@ class AccreditationController extends WebController
         }
     }
 
-
+    public function pdfAccreditation(ReportPdfAccreditationRequest $request)
+    {
+//        try {
+            return app(GeneratePdfAccreditationAction::class)->run($request);
+//        } catch (Exception $e) {
+//            throw new NotFoundException('No se pudo generar el archivo PDF');
+//        }
+    }
 }

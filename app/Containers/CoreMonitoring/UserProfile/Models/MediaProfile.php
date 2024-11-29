@@ -5,6 +5,8 @@ namespace App\Containers\CoreMonitoring\UserProfile\Models;
 use App\Containers\AppSection\User\Models\User;
 use App\Containers\CoreMonitoring\FileManager\Models\File;
 use App\Ship\Parents\Models\Model as ParentModel;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MediaProfile extends ParentModel
@@ -97,5 +99,15 @@ class MediaProfile extends ParentModel
     public function mediaTypes()
     {
         return $this->hasMany(MediaType::class, 'fid_media_profile');
+    }
+
+    /**
+     * Mutators
+     */
+    protected function registrationDate(): Attribute
+    {
+        return new Attribute(
+            get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y h:i A'),
+        );
     }
 }

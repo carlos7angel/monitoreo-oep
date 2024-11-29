@@ -29,8 +29,8 @@
                         <div class="d-flex flex-center flex-column py-5">
 
                             <div class="symbol symbol-175px mb-7">
-                                <div class="h-175px w-175px" style="background-image: url({{ asset('storage') . $profile->logo  }}); background-size: cover; background-position: center"></div>
-{{--                                <img src="{{ asset('storage') . $profile->logo  }}" alt="image" />--}}
+                                <div class="h-175px w-175px border-dashed border-2 border-secondary rounded-2" style="background-image: url({{ asset('storage') . $profile->logo  }});
+                                        background-size: contain; background-repeat: no-repeat; background-position: center"></div>
                             </div>
 
                             <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">{{ $profile->name }}</a>
@@ -53,14 +53,14 @@
 
                             <div class="d-flex flex-wrap flex-center">
                                 <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3">
-                                    <div class="fs-4 fw-bold text-gray-700">
-                                        <span class="w-75px">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $profile->registration_date)->format('d/m/Y H:i')  }}</span>
+                                    <div class="fs-5 fw-bold text-gray-700">
+                                        <span class="w-75px">{{ $profile->registration_date }}</span>
                                     </div>
                                     <div class="fw-semibold text-center text-muted">Fecha de Registro</div>
                                 </div>
                                 <div class="border border-gray-300 border-dashed rounded py-3 px-3 mx-4 mb-3">
-                                    <div class="fs-4 fw-bold text-gray-700">
-                                        <span class="w-50px">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $profile->updated_at)->format('d/m/Y H:i') }}</span>
+                                    <div class="fs-5 fw-bold text-gray-700">
+                                        <span class="w-50px">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $profile->updated_at)->format('d/m/Y H:i A') }}</span>
                                     </div>
                                     <div class="fw-semibold text-center text-muted">Última Actualización</div>
                                 </div>
@@ -103,8 +103,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="fw-semibold fs-7 text-gray-600 mb-1">Documento del Representante:</div>
-                                    <div class="fw-bold fs-6 text-gray-800">{{ $profile->rep_document }} {{ $profile->rep_exp }}</div>
-                                    {{--<div class="fw-semibold fs-7 text-gray-600"></div>--}}
+                                    <div class="fw-bold fs-6 text-gray-800">{{ $profile->rep_document ?? '-' }} {{ $profile->rep_exp }}</div>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +152,7 @@
                                                     @foreach($media_items as $key => $media)
                                                         @if($media['ENABLE'] && $media['ITEM'])
                                                         <tr class="fw-bold text-gray-700 fs-7 text-end">
-                                                            <td class="text-start pt-6">
+                                                            <td class="text-start pt-6 ps-4">
                                                                 <i class="fa fa-genderless text-info fs-2 me-2"></i>
                                                                 <span>{{$key}}</span>
                                                             </td>
@@ -208,7 +207,7 @@
 
                                         </p>
                                     </div>
-                                    {{--<div class="fw-semibold fs-7 text-gray-600"></div>--}}
+
                                 </div>
                             </div>
                         </div>
@@ -237,53 +236,59 @@
                                 </thead>
                                 <tbody class="fs-6 fw-semibold text-gray-600">
 
+                                @if (count($accreditations) > 0)
                                     @foreach($accreditations as $accreditation)
-                                    <tr>
-                                        <td>{{ $accreditation->code }}</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <a class="symbol symbol-50px">
+                                        <tr>
+                                            <td>{{ $accreditation->code }}</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <a class="symbol symbol-50px">
                                                     <span class="h-50px w-50px symbol-label" style="background-image:url({{ asset('storage') . $accreditation->election->logo_image }});
                                                             background-size: cover; background-position: center"></span>
-                                                </a>
-                                                <div class="ms-3">
-                                                    <div class="text-gray-800 text-hover-primary fs-6 fw-bold mb-1">
-                                                        {{ $accreditation->election->name }}</div>
-                                                    <div class="text-muted fs-7">{{ $accreditation->election->code }}</div>
+                                                    </a>
+                                                    <div class="ms-3">
+                                                        <div class="text-gray-800 text-hover-primary fs-6 fw-bold mb-1">
+                                                            {{ $accreditation->election->name }}</div>
+                                                        <div class="text-muted fs-7">{{ $accreditation->election->code }}</div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            @switch($accreditation->status)
-                                                @case('new')
-                                                <span class="badge badge-info py-2 px-4">Nuevo</span>
-                                                @break
+                                            </td>
+                                            <td class="text-center">
+                                                @switch($accreditation->status)
+                                                    @case('new')
+                                                    <span class="badge badge-info py-2 px-4">Nuevo</span>
+                                                    @break
 
-                                                @case('observed')
-                                                <span class="badge badge-warning py-2 px-4">Observado</span>
-                                                @break
+                                                    @case('observed')
+                                                    <span class="badge badge-warning py-2 px-4">Observado</span>
+                                                    @break
 
-                                                @case('accredited')
-                                                <span class="badge badge-success py-2 px-4">Acreditado</span>
-                                                @break
+                                                    @case('accredited')
+                                                    <span class="badge badge-success py-2 px-4">Acreditado</span>
+                                                    @break
 
-                                                @case('archived')
-                                                <span class="badge badge-secondary py-2 px-4">Archivado</span>
-                                                @break
+                                                    @case('archived')
+                                                    <span class="badge badge-secondary py-2 px-4">Archivado</span>
+                                                    @break
 
-                                                @case('rejected')
-                                                <span class="badge badge-danger py-2 px-4">Rechazado</span>
-                                                @break
-                                            @endswitch
-                                        </td>
-                                        <td class="text-center">{{ $accreditation->submitted_at }}</td>
-                                        <td class="text-end">
-                                            <a href="{{ route('oep_admin_media_accreditation_detail', ['id' => $accreditation->id]) }}" class="btn btn-sm btn-icon btn-secondary">
-                                                <i class="ki-outline ki-arrow-right fs-2"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                                    @case('rejected')
+                                                    <span class="badge badge-danger py-2 px-4">Rechazado</span>
+                                                    @break
+                                                @endswitch
+                                            </td>
+                                            <td class="text-center">{{ $accreditation->submitted_at }}</td>
+                                            <td class="text-end">
+                                                <a href="{{ route('oep_admin_media_accreditation_detail', ['id' => $accreditation->id]) }}" class="btn btn-sm btn-icon btn-secondary">
+                                                    <i class="ki-outline ki-arrow-right fs-2"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
                                     @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="5" class="text-center"><span class="text-gray-500">No existen registros</span></td>
+                                    </tr>
+                                @endif
 
                                 </tbody>
                             </table>
@@ -307,5 +312,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('themes/admin/js/custom/media/detail.js') }}"></script>
+    <script src="{{ asset('themes/admin/js/custom/media_profiles/detail.js') }}"></script>
 @endsection

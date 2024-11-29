@@ -76,6 +76,14 @@
         </tr>
         <tr>
             <td class="text-muted">
+                <div class="d-flex align-items-center">Sitio web</div>
+            </td>
+            <td class="fw-bold text-end">
+                <span class="text-gray-800">{{ $media_profile->website ? $media_profile->website : '-' }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-muted">
                 <div class="d-flex align-items-center">Fecha de Registro</div>
             </td>
             <td class="fw-bold text-end">

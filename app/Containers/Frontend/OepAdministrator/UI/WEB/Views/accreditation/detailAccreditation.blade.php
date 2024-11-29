@@ -34,7 +34,8 @@
                             <button type="button" data-new-status="rejected" data-new-status-label="RECHAZADO" class="kt_change_accreditation_status btn btn-primary btn-sm me-1 fs-8"><i class="ki-outline ki-cross fs-3 me-1"></i>Rechazar</button>
                         @break
                         @case('accredited')
-                            <button type="button" data-new-status="archived" data-new-status-label="ARCHIVADO" class="kt_change_accreditation_status btn btn-primary btn-sm me-1 fs-8"><i class="ki-outline ki-archive fs-3 me-1"></i>Archivar</button>
+
+                        <button type="button" data-new-status="archived" data-new-status-label="ARCHIVADO" class="kt_change_accreditation_status btn btn-primary btn-sm me-1 fs-8"><i class="ki-outline ki-archive fs-3 me-1"></i>Archivar</button>
                         @break
                         @case('archived')
                         @break
@@ -49,6 +50,14 @@
                         <div class="d-flex flex-column py-5">
 
                             <h6 class="mb-8 fw-bolder text-gray-600 text-hover-primary">DATOS DEL DOCUMENTO</h6>
+
+                            <div class="d-flex flex-aligns-center mb-5">
+                                <img alt="" class="w-25px me-2" src="{{ asset('themes/common/media/svg/files/pdf.svg') }}">
+                                <div class="ms-1 fw-semibold">
+                                    <a href="{{ route('oep_admin_media_accreditation_report_pdf', ['id' => $accreditation->id]) }}" target="_blank" class="fs-7 text-hover-primary__ fw-bold">Descargar</a>
+                                </div>
+                            </div>
+
                             <div class="mb-6">
                                 <div class="fw-semibold text-gray-600 fs-7">Tipo de Operación:</div>
                                 <div class="fw-bold text-gray-800 fs-6">Acreditación de Medios de Comunicación</div>
@@ -80,7 +89,6 @@
                                         @case('rejected')
                                         <span class="badge badge-danger py-1 px-2">Rechazado</span>
                                         @break
-                                    {{ $accreditation->status }}
                                     @endswitch
                                 </div>
                             </div>

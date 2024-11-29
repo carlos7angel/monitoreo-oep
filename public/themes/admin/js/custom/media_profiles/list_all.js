@@ -86,11 +86,17 @@ var KTMediaList = function () {
                     searchable: true,
                     className: 'pe-0',
                     render: function (data, type, full, meta) {
-                        let media_logo = '/storage'+ full.logo;
-                        return `<div class="d-flex align-items-center">
-                                    <a class="symbol symbol-50px">
-                                        <span class="symbol-label" style="background-image:url(${media_logo});"></span>
-                                    </a>
+
+                        console.log(full);
+
+                        let logo_html = ``;
+                        if (full.logo) {
+                            let media_logo = '/storage'+ full.logo;
+                             logo_html = `<a class="symbol symbol-50px">
+                                                <span class="symbol-label" style="background-image:url(${media_logo});"></span>
+                                            </a>`;
+                        }
+                        return `<div class="d-flex align-items-center">${logo_html}
                                     <div class="ms-3">
                                         <div class="text-gray-800 text-hover-primary fs-6 fw-bold mb-1">${data}</div>
                                         <div class="text-muted fs-7">${full.business_name}</div>
@@ -114,19 +120,17 @@ var KTMediaList = function () {
                     className: 'text-center pe-0',
                     render: function (data, type, full, meta) {
 
-                        console.log(full);
-
                         let types = ``;
-                        if (parseInt(full.media_type_television)) {
+                        if (full.media_type_television) {
                             types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Televisivo</div>`
                         }
-                        if (parseInt(full.media_type_radio)) {
+                        if (full.media_type_radio) {
                             types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Radial</div>`
                         }
-                        if (parseInt(full.media_type_print)) {
+                        if (full.media_type_print) {
                             types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Impreso</div>`
                         }
-                        if (parseInt(full.media_type_digital)) {
+                        if (full.media_type_digital) {
                             types = types + `<div class="badge badge-secondary py-2 px-4 me-2">Digital</div>`
                         }
                         return `<span>${types}</span>`;
@@ -138,8 +142,7 @@ var KTMediaList = function () {
                     searchable: true,
                     className: 'dt-center pe-0',
                     render: function (data, type, full, meta) {
-                        //return `<span class="text-gray-900">${data}<span>`;
-                        return `<span class="text-gray-900">${moment(data).format('DD/MM/YYYY HH:mm')}</span>`;
+                        return `<span class="text-gray-900">${data}</span>`;
                     },
                 },
                 {
