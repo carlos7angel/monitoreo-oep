@@ -257,19 +257,19 @@
 @endsection
 
 @section('styles')
-    <!-- fileuploader -->
     <link href="{{ asset('themes/common/plugins/custom/fileuploader/font/font-fileuploader.css') }}" media="all" rel="stylesheet">
     <link href="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader.min.css') }}" media="all" rel="stylesheet">
     <link href="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader-theme-dropin.css') }}" media="all" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+    <style>
+        #kt_content .fileuploader {
+            padding: 16px;
+            padding-top: 0;
+        }
+    </style>
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-    <script>
-        Fancybox.bind("[data-fancybox]", {
-            // Your custom options
-        });
-    </script>
+    <script src="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('themes/admin/js/custom/monitoring/detail.js') }}"></script>
+    <script src="{{ asset('themes/admin/js/custom/monitoring_report/detail-monitoring_files.js') }}"></script>
 @endsection

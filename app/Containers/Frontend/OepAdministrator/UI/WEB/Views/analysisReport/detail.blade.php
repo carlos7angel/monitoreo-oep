@@ -92,12 +92,25 @@
                                         <button type="button" data-new-status="COMPLEMENTARY_REPORT_PLENARY" class="kt_change_analysis_report_status_complementary btn btn-primary w-100 mb-3 fs-8">
                                             <i class="ki-outline ki-file-left fs-3 me-1"></i>Informe Complementario
                                         </button>
+                                        <button type="button" class="kt_change_analysis_report_status_second_resolution btn btn-primary w-100 mb-3 fs-8">
+                                            <i class="ki-outline ki-file-right fs-3 me-1"></i>Resolución en 2da Instancia
+                                        </button>
                                         <button type="button" class="kt_change_analysis_report_status_final_resolution btn btn-primary w-100 mb-0 fs-8">
                                             <i class="ki-outline ki-file-added fs-3 me-1"></i>Resolución Final
                                         </button>
                                     </div>
                                     @break
                                     @case('COMPLEMENTARY_REPORT_PLENARY')
+                                    <div class="mb-5">
+                                        <button type="button" class="kt_change_analysis_report_status_second_resolution btn btn-primary w-100 mb-3 fs-8">
+                                            <i class="ki-outline ki-file-right fs-3 me-1"></i>Resolución en 2da Instancia
+                                        </button>
+                                        <button type="button" class="kt_change_analysis_report_status_final_resolution btn btn-primary w-100 mb-0 fs-8">
+                                            <i class="ki-outline ki-file-added fs-3 me-1"></i>Resolución Final
+                                        </button>
+                                    </div>
+                                    @break
+                                    @case('SECOND_INSTANCE_RESOLUTION')
                                     <div class="mb-5">
                                         <button type="button" class="kt_change_analysis_report_status_final_resolution btn btn-primary w-100 mb-0 fs-8">
                                             <i class="ki-outline ki-file-added fs-3 me-1"></i>Resolución Final
@@ -159,6 +172,9 @@
                                     @case('COMPLEMENTARY_REPORT_PLENARY')
                                     <span class="badge badge-info">Informe Complementario</span>
                                     @break
+                                    @case('SECOND_INSTANCE_RESOLUTION')
+                                    <span class="badge badge-info">Con Resolución en 2da Instancia</span>
+                                    @break
                                     @case('FINALIZED')
                                     <span class="badge badge-info">Con Resolución Final</span>
                                     @break
@@ -167,6 +183,12 @@
                                     @break
                                 @endswitch
                             </div>
+                            @if($analysis_report->status == 'FINALIZED')
+                            <div class="mb-6">
+                                <div class="fw-semibold text-gray-600 fs-7">Final:</div>
+                                <div class="fw-bold text-gray-800 fs-6">{{ $analysis_report->final_status ?? '' }}</div>
+                            </div>
+                            @endif
                             <div class="mb-6">
                                 <div class="fw-semibold text-gray-600 fs-7">Fecha de Registro:</div>
                                 <div class="fw-bold text-gray-800 fs-6">{{ $analysis_report->lastStatusActivity->registered_at }}</div>
@@ -221,6 +243,21 @@
                                     <div class="separator separator-dashed border-muted my-2"></div>
                                     @endif
 
+                                    @if($analysis_report->fileAdditionalAttachment)
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
+                                                <label class="fw-semibold fs-7 text-gray-600">Otros adjuntos:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="hidden" name="hdn_analysis_file_additional" class="file_default"
+                                                       data-name="{{ $analysis_report->fileAdditionalAttachment->origin_name }}" data-size="{{ $analysis_report->fileAdditionalAttachment->size }}"
+                                                       data-mimetype="{{ $analysis_report->fileAdditionalAttachment->mime_type }}" data-path="{{ $analysis_report->fileAdditionalAttachment->url_file }}">
+                                                <input type="file" name="ro_analysis_file_additional" class="files kt_analysis_report_files" id="kt_ro_analysis_file_additional">
+                                            </div>
+                                        </div>
+                                        <div class="separator separator-dashed border-muted my-2"></div>
+                                    @endif
+
                                     @if($analysis_report->fileAnalysisComplementaryReport)
                                     <div class="row">
                                         <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
@@ -264,6 +301,21 @@
                                         </div>
                                     </div>
                                     <div class="separator separator-dashed border-muted my-2"></div>
+                                    @endif
+
+                                    @if($analysis_report->fileAnalysisResolutionSecondInstance)
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex align-items-center justify-content-end text-end">
+                                                <label class="fw-semibold fs-7 text-gray-600">Resolución 2da Instancia:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="hidden" name="hdn_analysis_file_second_resolution" class="file_default"
+                                                       data-name="{{ $analysis_report->fileAnalysisResolutionSecondInstance->origin_name }}" data-size="{{ $analysis_report->fileAnalysisResolutionSecondInstance->size }}"
+                                                       data-mimetype="{{ $analysis_report->fileAnalysisResolutionSecondInstance->mime_type }}" data-path="{{ $analysis_report->fileAnalysisResolutionSecondInstance->url_file }}">
+                                                <input type="file" name="ro_analysis_file_second_resolution" class="files kt_analysis_report_files" id="ro_kt_analysis_file_second_resolution">
+                                            </div>
+                                        </div>
+                                        <div class="separator separator-dashed border-muted my-2"></div>
                                     @endif
 
                                     @if($analysis_report->fileAnalysisResolutionFinalInstance)
@@ -376,6 +428,10 @@
                                         <span> ha registrado el informe de análisis con </span>
                                         <span class="text-primary">Informe Complementario</span> en Sala Plena
                                         @break
+                                        @case('SECOND_INSTANCE_RESOLUTION')
+                                        <span> ha registrado el informe de análisis con </span>
+                                        <span class="text-primary">Resolución den 2da Instancia</span> en Sala Plena
+                                        @break
                                         @case('FINALIZED')
                                         <span> ha finalizado el informe de análisis con </span>
                                         <span class="text-primary">Resolución Final</span>
@@ -477,17 +533,23 @@
                     </div>
                     <form id="kt_form_analysis_report_submit_to_secretariat" class="form" method="post" autocomplete="off" action="{{ route('oep_admin_analysis_report_to_secretariat', ['id' => $analysis_report->id]) }}">
                         <div class="fv-row mb-10">
-                            <label class="required form-label fs-6 mb-2">Informe</label>
+                            <label class="required form-label fs-6 mb-2">Informe:</label>
                             <input type="file" name="analysis_file_report" class="files kt_analysis_report_files"
                                    id="kt_analysis_file_report" data-maxsize="5" data-maxfiles="1" data-accept="doc,docx,pdf">
                             <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF, WORD</div>
                         </div>
 
                         <div class="fv-row mb-10">
-                            <label class="form-label fw-semibold fs-6 mb-2">Comentarios</label>
+                            <label class="form-label fw-semibold fs-6 mb-2">Comentarios:</label>
                             <textarea class="form-control" rows="3" name="analysis_observations" placeholder=""></textarea>
                         </div>
 
+                        <div class="fv-row mb-10">
+                            <label class="form-label fs-6 mb-2">Otros adjuntos (opcional):</label>
+                            <input type="file" name="analysis_file_additional" class="files kt_analysis_report_files"
+                                   id="kt_analysis_file_additional" data-maxsize="10" data-maxfiles="1" data-accept="doc,docx,pdf,mp3,mp4,png,jpeg,jpg,">
+                            <div class="text-muted fs-7">Máximo de tamaño permitido 10MB.</div>
+                        </div>
 
                         <div class="fv-row mb-10">
                             <label class="required form-label fs-6 mb-2">Enviado a:</label>
@@ -643,6 +705,64 @@
         </div>
     </div>
 
+    <div class="modal fade" id="kt_modal_analysis_report_second_resolution" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content rounded" id="kt_block_target_second_resolution">
+                <div class="modal-header pb-0 border-0 justify-content-end">
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                        <i class="ki-duotone ki-cross fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                </div>
+                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7 pt-0 pb-15">
+                    <div class="mb-10 text-center">
+                        <h1 class="mb-3">Informe de Análisis</h1>
+                        <div class="text-muted fw-semibold fs-5">Resolución en 2da Instancia</div>
+                    </div>
+                    <div class="notice d-flex bg-light-info rounded border-info border border-dashed mb-9 p-6">
+                        <i class="ki-duotone ki-information fs-2tx text-info me-4">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                        </i>
+                        <div class="d-flex flex-stack flex-grow-1">
+                            <div class="fw-semibold">
+                                <div class="fs-6 text-gray-700">
+                                    Registrar Resolución en 2da Instancia
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form id="kt_form_analysis_report_second_resolution" class="form" method="post" autocomplete="off"
+                          action="{{ route('oep_admin_analysis_report_second_resolution', ['id' => $analysis_report->id]) }}">
+                        <div class="fv-row mb-10">
+                            <label class="required form-label fs-6 mb-2">Resolución 2da Instancia:</label>
+                            <input type="file" name="analysis_file_second_resolution" class="files kt_analysis_report_files"
+                                   id="kt_analysis_file_second_resolution" data-maxsize="5" data-maxfiles="1" data-accept="doc,docx,pdf">
+                            <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF, WORD</div>
+                        </div>
+
+                        <div class="fv-row mb-10">
+                            <label class="form-label fw-semibold fs-6 mb-2">Comentarios:</label>
+                            <textarea class="form-control" rows="3" name="analysis_observations" placeholder=""></textarea>
+                        </div>
+
+                        <div class="text-center pt-15">
+                            <button type="button" id="kt_cancel_button_analysis_report_second_resolution" class="btn btn-light me-3">Cancelar</button>
+                            <button type="button" id="kt_submit_button_analysis_report_second_resolution" class="btn btn-primary">
+                                <span class="indicator-label">Guardar</span>
+                                <span class="indicator-progress">Espere por favor...<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="kt_modal_analysis_report_final_resolution" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content rounded" id="kt_block_target_final_resolution">
@@ -668,7 +788,7 @@
                         <div class="d-flex flex-stack flex-grow-1">
                             <div class="fw-semibold">
                                 <div class="fs-6 text-gray-700">
-                                    Debe subir la Resolción Final.
+                                    Debe subir la Resolución Final.
                                 </div>
                             </div>
                         </div>
@@ -676,10 +796,21 @@
                     <form id="kt_form_analysis_report_final_resolution" class="form" method="post" autocomplete="off" action="{{ route('oep_admin_analysis_report_final_resolution', ['id' => $analysis_report->id]) }}">
 
                         <div class="fv-row mb-10">
-                            <label class="required form-label fs-6 mb-2">Resolución Final:</label>
+                            <label class="required form-label fs-6 mb-2">Informe Resolución Final:</label>
                             <input type="file" name="analysis_file_final_resolution" class="files kt_analysis_report_files"
                                    id="kt_analysis_file_final_resolution" data-maxsize="5" data-maxfiles="1" data-accept="doc,docx,pdf">
                             <div class="text-muted fs-7">Máximo de tamaño permitido 5MB. Formatos aceptados: PDF, WORD</div>
+                        </div>
+
+                        <div class="fv-row mb-10">
+                            <label class="form-label fw-semibold fs-6 mb-2">Resolución:</label>
+                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Seleccione una opción"
+                                    name="analysis_final_status">
+                                <option></option>
+                                <option value="Suspención">Suspención</option>
+                                <option value="Sanción">Sanción</option>
+                                <option value="Desestimación">Desestimación</option>
+                            </select>
                         </div>
 
                         <div class="fv-row mb-10">
@@ -708,6 +839,7 @@
     <link href="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader.min.css') }}" media="all" rel="stylesheet">
     <link href="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader-theme-dropin.css') }}" media="all" rel="stylesheet">
     <style>
+        #kt_content .fileuploader,
         .wrapper_content_files_ro .fileuploader {
             padding: 16px;
             padding-top: 0;
@@ -732,4 +864,5 @@
 @section('scripts')
     <script src="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('themes/admin/js/custom/analysis_report/detail.js') }}"></script>
+    <script src="{{ asset('themes/admin/js/custom/monitoring_report/detail-monitoring_files.js') }}"></script>
 @endsection

@@ -28,8 +28,11 @@
                         @case('SUBMITTED')
                             @if(auth()->user()->hasRole('analyst'))
                             <div class="mb-5">
-                                <button type="button" data-url="{{ route('oep_admin_analysis_report_create', ['id' => $monitoring_report->id]) }}" class="kt_btn_analysis_report_create btn btn-primary w-100 fs-8">
+                                <button type="button" data-url="{{ route('oep_admin_analysis_report_create', ['id' => $monitoring_report->id]) }}" class="kt_btn_analysis_report_create btn btn-primary w-100 mb-3 fs-8">
                                     <i class="ki-outline ki-document fs-3 me-1"></i>Crear Informe de Análisis
+                                </button>
+                                <button type="button" data-new-status="REJECTED" data-new-status-label="RECHAZADO" class="kt_change_monitoring_report_status btn btn-light-danger w-100 fs-8">
+                                    <i class="ki-outline ki-archive fs-3 me-1"></i>Rechazar Reporte
                                 </button>
                             </div>
                             @endif
@@ -234,9 +237,20 @@
 @endsection
 
 @section('styles')
-
+    <link href="{{ asset('themes/common/plugins/custom/fileuploader/font/font-fileuploader.css') }}" media="all" rel="stylesheet">
+    <link href="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader.min.css') }}" media="all" rel="stylesheet">
+    <link href="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader-theme-dropin.css') }}" media="all" rel="stylesheet">
+    <style>
+        #kt_content .fileuploader {
+            padding: 16px;
+            padding-top: 0;
+        }
+    </style>
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('themes/admin/js/custom/monitoring_report/detail.js') }}"></script>
+    <script src="{{ asset('themes/admin/js/custom/monitoring_report/detail-monitoring_files.js') }}"></script>
     <script src="{{ asset('themes/admin/js/custom/analysis_report/monitoring-detail.js') }}"></script>
 @endsection

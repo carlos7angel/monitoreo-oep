@@ -56,6 +56,11 @@ class ToSecretariatAnalysisReportAction extends ParentAction
                 $analysis_report->file_analysis_report = $file_report->unique_code;
             }
 
+            if($request->file('analysis_file_additional')) {
+                $file_report = $this->createFileTask->run($request->file('analysis_file_additional'), 'analysis-report', $analysis_report->id, $user);
+                $analysis_report->file_additional_attachment = $file_report->unique_code;
+            }
+
             $new_status = 'UNTREATED';
             $analysis_status_data = [
                 'fid_analysis_report' => $analysis_report->id,

@@ -28,8 +28,11 @@ class AnalysisReport extends ParentModel
         'file_analysis_report',
         'file_analysis_report_complementary',
         'file_resolution_first_instance',
+        'file_resolution_second_instance',
         'file_resolution_final_instance',
+        'file_additional_attachment',
         'observations',
+        'final_status',
     ];
 
     protected $attributes = [
@@ -95,9 +98,19 @@ class AnalysisReport extends ParentModel
         return $this->hasOne(File::class, 'unique_code', 'file_resolution_first_instance');
     }
 
+    public function fileAnalysisResolutionSecondInstance()
+    {
+        return $this->hasOne(File::class, 'unique_code', 'file_resolution_second_instance');
+    }
+
     public function fileAnalysisResolutionFinalInstance()
     {
         return $this->hasOne(File::class, 'unique_code', 'file_resolution_final_instance');
+    }
+
+    public function fileAdditionalAttachment()
+    {
+        return $this->hasOne(File::class, 'unique_code', 'file_additional_attachment');
     }
 
 }

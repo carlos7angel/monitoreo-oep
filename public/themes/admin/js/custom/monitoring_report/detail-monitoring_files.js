@@ -1,130 +1,6 @@
 "use strict";
 
-var KTMonitoringReportList = function () {
-
-    var blockUI;
-
-    var modalDetailsEl;
-    var modalDetails;
-    var modalDetailsContent;
-
-    var submitButtonStatus;
-    var cancelButtonStatus;
-    var validator;
-    var formStatus;
-
-    var modalEl;
-    var modal;
-    var modalContent;
-
-    var _initStatusForm = function () {
-
-        validator = FormValidation.formValidation(
-            formStatus,
-            {
-                fields: {
-                    monitoring_report_observations: {
-                        validators: {
-                            notEmpty: {
-                                message: 'El campo es obligatorio'
-                            }
-                        }
-                    },
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger(),
-                    bootstrap: new FormValidation.plugins.Bootstrap5({
-                        rowSelector: '.fv-row',
-                        eleInvalidClass: '',
-                        eleValidClass: ''
-                    })
-                }
-            }
-        );
-
-        submitButtonStatus.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            blockUI = new KTBlockUI(document.querySelector('#kt_form_update_status_monitoring_status'));
-
-            if (validator) {
-                validator.validate().then(function (status) {
-
-                    if (status === 'Valid') {
-                        submitButtonStatus.setAttribute('data-kt-indicator', 'on');
-                        submitButtonStatus.disabled = true;
-
-                        var formData = new FormData($(formStatus)[0]);
-                        $.ajax({
-                            type: 'POST',
-                            url: formStatus.action,
-                            contentType: false,
-                            processData: false,
-                            data: formData,
-                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                            beforeSend: function (response) {
-                                blockUI.block();
-                            },
-                            success: function (response) {
-                                if (response.success) {
-                                    Swal.fire({
-                                        text: "Actualización satisfactoria.",
-                                        icon: "success",
-                                        buttonsStyling: false,
-                                        confirmButtonText: "Aceptar",
-                                        allowOutsideClick: false,
-                                        customClass: {
-                                            confirmButton: "btn btn-primary"
-                                        }
-                                    }).then(function(result){
-                                        if (result.isConfirmed) {
-                                            modal.hide();
-                                            window.location.reload();
-                                        }
-                                    });
-                                } else {
-                                    toastr.error(response.message, "Ocurrio un problema");
-                                }
-                            },
-                            complete: function (response) {
-                                submitButtonStatus.removeAttribute('data-kt-indicator');
-                                submitButtonStatus.disabled = false;
-
-                                blockUI.release();
-                                blockUI.destroy();
-                            },
-                            error: function (response) {
-                                toastr.error(response.hasOwnProperty('responseJSON') ? response.responseJSON.message : "", "Ocurrió un problema");
-                            }
-                        });
-                    } else {
-                        toastr.warning("Complete el formulario", "Advertencia");
-                    }
-                });
-            }
-        });
-
-        cancelButtonStatus.addEventListener('click', function (e) {
-            e.preventDefault();
-            modal.hide();
-        });
-    }
-
-    var _handleUpdateStatusModal = function () {
-
-        $(document).on('click', '.kt_change_monitoring_report_status', function (e) {
-            e.preventDefault();
-            formStatus.reset();
-            validator.resetForm(true);
-            var new_status = $(this).data('new-status');
-            var new_status_label = $(this).data('new-status-label');
-            $('input[name="monitoring_report_status"]').val(new_status);
-            $('input[name="readonly_monitoring_report_status"]').val(new_status_label);
-            modal.show();
-        });
-
-    }
-
+var KTMonitoringFiles = function () {
 
     var _initMonitoringFiles = function () {
 
@@ -416,18 +292,6 @@ var KTMonitoringReportList = function () {
     return {
         init: function () {
 
-            // Status
-            formStatus = document.querySelector('#kt_form_update_status_monitoring_status');
-            submitButtonStatus = document.getElementById('kt_button_update_status_submit');
-            cancelButtonStatus = document.getElementById('kt_button_update_status_cancel');
-            _initStatusForm();
-
-            modalEl = document.querySelector('#kt_modal_update_monitoring_report_status');
-            if (modalEl) {
-                modal = new bootstrap.Modal(modalEl);
-                _handleUpdateStatusModal();
-            }
-
             _initMonitoringFiles();
         }
     }
@@ -435,5 +299,5 @@ var KTMonitoringReportList = function () {
 
 
 KTUtil.onDOMContentLoaded(function () {
-    KTMonitoringReportList.init();
+    KTMonitoringFiles.init();
 });

@@ -32,6 +32,8 @@ return new class() extends Migration {
                 'IN_TREATMENT_PLENARY',
                 'COMPLEMENTARY_REPORT_PLENARY',
 
+                'SECOND_INSTANCE_RESOLUTION',
+
                 //'FINAL_RESOLUTION',
                 'FINALIZED',
                 'ARCHIVED',
@@ -43,8 +45,12 @@ return new class() extends Migration {
 
 
             $table->string('file_resolution_first_instance', 100)->nullable();
+            $table->string('file_resolution_second_instance', 100)->nullable();
             $table->string('file_resolution_final_instance', 100)->nullable();
+            $table->string('file_additional_attachment', 100)->nullable();
             $table->text('observations')->nullable();
+
+            $table->enum('final_status', ['Suspención', 'Sanción', 'Desestimación'])->nullable();
 
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');

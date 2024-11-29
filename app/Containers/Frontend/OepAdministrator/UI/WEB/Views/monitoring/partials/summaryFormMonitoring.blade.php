@@ -119,36 +119,11 @@
                         </div>
                         <div class="col-md-8">
                             @if(isset($input[$field->unique_fieldname]) && is_array($input[$field->unique_fieldname]))
-                                <p class="form-control form-control-plaintext">
-                                    <a href="javascript:void(0)" data-fancybox data-type="pdf" data-src="{{ $input[$field->unique_fieldname]['url_file'] }}">{{ $input[$field->unique_fieldname]['original_name'] }}</a>
-                                </p>
-
-
-{{--                                <div class="fileuploader fileuploader-theme-dropin p-0">--}}
-{{--                                    <div class="fileuploader-items">--}}
-{{--                                        <ul class="fileuploader-items-list">--}}
-{{--                                            <li class="fileuploader-item file-type-application file-ext-pdf file-has-popup mb-0"  style="">--}}
-{{--                                                <div class="columns">--}}
-{{--                                                    <div class="column-thumbnail">--}}
-{{--                                                        <div class="fileuploader-item-image fileuploader-no-thumbnail">--}}
-{{--                                                            <div style="background-color: #f23c0f" class="fileuploader-item-icon"><i>pdf</i></div>--}}
-{{--                                                        </div>--}}
-{{--                                                        <span class="fileuploader-action-popup"></span>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="column-title">--}}
-{{--                                                        <a href="http://monitoreo-oep.test/storage/medios/m-2/acreditaciones/16/9cfaee47__sample-pdf-1.pdf" target="_blank">--}}
-{{--                                                            <div title="Sample_PDF__1.pdf">Sample_PDF__1.pdf</div>--}}
-{{--                                                            <span>6.69 KB</span>--}}
-{{--                                                        </a>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </li>--}}
-{{--                                        </ul>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
+                                <input type="hidden" name="file_ro_{{ $field->unique_fieldname }}" class="file_default"
+                                       data-name="{{ $input[$field->unique_fieldname]['original_name']  }}" data-size="{{ $input[$field->unique_fieldname]['size'] }}"
+                                       data-mimetype="{{ $input[$field->unique_fieldname]['mime_type'] }}" data-path="{{ $input[$field->unique_fieldname]['url_file'] }}">
+                                <input type="file" name="file_{{ $field->unique_fieldname  }}" class="files kt_media_files" readonly disabled>
                             @endif
-                            {{--<p class="form-control form-control-plaintext">{!! var_dump($input[$field->unique_fieldname]) !!}</p>--}}
                         </div>
                     </div>
                     <div class="separator separator-dashed border-muted"></div>

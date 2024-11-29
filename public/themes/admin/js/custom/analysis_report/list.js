@@ -166,6 +166,7 @@ var KTAnalysisReportList = function () {
                             'UNTREATED_PLENARY': {'title': 'No Tratado', 'class': 'badge-primary'},
                             'IN_TREATMENT_PLENARY': {'title': 'En Tratamiento', 'class': 'badge-primary'},
                             'COMPLEMENTARY_REPORT_PLENARY': {'title': 'Informe Complementario', 'class': 'badge-primary'},
+                            'SECOND_INSTANCE_RESOLUTION': {'title': 'Con Resolución en 2da Instancia', 'class': 'badge-primary'},
                             'FINALIZED': {'title': 'Con Resolución Final', 'class': 'badge-success'},
                             'ARCHIVED': {'title': 'Archivado', 'class': 'badge-danger'},
                         };

@@ -9,6 +9,7 @@ use App\Containers\CoreMonitoring\Analysis\Actions\FirstResolutionAnalysisReport
 use App\Containers\CoreMonitoring\Analysis\Actions\GetAnalysisReportsJsonDTAction;
 use App\Containers\CoreMonitoring\Analysis\Actions\InTreatmentAnalysisReportAction;
 use App\Containers\CoreMonitoring\Analysis\Actions\RejectAnalysisReportAction;
+use App\Containers\CoreMonitoring\Analysis\Actions\SecondResolutionAnalysisReportAction;
 use App\Containers\CoreMonitoring\Analysis\Actions\ToSecretariatAnalysisReportAction;
 use App\Containers\CoreMonitoring\Analysis\Tasks\FindAnalysisReportByIdTask;
 use App\Containers\CoreMonitoring\Analysis\Tasks\GetActivitiesByAnalysisReportTask;
@@ -23,6 +24,7 @@ use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\Edit
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\ListAnalysisReportJsonDtRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\ListAnalysisReportRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\RejectAnalysisReportRequest;
+use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\SecondResolutionAnalysisReportRequest;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\AnalysisReport\ToSecretariatAnalysisReportRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Exception;
@@ -121,6 +123,16 @@ class AnalysisReportController extends WebController
     {
         try {
             $analysis = app(FirstResolutionAnalysisReportAction::class)->run($request);
+            return response()->json(['success' => true, 'data' => $analysis]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function secondResolutionAnalysis(SecondResolutionAnalysisReportRequest $request)
+    {
+        try {
+            $analysis = app(SecondResolutionAnalysisReportAction::class)->run($request);
             return response()->json(['success' => true, 'data' => $analysis]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);

@@ -33,6 +33,13 @@ var KTAnalysisReportList = function () {
     var submitButtonFirstResolution;
     var cancelButtonFirstResolution;
 
+    var formSecondResolution;
+    var validatorFormSecondResolution;
+    var modalSecondResolution;
+    var modalSecondResolutionEl;
+    var submitButtonSecondResolution;
+    var cancelButtonSecondResolution;
+
     var formFinalResolution;
     var validatorFormFinalResolution;
     var modalFinalResolution;
@@ -90,8 +97,10 @@ var KTAnalysisReportList = function () {
 
     var _initFiles = function () {
         _initFileUploader('#kt_analysis_file_report', []);
+        _initFileUploader('#kt_analysis_file_additional', []);
         _initFileUploader('#kt_analysis_file_complementary', []);
         _initFileUploader('#kt_analysis_file_first_resolution', []);
+        _initFileUploader('#kt_analysis_file_second_resolution', []);
         _initFileUploader('#kt_analysis_file_final_resolution', []);
     };
 
@@ -563,6 +572,107 @@ var KTAnalysisReportList = function () {
     }
 
 
+    var _handleSecondResolutionAnalysisReportModal = function () {
+        $(document).on('click', '.kt_change_analysis_report_status_second_resolution', function (e) {
+            e.preventDefault();
+            // formSecondResolution.reset();
+            // if (validatorFormSecondResolution) { validatorFormSecondResolution.resetForm(true); }
+            modalSecondResolution.show();
+        });
+    }
+
+    var _initAnalysisReportSecondResolutionForm = function () {
+        validatorFormSecondResolution = FormValidation.formValidation(
+            formSecondResolution,
+            {
+                fields: {
+                    'analysis_file_second_resolution': {
+                        validators: {
+                            notEmpty: {
+                                message: 'El campo es obligatorio'
+                            }
+                        }
+                    },
+                },
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    bootstrap: new FormValidation.plugins.Bootstrap5({
+                        rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+                    })
+                }
+            }
+        );
+    }
+
+    var _handleAnalysisReportSecondResolutionForm = function () {
+        submitButtonSecondResolution.addEventListener('click', function (e) {
+
+            e.preventDefault();
+            if (validatorFormSecondResolution) {
+                validatorFormSecondResolution.validate().then(function (status) {
+                    if (status === 'Valid') {
+                        submitButtonSecondResolution.setAttribute('data-kt-indicator', 'on');
+                        submitButtonSecondResolution.disabled = true;
+                        var formData = new FormData($(formSecondResolution)[0]);
+                        var blockUI_2 = new KTBlockUI(document.querySelector('#kt_block_target_second_resolution'));
+                        $.ajax({
+                            type: 'POST',
+                            url: formSecondResolution.action,
+                            contentType: false,
+                            processData: false,
+                            data: formData,
+                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                            beforeSend: function (response) {
+                                blockUI_2.block();
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire({
+                                        title: 'Registro actualizado satisfactoriamente',
+                                        text: "La resolución en 2da Instancia ha sido registrada.",
+                                        icon: "success",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Aceptar",
+                                        allowOutsideClick: false,
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    }).then(function(result){
+                                        if (result.isConfirmed) {
+                                            modalSecondResolution.hide();
+                                            window.location.reload();
+                                        }
+                                    });
+                                } else {
+                                    toastr.error(response.message, "Ocurrio un problema");
+                                }
+                            },
+                            complete: function (response) {
+                                submitButtonSecondResolution.removeAttribute('data-kt-indicator');
+                                submitButtonSecondResolution.disabled = false;
+                                blockUI_2.release();
+                                blockUI_2.destroy();
+                            },
+                            error: function (response) {
+                                toastr.error(response.hasOwnProperty('responseJSON') ? response.responseJSON.message : "", "Ocurrió un problema");
+                            }
+                        });
+                    } else {
+                        toastr.warning("Complete el formulario", "Advertencia");
+                    }
+                });
+            }
+        });
+
+        cancelButtonSecondResolution.addEventListener('click', function (e) {
+            e.preventDefault();
+            modalSecondResolution.hide();
+        });
+    }
+
+
     var _handleFinalResolutionAnalysisReportModal = function () {
         $(document).on('click', '.kt_change_analysis_report_status_final_resolution', function (e) {
             e.preventDefault();
@@ -578,6 +688,13 @@ var KTAnalysisReportList = function () {
             {
                 fields: {
                     'analysis_file_final_resolution': {
+                        validators: {
+                            notEmpty: {
+                                message: 'El campo es obligatorio'
+                            }
+                        }
+                    },
+                    'analysis_final_status': {
                         validators: {
                             notEmpty: {
                                 message: 'El campo es obligatorio'
@@ -995,6 +1112,15 @@ var KTAnalysisReportList = function () {
             _handleFirstResolutionAnalysisReportModal();
             _initAnalysisReportFirstResolutionForm();
             _handleAnalysisReportFirstResolutionForm();
+
+            modalSecondResolutionEl = document.querySelector('#kt_modal_analysis_report_second_resolution');
+            if (modalSecondResolutionEl) { modalSecondResolution = new bootstrap.Modal(modalSecondResolutionEl); }
+            formSecondResolution = document.querySelector('#kt_form_analysis_report_second_resolution');
+            submitButtonSecondResolution = document.getElementById('kt_submit_button_analysis_report_second_resolution');
+            cancelButtonSecondResolution = document.getElementById('kt_cancel_button_analysis_report_second_resolution');
+            _handleSecondResolutionAnalysisReportModal();
+            _initAnalysisReportSecondResolutionForm();
+            _handleAnalysisReportSecondResolutionForm();
 
             modalFinalResolutionEl = document.querySelector('#kt_modal_analysis_report_final_resolution');
             if (modalFinalResolutionEl) { modalFinalResolution = new bootstrap.Modal(modalFinalResolutionEl); }
