@@ -29,3 +29,5 @@ aliases
 /public/vendor
 .bash_aliases
 .DS_Store
+/storage/app/public/
+/storage/framework/sessions/
