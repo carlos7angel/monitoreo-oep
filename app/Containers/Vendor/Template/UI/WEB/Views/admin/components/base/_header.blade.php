@@ -29,7 +29,7 @@
                             @endhasanyrole
                             @hasanyrole('monitor|analyst|secretariat|plenary|admin|super')
                             <li class="nav-item">
-                                <a class="nav-link {{ in_array($page, ['monitoring_list', 'monitoring_report_list', 'analysis_report_list']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_3">Monitoreo y Análisis</a>
+                                <a class="nav-link {{ in_array($page, ['monitoring_list', 'monitoring_report_list', 'analysis_report_list', 'monitoring_dashboard']) ? 'active' : ''  }}" data-bs-toggle="tab" href="#kt_header_navs_tab_3">Monitoreo y Análisis</a>
                             </li>
                             @endhasanyrole
                             @hasanyrole('admin|super')
@@ -150,13 +150,21 @@
                     </div>
                     @endhasanyrole
                     @hasanyrole('monitor|analyst|secretariat|plenary|admin|super')
-                    <div class="tab-pane fade {{ in_array($page, ['monitoring_list', 'monitoring_report_list', 'analysis_report_list']) ? 'active show' : ''  }}" id="kt_header_navs_tab_3">
+                    <div class="tab-pane fade {{ in_array($page, ['monitoring_list', 'monitoring_report_list', 'analysis_report_list', 'monitoring_dashboard']) ? 'active show' : ''  }}" id="kt_header_navs_tab_3">
                         <div class="header-menu flex-column align-items-stretch flex-lg-row">
                             <div class="menu menu-rounded menu-column menu-lg-row menu-root-here-bg-desktop menu-active-bg menu-title-gray-700 menu-state-primary menu-arrow-gray-500 fw-semibold align-items-stretch flex-grow-1 px-2 px-lg-0" id="#kt_header_menu" data-kt-menu="true">
+                                @hasanyrole('admin|super')
+                                <a href="{{ route('oep_admin_media_dashboard_for_monitoring') }}" class="menu-item {{ $page === 'monitoring_dashboard' ? 'here' : '' }} me-0 me-lg-2">
+                                    <span class="menu-link py-3">
+                                        <span class="menu-title">Dashboard Reporte</span>
+                                        <span class="menu-arrow d-lg-none"></span>
+                                    </span>
+                                </a>
+                                @endhasanyrole
                                 @hasanyrole('monitor|admin|super')
                                 <a href="{{ route('oep_admin_media_elections_list_for_monitoring') }}" class="menu-item {{ $page === 'monitoring_list' ? 'here' : '' }} me-0 me-lg-2">
                                     <span class="menu-link py-3">
-                                        <span class="menu-title">Monitoreo por Proceso Electoral</span>
+                                        <span class="menu-title">Registros de Monitoreo</span>
                                         <span class="menu-arrow d-lg-none"></span>
                                     </span>
                                 </a>

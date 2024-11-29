@@ -19,18 +19,6 @@ return new class() extends Migration {
             $table->enum('place', ['IN_ANALYST', 'IN_SECRETARIAT', 'IN_PLENARY'])->default('IN_ANALYST');
 
             $table->enum('status', [
-//                'NEW',
-//                'SUBMITTED_SECRETARIAT',
-//                'RECEIVED_SECRETARIAT',
-//                'UNTREATED',
-//                'RADICADO',
-//                'FIRST_INSTANCE_RESOLUTION',
-//                'FINAL_RESOLUTION',
-//                'SUBMITTED_PLENARY',
-//                'REJECTED',
-//                'RATIFIED',
-
-
                 'NEW',
                 'REJECTED',
 
@@ -46,33 +34,8 @@ return new class() extends Migration {
 
                 //'FINAL_RESOLUTION',
                 'FINALIZED',
-
                 'ARCHIVED',
-
             ])->default('NEW');
-
-//            $table->enum('status', ['NEW', 'REJECTED', 'IN_SECRETARIAT', 'IN_PLENARY', 'FINALIZED', 'ARCHIVED']);
-
-//            $table->enum('sub_status_analyst', [
-//                'NEW',
-//                'REJECTED',
-//            ])->nullable();
-
-//            $table->enum('sub_status', [
-//                'UNTREATED',
-//                'TREATED',
-//                'COMPLEMENTARY_REPORT',
-//                'FIRST_INSTANCE_RESOLUTION',
-//                'FINAL_RESOLUTION'
-//            ])->nullable();
-
-//            $table->enum('sub_status_plenary', [
-//                'UNTREATED_PLENARY',
-//                'TREATED_PLENARY',
-//                'COMPLEMENTARY_REPORT_PLENARY',
-//                'FINAL_RESOLUTION_PLENARY'
-//            ])->nullable();
-
 
             $table->string('file_analysis_report', 100)->nullable();
             $table->string('file_analysis_report_complementary', 100)->nullable();
