@@ -88,7 +88,7 @@
                     <div class="d-flex align-items-center">
                         <button type="submit" id="kt_search" class="btn btn-sm btn-secondary fs-7 me-2">Buscar</button>
                         <button type="button" id="kt_reset" class="btn btn-sm btn-light-secondary fs-7 me-5">Limpiar</button>
-                        <a href="{{ route('oep_admin_media_accreditations_by_election_xls', ['id' => $election->id]) }}" target="_blank" class="btn btn-sm btn-secondary fs-7 me-5">
+                        <a href="{{ route('oep_admin_media_accreditations_by_election_xls', ['id' => $election->id]) }}" target="_blank" rel="noopener" class="btn btn-sm btn-secondary fs-7 me-5">
                             <i class="fa fa-file-excel  me-1"></i> Reporte XLS
                         </a>
                     </div>

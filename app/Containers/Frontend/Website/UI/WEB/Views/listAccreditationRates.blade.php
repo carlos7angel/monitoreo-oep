@@ -114,7 +114,7 @@
                                                                                         </div>
                                                                                     </td>
                                                                                     <td class="text-start">
-                                                                                        <a target="_blank" href="{{$item->fileRate->url_file}}" class="">Descargar</a>
+                                                                                        <a target="_blank" rel="noopener" href="{{$item->fileRate->url_file}}" class="">Descargar</a>
                                                                                     </td>
                                                                                 </tr>
                                                                             @endforeach

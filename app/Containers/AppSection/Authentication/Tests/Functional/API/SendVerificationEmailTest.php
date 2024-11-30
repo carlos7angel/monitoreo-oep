@@ -59,7 +59,7 @@ final class SendVerificationEmailTest extends ApiTestCase
             'email' => 'ganldalf@the.grey',
             'password' => 's3cr3tPa$$',
             'name' => 'Bruce Lee',
-            'verification_url' => 'http://notallowed.test/wrong',
+            'verification_url' => 'https://notallowed.test/wrong',
         ];
 
         $response = $this->makeCall($data);

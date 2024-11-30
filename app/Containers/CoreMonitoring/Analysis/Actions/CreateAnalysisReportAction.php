@@ -50,7 +50,7 @@ class CreateAnalysisReportAction extends ParentAction
         }
 
         $data = [
-            'code' => md5(Carbon::now()->timestamp . $user->id .  $monitoring_report->id . Str::random(24)),
+            'code' => substr(hash("sha512",Carbon::now()->timestamp . $user->id .  $monitoring_report->id . Str::random(24)),0,30),
             'fid_monitoring_report' => $monitoring_report->id,
             'fid_election' => $monitoring_report->fid_election,
             'status' => 'NEW',
@@ -63,7 +63,7 @@ class CreateAnalysisReportAction extends ParentAction
         return DB::transaction(function () use ($data, $monitoring_report, $request, $user) {
 
             $analysis_report = $this->createAnalysisReportTask->run($data);
-            $analysis_report->code = 'A-' . strtoupper(substr(md5($analysis_report->id . $analysis_report->code), 0, 6)) . '/' . Carbon::now()->format('y');
+            $analysis_report->code = 'A-' . strtoupper(substr(hash("sha512",$analysis_report->id . $analysis_report->code), 0, 6)) . '/' . Carbon::now()->format('y');
 
             $analysis_status = [
                 'fid_analysis_report' => $analysis_report->id,

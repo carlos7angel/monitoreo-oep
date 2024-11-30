@@ -86,7 +86,7 @@ final class UserTest extends UnitTestCase
 
         $hashedEmail = $user->getHashedEmailForVerification();
 
-        $this->assertSame(sha1((string) $user->getEmailForVerification()), $hashedEmail);
+        $this->assertSame(sha1((string) $user->getEmailForVerification()), $hashedEmail); //NOSONAR
     }
 
     public function testUsesEmailFieldAsDefaultLoginFieldFallback(): void

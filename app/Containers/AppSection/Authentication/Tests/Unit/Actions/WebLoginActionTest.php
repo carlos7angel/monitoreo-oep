@@ -279,7 +279,7 @@ final class WebLoginActionTest extends UnitTestCase
     {
         config()->set('appSection-authentication.login.case_sensitive', false);
         config()->set('appSection-authentication.login.fields', [$field => []]);
-        $password = 'youShallNotPass';
+        $password = 'youShallNotPass'; //NOSONAR
         $userDetails = [
             $field => $originalCasing,
             'password' => $password,
@@ -303,7 +303,7 @@ final class WebLoginActionTest extends UnitTestCase
     {
         config()->set('appSection-authentication.login.case_sensitive', true);
         config()->set('appSection-authentication.login.fields', [$field => []]);
-        $password = 'youShallNotPass';
+        $password = 'youShallNotPass'; //NOSONAR
         $userDetails = [
             $field => $originalCasing,
             'password' => $password,
@@ -350,7 +350,7 @@ final class WebLoginActionTest extends UnitTestCase
         $credentials = [
             ...$loginFields,
             'password' => 'youShallNotPass',
-        ];
+        ]; //NOSONAR
         $user = UserFactory::new()->createOne($credentials);
         $request = LoginRequest::injectData($credentials);
         $action = app(WebLoginAction::class);
@@ -380,7 +380,7 @@ final class WebLoginActionTest extends UnitTestCase
         $credentials = [
             ...$loginFields,
             'password' => 'youShallNotPass',
-        ];
+        ]; //NOSONAR
         UserFactory::new()->createOne($credentials);
         $request = LoginRequest::injectData($credentials);
         $action = app(WebLoginAction::class);
@@ -395,7 +395,7 @@ final class WebLoginActionTest extends UnitTestCase
             'email' => 'gandalf@the.grey',
             'name' => 'gandalf',
             'password' => 'youShallNotPass',
-        ];
+        ]; //NOSONAR
         UserFactory::new()->createOne($credentials);
         $authSpy = Auth::spy();
         $authSpy->allows()->guard('web')->andReturnSelf();
@@ -422,13 +422,13 @@ final class WebLoginActionTest extends UnitTestCase
             'email' => 'ganldalf@the.grey',
             'name' => 'gandalf',
             'password' => 'youShallNotPass',
-        ];
+        ]; //NOSONAR
         $user = UserFactory::new()->createOne($userDetails);
         $credentials = [
             'email' => 'ganldalf@the.white', // wrong email
             'name' => 'gandalf', // correct name
             'password' => 'youShallNotPass',
-        ];
+        ]; //NOSONAR
         $request = LoginRequest::injectData($credentials);
         $action = app(WebLoginAction::class);
 

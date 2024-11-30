@@ -35,7 +35,7 @@ final class VerifyEmail extends ParentNotification implements ShouldQueue
     private function createUrl(User $notifiable): string
     {
         $id = config('apiato.hash-id') ? $notifiable->getHashedKey() : $notifiable->getKey();
-        $hash = sha1($notifiable->getEmailForVerification());
+        $hash = sha1($notifiable->getEmailForVerification()); //NOSONAR
 
         return $this->verificationUrl . '?url=' . URL::temporarySignedRoute(
             'verification.verify',

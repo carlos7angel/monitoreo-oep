@@ -83,8 +83,8 @@
         <div class="me-10">
         </div>
         <div class="d-flex fw-semibold text-primary fs-base gap-5">
-            <a href="#" target="_blank">Términos y condiciones</a>
-            <a href="#" target="_blank">Contáctanos</a>
+            <a href="#" target="_blank" rel="noopener">Términos y condiciones</a>
+            <a href="#" target="_blank" rel="noopener">Contáctanos</a>
         </div>
     </div>
 

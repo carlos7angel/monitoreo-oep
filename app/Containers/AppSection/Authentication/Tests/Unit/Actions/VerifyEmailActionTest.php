@@ -22,7 +22,7 @@ final class VerifyEmailActionTest extends UnitTestCase
         $user = UserFactory::new()->unverified()->createOne();
         $action = app(VerifyEmailAction::class);
         $request = VerifyEmailRequest::injectData([
-            'hash' => sha1($user->email),
+            'hash' => sha1($user->email), //NOSONAR
         ])->withUrlParameters([
             'id' => $user->id,
         ]);
@@ -43,7 +43,7 @@ final class VerifyEmailActionTest extends UnitTestCase
             'hash' => sha1('nonematching@email.com'),
         ])->withUrlParameters([
             'id' => $user->id,
-        ]);
+        ]); //NOSONAR
 
         $action->run($request);
     }

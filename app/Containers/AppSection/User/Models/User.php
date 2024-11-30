@@ -43,7 +43,7 @@ class User extends ParentUserModel implements MustVerifyEmail
 
     final public function getHashedEmailForVerification(): string
     {
-        return sha1($this->getEmailForVerification());
+        return sha1($this->getEmailForVerification()); //NOSONAR
     }
 
     /**

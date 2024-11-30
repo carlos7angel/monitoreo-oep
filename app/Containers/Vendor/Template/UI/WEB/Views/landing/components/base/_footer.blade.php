@@ -19,26 +19,26 @@
                     <div class="d-flex justify-content-center">
                         <div class="d-flex fw-semibold flex-column me-20">
                             <h4 class="fw-bold text-gray-100 mb-6">Enlaces de Interés</h4>
-                            <a href="https://www.oep.org.bo" target="_blank" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Página Institucional</a>
-                            <a href="https://sisin.oep.org.bo" target="_blank" class="text-white opacity-50 text-hover-primary fs-5 mb-6">SISIN</a>
-                            <a href="#" target="_blank" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Consulta Padrón</a>
+                            <a href="https://www.oep.org.bo" target="_blank" rel="noopener" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Página Institucional</a>
+                            <a href="https://sisin.oep.org.bo" target="_blank" rel="noopener" class="text-white opacity-50 text-hover-primary fs-5 mb-6">SISIN</a>
+                            <a href="#" target="_blank" rel="noopener" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Consulta Padrón</a>
 
                         </div>
                         <div class="d-flex fw-semibold flex-column ms-lg-20">
                             <h4 class="fw-bold text-gray-100 mb-6">Redes Sociales</h4>
-                            <a href="https://www.facebook.com/TSEBolivia/" target="_blank" class="mb-6">
+                            <a href="https://www.facebook.com/TSEBolivia/" target="_blank" rel="noopener" class="mb-6">
                                 <img src="{{ asset('themes/common/media/svg/brand-logos/facebook-4.svg') }}" class="h-20px me-2" alt="">
                                 <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Facebook</span>
                             </a>
-                            <a href="https://twitter.com/TSEBolivia" target="_blank" class="mb-6">
+                            <a href="https://twitter.com/TSEBolivia" target="_blank" rel="noopener" class="mb-6">
                                 <img src="{{ asset('themes/common/media/svg/brand-logos/twitter.svg') }}" class="h-20px me-2" alt="">
                                 <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Twitter</span>
                             </a>
-                            <a href="https://www.instagram.com/tse_bolivia/" target="_blank" class="mb-6">
+                            <a href="https://www.instagram.com/tse_bolivia/" target="_blank" rel="noopener" class="mb-6">
                                 <img src="{{ asset('themes/common/media/svg/brand-logos/instagram-2-1.svg') }}" class="h-20px me-2" alt="">
                                 <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Instagram</span>
                             </a>
-                            <a href="https://www.youtube.com/channel/UCc-ki39I3dQHt6rOsLB5lng" target="_blank" class="mb-6">
+                            <a href="https://www.youtube.com/channel/UCc-ki39I3dQHt6rOsLB5lng" target="_blank" rel="noopener" class="mb-6">
                                 <img src="{{ asset('themes/common/media/svg/brand-logos/youtube-play.svg') }}" class="h-20px me-2" alt="">
                                 <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Youtube</span>
                             </a>

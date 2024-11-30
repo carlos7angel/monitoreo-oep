@@ -25,7 +25,7 @@ final class VerifyEmailTest extends ApiTestCase
     {
         Notification::fake();
         $unverifiedUser = UserFactory::new()->unverified()->createOne();
-        $hashedEmail = sha1($unverifiedUser->getEmailForVerification());
+        $hashedEmail = sha1($unverifiedUser->getEmailForVerification()); //NOSONAR
         // enable email verification
         config()->set('appSection-authentication.require_email_verification', true);
         $url = URL::temporarySignedRoute(
@@ -56,7 +56,7 @@ final class VerifyEmailTest extends ApiTestCase
     {
         Notification::fake();
         $unverifiedUser = UserFactory::new()->unverified()->createOne();
-        $hashedEmail = sha1($unverifiedUser->getEmailForVerification());
+        $hashedEmail = sha1($unverifiedUser->getEmailForVerification()); //NOSONAR
         // enable email verification
         config()->set('appSection-authentication.require_email_verification', true);
         $url = URL::temporarySignedRoute(

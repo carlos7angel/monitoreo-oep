@@ -199,7 +199,7 @@
                                         <p class="form-control form-control-plaintext">
                                             @if(count($rrss)>0)
                                                 @foreach($rrss as $red)
-                                                    <a href="{{ $red->rrss_value }}" target="_blank" class="fs-6">{{ $red->rrss_option }}</a><br>
+                                                    <a href="{{ $red->rrss_value }}" target="_blank" rel="noopener" class="fs-6">{{ $red->rrss_option }}</a><br>
                                                 @endforeach
                                             @else
                                                 <span>-</span>

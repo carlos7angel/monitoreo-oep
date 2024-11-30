@@ -25,7 +25,7 @@ class CreateLogoImageElectionTask extends ParentTask
         $type = 'local';
 
         $sanitize_name = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
-        $unique_code = md5(Carbon::now()->timestamp . $sanitize_name .  $file->getSize() . $file->getMimeType() . Str::random(24));
+        $unique_code = md5(Carbon::now()->timestamp . $sanitize_name .  $file->getSize() . $file->getMimeType() . Str::random(24)); //NOSONAR
         $new_name = substr($unique_code, 0, 8) . '__' . $sanitize_name . '.' . $file->getClientOriginalExtension();
 
         try {

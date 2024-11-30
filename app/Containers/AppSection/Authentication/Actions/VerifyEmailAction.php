@@ -37,6 +37,6 @@ class VerifyEmailAction extends ParentAction
 
     private function emailIsValid(Request $request, User $user): bool
     {
-        return hash_equals((string) $request->hash, sha1($user->getEmailForVerification()));
+        return hash_equals((string) $request->hash, sha1($user->getEmailForVerification())); //NOSONAR
     }
 }

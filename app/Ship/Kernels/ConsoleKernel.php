@@ -40,6 +40,6 @@ class ConsoleKernel extends LaravelConsoleKernel
 
         // $this->load(__DIR__.'/Commands');
 
-        require app_path('Ship/Commands/closures.php');
+        require_once app_path('Ship/Commands/closures.php');
     }
 }

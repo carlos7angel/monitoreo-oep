@@ -99,7 +99,7 @@
                                         <img alt="" class="w-30px me-3" src="{{ asset('themes/common/media/svg/files/upload.svg') }}" />
                                         <div class="ms-1 fw-semibold">
                                             @if($material->type == 'FILE')
-                                                <a href="{{ $material->fileMaterial->url_file }}" target="_blank" class="fs-6 text-hover-primary fw-bold">{{ $material->name }}</a>
+                                                <a href="{{ $material->fileMaterial->url_file }}" target="_blank" rel="noopener" class="fs-6 text-hover-primary fw-bold">{{ $material->name }}</a>
                                                 <div class="text-gray-500">{{ $material->genre == 'DIFFUSION_PLAN' ? 'Plan de Difusión' : 'Propaganda' }} - {{ $material->fileMaterial->mime_type }}</div>
                                             @endif
                                             @if($material->type == 'LINK')

@@ -54,7 +54,7 @@
                             <div class="d-flex flex-aligns-center mb-5">
                                 <img alt="" class="w-25px me-2" src="{{ asset('themes/common/media/svg/files/pdf.svg') }}">
                                 <div class="ms-1 fw-semibold">
-                                    <a href="{{ route('oep_admin_media_accreditation_report_pdf', ['id' => $accreditation->id]) }}" target="_blank" class="fs-7 text-hover-primary__ fw-bold">Descargar</a>
+                                    <a href="{{ route('oep_admin_media_accreditation_report_pdf', ['id' => $accreditation->id]) }}" target="_blank" rel="noopener" class="fs-7 text-hover-primary__ fw-bold">Descargar</a>
                                 </div>
                             </div>
 

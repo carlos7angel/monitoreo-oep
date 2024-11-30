@@ -53,13 +53,13 @@ class WebExtAdministratorLoginAction extends ParentAction
         $user = Auth::guard('external')->user();
 
         if (! $user->hasExternalAdminMediaRole()) {
-            throw new LoginFailedException('El usuario no tiene un rol autorizado');
             Auth::guard('external')->logout();
+            throw new LoginFailedException('El usuario no tiene un rol autorizado');
         }
 
         if (! $user->active) {
-            throw new LoginFailedException('El usuario no esta activo. Póngase en contacto con soporte.');
             Auth::guard('external')->logout();
+            throw new LoginFailedException('El usuario no esta activo. Póngase en contacto con soporte.');
         }
 
         session()->regenerate();

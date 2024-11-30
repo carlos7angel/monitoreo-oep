@@ -1,13 +1,14 @@
 <style>html,body { padding: 0; margin:0; }</style>
 <div style="font-family:Arial,Helvetica,sans-serif; line-height: 1.5; font-weight: normal; font-size: 15px; color: #2F3044; min-height: 100%; margin:0; padding:0; width:100%; background-color:#edf2f7">
-    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;margin:0 auto; padding:0; max-width:600px">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;margin:0 auto; padding:0; max-width:600px"
+           aria-describedby="forgot password">
         <tbody>
         <tr>
-            <td align="center" valign="center" style="text-align:center; padding: 40px">
-                <a rel="noopener" target="_blank">
+            <th align="center" valign="center" style="text-align:center; padding: 40px">
+                <a rel="noopener" target="_blank" rel="noopener">
                     <img alt="Logo" src="{{ asset('themes/common/media/logos/logo_oep.png') }}" class="h-100px" />
                 </a>
-            </td>
+            </th>
         </tr>
         <tr>
             <td align="left" valign="center">

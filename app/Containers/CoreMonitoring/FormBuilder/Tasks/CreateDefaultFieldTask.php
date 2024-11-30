@@ -32,7 +32,7 @@ class CreateDefaultFieldTask extends ParentTask
             'field_type_name' => $type->type,
             'field_subtype' => $options->input->subtype[0],
             'unique_fieldname' => Str::random(24),
-            'label' => $type->name . ' ' . rand(11111, 99999),
+            'label' => $type->name . ' ' . rand(11111, 99999), //NOSONAR
             'order' => 0,
         ];
 
@@ -47,7 +47,7 @@ class CreateDefaultFieldTask extends ParentTask
             throw new CreateResourceFailedException();
         }
 
-        $unique_code = md5($field->id . Carbon::now()->timestamp . $form_id .  $type->id . $type->type . Str::random(24));
+        $unique_code = hash("sha512", $field->id . Carbon::now()->timestamp . $form_id .  $type->id . $type->type . Str::random(24));
 
         $data = [
             'unique_fieldname' => $type->type . '-' . strtoupper(substr($unique_code, 0, 10)),

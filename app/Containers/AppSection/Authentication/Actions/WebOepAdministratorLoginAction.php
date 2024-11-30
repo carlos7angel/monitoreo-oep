@@ -57,13 +57,13 @@ class WebOepAdministratorLoginAction extends ParentAction
         $user = Auth::guard('web')->user();
 
         if (! $user->hasAdminMediaRole()) {
-            throw new LoginFailedException('El usuario no tiene un rol autorizado');
             Auth::guard('web')->logout();
+            throw new LoginFailedException('El usuario no tiene un rol autorizado');
         }
 
         if (! $user->active) {
-            throw new LoginFailedException('El usuario no esta activo. Póngase en contacto con soporte.');
             Auth::guard('web')->logout();
+            throw new LoginFailedException('El usuario no esta activo. Póngase en contacto con soporte.');
         }
 
         session()->regenerate();

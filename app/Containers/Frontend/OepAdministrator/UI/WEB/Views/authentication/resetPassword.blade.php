@@ -59,7 +59,7 @@
         </div>
         <div class="px-lg-10">
             <div class="fw-semibold text-primary text-center fs-base gap-5">
-                <a href="#" target="_blank">¿Tienes problemas? Contáctate con soporte</a>
+                <a href="#" target="_blank" rel="noopener">¿Tienes problemas? Contáctate con soporte</a>
             </div>
         </div>
     </div>

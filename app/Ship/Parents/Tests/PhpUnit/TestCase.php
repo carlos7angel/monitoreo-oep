@@ -38,7 +38,7 @@ abstract class TestCase extends AbstractTestCase
         // override the default subDomain of the base URL when subDomain property is declared inside a test
         $this->overrideSubDomain();
 
-        $app = require __DIR__ . '/../../../../../bootstrap/app.php';
+        $app = require_once __DIR__ . '/../../../../../bootstrap/app.php';
 
         $app->make(ApiatoConsoleKernel::class)->bootstrap();
 

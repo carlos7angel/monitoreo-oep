@@ -136,10 +136,10 @@
                                     </td>
                                     <td>
                                         @if($material->type == 'FILE')
-                                            <a href="{{ $material->fileMaterial->url_file }}" target="_blank" class="text-gray-900 fw-bold text-hover-info d-block mb-1 fs-7">{{ $material->fileMaterial->url_file }}</a>
+                                            <a href="{{ $material->fileMaterial->url_file }}" target="_blank" rel="noopener" class="text-gray-900 fw-bold text-hover-info d-block mb-1 fs-7">{{ $material->fileMaterial->url_file }}</a>
                                         @endif
                                         @if($material->type == 'LINK')
-                                            <a href="{{ $material->link_material }}" target="_blank" class="text-gray-900 fw-bold text-hover-info d-block mb-1 fs-7">{{ $material->link_material }}</a>
+                                            <a href="{{ $material->link_material }}" target="_blank" rel="noopener" class="text-gray-900 fw-bold text-hover-info d-block mb-1 fs-7">{{ $material->link_material }}</a>
                                         @endif
                                     </td>
                                     <td class="text-end">

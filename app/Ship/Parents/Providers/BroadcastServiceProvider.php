@@ -20,6 +20,6 @@ abstract class BroadcastServiceProvider extends AbstractBroadcastServiceProvider
     {
         Broadcast::routes();
 
-        require app_path('Ship/Broadcasts/channels.php');
+        require_once app_path('Ship/Broadcasts/channels.php');
     }
 }

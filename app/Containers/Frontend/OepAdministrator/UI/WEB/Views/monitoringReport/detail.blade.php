@@ -170,7 +170,7 @@
                         <div class="d-flex flex-aligns-center mb-5">
                             <img alt="" class="w-30px me-3" src="{{ asset('themes/common/media/svg/files/pdf.svg') }}">
                             <div class="ms-1 fw-semibold">
-                                <a href="{{ route('oep_admin_media_monitoring_generate_pdf', ['id' => $monitoring_report->monitoringItem->id]) }}" target="_blank" class="fs-6 text-hover-primary__ fw-bold">Descargar</a>
+                                <a href="{{ route('oep_admin_media_monitoring_generate_pdf', ['id' => $monitoring_report->monitoringItem->id]) }}" target="_blank" rel="noopener" class="fs-6 text-hover-primary__ fw-bold">Descargar</a>
                             </div>
                         </div>
 

@@ -27,12 +27,12 @@ final class RegisterUserTest extends ApiTestCase
     public function testGivenEmailVerificationEnabledRegisterNewUserWithCredentials(): void
     {
         config()->set('appSection-authentication.require_email_verification', true);
-        config()->set('appSection-authentication.allowed-verify-email-urls', 'http://some.test/known/url');
+        config()->set('appSection-authentication.allowed-verify-email-urls', 'https://some.test/known/url');
 
         $data = [
             'email' => 'ganldalf@the.grey',
             'password' => 's3cr3tPa$$',
-            'verification_url' => 'http://some.test/known/url',
+            'verification_url' => 'https://some.test/known/url',
         ];
 
         $response = $this->makeCall($data);
@@ -157,7 +157,7 @@ final class RegisterUserTest extends ApiTestCase
         $data = [
             'email' => 'ganldalf@the.grey',
             'password' => 's3cr3tPa$$',
-            'verification_url' => 'http://notallowed.test/wrong/hopyfuly/noone/make/a/route/like/this',
+            'verification_url' => 'https://notallowed.test/wrong/hopyfuly/noone/make/a/route/like/this',
         ];
 
         $response = $this->makeCall($data);

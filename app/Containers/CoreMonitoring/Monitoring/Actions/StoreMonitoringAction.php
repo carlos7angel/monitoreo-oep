@@ -66,7 +66,7 @@ class StoreMonitoringAction extends ParentAction
         }
 
         $data = [
-            'code' => md5(Carbon::now()->timestamp . $user->id .  $request->media_profile . Str::random(24)),
+            'code' => substr(hash("sha512", Carbon::now()->timestamp . $user->id .  $request->media_profile . Str::random(24)),0,30),
             'media_type' => $request->oep_media_type,
             'fid_election' => $election->id,
             'fid_form' => $form->id,
@@ -98,7 +98,7 @@ class StoreMonitoringAction extends ParentAction
 
             $monitoring = $this->createMonitoringTask->run($data);
             $data_form = app(StoreDataFieldsFormTask::class)->run($form, $request, $monitoring);
-            $monitoring->code = 'M-' . strtoupper(substr(md5($monitoring->id . $monitoring->created_at . $monitoring->code), 0, 6)) . '-' . Carbon::now()->format('y');
+            $monitoring->code = 'M-' . strtoupper(substr(hash("sha512", $monitoring->id . $monitoring->created_at . $monitoring->code), 0, 6)) . '-' . Carbon::now()->format('y');
             $monitoring->data = json_encode($data_form);
             $monitoring->save();
 

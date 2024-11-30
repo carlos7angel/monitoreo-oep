@@ -160,7 +160,7 @@
                                     <div class="fw-bold mt-5">Declaración Jurada:</div>
                                     <div class="text-gray-600">
                                         @if($election->fileAffidavitMediaRegistration)
-                                            <a target="_blank" href="{{ $election->fileAffidavitMediaRegistration->url_file }}" class="text-primary text-hover-primary">Descargar</a>
+                                            <a target="_blank" href="{{ $election->fileAffidavitMediaRegistration->url_file }}" rel="noopener" class="text-primary text-hover-primary">Descargar</a>
                                         @else
                                             <span>-</span>
                                         @endif

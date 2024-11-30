@@ -48,7 +48,7 @@ class SubmitMonitoringAction extends ParentAction
         }
 
         $data = [
-            'code' => md5(Carbon::now()->timestamp . $user->id .  $election->id . Str::random(24)),
+            'code' => substr(hash("sha512",Carbon::now()->timestamp . $user->id .  $election->id . Str::random(24)),0,30),
             'fid_election' => $election->id,
             'status' => 'SUBMITTED',
             'submitted_at' => Carbon::now(),
@@ -66,7 +66,7 @@ class SubmitMonitoringAction extends ParentAction
         return DB::transaction(function () use ($data, $monitoring_item, $request, $user) {
 
             $monitoring_report = $this->createMonitoringReportTask->run($data);
-            $monitoring_report->code = 'R-' . strtoupper(substr(md5($monitoring_report->id . $monitoring_report->code), 0, 6)) . '/' . Carbon::now()->format('y');
+            $monitoring_report->code = 'R-' . strtoupper(substr(hash("sha512", $monitoring_report->id . $monitoring_report->code), 0, 6)) . '/' . Carbon::now()->format('y');
             $monitoring_report->save();
 
             $monitoring_item->status = 'SELECTED';
