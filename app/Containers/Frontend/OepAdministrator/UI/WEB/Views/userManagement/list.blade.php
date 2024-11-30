@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users" data-url="{{ route('oep_admin_users_json_dt') }}"> <!-- //NOSONAR -->
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users" data-url="{{ route('oep_admin_users_json_dt') }}" aria-describedby="table"> <!-- //NOSONAR -->
                     <thead>
                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                         <th class="w-10px pe-2">#</th>

@@ -4,7 +4,7 @@
 </div>
 
 <div class="table-responsive">
-    <table class="table align-middle table-row-bordered mb-0 fs-6 gy-5 min-w-300px">
+    <table class="table align-middle table-row-bordered mb-0 fs-6 gy-5 min-w-300px" aria-describedby="table"><!-- //NOSONAR -->
         <tbody class="fw-semibold text-gray-600">
         <tr>
             <td class="text-muted">

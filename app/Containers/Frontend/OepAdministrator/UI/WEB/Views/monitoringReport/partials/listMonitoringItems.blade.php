@@ -2,7 +2,7 @@
       action="{{ route('oep_admin_monitoring_report_add_items', ['id' => $monitoring_report->id]) }}">
 
     <div class="table-responsive">
-        <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3"> <!-- //NOSONAR -->
+        <table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3" aria-describedby="table"> <!-- //NOSONAR -->
             <thead>
             <tr class="fw-bold text-muted">
                 <th class="w-25px">

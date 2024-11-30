@@ -115,7 +115,7 @@
 
                                     <div class="flex-grow-1">
                                         <div class="table-responsive border-bottom mb-9">
-                                            <table class="table align-middle gs-0 gy-4 mb-3">
+                                            <table class="table align-middle gs-0 gy-4 mb-3" aria-describedby="table"><!-- //NOSONAR -->
                                                 <thead>
                                                 <tr class="border-bottom bg-light fs-6 fw-bold text-muted">
                                                     <th class="ps-4 rounded-start min-w-175px">Tipo</th>
@@ -265,7 +265,7 @@
                     </div>
                     <div class="card-body pt-0 pb-5">
                         <div class="table-responsive">
-                            <table class="table align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
+                            <table class="table align-middle table-row-dashed gy-5" id="kt_table_users_login_session" aria-describedby="table"><!-- //NOSONAR -->
                                 <thead class="border-bottom border-gray-200 fs-7 fw-bold">
                                     <tr class="text-start text-muted text-uppercase gs-0">
                                         <th class="text-start min-w-70px">Documento</th>

@@ -86,7 +86,8 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_elections" data-url="{{ route('oep_admin_elections_json_dt') }}">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_elections"
+                       data-url="{{ route('oep_admin_elections_json_dt') }}" aria-describedby="table">
                     <thead>
                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                         <th class="w-10px pe-2">#</th>

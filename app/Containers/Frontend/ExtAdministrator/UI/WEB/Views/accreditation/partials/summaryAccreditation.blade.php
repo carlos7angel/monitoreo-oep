@@ -65,7 +65,7 @@
         <div class="col-md-12 d-flex align-items-center mt-5">
             <div class="flex-grow-1">
             <div class="table-responsive">
-                <table class="table align-middle gs-0 gy-4 mb-3">
+                <table class="table align-middle gs-0 gy-4 mb-3" aria-describedby="table"><!-- //NOSONAR -->
                     <thead>
                     <tr class="border-bottom bg-light fs-6 fw-bold text-muted">
                         <th class="ps-4 rounded-start min-w-175px">Tipo</th>

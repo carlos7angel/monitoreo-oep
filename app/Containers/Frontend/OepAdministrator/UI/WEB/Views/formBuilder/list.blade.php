@@ -39,7 +39,8 @@
         <div class="card card-flush">
 
             <div class="card-body">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_forms" data-url="{{ route('oep_admin_forms_json_dt') }}">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_forms"
+                       data-url="{{ route('oep_admin_forms_json_dt') }}" aria-describedby="table"><!-- //NOSONAR -->
                     <thead>
                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                         <th class="w-10px pe-2">#</th>

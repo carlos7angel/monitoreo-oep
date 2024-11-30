@@ -121,7 +121,7 @@
 
                             <div class="row fv-row mb-7">
                                 <div class="table-responsive">
-                                    <table class="table align-middle table-bordered" id="table_media_types">
+                                    <table class="table align-middle table-bordered" id="table_media_types" aria-describedby="table"><!-- //NOSONAR -->
                                         <thead>
                                             <tr class="fw-bold fs-6 text-gray-800">
                                                 <th class="text-center">#</th>

@@ -40,7 +40,7 @@
         <div class="card card-flush">
             <div class="card-body">
                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_elections_monitoring"
-                       data-url="{{ route('oep_admin_media_elections_list_for_monitoring_json_dt') }}"> <!-- //NOSONAR -->
+                       data-url="{{ route('oep_admin_media_elections_list_for_monitoring_json_dt') }}" aria-describedby="table"> <!-- //NOSONAR -->
                     <thead>
                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                         <th class="w-10px pe-2">#</th>

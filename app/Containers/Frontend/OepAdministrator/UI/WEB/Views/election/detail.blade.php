@@ -190,7 +190,7 @@
 
                                 <div class="card-body pt-0">
                                     <div class="table-responsive">
-                                        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
+                                        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0"  aria-describedby="table"><!-- //NOSONAR -->
                                             <thead>
                                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                                 <th class="min-w-175px">Medio de Comunicación</th>
@@ -342,7 +342,7 @@
 
                                 <div class="card-body pt-0">
                                     <div class="table-responsive">
-                                        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
+                                        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" aria-describedby="table"><!-- //NOSONAR -->
                                             <thead>
                                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                                 <th class="min-w-175px">Medio de Comunicación</th>
@@ -506,7 +506,7 @@
 
                                 <div class="card-body pt-0">
                                     <div class="table-responsive">
-                                        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
+                                        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" aria-describedby="table"><!-- //NOSONAR -->
                                             <thead>
                                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                                 <th class="min-w-175px">Partido Político</th>

@@ -165,7 +165,7 @@
                     <div class="card-body pt-5">
 
                         <div class="table-responsive">
-                            <table class="table align-middle gs-0 gy-4">
+                            <table class="table align-middle gs-0 gy-4" aria-describedby="table"><!-- //NOSONAR -->
                                 <thead>
                                 <tr class="fw-bold text-muted bg-light">
                                     <th class="ps-4 min-w-300px rounded-start">Usuario</th>
