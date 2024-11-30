@@ -8,13 +8,8 @@ use App\Ship\Parents\Tasks\Task as ParentTask;
 
 class FillDataFieldTask extends ParentTask
 {
-    public function __construct(
-    ) {
-    }
-
     public function run(Field $field, Request $request): mixed
     {
-        // dd($request->all());
         $data = [
             'unique_fieldname' => $request->fieldname
         ];

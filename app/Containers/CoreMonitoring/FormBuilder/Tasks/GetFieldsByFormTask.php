@@ -14,10 +14,6 @@ class GetFieldsByFormTask extends ParentTask
 
     public function run($form_id): mixed
     {
-        //        return $this->repository->findWhere([
-        //            'fid_form' => $form_id
-        //        ])->all();
-
         $result = $this->repository->scopeQuery(function ($query) use ($form_id) {
             $query = $query->where('fid_form', '=', $form_id);
             return $query->distinct()->select(['form_fields.*']);
