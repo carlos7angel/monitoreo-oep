@@ -8,4 +8,3 @@ Route::post('/logout', [AuthController::class, 'postLogout'])
     ->name('oep_admin_post_logout')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

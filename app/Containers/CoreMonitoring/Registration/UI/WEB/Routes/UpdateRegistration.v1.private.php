@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::patch('registrations/{id}', [UpdateRegistrationController::class, 'update'])
     ->middleware(['auth:web']);
-

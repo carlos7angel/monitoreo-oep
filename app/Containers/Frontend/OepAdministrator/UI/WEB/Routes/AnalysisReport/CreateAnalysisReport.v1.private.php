@@ -8,4 +8,3 @@ Route::post('monitoreo/reportes/{id}/analisis/nuevo', [AnalysisReportController:
     ->name('oep_admin_analysis_report_create')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

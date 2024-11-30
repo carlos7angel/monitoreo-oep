@@ -85,11 +85,11 @@ class StoreMonitoringAction extends ParentAction
             $data['other_media'] = $request->media_profile_text;
         }
 
-        if($user->type === 'TSE' || empty($user->type)) {
+        if ($user->type === 'TSE' || empty($user->type)) {
             $data['scope_type'] = 'TSE';
             $data['scope_department'] = 'Nacional';
         }
-        if($user->type === 'TED') {
+        if ($user->type === 'TED') {
             $data['scope_type'] = $user->type ;
             $data['scope_department'] = $user->department;
         }
@@ -103,7 +103,7 @@ class StoreMonitoringAction extends ParentAction
             $monitoring->save();
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::CREATED_MONITORING, $request->server(), $monitoring));
+            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::CREATED_MONITORING, $request->server(), $monitoring));
 
             return $monitoring;
         });

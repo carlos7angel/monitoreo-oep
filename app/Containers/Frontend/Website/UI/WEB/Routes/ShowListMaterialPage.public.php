@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/proceso-electoral/{id}/{slug}/material', [Controller::class, 'listMaterialPage'])
     ->name('web_show_list_material');
-

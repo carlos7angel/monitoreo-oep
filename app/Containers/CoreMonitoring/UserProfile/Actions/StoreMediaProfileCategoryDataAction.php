@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\DB;
 class StoreMediaProfileCategoryDataAction extends ParentAction
 {
     public function __construct(
-         private UpdateUserMediaProfileTask $updateUserMediaProfileTask,
-         private RemoveAllMediaTypesByUserMediaProfileTask $removeAllMediaTypesByUserMediaProfileTask,
-         private CreateLogoImageMediaTask $createLogoImageMediaTask,
-         private CreateTypeMediaProfileTask $createTypeMediaProfileTask,
+        private UpdateUserMediaProfileTask $updateUserMediaProfileTask,
+        private RemoveAllMediaTypesByUserMediaProfileTask $removeAllMediaTypesByUserMediaProfileTask,
+        private CreateLogoImageMediaTask $createLogoImageMediaTask,
+        private CreateTypeMediaProfileTask $createTypeMediaProfileTask,
     ) {
     }
 

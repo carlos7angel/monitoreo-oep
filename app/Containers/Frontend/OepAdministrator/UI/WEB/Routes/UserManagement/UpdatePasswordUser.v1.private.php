@@ -8,4 +8,3 @@ Route::post('usuarios/{id}/password', [UserManagementController::class, 'updateP
     ->name('oep_admin_users_update_password')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

@@ -8,4 +8,3 @@ Route::post('/medio-comunicacion/categoria', [MediaProfileController::class, 'st
     ->name('ext_admin_media_profile_category_data_store')
     ->middleware(['auth:external'])
     ->domain(parse_url(config('app.url'))['host']);
-

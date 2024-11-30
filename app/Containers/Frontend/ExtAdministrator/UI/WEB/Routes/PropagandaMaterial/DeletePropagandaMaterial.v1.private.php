@@ -8,4 +8,3 @@ Route::post('/registros/elecciones/{registration_id}/material-propaganda/{id}/el
     ->name('ext_admin_propaganda_material_delete')
     ->middleware(['auth:external'])
     ->domain(parse_url(config('app.url'))['host']);
-

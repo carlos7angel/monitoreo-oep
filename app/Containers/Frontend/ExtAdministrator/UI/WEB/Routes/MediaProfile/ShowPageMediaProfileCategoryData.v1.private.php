@@ -8,4 +8,3 @@ Route::get('/medio-comunicacion/categoria', [MediaProfileController::class, 'sho
     ->name('ext_admin_media_profile_category_data_show')
     ->middleware(['auth:external'])
     ->domain(parse_url(config('app.url'))['host']);
-

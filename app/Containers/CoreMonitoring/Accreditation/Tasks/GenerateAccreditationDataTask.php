@@ -8,7 +8,8 @@ use App\Ship\Parents\Tasks\Task as ParentTask;
 
 class GenerateAccreditationDataTask extends ParentTask
 {
-    public function __construct() {
+    public function __construct()
+    {
     }
 
     /**

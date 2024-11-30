@@ -8,4 +8,3 @@ Route::post('monitoreo/analisis/{id}/informe-complementario', [AnalysisReportCon
     ->name('oep_admin_analysis_report_complementary')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

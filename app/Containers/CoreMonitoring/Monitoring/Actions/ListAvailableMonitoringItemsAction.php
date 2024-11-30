@@ -26,11 +26,11 @@ class ListAvailableMonitoringItemsAction extends ParentAction
         $election = app(FindElectionByIdTask::class)->run($request->election_id);
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
         $scope_type = $scope_department = null;
-        if($user->type === 'TSE' || empty($user->type)) {
+        if ($user->type === 'TSE' || empty($user->type)) {
             $scope_type = 'TSE';
             $scope_department = 'Nacional';
         }
-        if($user->type === 'TED') {
+        if ($user->type === 'TED') {
             $scope_type = $user->type ;
             $scope_department = $user->department;
         }

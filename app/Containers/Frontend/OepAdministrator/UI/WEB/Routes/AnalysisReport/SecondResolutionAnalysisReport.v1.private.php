@@ -8,4 +8,3 @@ Route::post('monitoreo/analisis/{id}/resolucion-segunda-instancia', [AnalysisRep
     ->name('oep_admin_analysis_report_second_resolution')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

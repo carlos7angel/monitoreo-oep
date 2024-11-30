@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration {
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('form_fields', function (Blueprint $table) {
@@ -34,9 +34,9 @@ return new class() extends Migration {
             $table->string('file_maxsize', 10)->nullable();
             $table->string('file_mimetypes', 255)->nullable();
             $table->string('date_start', 20)->nullable();
-            $table->string('date_end',20)->nullable();
-            $table->string('date_format',20)->nullable();
-            $table->string('date_preview',20)->nullable();
+            $table->string('date_end', 20)->nullable();
+            $table->string('date_format', 20)->nullable();
+            $table->string('date_preview', 20)->nullable();
             $table->text('date_range')->nullable();
             $table->unsignedBigInteger('table_form_id')->nullable(); // foreign key?
             $table->boolean('table_edit_option')->nullable();
@@ -60,11 +60,11 @@ return new class() extends Migration {
             $table->integer('maxrows')->nullable();
 
             //style
-            $table->string('grid_column',20)->nullable();
+            $table->string('grid_column', 20)->nullable();
             $table->text('input_group_prepend')->nullable();
             $table->text('input_group_append')->nullable();
-            $table->string('class_name',50)->nullable();
-            $table->string('color',20)->nullable();
+            $table->string('class_name', 50)->nullable();
+            $table->string('color', 20)->nullable();
 
             //advanced
             $table->longText('logic_condition')->nullable();

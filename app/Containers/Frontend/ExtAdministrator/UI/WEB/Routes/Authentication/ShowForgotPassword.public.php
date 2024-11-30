@@ -8,4 +8,3 @@ Route::prefix(config('app.admin_external_prefix'))->group(function () {
         ->name('ext_admin_forgot_password')
         ->domain(parse_url(config('app.url'))['host']);
 });
-

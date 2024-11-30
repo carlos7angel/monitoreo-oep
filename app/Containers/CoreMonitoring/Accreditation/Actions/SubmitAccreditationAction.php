@@ -42,12 +42,12 @@ class SubmitAccreditationAction extends ParentAction
 
         $accreditation = app(FindAccreditationByIdTask::class)->run($request->id);
 
-        if($accreditation->status !== 'observed' && $accreditation->status !== 'draft') {
+        if ($accreditation->status !== 'observed' && $accreditation->status !== 'draft') {
             throw new NotFoundException('No se puede enviar el proceso de acreditación');
         } else {
 
-            if($accreditation->status === 'observed') {
-                if($accreditation->due_date_observed) {
+            if ($accreditation->status === 'observed') {
+                if ($accreditation->due_date_observed) {
                     $due = Carbon::createFromFormat('d/m/Y H:i', $accreditation->due_date_observed);
                     $today = Carbon::now();
                     if (! $today->lte($due)) {
@@ -71,7 +71,7 @@ class SubmitAccreditationAction extends ParentAction
             App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::SUBMITTED_ACCREDITATION, $request->server(), $accreditation));
 
             // Send Notification
-            App::make(Dispatcher::class)->dispatch(New SubmitAccreditationNotificationEvent($accreditation, $user));
+            App::make(Dispatcher::class)->dispatch(new SubmitAccreditationNotificationEvent($accreditation, $user));
 
             return $accreditation;
         });

@@ -39,7 +39,7 @@ class UpdateMonitoringAction extends ParentAction
     {
         $monitoring = $this->findMonitoringByIdTask->run($request->id);
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
-        if($user->id !== $monitoring->registered_by) {
+        if ($user->id !== $monitoring->registered_by) {
             throw new AuthorizationException('No tiene los permisos para realizar esta acción.');
         }
 
@@ -61,7 +61,7 @@ class UpdateMonitoringAction extends ParentAction
             $monitoring->save();
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::UPDATED_MONITORING, $request->server(), $monitoring));
+            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::UPDATED_MONITORING, $request->server(), $monitoring));
 
             return $monitoring;
         });

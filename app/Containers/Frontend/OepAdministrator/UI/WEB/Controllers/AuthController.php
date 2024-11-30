@@ -26,8 +26,9 @@ class AuthController extends WebController
     public function showLoginPage()
     {
         $page_title = "Ingreso";
-        if(Auth::guard('web')->check())
+        if (Auth::guard('web')->check()) {
             return redirect()->route('oep_admin_index');
+        }
         return view('frontend@oepAdministrator::authentication.login', [], compact('page_title'));
     }
 
@@ -51,8 +52,9 @@ class AuthController extends WebController
     public function showForgotPasswordPage()
     {
         $page_title = "Olvidaste tu contraseña";
-        if(Auth::guard('web')->check())
+        if (Auth::guard('web')->check()) {
             return redirect()->route('oep_admin_index');
+        }
         return view('frontend@oepAdministrator::authentication.forgotPassword', [
             'reseturl' => url(route('oep_admin_login_reset_password'))
         ], compact('page_title'));
@@ -71,8 +73,9 @@ class AuthController extends WebController
     public function showResetPasswordPage()
     {
         $page_title = "Restablecer contraseña";
-        if(Auth::guard('web')->check())
+        if (Auth::guard('web')->check()) {
             return redirect()->route('oep_admin_index');
+        }
         return view('frontend@oepAdministrator::authentication.resetPassword', [], compact('page_title'));
     }
 

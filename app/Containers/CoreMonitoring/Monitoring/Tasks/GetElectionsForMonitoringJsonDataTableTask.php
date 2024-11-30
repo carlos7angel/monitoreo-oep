@@ -27,7 +27,7 @@ class GetElectionsForMonitoringJsonDataTableTask extends ParentTask
         $start = $requestData['start'];
         $length = $requestData['length'];
         $sortColumn = $sortColumnDir = null;
-        if(isset($requestData['order'])) {
+        if (isset($requestData['order'])) {
             $indexSort = $requestData['order'][0]['column'];
             $sortColumn = $requestData['columns'][$indexSort]['name'];
             $sortColumnDir = $requestData['order'][0]['dir'];
@@ -37,7 +37,7 @@ class GetElectionsForMonitoringJsonDataTableTask extends ParentTask
         $skip = $start != null ? intval($start) : 0;
 
         $result = $this->repository->scopeQuery(function ($query) use ($searchValue) {
-            if(! empty($searchValue)) {
+            if (! empty($searchValue)) {
                 $query = $query->where('name', 'like', '%'.$searchValue.'%')->orWhere('code', 'like', '%'.$searchValue.'%');
             }
             $query = $query->whereIn('status', ['active', 'finished'])->where('enable_for_monitoring', 1);
@@ -48,7 +48,7 @@ class GetElectionsForMonitoringJsonDataTableTask extends ParentTask
 
         $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
 
-        if($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
+        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 

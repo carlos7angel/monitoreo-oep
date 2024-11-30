@@ -27,7 +27,7 @@ class CreateFileTask extends ParentTask
      */
     public function run($file, $type, $id, $user): File|null
     {
-        if(! $file) {
+        if (! $file) {
             return null;
         }
 

@@ -8,4 +8,3 @@ Route::get('/perfil', [AuthController::class, 'showMyProfile'])
     ->name('oep_admin_my_profile')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

@@ -40,12 +40,12 @@ class CreateAnalysisReportAction extends ParentAction
         ]);
 
         $monitoring_report = app(FindMonitoringReportByIdTask::class)->run($request->id);
-        if($monitoring_report->status !== 'SUBMITTED') {
+        if ($monitoring_report->status !== 'SUBMITTED') {
             throw new ValidationFailedException('Operación no permitida. El registro no puede cambiar de estado.');
         }
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
-        if(! $user->hasRole(['analyst'])) {
+        if (! $user->hasRole(['analyst'])) {
             throw new AuthorizationException('No tiene los permisos para realizar esta acción');
         }
 
@@ -63,7 +63,7 @@ class CreateAnalysisReportAction extends ParentAction
         return DB::transaction(function () use ($data, $monitoring_report, $request, $user) {
 
             $analysis_report = $this->createAnalysisReportTask->run($data);
-            $analysis_report->code = 'A-' . strtoupper(substr(md5($analysis_report->id . $analysis_report->code),0,6)) . '/' . Carbon::now()->format('y');
+            $analysis_report->code = 'A-' . strtoupper(substr(md5($analysis_report->id . $analysis_report->code), 0, 6)) . '/' . Carbon::now()->format('y');
 
             $analysis_status = [
                 'fid_analysis_report' => $analysis_report->id,
@@ -79,7 +79,7 @@ class CreateAnalysisReportAction extends ParentAction
             $monitoring_report->save();
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::CREATE_ANALYSIS_REPORT, $request->server(), $analysis_report));
+            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::CREATE_ANALYSIS_REPORT, $request->server(), $analysis_report));
 
             return $analysis_report;
         });

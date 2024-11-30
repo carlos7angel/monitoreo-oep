@@ -49,7 +49,7 @@ class EnableUserMediaProfileAccountAction extends ParentAction
 
         $password = strtoupper(substr(md5(
             Carbon::now()->timestamp . $media_profile->email . $media_profile->name . Str::random(24)
-        ),0,10));
+        ), 0, 10));
         // $password = 'admin';
 
         $data = [

@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::delete('catalogs/{id}', [DeleteCatalogController::class, 'destroy'])
     ->middleware(['auth:web']);
-

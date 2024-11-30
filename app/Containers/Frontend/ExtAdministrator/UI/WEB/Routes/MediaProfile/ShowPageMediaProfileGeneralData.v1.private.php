@@ -8,4 +8,3 @@ Route::get('/medio-comunicacion/general', [MediaProfileController::class, 'showG
     ->name('ext_admin_media_profile_general_data_show')
     ->middleware(['auth:external'])
     ->domain(parse_url(config('app.url'))['host']);
-

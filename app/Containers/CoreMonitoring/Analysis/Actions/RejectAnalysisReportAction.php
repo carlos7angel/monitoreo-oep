@@ -35,7 +35,7 @@ class RejectAnalysisReportAction extends ParentAction
         $data = $request->sanitizeInput($request->all());
         $user = $this->getAuthenticatedUserByGuardTask->run('web');
         $analysis_report = $this->findAnalysisReportByIdTask->run($request->id);
-        if($analysis_report->status !== 'NEW') {
+        if ($analysis_report->status !== 'NEW') {
             throw new ValidationFailedException('Operación no permitida, el estado no esta autorizado para realizar esta acción.');
         }
 

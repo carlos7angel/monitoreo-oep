@@ -8,4 +8,3 @@ Route::post('medios/habilitar/{id}', [MediaProfileController::class, 'enableAcco
     ->name('oep_admin_media_profiles_enable_account')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

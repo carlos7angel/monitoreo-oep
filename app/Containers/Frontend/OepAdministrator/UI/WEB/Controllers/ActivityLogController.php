@@ -30,7 +30,8 @@ class ActivityLogController extends WebController
         }
     }
 
-    public function showDetail(ShowDetailActivityLogRequest $request) {
+    public function showDetail(ShowDetailActivityLogRequest $request)
+    {
         try {
             $log = app(FindActivityLogByIdTask::class)->run($request->id);
             $render = view('frontend@oepAdministrator::activityLog.partials.detail')->with([

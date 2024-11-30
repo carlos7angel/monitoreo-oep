@@ -42,14 +42,14 @@ class UpdatePropagandaMaterialAction extends ParentAction
             'type' => $request->get('material_type'),
         ];
 
-        if($request->get('material_type') === 'LINK') {
+        if ($request->get('material_type') === 'LINK') {
             $data['link_material'] = $request->get('material_link');
             $data['file_material'] = null;
         }
 
-        if($request->get('material_type') === 'FILE') {
+        if ($request->get('material_type') === 'FILE') {
             $data['link_material'] = null;
-            if($request->file('material_file')) {
+            if ($request->file('material_file')) {
                 $file_bases = $this->createFileTask->run($request->file('material_file'), 'propaganda', $registration->election->id, $user);
                 $data['file_material'] = $file_bases->unique_code;
             }

@@ -8,4 +8,3 @@ Route::post('medios/acreditaciones/{id}/cambiar-estado', [AccreditationControlle
     ->name('oep_admin_media_accreditation_update_status')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

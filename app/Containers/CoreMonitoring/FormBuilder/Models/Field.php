@@ -94,6 +94,6 @@ class Field extends ParentModel
 
     public function form()
     {
-        return $this->belongsTo(Form::class, 'fid_form',);
+        return $this->belongsTo(Form::class, 'fid_form', );
     }
 }

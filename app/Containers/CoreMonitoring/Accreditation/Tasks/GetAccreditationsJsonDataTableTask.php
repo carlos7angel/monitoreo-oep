@@ -31,7 +31,7 @@ class GetAccreditationsJsonDataTableTask extends ParentTask
         $start = $requestData['start'];
         $length = $requestData['length'];
         $sortColumn = $sortColumnDir = null;
-        if(isset($requestData['order'])) {
+        if (isset($requestData['order'])) {
             $indexSort = $requestData['order'][0]['column'];
             $sortColumn = $requestData['columns'][$indexSort]['name'];
             $sortColumnDir = $requestData['order'][0]['dir'];
@@ -43,7 +43,7 @@ class GetAccreditationsJsonDataTableTask extends ParentTask
         $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $user) {
             $query = $query->join('elections', 'media_accreditations.fid_election', 'elections.id');
             $query = $query->where('media_accreditations.fid_user', $user->id)->where('media_accreditations.fid_media_profile', $user->profile_data->id);
-            if(! empty($searchValue)) {
+            if (! empty($searchValue)) {
                 $query = $query->where('elections.name', 'like', '%'.$searchValue.'%')
                     ->orWhere('elections.code', 'like', '%'.$searchValue.'%')
                     ->orWhere('media_accreditations.code', 'like', '%'.$searchValue.'%');
@@ -60,7 +60,7 @@ class GetAccreditationsJsonDataTableTask extends ParentTask
 
         $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
 
-        if($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
+        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 

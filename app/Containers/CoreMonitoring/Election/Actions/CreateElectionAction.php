@@ -50,7 +50,7 @@ class CreateElectionAction extends ParentAction
             'status' => 'draft',
         ];
 
-        if($request->has('election_enable_registration_media')) {
+        if ($request->has('election_enable_registration_media')) {
             $data['enable_for_media_registration'] = true;
             $data['start_date_media_registration'] = $request->get('election_start_date_registration_media');
             $data['end_date_media_registration'] = $request->get('election_end_date_registration_media');
@@ -58,7 +58,7 @@ class CreateElectionAction extends ParentAction
             // $data['fid_form_media_registration'] = $request->get('election_subform_registration_media');
         }
 
-        if($request->has('election_enable_monitoring')) {
+        if ($request->has('election_enable_monitoring')) {
             $data['enable_for_monitoring'] = true;
             $data['fid_form_tv_media'] = $request->get('election_form_tv_media') ? $request->get('election_form_tv_media') : null;
             $data['fid_form_radio_media'] = $request->get('election_form_radio_media') ? $request->get('election_form_radio_media') : null;
@@ -67,12 +67,12 @@ class CreateElectionAction extends ParentAction
             $data['fid_form_rrss_media'] = $request->get('election_form_rrss_media') ? $request->get('election_form_rrss_media') : null;
         }
 
-        if($request->has('election_enable_political_registration')) {
+        if ($request->has('election_enable_political_registration')) {
             $data['enable_for_political_registration'] = true;
             $data['end_date_political_registration'] = $request->get('election_end_date_political_registration');
             $data['description_for_political_registration'] = $request->get('election_description_political_registration');
             $data['max_size_for_political_registration'] = (int) $request->get('election_max_size_political_registration');
-            if($request->has('election_mime_type_political_registration')) {
+            if ($request->has('election_mime_type_political_registration')) {
                 $data['mime_types_for_political_registration'] = is_array($request->get('election_mime_type_political_registration')) ? json_encode($request->get('election_mime_type_political_registration')) : null;
             }
         }
@@ -96,7 +96,7 @@ class CreateElectionAction extends ParentAction
             }
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::CREATED_ELECTION, $request->server(), $election));
+            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::CREATED_ELECTION, $request->server(), $election));
 
             return $election;
         });

@@ -8,4 +8,3 @@ Route::post('/acreditaciones/nuevo', [AccreditationController::class, 'store'])
     ->name('ext_admin_accreditations_store')
     ->middleware(['auth:external'])
     ->domain(parse_url(config('app.url'))['host']);
-

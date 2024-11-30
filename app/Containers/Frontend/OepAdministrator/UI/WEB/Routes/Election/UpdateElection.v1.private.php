@@ -8,4 +8,3 @@ Route::post('elecciones/{id}/update', [ElectionController::class, 'update'])
     ->name('oep_admin_elections_update')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

@@ -8,4 +8,3 @@ Route::post('monitoreo/reportes/{id}/item/{monitoring_item_id}/remover', [Monito
     ->name('oep_admin_monitoring_report_remove_item')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

@@ -27,8 +27,9 @@ class AuthController extends WebController
     public function showLoginPage()
     {
         $page_title = "Ingreso";
-        if(Auth::guard('external')->check())
+        if (Auth::guard('external')->check()) {
             return redirect()->route('ext_admin_index');
+        }
         return view('frontend@extAdministrator::authentication.login', [], compact('page_title'));
     }
 
@@ -52,8 +53,9 @@ class AuthController extends WebController
     public function showForgotPasswordPage()
     {
         $page_title = "Olvidaste tu contraseña";
-        if(Auth::guard('external')->check())
+        if (Auth::guard('external')->check()) {
             return redirect()->route('ext_admin_index');
+        }
         return view('frontend@extAdministrator::authentication.forgotPassword', [
             'reseturl' => url(route('ext_admin_reset_password'))
         ], compact('page_title'));
@@ -72,8 +74,9 @@ class AuthController extends WebController
     public function showResetPasswordPage()
     {
         $page_title = "Restablecer contraseña";
-        if(Auth::guard('external')->check())
+        if (Auth::guard('external')->check()) {
             return redirect()->route('ext_admin_index');
+        }
         return view('frontend@extAdministrator::authentication.resetPassword', [], compact('page_title'));
     }
 

@@ -9,7 +9,6 @@ use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
 
-
 class GetAnalysisByStatusJsonAction extends ParentAction
 {
     public function __construct(

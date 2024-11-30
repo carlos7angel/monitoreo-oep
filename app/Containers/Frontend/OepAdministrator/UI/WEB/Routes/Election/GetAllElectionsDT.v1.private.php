@@ -8,5 +8,3 @@ Route::post('elecciones/dt', [ElectionController::class, 'listJsonDt'])
     ->name('oep_admin_elections_json_dt')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-
-

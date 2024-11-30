@@ -28,7 +28,7 @@ class GetAnalysisReportsByAnalystJsonDtTask extends ParentTask
         $start = $requestData['start'];
         $length = $requestData['length'];
         $sortColumn = $sortColumnDir = null;
-        if(isset($requestData['order'])) {
+        if (isset($requestData['order'])) {
             $indexSort = $requestData['order'][0]['column'];
             $sortColumn = $requestData['columns'][$indexSort]['name'];
             $sortColumnDir = $requestData['order'][0]['dir'];
@@ -65,20 +65,20 @@ class GetAnalysisReportsByAnalystJsonDtTask extends ParentTask
             $query = $query->leftJoin('users', 'analysis_report_status_activity.registered_by', 'users.id');
 
 
-            if(! empty($searchValue)) {
+            if (! empty($searchValue)) {
                 $query = $query->where('analysis_reports.code', 'like', '%'.$searchValue.'%')
                                 ->orWhere('elections.name', 'like', '%'.$searchValue.'%');
             }
 
-            if(! empty($searchFieldCode)) {
+            if (! empty($searchFieldCode)) {
                 $query = $query->where('analysis_reports.code', 'like', '%'.$searchFieldCode.'%');
             }
 
-            if(! empty($searchFieldElection)) {
+            if (! empty($searchFieldElection)) {
                 $query = $query->where('analysis_reports.fid_election', '=', $searchFieldElection);
             }
 
-            if(! empty($searchFieldStatus)) {
+            if (! empty($searchFieldStatus)) {
                 $query = $query->where('analysis_reports.status', '=', $searchFieldStatus);
             }
 
@@ -104,7 +104,7 @@ class GetAnalysisReportsByAnalystJsonDtTask extends ParentTask
 
         $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
 
-        if($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
+        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 

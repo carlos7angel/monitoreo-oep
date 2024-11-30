@@ -8,4 +8,3 @@ Route::post('monitoreo/reportes/json', [MonitoringReportController::class, 'list
     ->name('oep_admin_monitoring_report_list_json_dt')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

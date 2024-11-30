@@ -21,7 +21,6 @@ class ComplementaryAnalysisReportAction extends ParentAction
         private FindAnalysisReportByIdTask $findAnalysisReportByIdTask,
         private CreateStatusActivityAnalysisReportTask $createStatusActivityAnalysisReportTask,
         private GetAuthenticatedUserByGuardTask $getAuthenticatedUserByGuardTask,
-
         private CreateFileTask $createFileTask,
     ) {
     }
@@ -37,16 +36,16 @@ class ComplementaryAnalysisReportAction extends ParentAction
 
         $user = $this->getAuthenticatedUserByGuardTask->run('web');
         $analysis_report = $this->findAnalysisReportByIdTask->run($request->id);
-        if($analysis_report->status !== 'IN_TREATMENT' && $analysis_report->status !== 'IN_TREATMENT_PLENARY') {
+        if ($analysis_report->status !== 'IN_TREATMENT' && $analysis_report->status !== 'IN_TREATMENT_PLENARY') {
             throw new ValidationFailedException('Operación no permitida, el estado no esta autorizado para realizar esta acción.');
         }
-        if(! $request->file('analysis_file_complementary')) {
+        if (! $request->file('analysis_file_complementary')) {
             throw new ValidationFailedException('El archivo es un campo obligatorio');
         }
 
         return DB::transaction(function () use ($data, $analysis_report, $user, $request) {
 
-            if($request->file('analysis_file_complementary')) {
+            if ($request->file('analysis_file_complementary')) {
                 $file_report = $this->createFileTask->run($request->file('analysis_file_complementary'), 'analysis-report', $analysis_report->id, $user);
                 $analysis_report->file_analysis_report_complementary = $file_report->unique_code;
             }

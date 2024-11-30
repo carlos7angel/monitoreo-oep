@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('file-managers/create', [Controller::class, 'create'])
     ->middleware(['auth:web']);
-

@@ -8,4 +8,3 @@ Route::post('logs/json', [ActivityLogController::class, 'listJsonDT'])
     ->name('oep_admin_activity_logs_json_dt')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

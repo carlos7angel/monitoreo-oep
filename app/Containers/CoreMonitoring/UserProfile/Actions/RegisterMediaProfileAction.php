@@ -43,7 +43,7 @@ class RegisterMediaProfileAction extends ParentAction
 
         $media_profiles = $this->getUserMediaProfilesByEmailTask->run($sanitizedData['media_email']);
         $exist_email = $this->getUserByEmailTask->run($sanitizedData['media_email']);
-        if($media_profiles->count() > 0 || ! empty($exist_email)) {
+        if ($media_profiles->count() > 0 || ! empty($exist_email)) {
             throw new EmailAlreadyExistsException();
         }
 

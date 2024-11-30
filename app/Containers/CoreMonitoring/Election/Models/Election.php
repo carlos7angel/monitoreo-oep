@@ -98,27 +98,33 @@ class Election extends ParentModel
     /**
      * Mutators
      */
-    public function getElectionDateAttribute($value) {
+    public function getElectionDateAttribute($value)
+    {
         return $value ? Carbon::parse($value)->format('d/m/Y') : null;
     }
 
-    public function setElectionDateAttribute($value) {
+    public function setElectionDateAttribute($value)
+    {
         $this->attributes['election_date'] = $value ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d') : null;
     }
 
-    public function setStartDateMediaRegistrationAttribute($value) {
-        $this->attributes['start_date_media_registration'] = $value ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 00:00:00'): null;
+    public function setStartDateMediaRegistrationAttribute($value)
+    {
+        $this->attributes['start_date_media_registration'] = $value ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 00:00:00') : null;
     }
 
-    public function getStartDateMediaRegistrationAttribute($value) {
+    public function getStartDateMediaRegistrationAttribute($value)
+    {
         return $value ? Carbon::parse($value)->format('d/m/Y') : null;
     }
 
-    public function setEndDateMediaRegistrationAttribute($value) {
-        $this->attributes['end_date_media_registration'] = $value ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 00:00:00'): null;
+    public function setEndDateMediaRegistrationAttribute($value)
+    {
+        $this->attributes['end_date_media_registration'] = $value ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 00:00:00') : null;
     }
 
-    public function getEndDateMediaRegistrationAttribute($value) {
+    public function getEndDateMediaRegistrationAttribute($value)
+    {
         return $value ? Carbon::parse($value)->format('d/m/Y') : null;
     }
 

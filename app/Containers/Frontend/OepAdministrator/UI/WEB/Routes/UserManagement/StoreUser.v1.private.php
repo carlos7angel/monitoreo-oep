@@ -8,4 +8,3 @@ Route::post('usuarios', [UserManagementController::class, 'store'])
     ->name('oep_admin_users_store')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

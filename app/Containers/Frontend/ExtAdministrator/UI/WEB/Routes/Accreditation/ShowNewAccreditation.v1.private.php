@@ -8,4 +8,3 @@ Route::get('/acreditaciones/nuevo', [AccreditationController::class, 'newAccredi
     ->name('ext_admin_accreditations_new')
     ->middleware(['auth:external', 'checkProfile'])
     ->domain(parse_url(config('app.url'))['host']);
-

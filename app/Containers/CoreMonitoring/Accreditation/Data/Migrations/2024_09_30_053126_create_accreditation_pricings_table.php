@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration {
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('media_accreditation_rates', function (Blueprint $table) {
@@ -21,12 +21,12 @@ return new class() extends Migration {
             $table->string('file_rate', 50)->nullable();
 
 
-//            $table->unsignedBigInteger('fid_election')->nullable();
-//            $table->foreign('fid_election')->references('id')->on('elections')->onDelete('cascade');
-//            $table->unsignedBigInteger('fid_user')->nullable();
-//            $table->foreign('fid_user')->references('id')->on('users')->onDelete('cascade');
-//            $table->unsignedBigInteger('fid_media_profile')->nullable();
-//            $table->foreign('fid_media_profile')->references('id')->on('media_profiles')->onDelete('cascade');
+            //            $table->unsignedBigInteger('fid_election')->nullable();
+            //            $table->foreign('fid_election')->references('id')->on('elections')->onDelete('cascade');
+            //            $table->unsignedBigInteger('fid_user')->nullable();
+            //            $table->foreign('fid_user')->references('id')->on('users')->onDelete('cascade');
+            //            $table->unsignedBigInteger('fid_media_profile')->nullable();
+            //            $table->foreign('fid_media_profile')->references('id')->on('media_profiles')->onDelete('cascade');
 
             $table->dateTime('submitted_at')->nullable();
             $table->timestamps();

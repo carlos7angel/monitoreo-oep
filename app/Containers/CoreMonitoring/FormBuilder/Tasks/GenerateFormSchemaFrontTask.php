@@ -40,7 +40,7 @@ class GenerateFormSchemaFrontTask extends ParentTask
                         'required' => $field->required ? true : false,
                     ];
 
-                    if($field->required) {
+                    if ($field->required) {
                         $data['validations'][] = (object)array('name' => 'required', 'value' => true, 'message' => 'Este campo es obligatorio.');
                     }
 
@@ -179,13 +179,13 @@ class GenerateFormSchemaFrontTask extends ParentTask
                         'optionstype' => $field->options_type,
                     ];
 
-                    if($field->options_type == 'custom') {
+                    if ($field->options_type == 'custom') {
                         if ($field->field_subtype == 'select') {
                             $selecteds = []; //..[]
                             $opts = json_decode($field->options);
-                            if(is_array($opts)) {
+                            if (is_array($opts)) {
                                 foreach ($opts as $index => $option) {
-                                    if($option->selected == true) {
+                                    if ($option->selected == true) {
                                         $selecteds[] = (object)array( //..[]
                                             'text' => $option->text,
                                             'value' => $option->value,
@@ -200,7 +200,7 @@ class GenerateFormSchemaFrontTask extends ParentTask
                         if ($field->field_subtype == 'multiselect') {
                             $selecteds = [];
                             $opts = json_decode($field->options);
-                            if(is_array($opts)) {
+                            if (is_array($opts)) {
                                 foreach ($opts as $index => $option) {
                                     if ($option->selected == true) {
                                         $selecteds[] = (object)array(
@@ -248,7 +248,7 @@ class GenerateFormSchemaFrontTask extends ParentTask
                         $data['conditionlogic'] = json_decode($field->logic_condition);
                     }
 
-                    if($field->select_search != null && $field->select_search == true) {
+                    if ($field->select_search != null && $field->select_search == true) {
                         $data['search'] = true;
                     }
 
@@ -275,9 +275,9 @@ class GenerateFormSchemaFrontTask extends ParentTask
 
                     $selecteds = [];
                     $opts = json_decode($field->options);
-                    if(is_array($opts)) {
+                    if (is_array($opts)) {
                         foreach ($opts as $index => $option) {
-                            if($option->selected == true) {
+                            if ($option->selected == true) {
                                 $selecteds[] = (object)array(
                                     'text' => $option->text,
                                     'value' => $option->value,
@@ -401,7 +401,7 @@ class GenerateFormSchemaFrontTask extends ParentTask
 
                     if ($field->file_mimetypes != null) {
                         //$config['mimetypes'] = json_decode($field->file_mimetypes);
-                        $config['acceptedFiles'] = implode(",",json_decode($field->file_mimetypes));
+                        $config['acceptedFiles'] = implode(",", json_decode($field->file_mimetypes));
                     }
 
                     if ($field->maxfiles != null) {

@@ -8,4 +8,3 @@ Route::get('medios/acreditaciones/{id}', [AccreditationController::class, 'detai
     ->name('oep_admin_media_accreditation_detail')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

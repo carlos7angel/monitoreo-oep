@@ -7,4 +7,3 @@ Route::get('/restablecer-contrasena', [AuthController::class, 'showResetPassword
     ->prefix(config('app.admin_oep_prefix'))
     ->name('oep_admin_login_reset_password')
     ->domain(parse_url(config('app.url'))['host']);
-

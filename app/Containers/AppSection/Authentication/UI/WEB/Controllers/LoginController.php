@@ -9,14 +9,15 @@ use Illuminate\Http\RedirectResponse;
 
 class LoginController extends WebController
 {
-//    public function __invoke(LoginRequest $request, WebLoginAction $action): RedirectResponse
-//    {
-//        dd($request->all());
-//
-//        return $action->run($request);
-//    }
+    //    public function __invoke(LoginRequest $request, WebLoginAction $action): RedirectResponse
+    //    {
+    //        dd($request->all());
+    //
+    //        return $action->run($request);
+    //    }
 
-    public function redirectLogin(LoginRequest $request) {
+    public function redirectLogin(LoginRequest $request)
+    {
         dd($request->all());
     }
 

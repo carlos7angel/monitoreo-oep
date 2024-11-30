@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::patch('file-managers/{id}', [Controller::class, 'update'])
     ->middleware(['auth:web']);
-

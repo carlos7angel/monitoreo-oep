@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration {
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('forms', function (Blueprint $table) {
@@ -22,9 +22,9 @@ return new class() extends Migration {
             $table->longText('form_schema_web')->nullable();
             $table->text('form_settings')->nullable();
             $table->text('form_metadata')->nullable();
-            $table->string('form_class',100)->nullable();
+            $table->string('form_class', 100)->nullable();
             $table->text('form_style')->nullable();
-            $table->string('shortcode',50)->nullable();
+            $table->string('shortcode', 50)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

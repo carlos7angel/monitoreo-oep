@@ -8,4 +8,3 @@ Route::post('/actualizar-contrasena', [AuthController::class, 'updatePasswordPro
     ->name('oep_admin_update_password_profile')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

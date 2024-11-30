@@ -8,4 +8,3 @@ Route::post('/actualizar-usuario', [AuthController::class, 'updateUsernameProfil
     ->name('oep_admin_update_username_profile')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

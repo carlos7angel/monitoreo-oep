@@ -19,10 +19,10 @@ class CreateAccreditationTask extends ParentTask
      */
     public function run(array $data): Accreditation
     {
-//        try {
-            return $this->repository->create($data);
-//        } catch (\Exception) {
-//            throw new CreateResourceFailedException();
-//        }
+        //        try {
+        return $this->repository->create($data);
+        //        } catch (\Exception) {
+        //            throw new CreateResourceFailedException();
+        //        }
     }
 }

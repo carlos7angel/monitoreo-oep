@@ -28,7 +28,7 @@ class GetAllActivityLogsJsonDTTask extends ParentTask
         $start = $requestData['start'];
         $length = $requestData['length'];
         $sortColumn = $sortColumnDir = null;
-        if(isset($requestData['order'])) {
+        if (isset($requestData['order'])) {
             $indexSort = $requestData['order'][0]['column'];
             $sortColumn = $requestData['columns'][$indexSort]['name'];
             $sortColumnDir = $requestData['order'][0]['dir'];
@@ -45,11 +45,11 @@ class GetAllActivityLogsJsonDTTask extends ParentTask
 
             $query = $query->join('users', 'activity_log.causer_id', 'users.id');
 
-            if(! empty($searchFieldType)) {
+            if (! empty($searchFieldType)) {
                 $query = $query->where('activity_log.log_name', '=', $searchFieldType);
             }
 
-            if(! empty($searchFieldDesc)) {
+            if (! empty($searchFieldDesc)) {
                 $query = $query->where('activity_log.description', 'like', '%'.$searchFieldDesc.'%');
             }
 
@@ -59,11 +59,11 @@ class GetAllActivityLogsJsonDTTask extends ParentTask
                 $query = $query->whereDate('activity_log.created_at', '>=', $searchStartDate)
                                 ->whereDate('activity_log.created_at', '<=', $searchEndDate);
             } else {
-                if(!empty($searchFieldStartDate)) {
+                if (!empty($searchFieldStartDate)) {
                     $searchStartDate = Carbon::createFromFormat('d/m/Y', $searchFieldStartDate)->format('Y-m-d');
                     $query = $query->whereDate('activity_log.created_at', '>=', $searchStartDate);
                 }
-                if(!empty($searchFieldEndDate)) {
+                if (!empty($searchFieldEndDate)) {
                     $searchEndDate = Carbon::createFromFormat('d/m/Y', $searchFieldEndDate)->format('Y-m-d');
                     $query = $query->whereDate('activity_log.created_at', '<=', $searchEndDate);
                 }
@@ -90,7 +90,7 @@ class GetAllActivityLogsJsonDTTask extends ParentTask
 
         $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
 
-        if($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
+        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 

@@ -8,4 +8,3 @@ Route::post('monitoreo/reportes/{id}/items/actualizar', [MonitoringReportControl
     ->name('oep_admin_monitoring_report_add_items')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

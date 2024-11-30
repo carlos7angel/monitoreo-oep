@@ -27,7 +27,7 @@ class ResetPasswordAction extends ParentAction
      */
     public function run(Request $request): void
     {
-//        dd($request->all());
+        //        dd($request->all());
         $sanitizedData = $request->sanitizeInput([
             'email',
             'token',

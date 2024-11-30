@@ -12,7 +12,9 @@ use Illuminate\Support\Str;
 
 class CreateLogoImageMediaTask extends ParentTask
 {
-    public function __construct() { }
+    public function __construct()
+    {
+    }
 
     /**
      * @throws NotFoundException
@@ -33,12 +35,11 @@ class CreateLogoImageMediaTask extends ParentTask
             $hash_file = hash_file('md5', Storage::disk('local-uploads')->getConfig()['root'] . '/' . $upload);
             $relative_path = $path . '/' . $new_name;
             $url = url('/') . '/storage' . $relative_path;
-        }
-        catch (Exception $exception) {
+        } catch (Exception $exception) {
             throw new CreateResourceFailedException('No se puede subir el archivo.');
         }
 
-        if(! $upload) {
+        if (! $upload) {
             throw new CreateResourceFailedException('No se puede subir el archivo.');
         }
 

@@ -8,4 +8,3 @@ Route::get('monitoreo/analisis', [AnalysisReportController::class, 'listAnalysis
     ->name('oep_admin_analysis_report_list')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

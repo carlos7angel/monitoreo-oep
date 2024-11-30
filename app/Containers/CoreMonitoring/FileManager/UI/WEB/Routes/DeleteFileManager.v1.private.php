@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::delete('file-managers/{id}', [Controller::class, 'destroy'])
     ->middleware(['auth:web']);
-

@@ -19,10 +19,10 @@ class CreateElectionTask extends ParentTask
      */
     public function run(array $data): Election
     {
-//        try {
-            return $this->repository->create($data);
-//        } catch (\Exception) {
-//            throw new CreateResourceFailedException();
-//        }
+        //        try {
+        return $this->repository->create($data);
+        //        } catch (\Exception) {
+        //            throw new CreateResourceFailedException();
+        //        }
     }
 }

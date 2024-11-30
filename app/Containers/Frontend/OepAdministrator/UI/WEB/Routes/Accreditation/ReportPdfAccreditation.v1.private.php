@@ -8,4 +8,3 @@ Route::get('medios/acreditaciones/{id}/reporte', [AccreditationController::class
     ->name('oep_admin_media_accreditation_report_pdf')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

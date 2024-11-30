@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('registrations', [ListRegistrationsController::class, 'index'])
     ->middleware(['auth:web']);
-

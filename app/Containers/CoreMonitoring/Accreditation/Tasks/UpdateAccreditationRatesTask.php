@@ -32,9 +32,9 @@ class UpdateAccreditationRatesTask extends ParentTask
             if ($item_type_television) {
 
                 // Nacional
-                if($item_type_television->scope === 'Nacional') {
+                if ($item_type_television->scope === 'Nacional') {
                     $rate = $rates->where('type', 'Televisivo')->where('scope', 'Nacional')->first();
-                    if(isset($request->file('media_television_file_rate')['Nacional'])) {
+                    if (isset($request->file('media_television_file_rate')['Nacional'])) {
                         $file = $request->file('media_television_file_rate')['Nacional'];
                         $file_rate = $this->createFileTask->run($file, 'accreditation', $accreditation->id, $user);
                         $data['file_rate'] = $file_rate->unique_code;
@@ -53,7 +53,7 @@ class UpdateAccreditationRatesTask extends ParentTask
                 $states = explode(', ', $item_type_television->scope_department);
                 foreach ($states as $state) {
                     $rate = $rates->where('type', 'Televisivo')->where('scope', $state)->first();
-                    if(isset($request->file('media_television_file_rate')[$state])) {
+                    if (isset($request->file('media_television_file_rate')[$state])) {
                         $file = $request->file('media_television_file_rate')[$state];
                         $file_rate = $this->createFileTask->run($file, 'accreditation', $accreditation->id, $user);
                         $data['file_rate'] = $file_rate->unique_code;
@@ -78,9 +78,9 @@ class UpdateAccreditationRatesTask extends ParentTask
             if ($item_type_radio) {
 
                 // Nacional
-                if($item_type_radio->scope === 'Nacional') {
+                if ($item_type_radio->scope === 'Nacional') {
                     $rate = $rates->where('type', 'Radial')->where('scope', 'Nacional')->first();
-                    if(isset($request->file('media_radio_file_rate')['Nacional'])) {
+                    if (isset($request->file('media_radio_file_rate')['Nacional'])) {
                         $file_rate = $this->createFileTask->run($request->file('media_radio_file_rate')['Nacional'], 'accreditation', $accreditation->id, $user);
                         $data['file_rate'] = $file_rate->unique_code;
                         $data['fid_accreditation'] = $accreditation->id;
@@ -98,7 +98,7 @@ class UpdateAccreditationRatesTask extends ParentTask
                 $states = explode(', ', $item_type_radio->scope_department);
                 foreach ($states as $state) {
                     $rate = $rates->where('type', 'Radial')->where('scope', $state)->first();
-                    if(isset($request->file('media_radio_file_rate')[$state])) {
+                    if (isset($request->file('media_radio_file_rate')[$state])) {
                         $file_rate = $this->createFileTask->run($request->file('media_radio_file_rate')[$state], 'accreditation', $accreditation->id, $user);
                         $data['file_rate'] = $file_rate->unique_code;
                         $data['fid_accreditation'] = $accreditation->id;
@@ -123,9 +123,9 @@ class UpdateAccreditationRatesTask extends ParentTask
             if ($item_type_print) {
 
                 // Nacional
-                if($item_type_print->scope === 'Nacional') {
+                if ($item_type_print->scope === 'Nacional') {
                     $rate = $rates->where('type', 'Impreso')->where('scope', 'Nacional')->first();
-                    if(isset($request->file('media_print_file_rate')['Nacional'])) {
+                    if (isset($request->file('media_print_file_rate')['Nacional'])) {
                         $file_rate = $this->createFileTask->run($request->file('media_print_file_rate')['Nacional'], 'accreditation', $accreditation->id, $user);
                         $data['file_rate'] = $file_rate->unique_code;
                         $data['fid_accreditation'] = $accreditation->id;
@@ -143,7 +143,7 @@ class UpdateAccreditationRatesTask extends ParentTask
                 $states = explode(', ', $item_type_print->scope_department);
                 foreach ($states as $state) {
                     $rate = $rates->where('type', 'Impreso')->where('scope', $state)->first();
-                    if(isset($request->file('media_print_file_rate')[$state])) {
+                    if (isset($request->file('media_print_file_rate')[$state])) {
                         $file_rate = $this->createFileTask->run($request->file('media_print_file_rate')[$state], 'accreditation', $accreditation->id, $user);
                         $data['file_rate'] = $file_rate->unique_code;
                         $data['fid_accreditation'] = $accreditation->id;
@@ -168,9 +168,9 @@ class UpdateAccreditationRatesTask extends ParentTask
             if ($item_type_digital) {
 
                 // Nacional
-                if($item_type_digital->scope === 'Nacional') {
+                if ($item_type_digital->scope === 'Nacional') {
                     $rate = $rates->where('type', 'Digital')->where('scope', 'Nacional')->first();
-                    if(isset($request->file('media_digital_file_rate')['Nacional'])) {
+                    if (isset($request->file('media_digital_file_rate')['Nacional'])) {
                         $file_rate = $this->createFileTask->run($request->file('media_digital_file_rate')['Nacional'], 'accreditation', $accreditation->id, $user);
                         $data['file_rate'] = $file_rate->unique_code;
                         $data['fid_accreditation'] = $accreditation->id;
@@ -188,7 +188,7 @@ class UpdateAccreditationRatesTask extends ParentTask
                 $states = explode(', ', $item_type_digital->scope_department);
                 foreach ($states as $state) {
                     $rate = $rates->where('type', 'Digital')->where('scope', $state)->first();
-                    if(isset($request->file('media_digital_file_rate')[$state])) {
+                    if (isset($request->file('media_digital_file_rate')[$state])) {
                         $file_rate = $this->createFileTask->run($request->file('media_digital_file_rate')[$state], 'accreditation', $accreditation->id, $user);
                         $data['file_rate'] = $file_rate->unique_code;
                         $data['fid_accreditation'] = $accreditation->id;

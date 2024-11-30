@@ -8,4 +8,3 @@ Route::post('/acreditaciones/editar/{id}', [AccreditationController::class, 'upd
     ->name('ext_admin_accreditations_update')
     ->middleware(['auth:external'])
     ->domain(parse_url(config('app.url'))['host']);
-

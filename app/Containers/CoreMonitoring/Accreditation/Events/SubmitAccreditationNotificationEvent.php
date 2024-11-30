@@ -10,7 +10,6 @@ use App\Ship\Parents\Events\Event as ParentEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
-
 class SubmitAccreditationNotificationEvent extends ParentEvent implements ShouldQueue
 {
     protected $accreditation;
@@ -18,7 +17,7 @@ class SubmitAccreditationNotificationEvent extends ParentEvent implements Should
 
     public function __construct(Accreditation $_accreditation, User $_user)
     {
-        $this->accreditation= $_accreditation;
+        $this->accreditation = $_accreditation;
         $this->user = $_user;
     }
 

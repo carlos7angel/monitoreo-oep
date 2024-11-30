@@ -8,4 +8,3 @@ Route::get('monitoreo/procesos-electorales/{id}/registros', [MonitoringControlle
     ->name('oep_admin_media_monitoring_by_election')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

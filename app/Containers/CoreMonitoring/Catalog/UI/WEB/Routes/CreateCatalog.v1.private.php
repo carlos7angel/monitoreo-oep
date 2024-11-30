@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('catalogs/create', [CreateCatalogController::class, 'create'])
     ->middleware(['auth:web']);
-

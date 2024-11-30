@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('registrations/store', [CreateRegistrationController::class, 'store'])
     ->middleware(['auth:web']);
-

@@ -8,4 +8,3 @@ Route::get('medios/nuevos', [MediaProfileController::class, 'listNew'])
     ->name('oep_admin_media_profiles_list_new')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

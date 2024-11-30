@@ -9,7 +9,6 @@ use App\Ship\Exceptions\UpdateResourceFailedException;
 use App\Ship\Parents\Actions\Action as ParentAction;
 use App\Ship\Parents\Requests\Request;
 
-
 class GetMonitoringByScopeJsonAction extends ParentAction
 {
     public function __construct(
@@ -26,23 +25,23 @@ class GetMonitoringByScopeJsonAction extends ParentAction
     {
         return $this->task->run($request->id);
 
-//        return [
-//            (object) [
-//                'country' => 'Canada',
-//                'visits' =>  99,
-//                "icon" => "https://www.amcharts.com/wp-content/uploads/flags/canada.svg",
-//            ],
-//            (object) [
-//                'country' => 'Norway',
-//                'visits' =>  67,
-//                "icon" => "https://www.amcharts.com/wp-content/uploads/flags/norway.svg",
-//            ],
-//            (object) [
-//                'country' => 'Russia',
-//                'visits' =>  152,
-//                "icon" => "https://www.amcharts.com/wp-content/uploads/flags/russia.svg",
-//            ]
-//        ];
+        //        return [
+        //            (object) [
+        //                'country' => 'Canada',
+        //                'visits' =>  99,
+        //                "icon" => "https://www.amcharts.com/wp-content/uploads/flags/canada.svg",
+        //            ],
+        //            (object) [
+        //                'country' => 'Norway',
+        //                'visits' =>  67,
+        //                "icon" => "https://www.amcharts.com/wp-content/uploads/flags/norway.svg",
+        //            ],
+        //            (object) [
+        //                'country' => 'Russia',
+        //                'visits' =>  152,
+        //                "icon" => "https://www.amcharts.com/wp-content/uploads/flags/russia.svg",
+        //            ]
+        //        ];
 
     }
 }

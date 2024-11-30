@@ -32,7 +32,7 @@ class GetMonitoringReportsJsonDTTask extends ParentTask
         $start = $requestData['start'];
         $length = $requestData['length'];
         $sortColumn = $sortColumnDir = null;
-        if(isset($requestData['order'])) {
+        if (isset($requestData['order'])) {
             $indexSort = $requestData['order'][0]['column'];
             $sortColumn = $requestData['columns'][$indexSort]['name'];
             $sortColumnDir = $requestData['order'][0]['dir'];
@@ -69,19 +69,19 @@ class GetMonitoringReportsJsonDTTask extends ParentTask
             $query = $query->join('users', 'monitoring_reports.created_by', 'users.id');
             $query = $query->join('monitoring_items', 'monitoring_reports.fid_monitoring_item', 'monitoring_items.id');
 
-            if(! empty($searchValue)) {
+            if (! empty($searchValue)) {
                 $query = $query->where('monitoring_reports.code', 'like', '%'.$searchValue.'%');
             }
 
-            if(! empty($searchFieldCode)) {
+            if (! empty($searchFieldCode)) {
                 $query = $query->where('monitoring_reports.code', 'like', '%'.$searchFieldCode.'%');
             }
 
-            if(! empty($searchFieldElection)) {
+            if (! empty($searchFieldElection)) {
                 $query = $query->where('monitoring_reports.fid_election', '=', $searchFieldElection);
             }
 
-            if(! empty($searchFieldStatus)) {
+            if (! empty($searchFieldStatus)) {
                 $query = $query->where('monitoring_reports.status', '=', $searchFieldStatus);
             }
 
@@ -112,7 +112,7 @@ class GetMonitoringReportsJsonDTTask extends ParentTask
 
         $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
 
-        if($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
+        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 

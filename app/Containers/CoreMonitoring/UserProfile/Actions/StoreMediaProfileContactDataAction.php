@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\DB;
 class StoreMediaProfileContactDataAction extends ParentAction
 {
     public function __construct(
-         private UpdateUserMediaProfileTask $updateUserMediaProfileTask,
-         private CreateLogoImageMediaTask $createLogoImageMediaTask,
+        private UpdateUserMediaProfileTask $updateUserMediaProfileTask,
+        private CreateLogoImageMediaTask $createLogoImageMediaTask,
     ) {
     }
 
@@ -45,12 +45,12 @@ class StoreMediaProfileContactDataAction extends ParentAction
             'website' => $sanitizedData['media_website'],
         ];
 
-        if($request->has('kt_media_profile_add_rrss_options')) {
+        if ($request->has('kt_media_profile_add_rrss_options')) {
             $data['rrss'] = null;
             $rrss = [];
             $rrss_array =  $sanitizedData['kt_media_profile_add_rrss_options'];
             foreach ($rrss_array as $key => $rrss_item) {
-                if(! empty($rrss_item['media_rrss_value']) && ! empty($rrss_item['media_rrss_option'])) {
+                if (! empty($rrss_item['media_rrss_value']) && ! empty($rrss_item['media_rrss_option'])) {
                     $rrss[] = (object) array(
                         'rrss_option' => $rrss_item['media_rrss_option'],
                         'rrss_value' => $rrss_item['media_rrss_value'],

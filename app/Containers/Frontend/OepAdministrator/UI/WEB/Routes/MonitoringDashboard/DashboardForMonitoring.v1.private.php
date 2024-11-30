@@ -8,4 +8,3 @@ Route::get('monitoreo/dashboard', [MonitoringDashboardController::class, 'showDa
     ->name('oep_admin_media_dashboard_for_monitoring')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

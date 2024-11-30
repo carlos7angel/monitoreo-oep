@@ -22,7 +22,8 @@ class DocumentGeneratorServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../Configs/vendor-documentation.php', 'vendor-documentation'
+            __DIR__ . '/../Configs/vendor-documentation.php',
+            'vendor-documentation'
         );
     }
 }

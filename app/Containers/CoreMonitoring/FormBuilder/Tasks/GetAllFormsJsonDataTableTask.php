@@ -34,7 +34,7 @@ class GetAllFormsJsonDataTableTask extends ParentTask
         $skip = $start != null ? intval($start) : 0;
 
         $result = $this->repository->scopeQuery(function ($query) use ($searchValue) {
-            if(! empty($searchValue)) {
+            if (! empty($searchValue)) {
                 $query = $query->where('name', 'like', '%'.$searchValue.'%')->orWhere('unique_code', 'like', '%'.$searchValue.'%');
             }
             return $query->distinct()->select(['forms.*']);
@@ -44,7 +44,7 @@ class GetAllFormsJsonDataTableTask extends ParentTask
 
         $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
 
-        if($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
+        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 

@@ -8,4 +8,3 @@ Route::post('formularios/{id}/ordenar', [FormBuilderController::class, 'sortForm
     ->name('oep_admin_form_sort')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

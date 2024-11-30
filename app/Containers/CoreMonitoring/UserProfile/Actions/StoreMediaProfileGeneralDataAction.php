@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\DB;
 class StoreMediaProfileGeneralDataAction extends ParentAction
 {
     public function __construct(
-         private UpdateUserMediaProfileTask $updateUserMediaProfileTask,
-         private CreateLogoImageMediaTask $createLogoImageMediaTask,
+        private UpdateUserMediaProfileTask $updateUserMediaProfileTask,
+        private CreateLogoImageMediaTask $createLogoImageMediaTask,
     ) {
     }
 

@@ -64,12 +64,12 @@ class Accreditation extends ParentModel
 
     public function election()
     {
-        return $this->belongsTo(Election::class, 'fid_election',);
+        return $this->belongsTo(Election::class, 'fid_election', );
     }
 
     public function media()
     {
-        return $this->belongsTo(MediaProfile::class, 'fid_media_profile',);
+        return $this->belongsTo(MediaProfile::class, 'fid_media_profile', );
     }
 
     public function fileAffidavit()
@@ -87,10 +87,10 @@ class Accreditation extends ParentModel
         return $this->hasMany(AccreditationRate::class, 'fid_accreditation');
     }
 
-//    public function filePricingList()
-//    {
-//        return $this->hasOne(File::class, 'unique_code', 'file_pricing_list');
-//    }
+    //    public function filePricingList()
+    //    {
+    //        return $this->hasOne(File::class, 'unique_code', 'file_pricing_list');
+    //    }
 
     /**
      * Mutators

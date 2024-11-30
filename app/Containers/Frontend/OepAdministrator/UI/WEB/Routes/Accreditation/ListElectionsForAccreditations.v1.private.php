@@ -8,4 +8,3 @@ Route::get('medios/procesos-electorales', [AccreditationController::class, 'list
     ->name('oep_admin_media_elections_list_for_accreditation')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

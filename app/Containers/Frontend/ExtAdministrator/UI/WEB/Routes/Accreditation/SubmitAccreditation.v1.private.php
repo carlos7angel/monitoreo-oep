@@ -8,4 +8,3 @@ Route::post('/acreditaciones/enviar/{id}', [AccreditationController::class, 'sub
     ->name('ext_admin_accreditations_submit')
     ->middleware(['auth:external'])
     ->domain(parse_url(config('app.url'))['host']);
-

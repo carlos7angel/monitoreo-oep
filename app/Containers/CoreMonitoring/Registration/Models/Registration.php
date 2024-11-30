@@ -52,12 +52,12 @@ class Registration extends ParentModel
 
     public function election()
     {
-        return $this->belongsTo(Election::class, 'fid_election',);
+        return $this->belongsTo(Election::class, 'fid_election', );
     }
 
     public function politicalGroup()
     {
-        return $this->belongsTo(PoliticalGroupProfile::class, 'fid_political_group_profile',);
+        return $this->belongsTo(PoliticalGroupProfile::class, 'fid_political_group_profile', );
     }
 
     public function materials()
@@ -72,7 +72,7 @@ class Registration extends ParentModel
     {
         return new Attribute(
             get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y H:i'),
-        // set: static fn (string|null $value): string|null => null === $value ? null : Carbon::createFromFormat('d/m/Y', $value)->toDateTimeString()
+            // set: static fn (string|null $value): string|null => null === $value ? null : Carbon::createFromFormat('d/m/Y', $value)->toDateTimeString()
         );
     }
 

@@ -37,13 +37,13 @@ class SubmitMonitoringAction extends ParentAction
     public function run(Request $request): MonitoringReport
     {
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
-        if(! $user->hasRole(['monitor'])) {
+        if (! $user->hasRole(['monitor'])) {
             throw new AuthorizationException('No tiene los permisos para realizar esta acción');
         }
 
         $election = app(FindElectionByIdTask::class)->run($request->election_id);
         $monitoring_item = app(FindMonitoringByIdTask::class)->run($request->id);
-        if($monitoring_item->status !== 'CREATED') {
+        if ($monitoring_item->status !== 'CREATED') {
             throw new ValidationFailedException('El registro no puede cambiar de estado.');
         }
 
@@ -66,17 +66,17 @@ class SubmitMonitoringAction extends ParentAction
         return DB::transaction(function () use ($data, $monitoring_item, $request, $user) {
 
             $monitoring_report = $this->createMonitoringReportTask->run($data);
-            $monitoring_report->code = 'R-' . strtoupper(substr(md5($monitoring_report->id . $monitoring_report->code),0,6)) . '/' . Carbon::now()->format('y');
+            $monitoring_report->code = 'R-' . strtoupper(substr(md5($monitoring_report->id . $monitoring_report->code), 0, 6)) . '/' . Carbon::now()->format('y');
             $monitoring_report->save();
 
             $monitoring_item->status = 'SELECTED';
             $monitoring_item->save();
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::SUBMIT_MONITORING_TO_REPORT, $request->server(), $monitoring_report));
+            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::SUBMIT_MONITORING_TO_REPORT, $request->server(), $monitoring_report));
 
             // Send Notification
-            App::make(Dispatcher::class)->dispatch(New SubmitMonitoringNotificationEvent($monitoring_report, $user));
+            App::make(Dispatcher::class)->dispatch(new SubmitMonitoringNotificationEvent($monitoring_report, $user));
 
             return $monitoring_report;
         });

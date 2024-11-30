@@ -8,4 +8,3 @@ Route::post('monitoreo/procesos-electorales/{election_id}/registro-monitoreo/{id
     ->name('oep_admin_media_monitoring_submit')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

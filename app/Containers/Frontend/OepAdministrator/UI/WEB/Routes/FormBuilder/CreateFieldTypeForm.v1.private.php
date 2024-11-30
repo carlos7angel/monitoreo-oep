@@ -8,4 +8,3 @@ Route::post('formularios/{id}/field', [FormBuilderController::class, 'createFiel
     ->name('oep_admin_form_builder_create_field_type')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

@@ -8,5 +8,3 @@ Route::post('formularios/dt', [FormBuilderController::class, 'listJsonDt'])
     ->name('oep_admin_forms_json_dt')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-
-

@@ -15,12 +15,13 @@ use Prettus\Repository\Exceptions\RepositoryException;
 
 class GetPathByTypeTask extends ParentTask
 {
-    public function __construct() { }
+    public function __construct()
+    {
+    }
 
     public function run($type, $id, $user = null): mixed
     {
-        switch (strtolower($type))
-        {
+        switch (strtolower($type)) {
             case 'election':
                 $fileable_id = $id;
                 $fileable_type = Election::class;
@@ -39,11 +40,11 @@ class GetPathByTypeTask extends ParentTask
                 $path = '/medios/m-'.$user->profile_data->id.'/acreditaciones/'.$fileable_id;
                 break;
 
-//            case 'accreditation-rate':
-//                $fileable_id = $id;
-//                $fileable_type = AccreditationRate::class;
-//                $path = '/medios/m-'.$user->profile_data->id.'/acreditaciones/'.$fileable_id; // (?) !!!
-//                break;
+                //            case 'accreditation-rate':
+                //                $fileable_id = $id;
+                //                $fileable_type = AccreditationRate::class;
+                //                $path = '/medios/m-'.$user->profile_data->id.'/acreditaciones/'.$fileable_id; // (?) !!!
+                //                break;
 
             case 'monitoring':
                 $fileable_id = $id;

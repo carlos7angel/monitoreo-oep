@@ -78,7 +78,7 @@ class CreateAccreditationAction extends ParentAction
             $this->updateAccreditationRatesTask->run($request, $user, $accreditation);
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::CREATED_ACCREDITATION, $request->server(), $accreditation));
+            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::CREATED_ACCREDITATION, $request->server(), $accreditation));
 
             return $accreditation;
         });

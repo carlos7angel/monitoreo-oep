@@ -8,4 +8,3 @@ Route::post('monitoreo/analisis/{id}/enviar-secretaria', [AnalysisReportControll
     ->name('oep_admin_analysis_report_to_secretariat')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

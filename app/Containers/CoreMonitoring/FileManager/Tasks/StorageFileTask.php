@@ -10,7 +10,9 @@ use Exception;
 
 class StorageFileTask extends ParentTask
 {
-    public function __construct() { }
+    public function __construct()
+    {
+    }
 
     /**
      * @throws NotFoundException
@@ -21,7 +23,7 @@ class StorageFileTask extends ParentTask
         $type = 'local';
 
         try {
-            switch ($type){
+            switch ($type) {
                 case 'local':
                     $upload = Storage::disk('local-uploads')->putFileAs($path, $file, $new_name);
                     $hash_file = hash_file('md5', Storage::disk('local-uploads')->getConfig()['root'] . '/' . $upload);
@@ -31,12 +33,11 @@ class StorageFileTask extends ParentTask
                     throw new NotFoundException('El tipo de almacenamiento no existe.');
                     break;
             }
-        }
-        catch (Exception $exception) {
+        } catch (Exception $exception) {
             throw (new CreateResourceFailedException('Ocurrió un problema al subir un archivo en el servidor.'))->debug($exception);
         }
 
-        if(!$upload) {
+        if (!$upload) {
             throw new CreateResourceFailedException('No se puede subir el archivo.');
         }
 

@@ -8,4 +8,3 @@ Route::get('/registros/elecciones', [RegistrationController::class, 'listRegistr
     ->name('ext_admin_registration_elections_list')
     ->middleware(['auth:external'])
     ->domain(parse_url(config('app.url'))['host']);
-

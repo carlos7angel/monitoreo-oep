@@ -8,4 +8,3 @@ Route::get('logs/{id}', [ActivityLogController::class, 'showDetail'])
     ->name('oep_admin_activity_log_show_detail')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

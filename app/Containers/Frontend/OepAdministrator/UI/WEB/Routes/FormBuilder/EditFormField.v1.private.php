@@ -8,4 +8,3 @@ Route::get('formularios/{id}/field/{field_id}/editar', [FormBuilderController::c
     ->name('oep_admin_form_builder_edit_form_field')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

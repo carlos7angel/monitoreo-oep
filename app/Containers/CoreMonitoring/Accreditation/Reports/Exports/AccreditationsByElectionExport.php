@@ -38,20 +38,20 @@ class AccreditationsByElectionExport implements FromCollection, WithTitle, WithE
             $profile = app(ConvertJsonDataToProfileDataTask::class)->run($accreditation->data);
 
             $status = '-';
-            switch($accreditation->status) {
-                case('new'):
+            switch ($accreditation->status) {
+                case ('new'):
                     $status = 'Nuevo';
                     break;
-                case('observed'):
+                case ('observed'):
                     $status = 'Observado';
                     break;
-                case('accredited'):
+                case ('accredited'):
                     $status = 'Acreditado';
                     break;
-                case('archived'):
+                case ('archived'):
                     $status = 'Archivado';
                     break;
-                case('rejected'):
+                case ('rejected'):
                     $status = 'Rechazado';
                     break;
             }
@@ -63,10 +63,18 @@ class AccreditationsByElectionExport implements FromCollection, WithTitle, WithE
             }
 
             $media_types = [];
-            if ($profile->media_type_television) { $media_types[] = 'Televisión'; }
-            if ($profile->media_type_radio) { $media_types[] = 'Radio'; }
-            if ($profile->media_type_print) { $media_types[] = 'Prensa'; }
-            if ($profile->media_type_digital) { $media_types[] = 'Digital'; }
+            if ($profile->media_type_television) {
+                $media_types[] = 'Televisión';
+            }
+            if ($profile->media_type_radio) {
+                $media_types[] = 'Radio';
+            }
+            if ($profile->media_type_print) {
+                $media_types[] = 'Prensa';
+            }
+            if ($profile->media_type_digital) {
+                $media_types[] = 'Digital';
+            }
 
             $item = [];
             $item['id'] = $key + 1;
@@ -121,12 +129,12 @@ class AccreditationsByElectionExport implements FromCollection, WithTitle, WithE
     public function registerEvents(): array
     {
         return [
-            AfterSheet::class    => function(AfterSheet $event) {
+            AfterSheet::class    => function (AfterSheet $event) {
                 $event->sheet->styleCells(
                     'A1:AZ1',
                     [
-                        'font' =>[
-                            'bold'=>true,
+                        'font' => [
+                            'bold' => true,
                             'align' => 'center'
                         ],
                     ]

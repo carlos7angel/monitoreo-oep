@@ -49,7 +49,7 @@ class PropagandaMaterial extends ParentModel
 
     public function politicalRegistration()
     {
-        return $this->belongsTo(Registration::class, 'fid_political_registration',);
+        return $this->belongsTo(Registration::class, 'fid_political_registration', );
     }
 
     public function fileMaterial()

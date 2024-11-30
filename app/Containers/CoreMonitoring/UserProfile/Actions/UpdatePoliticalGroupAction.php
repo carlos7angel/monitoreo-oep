@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\DB;
 class UpdatePoliticalGroupAction extends ParentAction
 {
     public function __construct(
-         private CreateLogoImagePoliticalGroupTask $createLogoImagePoliticalGroupTask,
-         private UpdateUserPoliticalGroupProfileTask $updateUserPoliticalGroupProfileTask,
+        private CreateLogoImagePoliticalGroupTask $createLogoImagePoliticalGroupTask,
+        private UpdateUserPoliticalGroupProfileTask $updateUserPoliticalGroupProfileTask,
     ) {
     }
 
@@ -62,7 +62,7 @@ class UpdatePoliticalGroupAction extends ParentAction
             $pp = $this->updateUserPoliticalGroupProfileTask->run($data, $pp->id);
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::UPDATED_POLITICAL_GROUP, $request->server(), $pp));
+            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::UPDATED_POLITICAL_GROUP, $request->server(), $pp));
 
             return $pp;
         });

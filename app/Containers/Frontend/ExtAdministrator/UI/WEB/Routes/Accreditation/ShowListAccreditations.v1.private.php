@@ -8,4 +8,3 @@ Route::get('/acreditaciones/', [AccreditationController::class, 'listAccreditati
     ->name('ext_admin_accreditations_list')
     ->middleware(['auth:external'])
     ->domain(parse_url(config('app.url'))['host']);
-

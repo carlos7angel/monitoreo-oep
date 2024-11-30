@@ -16,7 +16,7 @@ class DefaultMediaFormsSeeder_4 extends ParentSeeder
         $filePath1 = database_path('SQL/forms.sql');
         $filePath2 = database_path('SQL/form_fields_pgsql.sql');
 
-        if(File::exists($filePath1) && File::exists($filePath2)){
+        if (File::exists($filePath1) && File::exists($filePath2)) {
             DB::unprepared(file_get_contents($filePath1));
             $this->command->info('Forms Table Seed');
             DB::unprepared(file_get_contents($filePath2));

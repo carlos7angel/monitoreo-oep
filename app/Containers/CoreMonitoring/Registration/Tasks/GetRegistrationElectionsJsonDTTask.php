@@ -26,7 +26,7 @@ class GetRegistrationElectionsJsonDTTask extends ParentTask
         $start = $requestData['start'];
         $length = $requestData['length'];
         $sortColumn = $sortColumnDir = null;
-        if(isset($requestData['order'])) {
+        if (isset($requestData['order'])) {
             $indexSort = $requestData['order'][0]['column'];
             $sortColumn = $requestData['columns'][$indexSort]['name'];
             $sortColumnDir = $requestData['order'][0]['dir'];
@@ -43,7 +43,7 @@ class GetRegistrationElectionsJsonDTTask extends ParentTask
             $query = $query->join('elections', 'political_registrations.fid_election', 'elections.id');
             $query = $query->where('fid_political_group_profile', $political_group_profile_id);
 
-            if(! empty($searchValue)) {
+            if (! empty($searchValue)) {
                 $query = $query->where('elections.name', 'like', '%'.$searchValue.'%')
                     ->orWhere('elections.code', 'like', '%'.$searchValue.'%');
             }
@@ -55,7 +55,7 @@ class GetRegistrationElectionsJsonDTTask extends ParentTask
 
         $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
 
-        if($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
+        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 

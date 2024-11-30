@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('registrations/create', [CreateRegistrationController::class, 'create'])
     ->middleware(['auth:web']);
-

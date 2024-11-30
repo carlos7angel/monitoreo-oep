@@ -143,7 +143,7 @@ class CreateActivityLogTask extends ParentTask
 
             activity($log)
                 ->causedBy($causer)
-                ->tap(function(Activity $activity) use($_request){
+                ->tap(function (Activity $activity) use ($_request) {
                     $activity->user_agent = $_request['HTTP_USER_AGENT'];
                     $activity->ip_address = $_request['REMOTE_ADDR'];
                 })

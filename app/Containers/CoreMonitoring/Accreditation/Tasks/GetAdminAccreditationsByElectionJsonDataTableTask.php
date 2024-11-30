@@ -29,7 +29,7 @@ class GetAdminAccreditationsByElectionJsonDataTableTask extends ParentTask
         $start = $requestData['start'];
         $length = $requestData['length'];
         $sortColumn = $sortColumnDir = null;
-        if(isset($requestData['order'])) {
+        if (isset($requestData['order'])) {
             $indexSort = $requestData['order'][0]['column'];
             $sortColumn = $requestData['columns'][$indexSort]['name'];
             $sortColumnDir = $requestData['order'][0]['dir'];
@@ -47,11 +47,11 @@ class GetAdminAccreditationsByElectionJsonDataTableTask extends ParentTask
         $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $election_id, $searchFieldStatus, $user) {
             $query = $query->join('media_profiles', 'media_accreditations.fid_media_profile', 'media_profiles.id');
             $query = $query->where('fid_election', $election_id);
-            if(! empty($searchValue)) {
+            if (! empty($searchValue)) {
                 $query = $query->where('media_profiles.name', 'like', '%'.$searchValue.'%')->orWhere('media_profiles.business_name', 'like', '%'.$searchValue.'%');
             }
 
-            if(! empty($searchFieldStatus)) {
+            if (! empty($searchFieldStatus)) {
                 $query = $query->where('media_accreditations.status', $searchFieldStatus);
             } else {
                 $query = $query->whereIn('media_accreditations.status', ['new', 'observed', 'accredited', 'archived', 'rejected']);
@@ -70,7 +70,7 @@ class GetAdminAccreditationsByElectionJsonDataTableTask extends ParentTask
 
         $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
 
-        if($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
+        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 

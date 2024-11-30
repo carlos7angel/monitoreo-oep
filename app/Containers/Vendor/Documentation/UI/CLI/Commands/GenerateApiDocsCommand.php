@@ -7,12 +7,12 @@ use Apiato\Core\Abstracts\Commands\ConsoleCommand as AbstractConsoleCommand;
 
 class GenerateApiDocsCommand extends AbstractConsoleCommand
 {
-	protected $signature = "apiato:apidoc";
+    protected $signature = "apiato:apidoc";
 
-	protected $description = "Generate API Documentations with (API-Doc-JS)";
+    protected $description = "Generate API Documentations with (API-Doc-JS)";
 
-	public function handle(): void
-	{
-		app(GenerateDocumentationAction::class)->run($this);
-	}
+    public function handle(): void
+    {
+        app(GenerateDocumentationAction::class)->run($this);
+    }
 }

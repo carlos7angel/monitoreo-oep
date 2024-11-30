@@ -43,45 +43,50 @@ class GetAllUserMediaProfilesJsonDataTableTask extends ParentTask
         $searchFieldStatus = $requestData['columns'][5]['search']['value'];
 
         $result = $this->repository->scopeQuery(function ($query) use (
-            $searchValue, $searchFieldName, $searchFieldEmail, $searchFieldDate, $searchFieldType, $searchFieldScope, $searchFieldStatus
+            $searchValue,
+            $searchFieldName,
+            $searchFieldEmail,
+            $searchFieldDate,
+            $searchFieldType,
+            $searchFieldScope,
+            $searchFieldStatus
         ) {
-            if(! empty($searchValue)) {
+            if (! empty($searchValue)) {
                 $query = $query
                             ->where('name', 'like', '%'.$searchValue.'%')
                             ->orWhere('business_name', 'like', '%'.$searchValue.'%')
                             ->orWhere('email', 'like', '%'.$searchValue.'%');
             }
 
-            if(! empty($searchFieldName)) {
+            if (! empty($searchFieldName)) {
                 $query = $query->where('name', 'like', '%'.$searchFieldName.'%');
             }
 
-            if(! empty($searchFieldEmail)) {
+            if (! empty($searchFieldEmail)) {
                 $query = $query->where('email', 'like', '%'.$searchFieldEmail.'%');
             }
 
-            if(! empty($searchFieldDate)) {
+            if (! empty($searchFieldDate)) {
                 $searchDate = Carbon::createFromFormat('d/m/Y', $searchFieldDate)->format('Y-m-d');
                 $query = $query->whereDate('election_date', '=', $searchDate);
             }
 
-            if(! empty($searchFieldType)) {
+            if (! empty($searchFieldType)) {
                 $query = $query->where('type', 'like', '%'.$searchFieldType.'%');
             }
 
-            if(! empty($searchFieldScope)) {
+            if (! empty($searchFieldScope)) {
                 $query = $query->where('scope_department', 'like', '%'.$searchFieldScope.'%')
                                 ->orWhere('scope_municipality', 'like', '%'.$searchFieldScope.'%');
             }
 
-            if(! empty($searchFieldStatus)) {
+            if (! empty($searchFieldStatus)) {
                 $query = $query->where('status', '=', $searchFieldStatus);
                 // $query->where(['status' => '$searchFieldStatus']);
+            } else {
+                // $query = $query->whereIn('status', ['created', 'active', 'archived']);
+                $query = $query->where('status', '<>', 'created');
             }
-             else {
-                 // $query = $query->whereIn('status', ['created', 'active', 'archived']);
-                 $query = $query->where('status', '<>', 'created');
-             }
 
             return $query->distinct()->select(['media_profiles.*']);
         });
@@ -90,7 +95,7 @@ class GetAllUserMediaProfilesJsonDataTableTask extends ParentTask
 
         $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
 
-        if($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
+        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 

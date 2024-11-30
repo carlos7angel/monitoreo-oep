@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('analyses/store', [CreateAnalysisController::class, 'store'])
     ->middleware(['auth:web']);
-

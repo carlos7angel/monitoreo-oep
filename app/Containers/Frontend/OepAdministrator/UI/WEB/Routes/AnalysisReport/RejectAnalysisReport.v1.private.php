@@ -8,4 +8,3 @@ Route::post('monitoreo/analisis/{id}/rechazar', [AnalysisReportController::class
     ->name('oep_admin_analysis_report_reject')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

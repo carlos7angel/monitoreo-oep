@@ -49,7 +49,7 @@ class CreateFieldFormAction extends ParentAction
             $this->updateFormTask->run($data, $form->id);
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::ADD_FORM_FIELD, $request->server(), $field));
+            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::ADD_FORM_FIELD, $request->server(), $field));
 
             return $field;
 

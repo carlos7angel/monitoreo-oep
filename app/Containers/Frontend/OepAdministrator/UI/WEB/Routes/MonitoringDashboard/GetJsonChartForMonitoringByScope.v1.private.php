@@ -8,4 +8,3 @@ Route::get('monitoreo/dashboard/json/monitoreo-scope/{id}', [MonitoringDashboard
     ->name('oep_admin_media_dashboard_json_monitoring_scope')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

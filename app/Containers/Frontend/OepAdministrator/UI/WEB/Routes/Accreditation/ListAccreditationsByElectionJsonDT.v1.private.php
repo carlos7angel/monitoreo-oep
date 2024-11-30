@@ -8,4 +8,3 @@ Route::post('medios/procesos-electorales/{id}/acreditaciones/json', [Accreditati
     ->name('oep_admin_media_accreditations_by_election_json_dt')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

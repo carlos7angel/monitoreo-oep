@@ -8,4 +8,3 @@ Route::get('monitoreo/reporte/{id}/pdf', [MonitoringController::class, 'pdfMonit
     ->name('oep_admin_media_monitoring_generate_pdf')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

@@ -8,4 +8,3 @@ Route::get('monitoreo/analisis/{id}/formulario', [AnalysisReportController::clas
     ->name('oep_admin_analysis_report_form_edit')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

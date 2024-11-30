@@ -8,5 +8,3 @@ Route::post('usuarios/dt', [UserManagementController::class, 'listJsonDt'])
     ->name('oep_admin_users_json_dt')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-
-

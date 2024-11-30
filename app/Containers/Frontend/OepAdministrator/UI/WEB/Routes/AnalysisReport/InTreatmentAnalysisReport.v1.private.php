@@ -8,4 +8,3 @@ Route::post('monitoreo/analisis/{id}/en-tratamiento', [AnalysisReportController:
     ->name('oep_admin_analysis_report_in_treatment')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

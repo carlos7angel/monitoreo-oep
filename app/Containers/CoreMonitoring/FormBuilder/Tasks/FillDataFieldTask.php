@@ -19,8 +19,7 @@ class FillDataFieldTask extends ParentTask
             'unique_fieldname' => $request->fieldname
         ];
 
-        switch ($field->fieldType->type)
-        {
+        switch ($field->fieldType->type) {
             case 'textbox':
                 $data['label'] = $request->label;
                 $data['placeholder'] = $request->placeholder;
@@ -72,11 +71,11 @@ class FillDataFieldTask extends ParentTask
             case 'select':
 
                 $options_json = null;
-                if($request->has('repeater_options')) {
+                if ($request->has('repeater_options')) {
                     $options = [];
                     $options_array =  $request->repeater_options;
                     foreach ($options_array as $key => $item) {
-                        if(! empty($item['field_option']) && ! empty($item['field_value'])) {
+                        if (! empty($item['field_option']) && ! empty($item['field_value'])) {
                             $options[] = (object) array(
                                 'text'      => $item['field_option'],
                                 'value'     => $item['field_value'],
@@ -111,11 +110,11 @@ class FillDataFieldTask extends ParentTask
             case 'checkbox':
 
                 $options_json = null;
-                if($request->has('repeater_options')) {
+                if ($request->has('repeater_options')) {
                     $options = [];
                     $options_array =  $request->repeater_options;
                     foreach ($options_array as $key => $item) {
-                        if(! empty($item['field_option']) && ! empty($item['field_value'])) {
+                        if (! empty($item['field_option']) && ! empty($item['field_value'])) {
                             $options[] = (object) array(
                                 'text'      => $item['field_option'],
                                 'value'     => $item['field_value'],

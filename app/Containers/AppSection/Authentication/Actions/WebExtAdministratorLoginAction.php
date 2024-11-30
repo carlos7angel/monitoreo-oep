@@ -66,13 +66,13 @@ class WebExtAdministratorLoginAction extends ParentAction
 
         return $user;
 
-//        if ($loggedIn) {
-//            return redirect()->intended();
-//        } else {
-//            return back()->withErrors(
-//                $errorResult['errors'],
-//            )->onlyInput(...$errorResult['fields']);
-//        }
+        //        if ($loggedIn) {
+        //            return redirect()->intended();
+        //        } else {
+        //            return back()->withErrors(
+        //                $errorResult['errors'],
+        //            )->onlyInput(...$errorResult['fields']);
+        //        }
 
     }
 }

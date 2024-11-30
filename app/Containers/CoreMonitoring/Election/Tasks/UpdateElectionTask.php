@@ -22,12 +22,12 @@ class UpdateElectionTask extends ParentTask
      */
     public function run(array $data, $id): Election
     {
-//        try {
-            return $this->repository->update($data, $id);
-//        } catch (ModelNotFoundException) {
-//            throw new NotFoundException();
-//        } catch (\Exception) {
-//            throw new UpdateResourceFailedException();
-//        }
+        //        try {
+        return $this->repository->update($data, $id);
+        //        } catch (ModelNotFoundException) {
+        //            throw new NotFoundException();
+        //        } catch (\Exception) {
+        //            throw new UpdateResourceFailedException();
+        //        }
     }
 }

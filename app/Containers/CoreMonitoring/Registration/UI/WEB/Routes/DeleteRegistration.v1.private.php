@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::delete('registrations/{id}', [DeleteRegistrationController::class, 'destroy'])
     ->middleware(['auth:web']);
-

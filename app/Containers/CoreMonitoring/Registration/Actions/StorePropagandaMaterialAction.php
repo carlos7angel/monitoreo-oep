@@ -41,12 +41,12 @@ class StorePropagandaMaterialAction extends ParentAction
             'genre' => $sanitizedData['material_genre'],
         ];
 
-        if($request->get('material_type') === 'LINK') {
+        if ($request->get('material_type') === 'LINK') {
             $data['link_material'] = $sanitizedData['material_link'];
         }
 
-        if($request->get('material_type') === 'FILE') {
-            if($request->file('material_file')) {
+        if ($request->get('material_type') === 'FILE') {
+            if ($request->file('material_file')) {
                 $file_bases = $this->createFileTask->run($request->file('material_file'), 'propaganda', $registration->election->id, $user);
                 $data['file_material'] = $file_bases->unique_code;
             }

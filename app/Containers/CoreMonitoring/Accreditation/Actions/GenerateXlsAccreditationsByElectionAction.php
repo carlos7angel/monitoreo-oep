@@ -12,7 +12,9 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class GenerateXlsAccreditationsByElectionAction extends ParentAction
 {
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
     /**
      * @throws CoreInternalErrorException

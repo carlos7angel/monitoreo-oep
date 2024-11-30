@@ -10,7 +10,6 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
-
 class SendMediaAccountEnabledEvent extends ParentEvent implements ShouldQueue
 {
     protected $user;

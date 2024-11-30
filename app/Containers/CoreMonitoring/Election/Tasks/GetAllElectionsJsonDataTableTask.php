@@ -42,28 +42,28 @@ class GetAllElectionsJsonDataTableTask extends ParentTask
 
         $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $searchFieldName, $searchFieldType, $searchFieldCode, $searchFieldStatus, $searchFieldDate) {
 
-            if(! empty($searchFieldName)) {
+            if (! empty($searchFieldName)) {
                 $query = $query->where('name', 'like', '%'.$searchFieldName.'%');
             }
 
-            if(! empty($searchFieldType)) {
+            if (! empty($searchFieldType)) {
                 $query = $query->where('type', '=', $searchFieldType);
             }
 
-            if(! empty($searchFieldCode)) {
+            if (! empty($searchFieldCode)) {
                 $query = $query->where('name', 'like', '%'.$searchFieldName.'%');
             }
 
-            if(! empty($searchFieldStatus)) {
+            if (! empty($searchFieldStatus)) {
                 $query = $query->where('status', '=', $searchFieldStatus);
             }
 
-            if(! empty($searchFieldDate)) {
+            if (! empty($searchFieldDate)) {
                 $searchDate = Carbon::createFromFormat('d/m/Y', $searchFieldDate)->format('Y-m-d');
                 $query = $query->whereDate('election_date', '=', $searchDate);
             }
 
-            if(! empty($searchValue)) {
+            if (! empty($searchValue)) {
                 $query = $query->where('name', 'like', '%'.$searchValue.'%')
                                 ->orWhere('code', 'like', '%'.$searchValue.'%');
             }
@@ -76,7 +76,7 @@ class GetAllElectionsJsonDataTableTask extends ParentTask
 
         $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
 
-        if($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
+        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 

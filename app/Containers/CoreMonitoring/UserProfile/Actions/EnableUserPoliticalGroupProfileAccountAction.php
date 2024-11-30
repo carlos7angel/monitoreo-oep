@@ -47,7 +47,7 @@ class EnableUserPoliticalGroupProfileAccountAction extends ParentAction
 
         $password = strtoupper(substr(md5(
             Carbon::now()->timestamp . $pp->email . $pp->name . Str::random(24)
-        ),0,10));
+        ), 0, 10));
         // $password = 'admin';
 
         $data = [
@@ -72,10 +72,10 @@ class EnableUserPoliticalGroupProfileAccountAction extends ParentAction
         ], $pp->id);
 
         //Activity Log
-        App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::ENABLED_USER_POLITICAL_ACCOUNT, $request->server(), $user));
+        App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::ENABLED_USER_POLITICAL_ACCOUNT, $request->server(), $user));
 
         //Send Notification
-        App::make(Dispatcher::class)->dispatch(New SendMediaAccountEnabledEvent($user, $pp, $password));
+        App::make(Dispatcher::class)->dispatch(new SendMediaAccountEnabledEvent($user, $pp, $password));
 
         return $pp;
     }

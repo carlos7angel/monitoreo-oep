@@ -8,4 +8,3 @@ Route::post('monitoreo/analisis/{id}/resolucion-final', [AnalysisReportControlle
     ->name('oep_admin_analysis_report_final_resolution')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

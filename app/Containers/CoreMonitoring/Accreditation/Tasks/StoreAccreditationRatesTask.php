@@ -30,8 +30,8 @@ class StoreAccreditationRatesTask extends ParentTask
             if ($item_type_television) {
 
                 // Nacional
-                if($item_type_television->scope === 'Nacional') {
-                    if(isset($request->file('media_television_file_rate')['Nacional'])) {
+                if ($item_type_television->scope === 'Nacional') {
+                    if (isset($request->file('media_television_file_rate')['Nacional'])) {
                         $file = $request->file('media_television_file_rate')['Nacional'];
                         $file_rate = $this->createFileTask->run($file, 'accreditation', $accreditation_id, $user);
                         $data['file_rate'] = $file_rate->unique_code;
@@ -45,7 +45,7 @@ class StoreAccreditationRatesTask extends ParentTask
                 // Departamentos
                 $states = explode(', ', $item_type_television->scope_department);
                 foreach ($states as $state) {
-                    if(isset($request->file('media_television_file_rate')[$state])) {
+                    if (isset($request->file('media_television_file_rate')[$state])) {
                         $file = $request->file('media_television_file_rate')[$state];
                         $file_rate = $this->createFileTask->run($file, 'accreditation', $accreditation_id, $user);
                         $data['file_rate'] = $file_rate->unique_code;
@@ -66,9 +66,9 @@ class StoreAccreditationRatesTask extends ParentTask
             if ($item_type_radio) {
 
                 // Nacional
-                if($item_type_radio->scope === 'Nacional') {
+                if ($item_type_radio->scope === 'Nacional') {
                     $file = $request->file('media_radio_file_rate')['Nacional'];
-                    if($file) {
+                    if ($file) {
                         $file_rate = $this->createFileTask->run($file, 'accreditation', $accreditation_id, $user);
                         $data['file_rate'] = $file_rate->unique_code;
                         $data['fid_accreditation'] = $accreditation_id;
@@ -82,7 +82,7 @@ class StoreAccreditationRatesTask extends ParentTask
                 $states = explode(', ', $item_type_radio->scope_department);
                 foreach ($states as $state) {
                     $file = $request->file('media_radio_file_rate')[$state];
-                    if($file) {
+                    if ($file) {
                         $file_rate = $this->createFileTask->run($file, 'accreditation', $accreditation_id, $user);
                         $data['file_rate'] = $file_rate->unique_code;
                         $data['fid_accreditation'] = $accreditation_id;

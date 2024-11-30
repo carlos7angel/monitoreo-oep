@@ -8,4 +8,3 @@ Route::post('monitoreo/procesos-electorales/json', [MonitoringController::class,
     ->name('oep_admin_media_elections_list_for_monitoring_json_dt')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\DB;
 
 class RemoveItemFromMonitoringReportAction extends ParentAction
 {
-    public function __construct() {
+    public function __construct()
+    {
     }
 
     /**
@@ -24,9 +25,9 @@ class RemoveItemFromMonitoringReportAction extends ParentAction
     public function run(Request $request): MonitoringReport
     {
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
-//        if(! $user->hasRole(['monitor'])) {
-//            throw new AuthorizationException('No tiene los permisos para realizar esta acción');
-//        }
+        //        if(! $user->hasRole(['monitor'])) {
+        //            throw new AuthorizationException('No tiene los permisos para realizar esta acción');
+        //        }
         $monitoring_report = app(FindMonitoringReportByIdTask::class)->run($request->id);
         $monitoring_item = app(FindMonitoringByIdTask::class)->run($request->monitoring_item_id);
 

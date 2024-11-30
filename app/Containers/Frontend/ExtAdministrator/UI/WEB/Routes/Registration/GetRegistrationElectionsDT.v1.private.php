@@ -8,4 +8,3 @@ Route::post('/registros/elecciones/json', [RegistrationController::class, 'listR
     ->name('ext_admin_registration_elections_list_json_dt')
     ->middleware(['auth:external'])
     ->domain(parse_url(config('app.url'))['host']);
-

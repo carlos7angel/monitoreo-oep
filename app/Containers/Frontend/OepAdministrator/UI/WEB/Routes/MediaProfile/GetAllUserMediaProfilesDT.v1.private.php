@@ -8,5 +8,3 @@ Route::post('medios/dt', [MediaProfileController::class, 'listJsonDt'])
     ->name('oep_admin_media_profiles_json_dt')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-
-

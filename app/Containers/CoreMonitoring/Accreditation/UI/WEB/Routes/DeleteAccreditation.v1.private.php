@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::delete('accreditations/{id}', [DeleteAccreditationController::class, 'destroy'])
     ->middleware(['auth:web']);
-

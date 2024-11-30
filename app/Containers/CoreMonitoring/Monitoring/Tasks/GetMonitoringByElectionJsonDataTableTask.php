@@ -29,7 +29,7 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
         $start = $requestData['start'];
         $length = $requestData['length'];
         $sortColumn = $sortColumnDir = null;
-        if(isset($requestData['order'])) {
+        if (isset($requestData['order'])) {
             $indexSort = $requestData['order'][0]['column'];
             $sortColumn = $requestData['columns'][$indexSort]['name'];
             $sortColumnDir = $requestData['order'][0]['dir'];
@@ -48,12 +48,12 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
 
             $query = $query->leftJoin('media_profiles', 'monitoring_items.fid_media_profile', 'media_profiles.id');
             $query = $query->where('fid_election', $election_id);
-            if(! empty($searchValue)) {
+            if (! empty($searchValue)) {
                 $query = $query->where('media_profiles.name', 'like', '%'.$searchValue.'%')
                                 ->orWhere('media_profiles.business_name', 'like', '%'.$searchValue.'%');
             }
 
-            if(! empty($searchFieldMediaType)) {
+            if (! empty($searchFieldMediaType)) {
                 $query = $query->where('monitoring_items.media_type', $searchFieldMediaType);
             }
 
@@ -100,7 +100,7 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
 
         $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
 
-        if($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
+        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 

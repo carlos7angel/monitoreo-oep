@@ -8,4 +8,3 @@ Route::get('/registros/elecciones/{id}/material-propaganda/nuevo', [PropagandaMa
     ->name('ext_admin_propaganda_material_create')
     ->middleware(['auth:external'])
     ->domain(parse_url(config('app.url'))['host']);
-

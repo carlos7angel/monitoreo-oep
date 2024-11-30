@@ -10,7 +10,8 @@ class GetAllFieldTypesTask extends ParentTask
 {
     protected FieldTypeRepository $repository;
 
-    public function __construct(FieldTypeRepository $_repository) {
+    public function __construct(FieldTypeRepository $_repository)
+    {
         $this->repository = $_repository;
     }
 

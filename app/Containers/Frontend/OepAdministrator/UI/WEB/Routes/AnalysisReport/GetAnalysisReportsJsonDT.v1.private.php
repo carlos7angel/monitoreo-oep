@@ -8,4 +8,3 @@ Route::post('monitoreo/analisis/json', [AnalysisReportController::class, 'listJs
     ->name('oep_admin_analysis_report_list_json_dt')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

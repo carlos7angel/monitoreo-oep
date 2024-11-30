@@ -24,9 +24,9 @@ use phpDocumentor\Reflection\DocBlock\Tags\Throws;
 class StorePoliticalGroupAction extends ParentAction
 {
     public function __construct(
-         private CreateUserPoliticalGroupProfileTask $createUserPoliticalGroupProfileTask,
-         private CreateLogoImagePoliticalGroupTask $createLogoImagePoliticalGroupTask,
-         private UpdateUserPoliticalGroupProfileTask $updateUserPoliticalGroupProfileTask,
+        private CreateUserPoliticalGroupProfileTask $createUserPoliticalGroupProfileTask,
+        private CreateLogoImagePoliticalGroupTask $createLogoImagePoliticalGroupTask,
+        private UpdateUserPoliticalGroupProfileTask $updateUserPoliticalGroupProfileTask,
     ) {
     }
 
@@ -41,10 +41,10 @@ class StorePoliticalGroupAction extends ParentAction
 
         $sanitizedData = $request->sanitizeInput($request->all());
 
-//        $existing_email = app(FindUserByEmailTask::class)->run($request->get('pp_email'));
-//        if ($existing_email) {
-//            throw new NotFoundException('El correo electrónico ya existe, intente con otro.');
-//        }
+        //        $existing_email = app(FindUserByEmailTask::class)->run($request->get('pp_email'));
+        //        if ($existing_email) {
+        //            throw new NotFoundException('El correo electrónico ya existe, intente con otro.');
+        //        }
 
         $data = [
             'name' => $request->get('pp_name'),
@@ -73,7 +73,7 @@ class StorePoliticalGroupAction extends ParentAction
             }
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::CREATED_POLITICAL_GROUP, $request->server(), $pp));
+            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::CREATED_POLITICAL_GROUP, $request->server(), $pp));
 
             return $pp;
         });

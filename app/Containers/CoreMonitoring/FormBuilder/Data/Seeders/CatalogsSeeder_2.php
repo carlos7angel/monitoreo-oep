@@ -15,7 +15,7 @@ class CatalogsSeeder_2 extends ParentSeeder
 
         $filePath = database_path('SQL/catalogs.sql');
 
-        if(File::exists($filePath)){
+        if (File::exists($filePath)) {
             DB::unprepared(file_get_contents($filePath));
             $this->command->info('Catalogs Table Seed');
         }

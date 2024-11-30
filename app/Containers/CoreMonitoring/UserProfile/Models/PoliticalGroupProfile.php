@@ -73,11 +73,13 @@ class PoliticalGroupProfile extends ParentModel
     /**
      * Mutators
      */
-    public function getFoundationDateAttribute($value) {
+    public function getFoundationDateAttribute($value)
+    {
         return $value ? Carbon::parse($value)->format('d/m/Y') : null;
     }
 
-    public function setFoundationDateAttribute($value) {
+    public function setFoundationDateAttribute($value)
+    {
         $this->attributes['foundation_date'] = $value ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d') : null;
     }
 

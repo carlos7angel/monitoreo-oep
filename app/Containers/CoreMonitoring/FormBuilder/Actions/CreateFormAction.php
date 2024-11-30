@@ -18,7 +18,8 @@ class CreateFormAction extends ParentAction
 {
     protected CreateFormTask $createFormTask;
 
-    public function __construct(CreateFormTask $_task) {
+    public function __construct(CreateFormTask $_task)
+    {
         $this->createFormTask = $_task;
     }
 
@@ -46,7 +47,7 @@ class CreateFormAction extends ParentAction
         $form = $this->createFormTask->run($data);
 
         // Add Log
-        App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::CREATE_DYNAMIC_FORM, $request->server(), $form));
+        App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::CREATE_DYNAMIC_FORM, $request->server(), $form));
 
         return $form;
     }

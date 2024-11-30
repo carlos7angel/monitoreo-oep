@@ -21,7 +21,6 @@ class InTreatmentAnalysisReportAction extends ParentAction
         private FindAnalysisReportByIdTask $findAnalysisReportByIdTask,
         private CreateStatusActivityAnalysisReportTask $createStatusActivityAnalysisReportTask,
         private GetAuthenticatedUserByGuardTask $getAuthenticatedUserByGuardTask,
-
         private CreateFileTask $createFileTask,
     ) {
     }
@@ -37,7 +36,7 @@ class InTreatmentAnalysisReportAction extends ParentAction
 
         $user = $this->getAuthenticatedUserByGuardTask->run('web');
         $analysis_report = $this->findAnalysisReportByIdTask->run($request->id);
-        if($analysis_report->status !== 'UNTREATED' && $analysis_report->status !== 'UNTREATED_PLENARY') {
+        if ($analysis_report->status !== 'UNTREATED' && $analysis_report->status !== 'UNTREATED_PLENARY') {
             throw new ValidationFailedException('Operación no permitida, el estado no esta autorizado para realizar esta acción.');
         }
 

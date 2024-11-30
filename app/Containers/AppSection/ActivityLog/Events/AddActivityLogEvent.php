@@ -7,7 +7,6 @@ use App\Ship\Parents\Events\Event as ParentEvent;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-
 class AddActivityLogEvent extends ParentEvent implements ShouldQueue
 {
     protected $log;

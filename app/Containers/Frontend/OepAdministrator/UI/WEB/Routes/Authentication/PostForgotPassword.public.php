@@ -7,4 +7,3 @@ Route::post('/olvidaste-tu-contrasena', [AuthController::class, 'postForgotPassw
     ->prefix(config('app.admin_oep_prefix'))
     ->name('oep_admin_login_forgot_password_post')
     ->domain(parse_url(config('app.url'))['host']);
-

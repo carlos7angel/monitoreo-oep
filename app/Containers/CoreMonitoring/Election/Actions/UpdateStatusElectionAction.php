@@ -36,9 +36,9 @@ class UpdateStatusElectionAction extends ParentAction
 
         $election = app(FindElectionByIdTask::class)->run($request->id);
 
-//        if($election->status !== 'observed') {
-//            throw new NotFoundException();
-//        }
+        //        if($election->status !== 'observed') {
+        //            throw new NotFoundException();
+        //        }
 
         $data = [
             'status' => $request->new_status,
@@ -47,7 +47,7 @@ class UpdateStatusElectionAction extends ParentAction
         $election = $this->updateElectionTask->run($data, $election->id);
 
         // Add Log
-        App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::UPDATED_STATUS_ELECTION, $request->server(), $election));
+        App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::UPDATED_STATUS_ELECTION, $request->server(), $election));
 
         return  $election;
     }

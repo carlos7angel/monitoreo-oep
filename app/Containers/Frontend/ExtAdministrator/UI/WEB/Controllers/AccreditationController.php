@@ -73,7 +73,7 @@ class AccreditationController extends WebController
         $page_title = "Editar Acreditación";
         $user =  app(GetAuthenticatedUserByGuardTask::class)->run('external');
         $accreditation = app(FindAccreditationByIdTask::class)->run($request->id);
-        if($accreditation->status !== 'observed' && $accreditation->status !== 'draft') {
+        if ($accreditation->status !== 'observed' && $accreditation->status !== 'draft') {
             return redirect()->route('ext_admin_accreditations_list');
         }
         $profile_json = app(ConvertJsonDataToProfileDataTask::class)->run($accreditation->data);

@@ -32,7 +32,7 @@ class GeneratePdfMonitoringAction extends ParentAction
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
         $monitoring_item = app(FindMonitoringByIdTask::class)->run($request->id);
-        if($monitoring_item->status == 'CREATED') {
+        if ($monitoring_item->status == 'CREATED') {
             throw new ValidationFailedException('');
         }
 

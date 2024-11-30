@@ -8,4 +8,3 @@ Route::post('/registros/elecciones/{id}/material-propaganda/guardar', [Propagand
     ->name('ext_admin_propaganda_material_store')
     ->middleware(['auth:external'])
     ->domain(parse_url(config('app.url'))['host']);
-

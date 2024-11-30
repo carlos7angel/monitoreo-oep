@@ -69,18 +69,18 @@ class WebOepAdministratorLoginAction extends ParentAction
         session()->regenerate();
 
         // Add Log
-        App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::LOGIN_ADMIN, $request->server(), $user));
+        App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::LOGIN_ADMIN, $request->server(), $user));
 
 
         return $user;
 
-//        if ($loggedIn) {
-//            return redirect()->intended();
-//        } else {
-//            return back()->withErrors(
-//                $errorResult['errors'],
-//            )->onlyInput(...$errorResult['fields']);
-//        }
+        //        if ($loggedIn) {
+        //            return redirect()->intended();
+        //        } else {
+        //            return back()->withErrors(
+        //                $errorResult['errors'],
+        //            )->onlyInput(...$errorResult['fields']);
+        //        }
 
     }
 }

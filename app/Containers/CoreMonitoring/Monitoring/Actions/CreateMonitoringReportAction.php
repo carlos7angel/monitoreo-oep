@@ -36,22 +36,22 @@ class CreateMonitoringReportAction extends ParentAction
         $election = app(FindElectionByIdTask::class)->run($request->election_id);
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
-        if(! $user->hasRole(['monitor'])) {
+        if (! $user->hasRole(['monitor'])) {
             throw new AuthorizationException('No tiene los permisos para realizar esta acción');
         }
         $scope_type = $scope_department = null;
-        if($user->type === 'TSE' || empty($user->type)) {
+        if ($user->type === 'TSE' || empty($user->type)) {
             $scope_type = 'TSE';
             $scope_department = 'Nacional';
         }
-        if($user->type === 'TED') {
+        if ($user->type === 'TED') {
             $scope_type = $user->type ;
             $scope_department = $user->department;
         }
 
         $monitoring_items = app(GetOpenMonitoringItemsByElectionScopeTask::class)->run($election->id, $scope_type, $scope_department, $user);
 
-        if($monitoring_items->count() <= 0) {
+        if ($monitoring_items->count() <= 0) {
             throw new CreateResourceFailedException('No existen registros de monitoreo para reportar');
         }
 
@@ -68,7 +68,7 @@ class CreateMonitoringReportAction extends ParentAction
 
             $monitoring_report = $this->createMonitoringReportTask->run($data);
             $monitoring_report->monitoringItems()->sync($monitoring_items->pluck('id')->toArray());
-            $monitoring_report->code = 'R-' . strtoupper(substr(md5($monitoring_report->id . $monitoring_report->code),0,6)) . '/' . Carbon::now()->format('y');
+            $monitoring_report->code = 'R-' . strtoupper(substr(md5($monitoring_report->id . $monitoring_report->code), 0, 6)) . '/' . Carbon::now()->format('y');
             $monitoring_report->save();
 
             foreach ($monitoring_items->all() as $monitoring_item) {

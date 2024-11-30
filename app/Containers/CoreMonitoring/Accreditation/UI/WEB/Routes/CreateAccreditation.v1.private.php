@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('accreditations/create', [CreateAccreditationController::class, 'create'])
     ->middleware(['auth:web']);
-

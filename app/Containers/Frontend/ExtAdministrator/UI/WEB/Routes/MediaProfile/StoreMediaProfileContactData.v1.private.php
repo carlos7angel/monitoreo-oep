@@ -8,4 +8,3 @@ Route::post('/medio-comunicacion/contacto', [MediaProfileController::class, 'sto
     ->name('ext_admin_media_profile_contact_data_store')
     ->middleware(['auth:external'])
     ->domain(parse_url(config('app.url'))['host']);
-

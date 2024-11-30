@@ -8,4 +8,3 @@ Route::get('monitoreo/reportes/eleccions-habilitadas', [MonitoringReportControll
     ->name('ext_admin_monitoring_report_show_active_elections_partial')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

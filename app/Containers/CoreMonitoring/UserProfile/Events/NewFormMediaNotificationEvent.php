@@ -9,7 +9,6 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
-
 class NewFormMediaNotificationEvent extends ParentEvent implements ShouldQueue
 {
     protected $profile;

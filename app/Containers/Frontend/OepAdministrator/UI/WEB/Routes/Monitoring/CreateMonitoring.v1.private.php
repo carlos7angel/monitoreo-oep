@@ -8,4 +8,3 @@ Route::get('monitoreo/procesos-electorales/{id}/medios/{media}/nuevo', [Monitori
     ->name('oep_admin_media_monitoring_create')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

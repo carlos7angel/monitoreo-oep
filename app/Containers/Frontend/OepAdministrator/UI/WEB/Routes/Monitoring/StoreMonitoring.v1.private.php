@@ -8,4 +8,3 @@ Route::post('monitoreo/procesos-electorales/{id}/medios/{media}/guardar', [Monit
     ->name('oep_admin_media_monitoring_store')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

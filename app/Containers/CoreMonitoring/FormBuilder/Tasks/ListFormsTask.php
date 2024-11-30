@@ -10,7 +10,8 @@ class ListFormsTask extends ParentTask
 {
     protected FormRepository $repository;
 
-    public function __construct(FormRepository $_repository) {
+    public function __construct(FormRepository $_repository)
+    {
         $this->repository = $_repository;
     }
 

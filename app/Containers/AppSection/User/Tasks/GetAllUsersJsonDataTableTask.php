@@ -37,7 +37,7 @@ class GetAllUsersJsonDataTableTask extends ParentTask
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
         $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $user) {
-            if(! empty($searchValue)) {
+            if (! empty($searchValue)) {
                 $query = $query->where('name', 'like', '%'.$searchValue.'%')->orWhere('email', 'like', '%'.$searchValue.'%');
             }
 
@@ -50,7 +50,7 @@ class GetAllUsersJsonDataTableTask extends ParentTask
 
         $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
 
-        if($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
+        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
             $result->orderBy($sortColumn, $sortColumnDir);
         }
 

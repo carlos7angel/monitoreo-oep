@@ -8,4 +8,3 @@ Route::get('formularios/{id}/constructor', [FormBuilderController::class, 'showB
     ->name('oep_admin_form_builder')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

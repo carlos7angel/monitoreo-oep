@@ -8,4 +8,3 @@ Route::get('monitoreo/reportes/{id}/item/{monitoring_item_id}/detalle', [Monitor
     ->name('oep_admin_monitoring_report_details_item')
     ->middleware(['auth:web'])
     ->domain(parse_url(config('app.url'))['host']);
-

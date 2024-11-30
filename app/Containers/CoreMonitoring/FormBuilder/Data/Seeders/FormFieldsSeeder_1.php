@@ -15,7 +15,7 @@ class FormFieldsSeeder_1 extends ParentSeeder
 
         $filePath = database_path('SQL/fieldTypes.sql');
 
-        if(File::exists($filePath)){
+        if (File::exists($filePath)) {
             DB::unprepared(file_get_contents($filePath));
             $this->command->info('Field Types Table Seed');
         }

@@ -38,14 +38,14 @@ class StoreDataFieldsFormTask extends ParentTask
                 case 'checkbox':
                     $data[$field->unique_fieldname] = null;
                     $options = isset($input[$field->unique_fieldname]) ? $input[$field->unique_fieldname] : [];
-                    if(is_array($options)) {
-                        if($field->field_subtype === 'select') {
+                    if (is_array($options)) {
+                        if ($field->field_subtype === 'select') {
                             $data[$field->unique_fieldname] = $options[0];
                         }
-                        if($field->field_subtype === 'multiselect') {
+                        if ($field->field_subtype === 'multiselect') {
                             $data[$field->unique_fieldname] = json_encode($options);
                         }
-                        if($field->field_subtype === 'checkbox') {
+                        if ($field->field_subtype === 'checkbox') {
                             $data[$field->unique_fieldname] = json_encode($options);
                         }
                     }
@@ -53,11 +53,11 @@ class StoreDataFieldsFormTask extends ParentTask
                 case 'fileupload':
                     $data[$field->unique_fieldname] = null;
 
-                    if(isset($load[$field->unique_fieldname]) && is_array($load[$field->unique_fieldname])) {
+                    if (isset($load[$field->unique_fieldname]) && is_array($load[$field->unique_fieldname])) {
                         $data[$field->unique_fieldname] = $load[$field->unique_fieldname];
                     }
 
-                    if(isset($input[$field->unique_fieldname]) && $request->file($field->unique_fieldname)) {
+                    if (isset($input[$field->unique_fieldname]) && $request->file($field->unique_fieldname)) {
                         $file = app(CreateFileTask::class)->run($request->file($field->unique_fieldname), 'monitoring', $monitoring->id, $user);
                         $data[$field->unique_fieldname] = [
                             'code' => $file->unique_code,

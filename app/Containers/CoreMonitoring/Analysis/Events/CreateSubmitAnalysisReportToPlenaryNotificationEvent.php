@@ -10,7 +10,6 @@ use App\Ship\Parents\Events\Event as ParentEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
-
 class CreateSubmitAnalysisReportToPlenaryNotificationEvent extends ParentEvent implements ShouldQueue
 {
     protected $analysis_report;

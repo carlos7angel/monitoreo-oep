@@ -10,7 +10,6 @@ use App\Ship\Parents\Events\Event as ParentEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
-
 class SubmitMonitoringNotificationEvent extends ParentEvent implements ShouldQueue
 {
     protected $monitoring_report;
@@ -18,18 +17,18 @@ class SubmitMonitoringNotificationEvent extends ParentEvent implements ShouldQue
 
     public function __construct(MonitoringReport $_monitoring_report, User $_user)
     {
-        $this->monitoring_report= $_monitoring_report;
+        $this->monitoring_report = $_monitoring_report;
         $this->user = $_user;
     }
 
     public function handle()
     {
         $scope_type = $scope_department = null;
-        if($this->user->type === 'TSE' || empty($this->user->type)) {
+        if ($this->user->type === 'TSE' || empty($this->user->type)) {
             $scope_type = 'TSE';
             $scope_department = 'Nacional';
         }
-        if($this->user->type === 'TED') {
+        if ($this->user->type === 'TED') {
             $scope_type = $this->user->type ;
             $scope_department = $this->user->department;
         }
