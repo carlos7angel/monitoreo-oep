@@ -206,6 +206,7 @@ var KTUsersUpdateUsername = function () {
         const openButton = document.getElementById('kt_handle_modal_update_username');
         openButton.addEventListener('click', e => {
             e.preventDefault();
+            form.reset();
             modal.show();
         });
 

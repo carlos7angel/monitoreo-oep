@@ -158,7 +158,7 @@ var KTRegistrationList = function () {
                     className: 'text-end',
                     render: function (data, type, full, meta) {
                         var toUrl = `/u/admin/registros/elecciones/${full.registration_id}/material-propaganda`;
-                        return `<a href="${toUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-eye fs-2"></i></a>`;
+                        return `<a href="${toUrl}" class="btn btn-sm btn-icon btn-secondary"><i class="ki-outline ki-arrow-right text-gray-600 fs-2"></i></a>`;
                     },
                 },
             ],

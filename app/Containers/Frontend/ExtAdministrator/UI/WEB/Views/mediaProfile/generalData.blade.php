@@ -186,7 +186,7 @@
                                                 $file_logo = asset('storage' . $profile->logo);
                                             }
                                         @endphp
-                                        <div class="image-input-wrapper w-180px h-180px" style="background-image: url({{ $file_logo }})"></div>
+                                        <div class="image-input-wrapper w-180px h-180px bgi-size-contain bgi-position-center" style="background-size: contain; background-image: url({{ $file_logo }})"></div>
                                         <!--end::Preview existing avatar-->
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar">
                                             <i class="ki-outline ki-pencil fs-7"></i>

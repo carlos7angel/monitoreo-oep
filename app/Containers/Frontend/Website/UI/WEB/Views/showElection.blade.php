@@ -104,12 +104,14 @@
                                                     <span class="fw-bold">Categoría:</span><span class="text-gray-900">{{ $election->type }}</span>
                                                 </div>
                                             </div>
+                                            @if($election->end_date_media_registration)
                                             <div class="d-flex align-items-center mb-3">
                                                 <span class="bullet me-3"></span>
                                                 <div class="text-gray-600 fw-semibold fs-6">
                                                     <span class="fw-bold">Plazo Registro Medios:</span><span class="text-gray-900">{{ $election->end_date_media_registration }}</span>
                                                 </div>
                                             </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

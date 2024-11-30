@@ -37,7 +37,7 @@ class UpdateUserAdminPasswordAction extends ParentAction
         // $user->notify(new PasswordUpdatedNotification());
 
         // Add Log
-        App::make(Dispatcher::class)->dispatch(New AddActivityLogEvent(LogConstants::UPDATED_USER_DATA_PASSWORD, $request->server(), $user));
+        App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::UPDATED_USER_DATA_PASSWORD, $request->server(), $user));
 
         return $user;
     }

@@ -32,6 +32,7 @@
                             @php
                                 $open = true;
                             @endphp
+                            @if(count($data) > 0)
                             @foreach($data as $key => $scope)
                                 @php
                                     $index = \Illuminate\Support\Str::slug($key);
@@ -52,7 +53,7 @@
                                                         <div class="text-sm-end fw-semibold fs-7 ms-5 text-muted">
                                                             <img alt="Logo Proceso Electoral" src="{{ asset('storage') . $election->logo_image }}" class="h-100px mb-2" />
                                                         </div>
-                                                        <div class="fw-bold fs-2 ms-5 text-gray-500 text-start" style="line-height: 1.3">
+                                                        <div class="fw-bold fs-4 ms-5 text-gray-500 text-start d-flex align-items-center" style="text-decoration: underline; line-height: 1.3">
                                                             Publicación de la lista de medios de comunicación habilitados para la difusión de méritos y/o propaganda
                                                         </div>
                                                     </div>
@@ -71,7 +72,6 @@
                                                                     $count = 0;
                                                                 @endphp
                                                                 @if (is_array($items) && count($items) > 0)
-                                                                    @foreach($items as $key => $item)
                                                                     <div class="d-flex align-items-center mb-3 mt-10">
                                                                         <span class="bullet bullet-vertical h-30px bg-primary me-3"></span>
                                                                         <div class="flex-grow-1">
@@ -86,7 +86,7 @@
                                                                                     @case('Impreso')
                                                                                     <span>Medios Impresos</span>
                                                                                     @break
-                                       m                                             @case('Digital')
+                                                                                    @case('Digital')
                                                                                     <span>Medios Digitales</span>
                                                                                     @break
                                                                                 @endswitch
@@ -103,6 +103,7 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody class="border-bottom border-dashed border-dark">
+                                                                            @foreach($items as $key => $item)
                                                                                 <tr class="fw-bold text-gray-700 fs-7">
                                                                                     <td class="text-center">{{ $count + 1 }}</td>
                                                                                     <td class="text-start">
@@ -116,10 +117,10 @@
                                                                                         <a target="_blank" href="{{$item->fileRate->url_file}}" class="">Descargar</a>
                                                                                     </td>
                                                                                 </tr>
+                                                                            @endforeach
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
-                                                                    @endforeach
                                                                 @endif
                                                             @endforeach
                                                         </div>
@@ -135,7 +136,9 @@
                                     $open = false;
                                 @endphp
                             @endforeach
-
+                            @else
+                                <div class="text-center text-muted my-20"><i>No existen registros</i></div>
+                            @endif
                         </div>
                         <!--end::Accordion-->
 

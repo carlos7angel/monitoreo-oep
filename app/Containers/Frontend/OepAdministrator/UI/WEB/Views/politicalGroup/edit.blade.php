@@ -140,7 +140,7 @@
                                     $file_logo = asset('storage' . $pp->logo);
                                 }
                             @endphp
-                            <div class="image-input-wrapper w-200px h-200px {{ $file_logo ? 'bg-white' : '' }}" style="background-image: url({{ $file_logo }})"></div>
+                            <div class="image-input-wrapper w-200px h-200px bgi-size-contain bgi-position-center {{ $file_logo ? 'bg-white' : '' }}" style="background-image: url({{ $file_logo }})"></div>
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Cambiar">
                                 <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span class="path2"></span></i>
                                 <input type="hidden" name="pp_remove" />

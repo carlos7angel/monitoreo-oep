@@ -44,6 +44,13 @@ var KTFormFiles = function () {
                             }
                         }
                     },
+                    material_genre: {
+                        validators: {
+                            notEmpty: {
+                                message: 'El campo es obligatorio'
+                            }
+                        }
+                    },
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
@@ -113,11 +120,6 @@ var KTFormFiles = function () {
             }
         });
 
-        cancelButton.addEventListener('click', function (e) {
-            e.preventDefault();
-
-
-        });
     }
 
     var _handleTypeMaterial = function () {

@@ -3,12 +3,9 @@
 @section('breadcrumbs')
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
         <li class="breadcrumb-item text-white fw-bold lh-1">
-            <a href="/" class="text-white text-hover-secondary">
+            <a href="{{ route('ext_admin_index') }}" class="text-white text-hover-secondary">
                 <i class="ki-outline ki-home text-white fs-3"></i>
             </a>
-        </li>
-        <li class="breadcrumb-item">
-            <i class="ki-outline ki-right fs-4 text-white mx-n1"></i>
         </li>
         <li class="breadcrumb-item">
             <i class="ki-outline ki-right fs-4 text-white mx-n1"></i>
@@ -209,7 +206,7 @@
                     <form id="kt_modal_update_username_form" class="form" method="post" action="{{ route('ext_admin_media_update_username_profile') }}" autocomplete="off">
                         <input type="hidden" name="id" value="{{ $user->id }}">
                         <div class="fv-row mb-10">
-                            <label class="form-label fw-semibold fs-6 mb-2">Nombre de Usuario</label>
+                            <label class="form-label fw-semibold fs-6 mb-2">Nuevo nombre de usuario</label>
                             <input class="form-control" type="text" placeholder="" name="username" autocomplete="off" />
                         </div>
                         <div class="text-center pt-15">

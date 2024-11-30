@@ -27,12 +27,17 @@
                             </div>
                         </div>
 
-
+                        @if(count($registrations) > 0)
                         @foreach($registrations as $registration)
                         <div class="d-flex flex-column flex-lg-row">
                             <div class="flex-column flex-lg-row-auto w-100 w-xl-275px w-lg-200px mb-10 me-xl-20 me-lg-10">
-                                <div class="mb-15">
-                                    <img src="{{ asset('storage') . $registration->politicalGroup->logo }}" class="w-100" style="max-width: 350px" alt="Logo Partido Político">
+                                <div class="mb-md-15">
+                                    <div class="w-100">
+                                        <div class="w-xl-275px h-xl-275px w-lg-200px h-lg-200px w-200px h-200px position-relative border-2 border-dashed border-secondary rounded-2"
+                                             style="background-image: url({{ asset('storage') . $registration->politicalGroup->logo }}); background-size: contain;
+                                                    background-repeat: no-repeat; background-position: center top">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="flex-lg-row-fluid">
@@ -77,6 +82,9 @@
                         </div>
                         <div class="separator border-gray-400 my-5"></div>
                         @endforeach
+                        @else
+                            <div class="text-center text-muted my-20"><i>No existen registros</i></div>
+                        @endif
 
                     </div>
 

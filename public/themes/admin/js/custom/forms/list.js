@@ -104,7 +104,9 @@ var KTFormsList = function () {
                     render: function (data, type, full, meta) {
                         var status = {
                             '1': {'title': 'Activo', 'class': 'badge-light-success'},
+                            'true': {'title': 'Activo', 'class': 'badge-light-success'},
                             '0': {'title': 'Inactivo', 'class': 'badge-light-danger'},
+                            'false': {'title': 'Inactivo', 'class': 'badge-light-danger'},
                         };
                         if (typeof status[data] === 'undefined') {
                             return data;

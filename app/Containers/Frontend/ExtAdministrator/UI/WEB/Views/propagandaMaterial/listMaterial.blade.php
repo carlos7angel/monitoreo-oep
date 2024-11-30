@@ -3,7 +3,7 @@
 @section('breadcrumbs')
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
         <li class="breadcrumb-item text-white fw-bold lh-1">
-            <a href="/" class="text-white text-hover-secondary">
+            <a href="{{ route('ext_admin_index') }}" class="text-white text-hover-secondary">
                 <i class="ki-outline ki-home text-white fs-3"></i>
             </a>
         </li>
@@ -11,19 +11,19 @@
             <i class="ki-outline ki-right fs-4 text-white mx-n1"></i>
         </li>
         <li class="breadcrumb-item text-white fw-bold lh-1">
-            <a href="/" class="text-white text-hover-secondary">Acreditaciones</a>
+            <a href="{{ route('ext_admin_registration_elections_list') }}" class="text-white text-hover-secondary">Lista por elecciones</a>
         </li>
         <li class="breadcrumb-item">
             <i class="ki-outline ki-right fs-4 text-white mx-n1"></i>
         </li>
-        <li class="breadcrumb-item text-white fw-bold lh-1">Detalle</li>
+        <li class="breadcrumb-item text-white fw-bold lh-1">Lista Material ({{ $registration->election->name }})</li>
     </ul>
 @endsection
 
 @section('headline')
     <div class="page-title d-flex align-items-center me-3">
         <h1 class="page-heading d-flex text-white fw-bolder fs-1 flex-column justify-content-center my-0">Material de Propaganda Electoral
-            <span class="page-desc text-white opacity-50 fs-6 fw-bold pt-3">Información enviada</span>
+            <span class="page-desc text-white opacity-50 fs-6 fw-bold pt-3"></span>
         </h1>
     </div>
     <div class="d-flex gap-4 gap-lg-13">
