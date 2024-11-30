@@ -35,8 +35,8 @@
                     <div class="card-body py-9">
                         <div class="d-flex flex-column flex-lg-row  gx-9_ h-100">
                             <div class="flex-column flex-lg-row-auto w-lg-300px w-xl-300px me-lg-15">
-                                <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-w-300px h-100">
-                                    <img src="{{ asset('storage') . $election->logo_image }}" class="w-100" style="max-height: 200px" alt="Logo Proceso Electoral">
+                                <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-w-300px__ h-100 mb-10">
+                                    <img src="{{ asset('storage') . $election->logo_image }}" class="w-100" style="max-height: 200px; max-width: 400px" alt="Logo Proceso Electoral">
                                 </div>
                             </div>
                             <div class="flex-lg-row-fluid mb-10 mb-lg-0">

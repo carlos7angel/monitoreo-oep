@@ -15,6 +15,7 @@ class PropagandaMaterial extends ParentModel
         'name',
         'description',
         'type',
+        'genre',
         'file_material',
         'link_material',
         'fid_political_registration',

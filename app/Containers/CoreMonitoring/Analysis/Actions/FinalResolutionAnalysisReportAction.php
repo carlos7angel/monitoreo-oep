@@ -61,7 +61,6 @@ class FinalResolutionAnalysisReportAction extends ParentAction
                 'status' => $new_status,
                 'previous_status' => $analysis_report->status,
                 'observations' => $data['analysis_observations'],
-                'final_status' => $data['analysis_final_status'],
                 'registered_by' => $user->id,
                 'registered_at' => Carbon::now()
             ];
@@ -75,6 +74,7 @@ class FinalResolutionAnalysisReportAction extends ParentAction
             $monitoring_item->save();
 
             $analysis_report->status = $new_status;
+            $analysis_report->final_status = $data['analysis_final_status'];
             $analysis_report->fid_last_analysis_report_activity = $activity->id;
             $analysis_report->save();
 

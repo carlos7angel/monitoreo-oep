@@ -319,15 +319,16 @@
                                     <input class="form-check-input" type="checkbox" name="election_mime_type_political_registration[]" value="image/jpeg" {{ in_array('image/jpeg', $mime_types) ? 'checked="checked"' : '' }} />
                                     <label class="form-check-label fw-semibold">(.jpeg, .jpg) image/jpeg</label>
                                 </div>
+                                <div class="form-check form-check-custom mb-3">
+                                    <input class="form-check-input" type="checkbox" name="election_mime_type_political_registration[]" value="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" {{ in_array('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', $mime_types) ? 'checked="checked"' : '' }}/>
+                                    <label class="form-check-label fw-semibold">(.xlsx) application/xlsx</label>
+                                </div>
 
                             </div>
                         </div>
 
                     </div>
                 </div>
-
-
-
 
 
             </div>

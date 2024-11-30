@@ -173,7 +173,7 @@
 
                         </div>
 
-                        <div class="m-0">
+                        <div class="m-0 pb-5">
                             <div class="fw-bold fs-3 text-primary mb-8">Datos de Contacto</div>
                             <div class="row g-5 mb-11">
                                 <div class="col-sm-6">
@@ -208,6 +208,47 @@
                                         </p>
                                     </div>
 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="m-0">
+                            <div class="fw-bold fs-3 text-primary mb-8">Documentos</div>
+                            <div class="row g-5">
+                                <div class="col-sm-12">
+                                    <div class="fw-semibold fs-7 text-gray-600 mb-1">Poder Notariado:</div>
+                                    <div class="">
+                                        @if($profile->fileLegalAttorney)
+                                            <input type="hidden" name="file_ro_legal_attorney" class="file_default"
+                                                   data-name="{{ $profile->fileLegalAttorney->origin_name }}" data-size="{{ $profile->fileLegalAttorney->size }}"
+                                                   data-mimetype="{{ $profile->fileLegalAttorney->mime_type }}" data-path="{{ $profile->fileLegalAttorney->url_file }}">
+                                            <input type="file" name="media_file_ro_legal_attorney" class="files kt_media_files">
+                                        @else
+                                            <div class="fs-6 text-gray-800 mb-8">-</div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-5">
+                                <div class="col-sm-12">
+                                    <div class="fw-semibold fs-7 text-gray-600 mb-1">Cédula de Identidad:</div>
+                                    @if($profile->fileRepDocument)
+                                        <input type="hidden" name="file_ro_rep_document" class="file_default"
+                                               data-name="{{ $profile->fileRepDocument->origin_name }}" data-size="{{ $profile->fileRepDocument->size }}"
+                                               data-mimetype="{{ $profile->fileRepDocument->mime_type }}" data-path="{{ $profile->fileRepDocument->url_file }}">
+                                        <input type="file" name="media_file_ro_rep_document" class="files kt_media_files">
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row g-5">
+                                <div class="col-sm-12">
+                                    <div class="fw-semibold fs-7 text-gray-600 mb-1">NIT:</div>
+                                    @if($profile->fileNit)
+                                        <input type="hidden" name="file_ro_nit" class="file_default"
+                                               data-name="{{ $profile->fileNit->origin_name }}" data-size="{{ $profile->fileNit->size }}"
+                                               data-mimetype="{{ $profile->fileNit->mime_type }}" data-path="{{ $profile->fileNit->url_file }}">
+                                    @endif
+                                    <input type="file" name="media_file_ro_nit" class="files kt_media_files">
                                 </div>
                             </div>
                         </div>
@@ -308,9 +349,18 @@
 @endsection
 
 @section('styles')
-
+    <link href="{{ asset('themes/common/plugins/custom/fileuploader/font/font-fileuploader.css') }}" media="all" rel="stylesheet">
+    <link href="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader.min.css') }}" media="all" rel="stylesheet">
+    <link href="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader-theme-dropin.css') }}" media="all" rel="stylesheet">
+    <style>
+        #kt_content .fileuploader {
+            padding: 16px;
+            padding-top: 0;
+        }
+    </style>
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('themes/admin/js/custom/media_profiles/detail.js') }}"></script>
+    <script src="{{ asset('themes/common/plugins/custom/fileuploader/jquery.fileuploader.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('themes/admin/js/custom/monitoring_report/detail-monitoring_files.js') }}"></script>
 @endsection

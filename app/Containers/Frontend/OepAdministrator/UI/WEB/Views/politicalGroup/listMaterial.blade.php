@@ -100,7 +100,7 @@
                                         <div class="ms-1 fw-semibold">
                                             @if($material->type == 'FILE')
                                                 <a href="{{ $material->fileMaterial->url_file }}" target="_blank" class="fs-6 text-hover-primary fw-bold">{{ $material->name }}</a>
-                                                <div class="text-gray-500">{{ $material->fileMaterial->mime_type }}</div>
+                                                <div class="text-gray-500">{{ $material->genre == 'DIFFUSION_PLAN' ? 'Plan de Difusión' : 'Propaganda' }} - {{ $material->fileMaterial->mime_type }}</div>
                                             @endif
                                             @if($material->type == 'LINK')
                                                 <a href="{{ $material->link_material }}" target="_blank" class="fs-6 text-hover-primary fw-bold">{{ $material->name }}</a>

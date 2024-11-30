@@ -26,24 +26,23 @@ class StorePropagandaMaterialAction extends ParentAction
      */
     public function run(Request $request): PropagandaMaterial
     {
-        $sanitizedData = $request->sanitizeInput([
-            // add your request data here
-        ]);
+        $sanitizedData = $request->sanitizeInput($request->all());
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('external');
 
         $registration = app(FindRegistrationByIdTask::class)->run($request->id);
 
         $data = [
-            'name' => $request->get('material_name'),
-            'description' => $request->get('material_description'),
-            'type' => $request->get('material_type'),
+            'name' => $sanitizedData['material_name'],
+            'description' => $sanitizedData['material_description'],
+            'type' => $sanitizedData['material_type'],
             'fid_political_registration' => $registration->id,
             'fid_election' => $registration->fid_election,
+            'genre' => $sanitizedData['material_genre'],
         ];
 
         if($request->get('material_type') === 'LINK') {
-            $data['link_material'] = $request->get('material_link');
+            $data['link_material'] = $sanitizedData['material_link'];
         }
 
         if($request->get('material_type') === 'FILE') {

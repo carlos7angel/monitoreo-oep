@@ -13,6 +13,7 @@ return new class() extends Migration {
             $table->string('name', 100);
             $table->text('description')->nullable();
             $table->enum('type', ['LINK', 'FILE'])->default('FILE');
+            $table->enum('genre', ['PROPAGANDA', 'DIFFUSION_PLAN'])->default('PROPAGANDA');
             $table->string('file_material', 50)->nullable();
             $table->string('link_material', 255)->nullable();
             $table->unsignedBigInteger('fid_political_registration')->nullable();

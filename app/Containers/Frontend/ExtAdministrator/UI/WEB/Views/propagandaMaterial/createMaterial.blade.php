@@ -46,7 +46,7 @@
                         <div class="d-flex flex-column py-5">
 
                             <div class="mb-6">
-                                <div class="fw-semibold text-gray-600 fs-7">Nombre Proceso Electoral:</div>
+                                <div class="fw-semibold text-gray-600 fs-7">Proceso Electoral:</div>
                                 <div class="fw-bold text-gray-800 fs-6">{{ $registration->election->name }}</div>
                             </div>
                             <div class="mb-6">
@@ -118,8 +118,18 @@
                                 <textarea class="form-control" rows="3" name="material_description"></textarea>
                             </div>
 
+                            <div class="fv-row mb-7">
+                                <label class="fs-6 fw-semibold form-label mt-3">
+                                    <span class="required">Tipo</span>
+                                </label>
+                                <select class="form-select" data-control="select2" data-hide-search="true" data-placeholder="Selecciona una opción" name="material_genre">
+                                    <option value="PROPAGANDA">Propaganda</option>
+                                    <option value="DIFFUSION_PLAN">Plan de Difusión</option>
+                                </select>
+                            </div>
+
                             <div class="mb-7 fv-row">
-                                <label class="required fw-semibold fs-6 mb-5">Tipo de subida</label>
+                                <label class="required fw-semibold fs-6 mb-5">Archivo fuente</label>
                                 <div class="d-flex __fv-row">
                                     <div class="form-check form-check-custom form-check-solid">
                                         <input class="form-check-input me-3" name="material_type" type="radio" value="LINK" id="kt_type_option_0" />
@@ -166,7 +176,7 @@
                             <div class="separator mb-6"></div>
 
                             <div class="d-flex justify-content-end">
-                                <button type="reset" id="kt_propaganda_material_cancel" class="btn btn-light me-3">Cancelar</button>
+                                <a href="{{ route('ext_admin_propaganda_material_by_election_list', ['id' => $registration->election->id]) }}" class="btn btn-light me-3">Cancelar</a>
                                 <button type="button" id="kt_propaganda_material_submit" class="btn btn-primary">
                                     <span class="indicator-label">Guardar</span>
                                     <span class="indicator-progress">Espere por favor...<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
