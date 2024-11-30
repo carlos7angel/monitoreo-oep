@@ -74,7 +74,6 @@ return new class() extends Migration {
             $table->integer('order')->nullable();
 
             $table->timestamps();
-            // $table->softDeletes();
         });
     }
 

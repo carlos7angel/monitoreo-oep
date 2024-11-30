@@ -3,8 +3,9 @@
 namespace App\Containers\CoreMonitoring\UserProfile\Tasks;
 
 use Apiato\Core\Exceptions\CoreInternalErrorException;
+use App\Containers\CoreMonitoring\FileManager\Tasks\GetExecutedDataTableTask;
+use App\Containers\CoreMonitoring\FileManager\Tasks\GetInitialDataTableTask;
 use App\Containers\CoreMonitoring\UserProfile\Data\Repositories\MediaProfileRepository;
-use App\Ship\Criterias\SkipTakeCriteria;
 use App\Ship\Parents\Requests\Request;
 use App\Ship\Parents\Tasks\Task as ParentTask;
 use Prettus\Repository\Exceptions\RepositoryException;
@@ -12,7 +13,7 @@ use Prettus\Repository\Exceptions\RepositoryException;
 class GetNewUserMediaProfilesJsonDataTableTask extends ParentTask
 {
     public function __construct(
-        protected MediaProfileRepository $repository,
+        protected MediaProfileRepository $mediaProfileRepository,
     ) {
     }
 
@@ -22,18 +23,10 @@ class GetNewUserMediaProfilesJsonDataTableTask extends ParentTask
      */
     public function run(Request $request): mixed
     {
-        $requestData = $request->all();
-        $draw = $requestData['draw'];
-        $start = $requestData['start'];
-        $length = $requestData['length'];
-        $indexSort = $requestData['order'][0]['column'];
-        $sortColumn = $requestData['columns'][$indexSort]['name'];
-        $sortColumnDir = $requestData['order'][0]['dir'];
-        $searchValue = $requestData['search']['value'];
-        $pageSize = $length != null ? intval($length) : 0;
-        $skip = $start != null ? intval($start) : 0;
+        [$requestData, $draw, $sortColumn, $sortColumnDir, $pageSize, $skip, $searchValue] =
+            app(GetInitialDataTableTask::class)->run($request);
 
-        $result = $this->repository->scopeQuery(function ($query) use ($searchValue) {
+        $result = $this->mediaProfileRepository->scopeQuery(function ($query) use ($searchValue) {
             if (! empty($searchValue)) {
                 $query = $query
                             ->where('name', 'like', '%'.$searchValue.'%')
@@ -46,21 +39,14 @@ class GetNewUserMediaProfilesJsonDataTableTask extends ParentTask
             return $query->distinct()->select(['media_profiles.*']);
         });
 
-        $recordsTotal =  (clone $result)->count();
+        [$recordsTotal, $result] = app(GetExecutedDataTableTask::class)
+            ->run($result, $sortColumn, $sortColumnDir, $skip, $pageSize);
 
-        $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
-
-        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
-            $result->orderBy($sortColumn, $sortColumnDir);
-        }
-
-        $response = [
+        return [
             'draw' => $draw,
             'recordsFiltered' => $recordsTotal,
             'recordsTotal' => $recordsTotal,
             'data' => $result->all()
         ];
-
-        return $response;
     }
 }

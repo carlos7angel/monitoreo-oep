@@ -2,13 +2,12 @@
 
 namespace App\Containers\CoreMonitoring\Registration\Tasks;
 
-use Apiato\Core\Exceptions\CoreInternalErrorException;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
+use App\Containers\CoreMonitoring\FileManager\Tasks\GetExecutedDataTableTask;
+use App\Containers\CoreMonitoring\FileManager\Tasks\GetInitialDataTableTask;
 use App\Containers\CoreMonitoring\Registration\Data\Repositories\RegistrationRepository;
-use App\Ship\Criterias\SkipTakeCriteria;
 use App\Ship\Parents\Requests\Request;
 use App\Ship\Parents\Tasks\Task as ParentTask;
-use Prettus\Repository\Exceptions\RepositoryException;
 
 class GetRegistrationElectionsJsonDTTask extends ParentTask
 {
@@ -21,22 +20,10 @@ class GetRegistrationElectionsJsonDTTask extends ParentTask
     {
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('external');
 
-        $requestData = $request->all();
-        $draw = $requestData['draw'];
-        $start = $requestData['start'];
-        $length = $requestData['length'];
-        $sortColumn = $sortColumnDir = null;
-        if (isset($requestData['order'])) {
-            $indexSort = $requestData['order'][0]['column'];
-            $sortColumn = $requestData['columns'][$indexSort]['name'];
-            $sortColumnDir = $requestData['order'][0]['dir'];
-        }
-        $searchValue = $requestData['search']['value'];
-        $pageSize = $length != null ? intval($length) : 0;
-        $skip = $start != null ? intval($start) : 0;
+        [$requestData, $draw, $sortColumn, $sortColumnDir, $pageSize, $skip, $searchValue] =
+            app(GetInitialDataTableTask::class)->run($request);
 
         $political_group_profile_id = $user->profile_data->id;
-
 
         $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $political_group_profile_id, $user) {
 
@@ -51,13 +38,8 @@ class GetRegistrationElectionsJsonDTTask extends ParentTask
             return $query->distinct()->select(['elections.*', 'political_registrations.id as registration_id']);
         });
 
-        $recordsTotal =  (clone $result)->count();
-
-        $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
-
-        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
-            $result->orderBy($sortColumn, $sortColumnDir);
-        }
+        [$recordsTotal, $result] = app(GetExecutedDataTableTask::class)
+            ->run($result, $sortColumn, $sortColumnDir, $skip, $pageSize);
 
         $records = $result->all();
 
@@ -65,13 +47,11 @@ class GetRegistrationElectionsJsonDTTask extends ParentTask
             $item->material_count = $item->materials->count();
         }
 
-        $response = [
+        return [
             'draw' => $draw,
             'recordsFiltered' => $recordsTotal,
             'recordsTotal' => $recordsTotal,
             'data' => $records
         ];
-
-        return $response;
     }
 }

@@ -14,7 +14,6 @@ return new class() extends Migration {
             $table->string('name', 100);
             $table->string('business_name', 100);
             $table->text('description')->nullable();
-            // $table->string('type', 150);
             $table->string('email', 100);
             $table->string('logo', 150)->nullable();
             $table->dateTime('registration_date');

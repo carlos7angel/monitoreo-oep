@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class UpdateFileManagerTask extends ParentTask
 {
     public function __construct(
-        protected readonly FileManagerRepository $repository,
+        protected FileRepository $repository,
     ) {
     }
 

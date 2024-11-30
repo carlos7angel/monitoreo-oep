@@ -30,7 +30,6 @@ return new class() extends Migration {
             $table->dateTime('submitted_at')->nullable();
             $table->dateTime('accredited_at')->nullable();
             $table->timestamps();
-            // $table->softDeletes();
         });
     }
 

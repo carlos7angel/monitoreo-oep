@@ -24,24 +24,5 @@ class GetMonitoringByScopeJsonAction extends ParentAction
     public function run(Request $request): mixed
     {
         return $this->task->run($request->id);
-
-        //        return [
-        //            (object) [
-        //                'country' => 'Canada',
-        //                'visits' =>  99,
-        //                "icon" => "https://www.amcharts.com/wp-content/uploads/flags/canada.svg",
-        //            ],
-        //            (object) [
-        //                'country' => 'Norway',
-        //                'visits' =>  67,
-        //                "icon" => "https://www.amcharts.com/wp-content/uploads/flags/norway.svg",
-        //            ],
-        //            (object) [
-        //                'country' => 'Russia',
-        //                'visits' =>  152,
-        //                "icon" => "https://www.amcharts.com/wp-content/uploads/flags/russia.svg",
-        //            ]
-        //        ];
-
     }
 }

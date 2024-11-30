@@ -43,13 +43,4 @@ class MediaType extends ParentModel
      */
     protected string $resourceKey = 'mediaTypes';
 
-    /**
-     * Eloquent Relationships
-     */
-
-    //    public function mediaProfile()
-    //    {
-    //        return $this->hasOne(MediaProfile::class, 'unique_code', 'file_rep_document');
-    //    }
-
 }

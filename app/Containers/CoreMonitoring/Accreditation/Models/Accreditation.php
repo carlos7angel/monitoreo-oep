@@ -87,11 +87,6 @@ class Accreditation extends ParentModel
         return $this->hasMany(AccreditationRate::class, 'fid_accreditation');
     }
 
-    //    public function filePricingList()
-    //    {
-    //        return $this->hasOne(File::class, 'unique_code', 'file_pricing_list');
-    //    }
-
     /**
      * Mutators
      */

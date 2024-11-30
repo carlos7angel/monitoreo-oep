@@ -96,7 +96,7 @@
                 </div>
             </div>
             <div class="col-xl-3">
-                <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-xl-100" style="background-color: #F1416C;background-image:url('assets/media/svg/shapes/wave-bg-red.svg')">
+                <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-xl-100" style="background-color: #F1416C;">
                     <div class="card-header pt-5 mb-3">
                         <div class="d-flex flex-center rounded-circle h-60px w-60px" style="border: 1px dashed rgba(255, 255, 255, 0.4);background-color: #F1416C">
                             <i class="ki-duotone ki-user text-white fs-2qx lh-0">

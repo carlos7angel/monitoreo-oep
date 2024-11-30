@@ -5,7 +5,8 @@ namespace App\Containers\CoreMonitoring\Analysis\Tasks;
 use Apiato\Core\Exceptions\CoreInternalErrorException;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
 use App\Containers\CoreMonitoring\Analysis\Data\Repositories\AnalysisReportRepository;
-use App\Ship\Criterias\SkipTakeCriteria;
+use App\Containers\CoreMonitoring\FileManager\Tasks\GetExecutedDataTableTask;
+use App\Containers\CoreMonitoring\FileManager\Tasks\GetInitialDataTableTask;
 use App\Ship\Parents\Requests\Request;
 use App\Ship\Parents\Tasks\Task as ParentTask;
 use Prettus\Repository\Exceptions\RepositoryException;
@@ -23,35 +24,37 @@ class GetAnalysisReportsJsonDTTask extends ParentTask
      */
     public function run(Request $request): mixed
     {
-        $requestData = $request->all();
-        $draw = $requestData['draw'];
-        $start = $requestData['start'];
-        $length = $requestData['length'];
-        $sortColumn = $sortColumnDir = null;
-        if (isset($requestData['order'])) {
-            $indexSort = $requestData['order'][0]['column'];
-            $sortColumn = $requestData['columns'][$indexSort]['name'];
-            $sortColumnDir = $requestData['order'][0]['dir'];
-        }
-        $searchValue = $requestData['search']['value'];
-        $pageSize = $length != null ? intval($length) : 0;
-        $skip = $start != null ? intval($start) : 0;
+        [$requestData, $draw, $sortColumn, $sortColumnDir, $pageSize, $skip, $searchValue] =
+            app(GetInitialDataTableTask::class)->run($request);
 
-        $searchFieldCode = $requestData['columns'][1]['search']['value'];
         $searchFieldElection = $requestData['columns'][2]['search']['value'];
         $searchFieldStatus = $requestData['columns'][5]['search']['value'];
 
+        $searchFieldCode = $requestData['columns'][1]['search']['value'];
+
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
-        $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $searchFieldCode, $searchFieldElection, $searchFieldStatus, $user) {
+        $result = $this->repository->scopeQuery(
+            function ($query) use (
+                $searchValue, $searchFieldCode, $searchFieldElection, $searchFieldStatus, $user
+            ) {
 
-            $query = $query->leftJoin('elections', 'analysis_reports.fid_election', 'elections.id');
+            $query = $query
+                ->leftJoin('elections', 'analysis_reports.fid_election', 'elections.id');
 
-            $query = $query->leftJoin('monitoring_reports', 'analysis_reports.fid_monitoring_report', 'monitoring_reports.id');
-            $query = $query->leftJoin('monitoring_items', 'monitoring_reports.fid_monitoring_item', 'monitoring_items.id');
+            $query = $query
+                ->leftJoin('monitoring_reports', 'analysis_reports.fid_monitoring_report', 'monitoring_reports.id');
+            $query = $query
+                ->leftJoin('monitoring_items', 'monitoring_reports.fid_monitoring_item', 'monitoring_items.id');
 
-            $query = $query->leftJoin('analysis_report_status_activity', 'analysis_reports.fid_last_analysis_report_activity', 'analysis_report_status_activity.id');
-            $query = $query->leftJoin('users', 'analysis_report_status_activity.registered_by', 'users.id');
+            $query = $query
+                ->leftJoin(
+                    'analysis_report_status_activity',
+                    'analysis_reports.fid_last_analysis_report_activity',
+                    'analysis_report_status_activity.id'
+                );
+            $query = $query
+                ->leftJoin('users', 'analysis_report_status_activity.registered_by', 'users.id');
 
 
             if (! empty($searchValue)) {
@@ -71,23 +74,6 @@ class GetAnalysisReportsJsonDTTask extends ParentTask
                 $query = $query->where('analysis_reports.status', '=', $searchFieldStatus);
             }
 
-            // if ($user->roles->first()->name === 'analyst') {
-            //     $query = $query->where('media_profiles.coverage', '=', $user->department);
-            // }
-
-            //            if ($user) {
-            //                if ($user->type === 'TSE' || empty($user->type)) {
-            //                    $query = $query->where('analysis_reports.scope_type', '=', 'TSE')
-            //                                    ->where('analysis_reports.scope_department', '=', 'Nacional');
-            //                }
-            //                if ($user->type === 'TED') {
-            //                    $query = $query->where('analysis_reports.scope_type', '=', 'TED')
-            //                                    ->where('analysis_reports.scope_department', '=', $user->department);
-            //                }
-            //            }
-
-            // $query = $query->whereIn('analysis_reports.status', []);
-
             return $query->distinct()->select([
                 'analysis_reports.*',
                 'elections.name as election_name',
@@ -99,21 +85,14 @@ class GetAnalysisReportsJsonDTTask extends ParentTask
             ]);
         });
 
-        $recordsTotal =  (clone $result)->count();
+        [$recordsTotal, $result] = app(GetExecutedDataTableTask::class)
+            ->run($result, $sortColumn, $sortColumnDir, $skip, $pageSize);
 
-        $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
-
-        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
-            $result->orderBy($sortColumn, $sortColumnDir);
-        }
-
-        $response = [
+        return [
             'draw' => $draw,
             'recordsFiltered' => $recordsTotal,
             'recordsTotal' => $recordsTotal,
             'data' => $result->all()
         ];
-
-        return $response;
     }
 }

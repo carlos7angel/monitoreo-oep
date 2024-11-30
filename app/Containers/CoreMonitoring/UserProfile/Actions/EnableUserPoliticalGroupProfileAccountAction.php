@@ -49,7 +49,6 @@ class EnableUserPoliticalGroupProfileAccountAction extends ParentAction
             "sha512",
             Carbon::now()->timestamp . $pp->email . $pp->name . Str::random(24)
         ), 0, 10));
-        // $password = 'admin';
 
         $data = [
             'email' => $pp->email,

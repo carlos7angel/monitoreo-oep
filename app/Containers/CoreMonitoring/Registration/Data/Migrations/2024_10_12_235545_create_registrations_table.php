@@ -22,7 +22,6 @@ return new class() extends Migration {
             $table->unsignedBigInteger('registered_by')->nullable();
             $table->foreign('registered_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
-            // $table->softDeletes();
 
             $table->index(['fid_election', 'fid_user', 'fid_political_group_profile'], 'registrations_fid_election_fid_user_fid_political_group_index');
         });

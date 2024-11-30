@@ -4,6 +4,7 @@ namespace App\Containers\Frontend\ExtAdministrator\UI\WEB\Controllers;
 
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
 use App\Containers\Frontend\OepAdministrator\UI\WEB\Requests\IndexRequest;
+use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Parents\Controllers\WebController;
 
 class IndexController extends WebController
@@ -18,8 +19,6 @@ class IndexController extends WebController
             return redirect()->route('ext_admin_registration_elections_list');
         }
 
-        $page_title = "Inicio";
-        echo $page_title;
-        // return view('frontend@extAdministrator::index', [], compact('page_title'));
+        throw new NotFoundException();
     }
 }

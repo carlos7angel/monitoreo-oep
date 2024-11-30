@@ -4,8 +4,9 @@ namespace App\Containers\CoreMonitoring\Monitoring\Tasks;
 
 use Apiato\Core\Exceptions\CoreInternalErrorException;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
+use App\Containers\CoreMonitoring\FileManager\Tasks\GetExecutedDataTableTask;
+use App\Containers\CoreMonitoring\FileManager\Tasks\GetInitialDataTableTask;
 use App\Containers\CoreMonitoring\Monitoring\Data\Repositories\MonitoringItemRepository;
-use App\Ship\Criterias\SkipTakeCriteria;
 use App\Ship\Parents\Requests\Request;
 use App\Ship\Parents\Tasks\Task as ParentTask;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,7 @@ use Prettus\Repository\Exceptions\RepositoryException;
 class GetMonitoringByElectionJsonDataTableTask extends ParentTask
 {
     public function __construct(
-        protected MonitoringItemRepository $repository,
+        protected MonitoringItemRepository $monitoringItemRepository,
     ) {
     }
 
@@ -24,27 +25,17 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
      */
     public function run(Request $request): mixed
     {
-        $requestData = $request->all();
-        $draw = $requestData['draw'];
-        $start = $requestData['start'];
-        $length = $requestData['length'];
-        $sortColumn = $sortColumnDir = null;
-        if (isset($requestData['order'])) {
-            $indexSort = $requestData['order'][0]['column'];
-            $sortColumn = $requestData['columns'][$indexSort]['name'];
-            $sortColumnDir = $requestData['order'][0]['dir'];
-        }
-        $searchValue = $requestData['search']['value'];
-        $pageSize = $length != null ? intval($length) : 0;
-        $skip = $start != null ? intval($start) : 0;
+        [$requestData, $draw, $sortColumn, $sortColumnDir, $pageSize, $skip, $searchValue] =
+            app(GetInitialDataTableTask::class)->run($request);
 
         $searchFieldMediaType = $requestData['columns'][3]['search']['value'];
-
         $election_id = $request->id;
-
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
-        $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $election_id, $searchFieldMediaType, $user) {
+        $result = $this->monitoringItemRepository->scopeQuery(
+            function ($query) use (
+                $searchValue, $election_id, $searchFieldMediaType, $user
+            ) {
 
             $query = $query->leftJoin('media_profiles', 'monitoring_items.fid_media_profile', 'media_profiles.id');
             $query = $query->where('fid_election', $election_id);
@@ -57,10 +48,6 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
                 $query = $query->where('monitoring_items.media_type', $searchFieldMediaType);
             }
 
-            // if ($user->roles->first()->name === 'media') {
-            //     $query = $query->where('media_profiles.coverage', '=', $user->department);
-            // }
-
             if ($user && false) { // Allow all records
                 if ($user->type === 'TSE' || empty($user->type)) {
                     $query = $query->where('monitoring_items.scope_type', '=', 'TSE')
@@ -72,9 +59,7 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
                 }
             }
 
-            // $query = $query->whereIn('status', ['active', 'finished']);
             return $query->distinct()->select([
-                //'monitoring_items.*',
                 'monitoring_items.id',
                 'monitoring_items.registered_at',
                 'monitoring_items.registered_by',
@@ -85,8 +70,10 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
                 'monitoring_items.fid_election',
                 'monitoring_items.status',
                 'monitoring_items.created_at',
-                DB::raw('CASE WHEN monitoring_items.registered_media = TRUE THEN media_profiles.name WHEN monitoring_items.registered_media = FALSE THEN monitoring_items.other_media ELSE NULL END AS media_name'),
-                // 'media_profiles.name as media_name',
+                DB::raw('CASE 
+                WHEN monitoring_items.registered_media = TRUE THEN media_profiles.name 
+                WHEN monitoring_items.registered_media = FALSE THEN monitoring_items.other_media 
+                ELSE NULL END AS media_name'),
                 'media_profiles.business_name as media_business_name',
                 'media_profiles.logo as media_logo',
                 'media_profiles.media_type_television',
@@ -96,13 +83,8 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
             ]);
         });
 
-        $recordsTotal =  (clone $result)->count();
-
-        $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
-
-        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
-            $result->orderBy($sortColumn, $sortColumnDir);
-        }
+        [$recordsTotal, $result] = app(GetExecutedDataTableTask::class)
+            ->run($result, $sortColumn, $sortColumnDir, $skip, $pageSize);
 
         $records = $result->all();
 
@@ -110,13 +92,11 @@ class GetMonitoringByElectionJsonDataTableTask extends ParentTask
             $item->can_edit = $item->registered_by === $user->id;
         }
 
-        $response = [
+        return [
             'draw' => $draw,
             'recordsFiltered' => $recordsTotal,
             'recordsTotal' => $recordsTotal,
             'data' => $records
         ];
-
-        return $response;
     }
 }

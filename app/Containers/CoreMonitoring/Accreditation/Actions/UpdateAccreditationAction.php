@@ -38,10 +38,6 @@ class UpdateAccreditationAction extends ParentAction
      */
     public function run(Request $request): Accreditation
     {
-        $sanitizedData = $request->sanitizeInput([
-            // add your request data here
-        ]);
-
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('external');
 
         $accreditation = app(FindAccreditationByIdTask::class)->run($request->id);

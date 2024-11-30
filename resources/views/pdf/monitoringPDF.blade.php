@@ -283,6 +283,10 @@
     <div class="bloque" style="margin: 1rem 0 0 0;">
         <div class="titulo">DATOS DEL REGISTRO DE MONITOREO</div>
         <table class="detalle_conv"  aria-describedby="table">
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
             @php
                 $input = json_decode($monitoring->data, true);
             @endphp

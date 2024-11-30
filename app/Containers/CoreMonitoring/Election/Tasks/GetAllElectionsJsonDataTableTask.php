@@ -4,7 +4,8 @@ namespace App\Containers\CoreMonitoring\Election\Tasks;
 
 use Apiato\Core\Exceptions\CoreInternalErrorException;
 use App\Containers\CoreMonitoring\Election\Data\Repositories\ElectionRepository;
-use App\Ship\Criterias\SkipTakeCriteria;
+use App\Containers\CoreMonitoring\FileManager\Tasks\GetExecutedDataTableTask;
+use App\Containers\CoreMonitoring\FileManager\Tasks\GetInitialDataTableTask;
 use App\Ship\Parents\Requests\Request;
 use App\Ship\Parents\Tasks\Task as ParentTask;
 use Carbon\Carbon;
@@ -13,7 +14,7 @@ use Prettus\Repository\Exceptions\RepositoryException;
 class GetAllElectionsJsonDataTableTask extends ParentTask
 {
     public function __construct(
-        protected ElectionRepository $repository,
+        protected ElectionRepository $electionRepository,
     ) {
     }
 
@@ -23,24 +24,18 @@ class GetAllElectionsJsonDataTableTask extends ParentTask
      */
     public function run(Request $request): mixed
     {
-        $requestData = $request->all();
-        $draw = $requestData['draw'];
-        $start = $requestData['start'];
-        $length = $requestData['length'];
-        $indexSort = $requestData['order'][0]['column'];
-        $sortColumn = $requestData['columns'][$indexSort]['name'];
-        $sortColumnDir = $requestData['order'][0]['dir'];
-        $searchValue = $requestData['search']['value'];
-        $pageSize = $length != null ? intval($length) : 0;
-        $skip = $start != null ? intval($start) : 0;
+        [$requestData, $draw, $sortColumn, $sortColumnDir, $pageSize, $skip, $searchValue] =
+            app(GetInitialDataTableTask::class)->run($request);
 
+        $searchFieldCode = $requestData['columns'][1]['search']['value'];
         $searchFieldName = $requestData['columns'][2]['search']['value'];
         $searchFieldType = $requestData['columns'][3]['search']['value'];
-        $searchFieldCode = $requestData['columns'][1]['search']['value'];
-        $searchFieldStatus = $requestData['columns'][5]['search']['value'];
         $searchFieldDate = $requestData['columns'][4]['search']['value'];
+        $searchFieldStatus = $requestData['columns'][5]['search']['value'];
 
-        $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $searchFieldName, $searchFieldType, $searchFieldCode, $searchFieldStatus, $searchFieldDate) {
+        $result = $this->electionRepository->scopeQuery(function ($query) use (
+            $searchValue, $searchFieldName, $searchFieldType, $searchFieldCode, $searchFieldStatus, $searchFieldDate
+        ) {
 
             if (! empty($searchFieldName)) {
                 $query = $query->where('name', 'like', '%'.$searchFieldName.'%');
@@ -72,21 +67,14 @@ class GetAllElectionsJsonDataTableTask extends ParentTask
             return $query->distinct()->select(['elections.*']);
         });
 
-        $recordsTotal =  (clone $result)->count();
+        [$recordsTotal, $result] = app(GetExecutedDataTableTask::class)
+            ->run($result, $sortColumn, $sortColumnDir, $skip, $pageSize);
 
-        $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
-
-        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
-            $result->orderBy($sortColumn, $sortColumnDir);
-        }
-
-        $response = [
+        return [
             'draw' => $draw,
             'recordsFiltered' => $recordsTotal,
             'recordsTotal' => $recordsTotal,
             'data' => $result->all()
         ];
-
-        return $response;
     }
 }

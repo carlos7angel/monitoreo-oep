@@ -5,12 +5,11 @@ namespace App\Containers\CoreMonitoring\Monitoring\Tasks;
 use Apiato\Core\Exceptions\CoreInternalErrorException;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
 use App\Containers\CoreMonitoring\Analysis\Data\Repositories\AnalysisReportRepository;
-use App\Containers\CoreMonitoring\Analysis\Models\AnalysisReport;
+use App\Containers\CoreMonitoring\FileManager\Tasks\GetExecutedDataTableTask;
+use App\Containers\CoreMonitoring\FileManager\Tasks\GetInitialDataTableTask;
 use App\Containers\CoreMonitoring\Monitoring\Data\Repositories\MonitoringReportRepository;
-use App\Ship\Criterias\SkipTakeCriteria;
 use App\Ship\Parents\Requests\Request;
 use App\Ship\Parents\Tasks\Task as ParentTask;
-use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Exceptions\RepositoryException;
 
 class GetMonitoringReportsJsonDTTask extends ParentTask
@@ -27,23 +26,12 @@ class GetMonitoringReportsJsonDTTask extends ParentTask
      */
     public function run(Request $request): mixed
     {
-        $requestData = $request->all();
-        $draw = $requestData['draw'];
-        $start = $requestData['start'];
-        $length = $requestData['length'];
-        $sortColumn = $sortColumnDir = null;
-        if (isset($requestData['order'])) {
-            $indexSort = $requestData['order'][0]['column'];
-            $sortColumn = $requestData['columns'][$indexSort]['name'];
-            $sortColumnDir = $requestData['order'][0]['dir'];
-        }
-        $searchValue = $requestData['search']['value'];
-        $pageSize = $length != null ? intval($length) : 0;
-        $skip = $start != null ? intval($start) : 0;
+        [$requestData, $draw, $sortColumn, $sortColumnDir, $pageSize, $skip, $searchValue] =
+            app(GetInitialDataTableTask::class)->run($request);
 
-        $searchFieldCode = $requestData['columns'][1]['search']['value'];
-        $searchFieldElection = $requestData['columns'][2]['search']['value'];
         $searchFieldStatus = $requestData['columns'][4]['search']['value'];
+        $searchFieldElection = $requestData['columns'][2]['search']['value'];
+        $searchFieldCode = $requestData['columns'][1]['search']['value'];
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
@@ -57,13 +45,16 @@ class GetMonitoringReportsJsonDTTask extends ParentTask
             $scope_department = $user->department;
         }
 
-
         $exclude = $this->analysisRepository->findWhere([
             ['scope_type','=', $scope_type],
             ['scope_department','=', $scope_department]
         ])->pluck('fid_monitoring_report')->toArray();
 
-        $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $searchFieldCode, $searchFieldElection, $searchFieldStatus, $user, $scope_type, $scope_department, $exclude) {
+        $result = $this->repository->scopeQuery(
+            function ($query) use (
+                $searchValue, $searchFieldCode, $searchFieldElection, $searchFieldStatus,
+                $user, $scope_type, $scope_department, $exclude
+            ) {
 
             $query = $query->join('elections', 'monitoring_reports.fid_election', 'elections.id');
             $query = $query->join('users', 'monitoring_reports.created_by', 'users.id');
@@ -85,10 +76,6 @@ class GetMonitoringReportsJsonDTTask extends ParentTask
                 $query = $query->where('monitoring_reports.status', '=', $searchFieldStatus);
             }
 
-            // if ($user->roles->first()->name === 'media') {
-            //     $query = $query->where('media_profiles.coverage', '=', $user->department);
-            // }
-
             if (!empty($scope_type) && !empty($scope_department)) {
                 $query = $query->where('monitoring_reports.scope_type', '=', $scope_type)
                                 ->where('monitoring_reports.scope_department', '=', $scope_department);
@@ -104,25 +91,17 @@ class GetMonitoringReportsJsonDTTask extends ParentTask
                 'elections.code as election_code',
                 'users.name as user_name',
                 'monitoring_items.other_media as media_name'
-                // DB::raw('(select count(*) as total from monitoring_item_report where fid_monitoring_report = monitoring_reports.id) as records')
             ]);
         });
 
-        $recordsTotal =  (clone $result)->count();
+        [$recordsTotal, $result] = app(GetExecutedDataTableTask::class)
+            ->run($result, $sortColumn, $sortColumnDir, $skip, $pageSize);
 
-        $result = $result->pushCriteria(new SkipTakeCriteria($skip, $pageSize));
-
-        if ($sortColumn != null && $sortColumn != "" && $sortColumnDir != null && $sortColumnDir != "") {
-            $result->orderBy($sortColumn, $sortColumnDir);
-        }
-
-        $response = [
+        return [
             'draw' => $draw,
             'recordsFiltered' => $recordsTotal,
             'recordsTotal' => $recordsTotal,
             'data' => $result->all()
         ];
-
-        return $response;
     }
 }

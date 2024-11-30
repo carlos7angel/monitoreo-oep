@@ -51,7 +51,6 @@ class EnableUserMediaProfileAccountAction extends ParentAction
             "sha512",
             Carbon::now()->timestamp . $media_profile->email . $media_profile->name . Str::random(24)
         ), 0, 10));
-        // $password = 'admin';
 
         $data = [
             'email' => $media_profile->email,
