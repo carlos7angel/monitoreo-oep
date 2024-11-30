@@ -34,10 +34,6 @@ class SubmitAccreditationAction extends ParentAction
      */
     public function run(Request $request): Accreditation
     {
-        $sanitizedData = $request->sanitizeInput([
-            // add your request data here
-        ]);
-
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('external');
 
         $accreditation = app(FindAccreditationByIdTask::class)->run($request->id);
@@ -63,15 +59,22 @@ class SubmitAccreditationAction extends ParentAction
                 'submitted_at' => Carbon::now()
             ];
 
-            $data['status_activity'] = app(UpdateStatusActivityAccreditationTask::class)->run($accreditation->status_activity, 'new', '', $user->id);
+            $data['status_activity'] = app(UpdateStatusActivityAccreditationTask::class)->run(
+                $accreditation->status_activity,
+                'new',
+                '',
+                $user->id
+            );
 
             $accreditation = $this->updateAccreditationTask->run($data, $accreditation->id);
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::SUBMITTED_ACCREDITATION, $request->server(), $accreditation));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::SUBMITTED_ACCREDITATION, $request->server(), $accreditation));
 
             // Send Notification
-            App::make(Dispatcher::class)->dispatch(new SubmitAccreditationNotificationEvent($accreditation, $user));
+            App::make(Dispatcher::class)->dispatch(
+                new SubmitAccreditationNotificationEvent($accreditation, $user));
 
             return $accreditation;
         });

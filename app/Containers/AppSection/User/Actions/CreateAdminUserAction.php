@@ -68,7 +68,9 @@ class CreateAdminUserAction extends ParentAction
             $user->save();
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::CREATED_USER, $request->server(), $user));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::CREATED_USER, $request->server(), $user)
+            );
 
             return $user;
         });

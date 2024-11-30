@@ -72,10 +72,14 @@ class EnableUserPoliticalGroupProfileAccountAction extends ParentAction
         ], $pp->id);
 
         //Activity Log
-        App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::ENABLED_USER_POLITICAL_ACCOUNT, $request->server(), $user));
+        App::make(Dispatcher::class)->dispatch(
+            new AddActivityLogEvent(LogConstants::ENABLED_USER_POLITICAL_ACCOUNT, $request->server(), $user)
+        );
 
         //Send Notification
-        App::make(Dispatcher::class)->dispatch(new SendMediaAccountEnabledEvent($user, $pp, $password));
+        App::make(Dispatcher::class)->dispatch(
+            new SendMediaAccountEnabledEvent($user, $pp, $password)
+        );
 
         return $pp;
     }

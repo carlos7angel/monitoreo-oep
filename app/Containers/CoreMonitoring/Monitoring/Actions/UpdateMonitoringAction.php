@@ -56,12 +56,15 @@ class UpdateMonitoringAction extends ParentAction
         }
 
         return DB::transaction(function () use ($monitoring, $form, $user, $request) {
-            $data_form = $this->storeDataFieldsFormTask->run($form, $request, $monitoring, json_decode($monitoring->data, true));
+            $data_form = $this->storeDataFieldsFormTask->run(
+                $form, $request, $monitoring, json_decode($monitoring->data, true));
             $monitoring->data = json_encode($data_form);
             $monitoring->save();
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::UPDATED_MONITORING, $request->server(), $monitoring));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::UPDATED_MONITORING, $request->server(), $monitoring)
+            );
 
             return $monitoring;
         });

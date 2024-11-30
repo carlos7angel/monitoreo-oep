@@ -111,7 +111,9 @@ class UpdateElectionAction extends ParentAction
             }
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::UPDATED_ELECTION, $request->server(), $election));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::UPDATED_ELECTION, $request->server(), $election)
+            );
 
             return $this->updateElectionTask->run($data, $election->id);
         });

@@ -103,7 +103,9 @@ class StoreMonitoringAction extends ParentAction
             $monitoring->save();
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::CREATED_MONITORING, $request->server(), $monitoring));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::CREATED_MONITORING, $request->server(), $monitoring)
+            );
 
             return $monitoring;
         });

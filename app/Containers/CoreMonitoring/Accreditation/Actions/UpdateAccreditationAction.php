@@ -61,25 +61,41 @@ class UpdateAccreditationAction extends ParentAction
             $data = [];
 
             if ($request->file('media_file_request_letter')) {
-                $file_request_letter = $this->createFileTask->run($request->file('media_file_request_letter'), 'accreditation', $accreditation->id, $user);
+                $file_request_letter = $this->createFileTask->run(
+                    $request->file('media_file_request_letter'),
+                    'accreditation',
+                    $accreditation->id,
+                    $user
+                );
                 $data['file_request_letter'] = $file_request_letter->unique_code;
             }
 
             if ($request->file('media_file_affidavit')) {
-                $file_affidavit = $this->createFileTask->run($request->file('media_file_affidavit'), 'accreditation', $accreditation->id, $user);
+                $file_affidavit = $this->createFileTask->run(
+                    $request->file('media_file_affidavit'),
+                    'accreditation',
+                    $accreditation->id,
+                    $user
+                );
                 $data['file_affidavit'] = $file_affidavit->unique_code;
             }
 
             $data['data'] = app(GenerateAccreditationDataTask::class)->run($user->profile_data);
 
-            $data['status_activity'] = app(UpdateStatusActivityAccreditationTask::class)->run($accreditation->status_activity, $accreditation->status, '', $user->id);
+            $data['status_activity'] = app(UpdateStatusActivityAccreditationTask::class)->run(
+                $accreditation->status_activity,
+                $accreditation->status,
+                '',
+                $user->id
+            );
 
             $this->updateAccreditationRatesTask->run($request, $user, $accreditation);
 
             $accreditation = $this->updateAccreditationTask->run($data, $accreditation->id);
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::UPDATED_ACCREDITATION, $request->server(), $accreditation));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::UPDATED_ACCREDITATION, $request->server(), $accreditation));
 
             return $accreditation;
 

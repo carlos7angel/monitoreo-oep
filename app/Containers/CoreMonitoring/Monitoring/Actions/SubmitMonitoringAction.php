@@ -7,7 +7,6 @@ use App\Containers\AppSection\ActivityLog\Constants\LogConstants;
 use App\Containers\AppSection\ActivityLog\Events\AddActivityLogEvent;
 use App\Containers\AppSection\Authentication\Tasks\GetAuthenticatedUserByGuardTask;
 use App\Containers\CoreMonitoring\Election\Tasks\FindElectionByIdTask;
-use App\Containers\CoreMonitoring\Monitoring\Events\CreateSubmitAnalysisReportNotificationEvent;
 use App\Containers\CoreMonitoring\Monitoring\Events\SubmitMonitoringNotificationEvent;
 use App\Containers\CoreMonitoring\Monitoring\Models\MonitoringReport;
 use App\Containers\CoreMonitoring\Monitoring\Tasks\CreateMonitoringReportTask;
@@ -48,7 +47,8 @@ class SubmitMonitoringAction extends ParentAction
         }
 
         $data = [
-            'code' => substr(hash("sha512", Carbon::now()->timestamp . $user->id .  $election->id . Str::random(24)), 0, 30),
+            'code' => substr(hash("sha512", Carbon::now()->timestamp . $user->id .  $election->id .
+                Str::random(24)), 0, 30),
             'fid_election' => $election->id,
             'status' => 'SUBMITTED',
             'submitted_at' => Carbon::now(),
@@ -66,17 +66,26 @@ class SubmitMonitoringAction extends ParentAction
         return DB::transaction(function () use ($data, $monitoring_item, $request, $user) {
 
             $monitoring_report = $this->createMonitoringReportTask->run($data);
-            $monitoring_report->code = 'R-' . strtoupper(substr(hash("sha512", $monitoring_report->id . $monitoring_report->code), 0, 6)) . '/' . Carbon::now()->format('y');
+            $monitoring_report->code = 'R-' . strtoupper(
+                substr(
+                    hash("sha512", $monitoring_report->id . $monitoring_report->code), 0, 6
+                )) . '/' . Carbon::now()->format('y');
             $monitoring_report->save();
 
             $monitoring_item->status = 'SELECTED';
             $monitoring_item->save();
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::SUBMIT_MONITORING_TO_REPORT, $request->server(), $monitoring_report));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(
+                    LogConstants::SUBMIT_MONITORING_TO_REPORT, $request->server(), $monitoring_report
+                )
+            );
 
             // Send Notification
-            App::make(Dispatcher::class)->dispatch(new SubmitMonitoringNotificationEvent($monitoring_report, $user));
+            App::make(Dispatcher::class)->dispatch(
+                new SubmitMonitoringNotificationEvent($monitoring_report, $user)
+            );
 
             return $monitoring_report;
         });

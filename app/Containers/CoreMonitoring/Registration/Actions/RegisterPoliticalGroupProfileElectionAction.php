@@ -53,7 +53,9 @@ class RegisterPoliticalGroupProfileElectionAction extends ParentAction
             $registration = $this->createRegistrationTask->run($data);
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::REGISTERED_POLITICAL_GROUP, $request->server(), $registration));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::REGISTERED_POLITICAL_GROUP, $request->server(), $registration)
+            );
 
             return $registration;
         });

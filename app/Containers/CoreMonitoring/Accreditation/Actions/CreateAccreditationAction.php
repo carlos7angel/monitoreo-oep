@@ -44,7 +44,12 @@ class CreateAccreditationAction extends ParentAction
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('external');
 
-        $unique_code = substr(hash("sha512", Carbon::now()->timestamp . $user->id .  $sanitizedData['media_election'] . Str::random(24)), 0, 30);
+        $unique_code = substr(
+            hash(
+                "sha512",
+                Carbon::now()->timestamp . $user->id .  $sanitizedData['media_election'] . Str::random(24)
+            ), 0, 30
+        );
         $data = [
             'code' => $unique_code,
             'fid_election' => (int) $sanitizedData['media_election'],
@@ -58,25 +63,42 @@ class CreateAccreditationAction extends ParentAction
 
             $data = [];
             if ($request->file('media_file_request_letter')) {
-                $file_request_letter = $this->createFileTask->run($request->file('media_file_request_letter'), 'accreditation', $accreditation->id, $user);
+                $file_request_letter = $this->createFileTask->run(
+                    $request->file('media_file_request_letter'),
+                    'accreditation',
+                    $accreditation->id,
+                    $user
+                );
                 $data['file_request_letter'] = $file_request_letter->unique_code;
             }
 
             if ($request->file('media_file_affidavit')) {
-                $file_affidavit = $this->createFileTask->run($request->file('media_file_affidavit'), 'accreditation', $accreditation->id, $user);
+                $file_affidavit = $this->createFileTask->run(
+                    $request->file('media_file_affidavit'),
+                    'accreditation',
+                    $accreditation->id,
+                    $user
+                );
                 $data['file_affidavit'] = $file_affidavit->unique_code;
             }
 
             $data['data'] = app(GenerateAccreditationDataTask::class)->run($user->profile_data);
-            $data['code'] = 'D-' . strtoupper(substr(hash("sha512", $accreditation->id . $accreditation->created_at . $accreditation->code), 0, 6)) . '-' . Carbon::now()->format('y');
-            $data['status_activity'] = app(UpdateStatusActivityAccreditationTask::class)->run(null, 'draft', '', $user->id);
+            $data['code'] = 'D-' . strtoupper(
+                substr(
+                    hash("sha512",
+                        $accreditation->id . $accreditation->created_at . $accreditation->code), 0, 6
+                )) . '-' . Carbon::now()->format('y');
+            $data['status_activity'] = app(UpdateStatusActivityAccreditationTask::class)
+                ->run(null, 'draft', '', $user->id);
 
             $accreditation = $this->updateAccreditationTask->run($data, $accreditation->id);
 
             $this->updateAccreditationRatesTask->run($request, $user, $accreditation);
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::CREATED_ACCREDITATION, $request->server(), $accreditation));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::CREATED_ACCREDITATION, $request->server(), $accreditation)
+            );
 
             return $accreditation;
         });

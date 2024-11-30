@@ -42,7 +42,9 @@ class FirstResolutionAnalysisReportAction extends ParentAction
         $user = $this->getAuthenticatedUserByGuardTask->run('web');
         $analysis_report = $this->findAnalysisReportByIdTask->run($request->id);
         if ($analysis_report->status !== 'IN_TREATMENT' && $analysis_report->status !== 'COMPLEMENTARY_REPORT') {
-            throw new ValidationFailedException('Operación no permitida, el estado no esta autorizado para realizar esta acción.');
+            throw new ValidationFailedException(
+                'Operación no permitida, el estado no esta autorizado para realizar esta acción.'
+            );
         }
         if (! $request->file('analysis_file_first_resolution')) {
             throw new ValidationFailedException('El archivo es un campo obligatorio');
@@ -51,7 +53,12 @@ class FirstResolutionAnalysisReportAction extends ParentAction
         return DB::transaction(function () use ($data, $analysis_report, $user, $request) {
 
             if ($request->file('analysis_file_first_resolution')) {
-                $file_report = $this->createFileTask->run($request->file('analysis_file_first_resolution'), 'analysis-report', $analysis_report->id, $user);
+                $file_report = $this->createFileTask->run(
+                    $request->file('analysis_file_first_resolution'),
+                    'analysis-report',
+                    $analysis_report->id,
+                    $user
+                );
                 $analysis_report->file_resolution_first_instance = $file_report->unique_code;
             }
 
@@ -75,10 +82,16 @@ class FirstResolutionAnalysisReportAction extends ParentAction
             $analysis_report->save();
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::SUBMIT_ANALYSIS_TO_PLENARY, $request->server(), $analysis_report));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(
+                    LogConstants::SUBMIT_ANALYSIS_TO_PLENARY, $request->server(), $analysis_report
+                )
+            );
 
             // Send Notification
-            App::make(Dispatcher::class)->dispatch(new CreateSubmitAnalysisReportToPlenaryNotificationEvent($analysis_report, $user));
+            App::make(Dispatcher::class)->dispatch(
+                new CreateSubmitAnalysisReportToPlenaryNotificationEvent($analysis_report, $user)
+            );
 
             return $analysis_report;
         });

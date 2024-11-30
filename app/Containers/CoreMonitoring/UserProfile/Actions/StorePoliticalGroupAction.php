@@ -68,12 +68,15 @@ class StorePoliticalGroupAction extends ParentAction
 
             if ($request->file('pp_logo')) {
                 $dataU = [];
-                $dataU['logo'] = $this->createLogoImagePoliticalGroupTask->run($request->file('pp_logo'), $pp->initials);
+                $dataU['logo'] = $this->createLogoImagePoliticalGroupTask
+                    ->run($request->file('pp_logo'), $pp->initials);
                 $pp = $this->updateUserPoliticalGroupProfileTask->run($dataU, $pp->id);
             }
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::CREATED_POLITICAL_GROUP, $request->server(), $pp));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::CREATED_POLITICAL_GROUP, $request->server(), $pp)
+            );
 
             return $pp;
         });

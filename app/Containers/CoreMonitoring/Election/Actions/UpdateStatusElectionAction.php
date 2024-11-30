@@ -30,15 +30,9 @@ class UpdateStatusElectionAction extends ParentAction
      */
     public function run(Request $request): Election
     {
-        $sanitizedData = $request->sanitizeInput($request->all());
-
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
         $election = app(FindElectionByIdTask::class)->run($request->id);
-
-        //        if($election->status !== 'observed') {
-        //            throw new NotFoundException();
-        //        }
 
         $data = [
             'status' => $request->new_status,
@@ -47,7 +41,9 @@ class UpdateStatusElectionAction extends ParentAction
         $election = $this->updateElectionTask->run($data, $election->id);
 
         // Add Log
-        App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::UPDATED_STATUS_ELECTION, $request->server(), $election));
+        App::make(Dispatcher::class)->dispatch(
+            new AddActivityLogEvent(LogConstants::UPDATED_STATUS_ELECTION, $request->server(), $election)
+        );
 
         return  $election;
     }

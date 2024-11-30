@@ -31,7 +31,7 @@ final class RegisterUserTest extends ApiTestCase
 
         $data = [
             'email' => 'ganldalf@the.grey',
-            'password' => 's3cr3tPa$$',
+            'password' => 's3cr3tPa$$', //NOSONAR
             'verification_url' => 'https://some.test/known/url',
         ];
 
@@ -50,7 +50,7 @@ final class RegisterUserTest extends ApiTestCase
         config()->set('appSection-authentication.require_email_verification', false);
         $data = [
             'email' => 'ganldalf@the.grey',
-            'password' => 's3cr3tPa$$',
+            'password' => 's3cr3tPa$$', //NOSONAR
         ];
 
         $response = $this->makeCall($data);
@@ -67,7 +67,7 @@ final class RegisterUserTest extends ApiTestCase
     {
         $userDetails = [
             'email' => 'ganldalf@the.grey',
-            'password' => 'youShallNotPass',
+            'password' => 'youShallNotPass', //NOSONAR
         ];
 
         $this->getTestingUser($userDetails);
@@ -156,7 +156,7 @@ final class RegisterUserTest extends ApiTestCase
 
         $data = [
             'email' => 'ganldalf@the.grey',
-            'password' => 's3cr3tPa$$',
+            'password' => 's3cr3tPa$$', //NOSONAR
             'verification_url' => 'https://notallowed.test/wrong/hopyfuly/noone/make/a/route/like/this',
         ];
 
@@ -178,7 +178,7 @@ final class RegisterUserTest extends ApiTestCase
         Notification::fake();
         $data = [
             'email' => 'ganldalf@the.grey',
-            'password' => 's3cr3tPa$$',
+            'password' => 's3cr3tPa$$', //NOSONAR
             'verification_url' => config('appSection-authentication.allowed-verify-email-urls')[0],
         ];
 

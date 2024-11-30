@@ -36,8 +36,6 @@ class DeleteFieldFormAction extends ParentAction
      */
     public function run(Request $request)
     {
-        $sanitizedData = $request->sanitizeInput($request->all());
-
         $form = $this->findFormByIdTask->run($request->id);
         $field = $this->findFieldByIdTask->run($request->field_id);
 
@@ -59,7 +57,9 @@ class DeleteFieldFormAction extends ParentAction
             $this->updateFormTask->run($data, $form->id);
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::DELETE_FORM_FIELD, $request->server(), $field));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::DELETE_FORM_FIELD, $request->server(), $field)
+            );
         });
     }
 }

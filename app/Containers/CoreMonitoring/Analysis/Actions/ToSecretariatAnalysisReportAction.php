@@ -42,7 +42,9 @@ class ToSecretariatAnalysisReportAction extends ParentAction
         $user = $this->getAuthenticatedUserByGuardTask->run('web');
         $analysis_report = $this->findAnalysisReportByIdTask->run($request->id);
         if ($analysis_report->status !== 'NEW') {
-            throw new ValidationFailedException('Operación no permitida, el estado no esta autorizado para realizar esta acción.');
+            throw new ValidationFailedException(
+                'Operación no permitida, el estado no esta autorizado para realizar esta acción.'
+            );
         }
         if (! $request->file('analysis_file_report')) {
             throw new ValidationFailedException('El archivo es un campo obligatorio');
@@ -51,12 +53,22 @@ class ToSecretariatAnalysisReportAction extends ParentAction
         return DB::transaction(function () use ($data, $analysis_report, $user, $request) {
 
             if ($request->file('analysis_file_report')) {
-                $file_report = $this->createFileTask->run($request->file('analysis_file_report'), 'analysis-report', $analysis_report->id, $user);
+                $file_report = $this->createFileTask->run(
+                    $request->file('analysis_file_report'),
+                    'analysis-report',
+                    $analysis_report->id,
+                    $user
+                );
                 $analysis_report->file_analysis_report = $file_report->unique_code;
             }
 
             if ($request->file('analysis_file_additional')) {
-                $file_report = $this->createFileTask->run($request->file('analysis_file_additional'), 'analysis-report', $analysis_report->id, $user);
+                $file_report = $this->createFileTask->run(
+                    $request->file('analysis_file_additional'),
+                    'analysis-report',
+                    $analysis_report->id,
+                    $user
+                );
                 $analysis_report->file_additional_attachment = $file_report->unique_code;
             }
 
@@ -85,10 +97,16 @@ class ToSecretariatAnalysisReportAction extends ParentAction
             $analysis_report->save();
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::SUBMIT_ANALYSIS_TO_SECRETARIAT, $request->server(), $analysis_report));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(
+                    LogConstants::SUBMIT_ANALYSIS_TO_SECRETARIAT, $request->server(), $analysis_report
+                )
+            );
 
             // Send Notification
-            App::make(Dispatcher::class)->dispatch(new CreateSubmitAnalysisReportNotificationEvent($analysis_report, $user));
+            App::make(Dispatcher::class)->dispatch(
+                new CreateSubmitAnalysisReportNotificationEvent($analysis_report, $user)
+            );
 
             return $analysis_report;
         });

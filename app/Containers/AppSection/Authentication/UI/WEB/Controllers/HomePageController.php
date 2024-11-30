@@ -10,6 +10,5 @@ class HomePageController extends WebController
     public function __invoke()
     {
         return redirect()->route('web_index');
-        // return view('appSection@authentication::home');
     }
 }

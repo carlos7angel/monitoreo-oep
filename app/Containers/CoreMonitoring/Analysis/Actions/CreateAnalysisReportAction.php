@@ -79,7 +79,9 @@ class CreateAnalysisReportAction extends ParentAction
             $monitoring_report->save();
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::CREATE_ANALYSIS_REPORT, $request->server(), $analysis_report));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::CREATE_ANALYSIS_REPORT, $request->server(), $analysis_report)
+            );
 
             return $analysis_report;
         });

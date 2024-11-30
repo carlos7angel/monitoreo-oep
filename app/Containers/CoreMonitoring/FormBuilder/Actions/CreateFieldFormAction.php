@@ -35,8 +35,6 @@ class CreateFieldFormAction extends ParentAction
      */
     public function run(Request $request): Field
     {
-        $sanitizedData = $request->sanitizeInput($request->all());
-
         $field = $this->findFieldTypeByIdTask->run($request->field_type_id);
         $form = $this->findFormByIdTask->run($request->id);
 
@@ -49,7 +47,9 @@ class CreateFieldFormAction extends ParentAction
             $this->updateFormTask->run($data, $form->id);
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::ADD_FORM_FIELD, $request->server(), $field));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::ADD_FORM_FIELD, $request->server(), $field)
+            );
 
             return $field;
 

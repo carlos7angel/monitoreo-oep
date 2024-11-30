@@ -56,13 +56,16 @@ class UpdatePoliticalGroupAction extends ParentAction
             }
 
             if ($request->file('pp_logo')) {
-                $data['logo'] = $this->createLogoImagePoliticalGroupTask->run($request->file('pp_logo'), $data['initials']);
+                $data['logo'] = $this->createLogoImagePoliticalGroupTask
+                    ->run($request->file('pp_logo'), $data['initials']);
             }
 
             $pp = $this->updateUserPoliticalGroupProfileTask->run($data, $pp->id);
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::UPDATED_POLITICAL_GROUP, $request->server(), $pp));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::UPDATED_POLITICAL_GROUP, $request->server(), $pp)
+            );
 
             return $pp;
         });

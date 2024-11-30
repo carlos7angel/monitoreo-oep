@@ -96,7 +96,9 @@ class CreateElectionAction extends ParentAction
             }
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::CREATED_ELECTION, $request->server(), $election));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::CREATED_ELECTION, $request->server(), $election)
+            );
 
             return $election;
         });

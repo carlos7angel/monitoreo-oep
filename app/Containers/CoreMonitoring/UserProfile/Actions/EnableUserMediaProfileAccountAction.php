@@ -112,10 +112,13 @@ class EnableUserMediaProfileAccountAction extends ParentAction
             }
 
             //Activity Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::ENABLED_USER_MEDIA_ACCOUNT, $request->server(), $user));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(LogConstants::ENABLED_USER_MEDIA_ACCOUNT, $request->server(), $user)
+            );
 
-            //Send Mail::send(new SendMediaAccountEnabled($user, $media_profile, $password));
-            App::make(Dispatcher::class)->dispatch(new SendMediaAccountEnabledEvent($user, $media_profile, $password));
+            App::make(Dispatcher::class)->dispatch(
+                new SendMediaAccountEnabledEvent($user, $media_profile, $password)
+            );
 
             return $media_profile;
         });

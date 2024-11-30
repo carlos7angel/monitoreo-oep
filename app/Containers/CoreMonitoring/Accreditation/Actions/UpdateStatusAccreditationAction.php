@@ -33,17 +33,9 @@ class UpdateStatusAccreditationAction extends ParentAction
      */
     public function run(Request $request): Accreditation
     {
-        $sanitizedData = $request->sanitizeInput([
-            // add your request data here
-        ]);
-
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
         $accreditation = app(FindAccreditationByIdTask::class)->run($request->id);
-
-        //        if($accreditation->status !== 'observed') {
-        //            throw new NotFoundException('No se puede enviar el proceso de acreditación');
-        //        }
 
         $data = [
             'status' => $request->accreditation_status,
@@ -74,7 +66,11 @@ class UpdateStatusAccreditationAction extends ParentAction
             $accreditation = $this->updateAccreditationTask->run($data, $accreditation->id);
 
             // Add Log
-            App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::STATUS_UPDATED_ACCREDITATION, $request->server(), $accreditation));
+            App::make(Dispatcher::class)->dispatch(
+                new AddActivityLogEvent(
+                    LogConstants::STATUS_UPDATED_ACCREDITATION, $request->server(), $accreditation
+                )
+            );
 
             return $accreditation;
         });

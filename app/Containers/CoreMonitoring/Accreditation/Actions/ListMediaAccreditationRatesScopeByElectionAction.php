@@ -44,10 +44,9 @@ class ListMediaAccreditationRatesScopeByElectionAction extends ParentAction
 
         $data = [];
         foreach ($scope as $department) {
-            // $rates_scope = (clone $rates)->where('media_accreditation_rates.scope', $department);
-            $rates_scope = $rates->where('scope', $department);
+            $ratesScope = $rates->where('scope', $department);
             foreach ($types as $media_type) {
-                $rates_media = $rates_scope->where('type', $media_type);
+                $rates_media = $ratesScope->where('type', $media_type);
                 if ($rates_media->count() > 0) {
                     $data[$department][$media_type] = $rates_media->all();
                 }
