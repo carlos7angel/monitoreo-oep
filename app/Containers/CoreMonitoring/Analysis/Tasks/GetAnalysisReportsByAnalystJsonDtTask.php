@@ -44,8 +44,13 @@ class GetAnalysisReportsByAnalystJsonDtTask extends ParentTask
         }
 
         $result = $this->analysisReportRepository->scopeQuery(function ($query) use (
-            $searchValue, $searchFieldCode, $searchFieldElection,
-            $searchFieldStatus, $user, $scope_type, $scope_department
+            $searchValue,
+            $searchFieldCode,
+            $searchFieldElection,
+            $searchFieldStatus,
+            $user,
+            $scope_type,
+            $scope_department
         ) {
 
             $query = $query->leftJoin('elections', 'analysis_reports.fid_election', 'elections.id');

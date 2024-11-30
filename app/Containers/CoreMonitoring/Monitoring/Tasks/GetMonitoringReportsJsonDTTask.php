@@ -52,47 +52,54 @@ class GetMonitoringReportsJsonDTTask extends ParentTask
 
         $result = $this->repository->scopeQuery(
             function ($query) use (
-                $searchValue, $searchFieldCode, $searchFieldElection, $searchFieldStatus,
-                $user, $scope_type, $scope_department, $exclude
+                $searchValue,
+                $searchFieldCode,
+                $searchFieldElection,
+                $searchFieldStatus,
+                $user,
+                $scope_type,
+                $scope_department,
+                $exclude
             ) {
 
-            $query = $query->join('elections', 'monitoring_reports.fid_election', 'elections.id');
-            $query = $query->join('users', 'monitoring_reports.created_by', 'users.id');
-            $query = $query->join('monitoring_items', 'monitoring_reports.fid_monitoring_item', 'monitoring_items.id');
+                $query = $query->join('elections', 'monitoring_reports.fid_election', 'elections.id');
+                $query = $query->join('users', 'monitoring_reports.created_by', 'users.id');
+                $query = $query->join('monitoring_items', 'monitoring_reports.fid_monitoring_item', 'monitoring_items.id');
 
-            if (! empty($searchValue)) {
-                $query = $query->where('monitoring_reports.code', 'like', '%'.$searchValue.'%');
+                if (! empty($searchValue)) {
+                    $query = $query->where('monitoring_reports.code', 'like', '%'.$searchValue.'%');
+                }
+
+                if (! empty($searchFieldCode)) {
+                    $query = $query->where('monitoring_reports.code', 'like', '%'.$searchFieldCode.'%');
+                }
+
+                if (! empty($searchFieldElection)) {
+                    $query = $query->where('monitoring_reports.fid_election', '=', $searchFieldElection);
+                }
+
+                if (! empty($searchFieldStatus)) {
+                    $query = $query->where('monitoring_reports.status', '=', $searchFieldStatus);
+                }
+
+                if (!empty($scope_type) && !empty($scope_department)) {
+                    $query = $query->where('monitoring_reports.scope_type', '=', $scope_type)
+                                    ->where('monitoring_reports.scope_department', '=', $scope_department);
+                }
+
+                $query = $query->whereNotIn('monitoring_reports.status', ['NEW']);
+
+                $query = $query->whereNotIn('monitoring_reports.id', $exclude);
+
+                return $query->distinct()->select([
+                    'monitoring_reports.*',
+                    'elections.name as election_name',
+                    'elections.code as election_code',
+                    'users.name as user_name',
+                    'monitoring_items.other_media as media_name'
+                ]);
             }
-
-            if (! empty($searchFieldCode)) {
-                $query = $query->where('monitoring_reports.code', 'like', '%'.$searchFieldCode.'%');
-            }
-
-            if (! empty($searchFieldElection)) {
-                $query = $query->where('monitoring_reports.fid_election', '=', $searchFieldElection);
-            }
-
-            if (! empty($searchFieldStatus)) {
-                $query = $query->where('monitoring_reports.status', '=', $searchFieldStatus);
-            }
-
-            if (!empty($scope_type) && !empty($scope_department)) {
-                $query = $query->where('monitoring_reports.scope_type', '=', $scope_type)
-                                ->where('monitoring_reports.scope_department', '=', $scope_department);
-            }
-
-            $query = $query->whereNotIn('monitoring_reports.status', ['NEW']);
-
-            $query = $query->whereNotIn('monitoring_reports.id', $exclude);
-
-            return $query->distinct()->select([
-                'monitoring_reports.*',
-                'elections.name as election_name',
-                'elections.code as election_code',
-                'users.name as user_name',
-                'monitoring_items.other_media as media_name'
-            ]);
-        });
+        );
 
         [$recordsTotal, $result] = app(GetExecutedDataTableTask::class)
             ->run($result, $sortColumn, $sortColumnDir, $skip, $pageSize);

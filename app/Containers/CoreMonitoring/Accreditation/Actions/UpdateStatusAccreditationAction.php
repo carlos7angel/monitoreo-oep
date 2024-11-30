@@ -68,7 +68,9 @@ class UpdateStatusAccreditationAction extends ParentAction
             // Add Log
             App::make(Dispatcher::class)->dispatch(
                 new AddActivityLogEvent(
-                    LogConstants::STATUS_UPDATED_ACCREDITATION, $request->server(), $accreditation
+                    LogConstants::STATUS_UPDATED_ACCREDITATION,
+                    $request->server(),
+                    $accreditation
                 )
             );
 

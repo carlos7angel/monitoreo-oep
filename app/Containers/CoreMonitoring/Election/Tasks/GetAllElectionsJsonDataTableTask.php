@@ -34,7 +34,12 @@ class GetAllElectionsJsonDataTableTask extends ParentTask
         $searchFieldStatus = $requestData['columns'][5]['search']['value'];
 
         $result = $this->electionRepository->scopeQuery(function ($query) use (
-            $searchValue, $searchFieldName, $searchFieldType, $searchFieldCode, $searchFieldStatus, $searchFieldDate
+            $searchValue,
+            $searchFieldName,
+            $searchFieldType,
+            $searchFieldCode,
+            $searchFieldStatus,
+            $searchFieldDate
         ) {
 
             if (! empty($searchFieldName)) {

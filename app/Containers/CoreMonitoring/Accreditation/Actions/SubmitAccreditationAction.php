@@ -70,11 +70,13 @@ class SubmitAccreditationAction extends ParentAction
 
             // Add Log
             App::make(Dispatcher::class)->dispatch(
-                new AddActivityLogEvent(LogConstants::SUBMITTED_ACCREDITATION, $request->server(), $accreditation));
+                new AddActivityLogEvent(LogConstants::SUBMITTED_ACCREDITATION, $request->server(), $accreditation)
+            );
 
             // Send Notification
             App::make(Dispatcher::class)->dispatch(
-                new SubmitAccreditationNotificationEvent($accreditation, $user));
+                new SubmitAccreditationNotificationEvent($accreditation, $user)
+            );
 
             return $accreditation;
         });

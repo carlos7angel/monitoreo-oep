@@ -84,7 +84,9 @@ class FirstResolutionAnalysisReportAction extends ParentAction
             // Add Log
             App::make(Dispatcher::class)->dispatch(
                 new AddActivityLogEvent(
-                    LogConstants::SUBMIT_ANALYSIS_TO_PLENARY, $request->server(), $analysis_report
+                    LogConstants::SUBMIT_ANALYSIS_TO_PLENARY,
+                    $request->server(),
+                    $analysis_report
                 )
             );
 

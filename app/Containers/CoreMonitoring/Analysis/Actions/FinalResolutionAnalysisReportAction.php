@@ -42,8 +42,7 @@ class FinalResolutionAnalysisReportAction extends ParentAction
             && $analysis_report->status !== 'COMPLEMENTARY_REPORT'
             && $analysis_report->status !== 'IN_TREATMENT_PLENARY'
             && $analysis_report->status !== 'COMPLEMENTARY_REPORT_PLENARY'
-            && $analysis_report->status !== 'SECOND_INSTANCE_RESOLUTION')
-        {
+            && $analysis_report->status !== 'SECOND_INSTANCE_RESOLUTION') {
             throw new ValidationFailedException(
                 'Operación no permitida, el estado no esta autorizado para realizar esta acción.'
             );

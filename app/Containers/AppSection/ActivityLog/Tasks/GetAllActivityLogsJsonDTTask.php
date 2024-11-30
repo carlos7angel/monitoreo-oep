@@ -33,7 +33,10 @@ class GetAllActivityLogsJsonDTTask extends ParentTask
         $searchFieldStartDate = $requestData['columns'][4]['search']['value'];
 
         $result = $this->activityLogRepository->scopeQuery(function ($query) use (
-            $searchFieldType, $searchFieldDesc, $searchFieldStartDate, $searchFieldEndDate
+            $searchFieldType,
+            $searchFieldDesc,
+            $searchFieldStartDate,
+            $searchFieldEndDate
         ) {
 
             $query = $query->join('users', 'activity_log.causer_id', 'users.id');

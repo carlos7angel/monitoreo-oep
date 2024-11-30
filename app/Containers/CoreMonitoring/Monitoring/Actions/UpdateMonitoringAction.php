@@ -57,7 +57,11 @@ class UpdateMonitoringAction extends ParentAction
 
         return DB::transaction(function () use ($monitoring, $form, $user, $request) {
             $data_form = $this->storeDataFieldsFormTask->run(
-                $form, $request, $monitoring, json_decode($monitoring->data, true));
+                $form,
+                $request,
+                $monitoring,
+                json_decode($monitoring->data, true)
+            );
             $monitoring->data = json_encode($data_form);
             $monitoring->save();
 

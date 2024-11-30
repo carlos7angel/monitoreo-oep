@@ -44,62 +44,69 @@ class GetAnalysisReportsBySecretariatJsonDtTask extends ParentTask
         }
 
         $result = $this->repository->scopeQuery(
-            function ($query) use ($searchValue, $searchFieldCode, $searchFieldElection,
-                $searchFieldStatus, $user, $scope_type, $scope_department
+            function ($query) use (
+                $searchValue,
+                $searchFieldCode,
+                $searchFieldElection,
+                $searchFieldStatus,
+                $user,
+                $scope_type,
+                $scope_department
             ) {
 
-            $query = $query
-                ->leftJoin('elections', 'analysis_reports.fid_election', 'elections.id');
+                $query = $query
+                    ->leftJoin('elections', 'analysis_reports.fid_election', 'elections.id');
 
-            $query = $query
-                ->leftJoin('monitoring_reports', 'analysis_reports.fid_monitoring_report', 'monitoring_reports.id');
-            $query = $query
-                ->leftJoin('monitoring_items', 'monitoring_reports.fid_monitoring_item', 'monitoring_items.id');
+                $query = $query
+                    ->leftJoin('monitoring_reports', 'analysis_reports.fid_monitoring_report', 'monitoring_reports.id');
+                $query = $query
+                    ->leftJoin('monitoring_items', 'monitoring_reports.fid_monitoring_item', 'monitoring_items.id');
 
-            $query = $query
-                ->leftJoin(
-                    'analysis_report_status_activity',
-                    'analysis_reports.fid_last_analysis_report_activity',
-                    'analysis_report_status_activity.id'
-                );
-            $query = $query
-                ->leftJoin('users', 'analysis_report_status_activity.registered_by', 'users.id');
+                $query = $query
+                    ->leftJoin(
+                        'analysis_report_status_activity',
+                        'analysis_reports.fid_last_analysis_report_activity',
+                        'analysis_report_status_activity.id'
+                    );
+                $query = $query
+                    ->leftJoin('users', 'analysis_report_status_activity.registered_by', 'users.id');
 
 
-            if (! empty($searchValue)) {
-                $query = $query->where('analysis_reports.code', 'like', '%'.$searchValue.'%')
-                                ->orWhere('elections.name', 'like', '%'.$searchValue.'%');
+                if (! empty($searchValue)) {
+                    $query = $query->where('analysis_reports.code', 'like', '%'.$searchValue.'%')
+                                    ->orWhere('elections.name', 'like', '%'.$searchValue.'%');
+                }
+
+                if (! empty($searchFieldCode)) {
+                    $query = $query->where('analysis_reports.code', 'like', '%'.$searchFieldCode.'%');
+                }
+
+                if (! empty($searchFieldElection)) {
+                    $query = $query->where('analysis_reports.fid_election', '=', $searchFieldElection);
+                }
+
+                if (! empty($searchFieldStatus)) {
+                    $query = $query->where('analysis_reports.status', '=', $searchFieldStatus);
+                }
+
+                if (!empty($scope_type) && !empty($scope_department)) {
+                    $query = $query->where('analysis_reports.scope_type_secretariat', '=', $scope_type)
+                        ->where('analysis_reports.scope_department_secretariat', '=', $scope_department);
+                }
+
+                $query = $query->whereNotIn('analysis_reports.status', ['NEW']);
+
+                return $query->distinct()->select([
+                    'analysis_reports.*',
+                    'elections.name as election_name',
+                    'elections.code as election_code',
+                    'monitoring_items.other_media as media_name',
+                    'monitoring_items.registered_media as media_registered',
+                    'analysis_report_status_activity.registered_at as activity_date',
+                    'users.name as activity_user',
+                ]);
             }
-
-            if (! empty($searchFieldCode)) {
-                $query = $query->where('analysis_reports.code', 'like', '%'.$searchFieldCode.'%');
-            }
-
-            if (! empty($searchFieldElection)) {
-                $query = $query->where('analysis_reports.fid_election', '=', $searchFieldElection);
-            }
-
-            if (! empty($searchFieldStatus)) {
-                $query = $query->where('analysis_reports.status', '=', $searchFieldStatus);
-            }
-
-            if (!empty($scope_type) && !empty($scope_department)) {
-                $query = $query->where('analysis_reports.scope_type_secretariat', '=', $scope_type)
-                    ->where('analysis_reports.scope_department_secretariat', '=', $scope_department);
-            }
-
-            $query = $query->whereNotIn('analysis_reports.status', ['NEW']);
-
-            return $query->distinct()->select([
-                'analysis_reports.*',
-                'elections.name as election_name',
-                'elections.code as election_code',
-                'monitoring_items.other_media as media_name',
-                'monitoring_items.registered_media as media_registered',
-                'analysis_report_status_activity.registered_at as activity_date',
-                'users.name as activity_user',
-            ]);
-        });
+        );
 
         [$recordsTotal, $result] = app(GetExecutedDataTableTask::class)
             ->run($result, $sortColumn, $sortColumnDir, $skip, $pageSize);

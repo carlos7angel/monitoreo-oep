@@ -68,8 +68,11 @@ class SubmitMonitoringAction extends ParentAction
             $monitoring_report = $this->createMonitoringReportTask->run($data);
             $monitoring_report->code = 'R-' . strtoupper(
                 substr(
-                    hash("sha512", $monitoring_report->id . $monitoring_report->code), 0, 6
-                )) . '/' . Carbon::now()->format('y');
+                    hash("sha512", $monitoring_report->id . $monitoring_report->code),
+                    0,
+                    6
+                )
+            ) . '/' . Carbon::now()->format('y');
             $monitoring_report->save();
 
             $monitoring_item->status = 'SELECTED';
@@ -78,7 +81,9 @@ class SubmitMonitoringAction extends ParentAction
             // Add Log
             App::make(Dispatcher::class)->dispatch(
                 new AddActivityLogEvent(
-                    LogConstants::SUBMIT_MONITORING_TO_REPORT, $request->server(), $monitoring_report
+                    LogConstants::SUBMIT_MONITORING_TO_REPORT,
+                    $request->server(),
+                    $monitoring_report
                 )
             );
 
