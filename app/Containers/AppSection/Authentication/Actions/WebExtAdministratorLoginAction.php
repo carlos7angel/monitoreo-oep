@@ -67,7 +67,9 @@ class WebExtAdministratorLoginAction extends ParentAction
 
         if (! $loggedIn) {
             Auth::guard('external')->logout();
-            throw new LoginFailedException(implode(" | ", $errorResult['errors']));
+            throw new LoginFailedException(
+                implode(" | ", isset($errorResult) ? $errorResult['errors'] : '')
+            );
         }
 
         return $user;

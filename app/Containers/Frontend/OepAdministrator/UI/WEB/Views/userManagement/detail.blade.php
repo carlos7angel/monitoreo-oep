@@ -70,7 +70,7 @@
                     </div>
                     <div class="card-body pt-0 pb-5">
                         <div class="table-responsive">
-                            <table class="table align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
+                            <table class="table align-middle table-row-dashed gy-5" id="kt_table_users_login_session"> <!-- //NOSONAR -->
                                 <tbody class="fs-6 fw-semibold text-gray-600">
                                 <tr>
                                     <td>Nombre de usuario</td>

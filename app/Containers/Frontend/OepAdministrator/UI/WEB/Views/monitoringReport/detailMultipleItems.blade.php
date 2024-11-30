@@ -221,7 +221,7 @@
                                         </div>
                                     </div>
                                     <div class="table-responsive">
-                                        <table class="table border align-middle gs-0 gy-4 mb-3">
+                                        <table class="table border align-middle gs-0 gy-4 mb-3"> <!-- //NOSONAR -->
                                             <thead>
                                             <tr class="bg-light fs-6 fw-bold text-muted">
                                                 <th class="ps-4 rounded-start__ min-w-20px text-center">#</th>

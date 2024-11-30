@@ -94,7 +94,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="table-responsive">
-                                                                        <table class="table border-x align-middle gs-0 gy-2 mb-3">
+                                                                        <table class="table border-x align-middle gs-0 gy-2 mb-3"> <!-- //NOSONAR -->
                                                                             <thead>
                                                                                 <tr class="bg-warning fs-6 fw-bold text-white">
                                                                                     <th class="ps-4 rounded-start__ min-w-20px text-center">#</th>

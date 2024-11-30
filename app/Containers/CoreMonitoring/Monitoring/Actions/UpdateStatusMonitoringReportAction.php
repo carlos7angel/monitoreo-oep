@@ -31,7 +31,7 @@ class UpdateStatusMonitoringReportAction extends ParentAction
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
         $monitoring_report = $this->findMonitoringReportByIdTask->run($request->id);
 
-        return DB::transaction(function () use ($monitoring_report, $user) {
+        return DB::transaction(function () use ($monitoring_report, $user, $request) {
 
             $monitoring_report->status = $request->monitoring_report_status;
 

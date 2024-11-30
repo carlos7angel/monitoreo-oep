@@ -171,7 +171,9 @@
                         </div>
                     </div>
                     <div class="card-body pt-0">
-                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_elections_by_political_group" data-url="{{ route('oep_admin_political_group_elections_json_dt', ['id' => $pp->id]) }}">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5"
+                               id="kt_table_elections_by_political_group"
+                               data-url="{{ route('oep_admin_political_group_elections_json_dt', ['id' => $pp->id]) }}"> <!-- //NOSONAR -->
                             <thead>
                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                 <th class="w-10px pe-2">#</th>

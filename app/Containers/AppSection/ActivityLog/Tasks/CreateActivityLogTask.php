@@ -20,13 +20,13 @@ class CreateActivityLogTask extends ParentTask
     /**
      * @throws CreateResourceFailedException
      */
-    public function run($log, $request, $subject, $data = null): Activity
+    public function run($inputLog, $request, $subject, $inputData = null): Activity
     {
         try {
             $log_data = true;
             $log = $message = '';
             $is_logged = true;
-            switch ($log) {
+            switch ($inputLog) {
                 case LogConstants::LOGIN_ADMIN:
                     $log = 'INGRESO AL SISTEMA';
                     $message = "El usuario " . $subject->name . " (" . $subject->email . ") ha ingresado al sistema";
@@ -141,8 +141,12 @@ class CreateActivityLogTask extends ParentTask
             }
 
             $data = [];
-            if (empty($data) && $log_data) {
-                $data = $subject->toArray();
+            if ($log_data) {
+                if (empty($inputData)) {
+                    $data = $subject->toArray();
+                } else {
+                    $data = $inputData;
+                }
             }
 
             $causer = null;
