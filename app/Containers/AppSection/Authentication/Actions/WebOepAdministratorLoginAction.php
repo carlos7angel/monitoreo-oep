@@ -31,10 +31,12 @@ class WebOepAdministratorLoginAction extends ParentAction
         foreach ($loginFields as $loginField) {
             if (config('appSection-authentication.login.case_sensitive')) {
                 $credentials[$loginField->name] =
-                    static fn (Builder $query): Builder => $query->orWhere($loginField->name, $loginField->value);
+                    static fn (Builder $query): Builder =>
+                    $query->orWhere($loginField->name, $loginField->value);
             } else {
                 $credentials[$loginField->name] =
-                    static fn (Builder $query): Builder => $query->orWhereRaw("lower({$loginField->name}) = lower(?)", [$loginField->value]);
+                    static fn (Builder $query): Builder =>
+                    $query->orWhereRaw("lower({$loginField->name}) = lower(?)", [$loginField->value]);
             }
         }
 
@@ -69,18 +71,15 @@ class WebOepAdministratorLoginAction extends ParentAction
         session()->regenerate();
 
         // Add Log
-        App::make(Dispatcher::class)->dispatch(new AddActivityLogEvent(LogConstants::LOGIN_ADMIN, $request->server(), $user));
+        App::make(Dispatcher::class)->dispatch(
+            new AddActivityLogEvent(LogConstants::LOGIN_ADMIN, $request->server(), $user)
+        );
 
+        if (! $loggedIn) {
+            Auth::guard('external')->logout();
+            throw new LoginFailedException(implode(" | ", $errorResult['errors']));
+        }
 
         return $user;
-
-        //        if ($loggedIn) {
-        //            return redirect()->intended();
-        //        } else {
-        //            return back()->withErrors(
-        //                $errorResult['errors'],
-        //            )->onlyInput(...$errorResult['fields']);
-        //        }
-
     }
 }

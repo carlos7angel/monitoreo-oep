@@ -14,7 +14,6 @@ class LoginFieldProcessor
      * The login fields are extracted from the given data.
      * The login fields are returned as an array of IncomingLoginField objects.
      * The login fields are returned in the order they are defined in the config file.
-     * TODO: update this docblock.
      *
      * @param array<string, mixed> $data
      *
@@ -59,13 +58,17 @@ class LoginFieldProcessor
         }
 
         if (!is_array($allowedLoginFields)) {
-            throw new \InvalidArgumentException('Login {fields} property must be an array, ' . gettype($allowedLoginFields) . ' given');
+            throw new \InvalidArgumentException(
+                'Login {fields} property must be an array, ' . gettype($allowedLoginFields) . ' given'
+            );
         }
 
         $fieldNames = array_keys($allowedLoginFields);
         foreach ($fieldNames as $key => $fieldName) {
             if (!is_string($fieldName)) {
-                throw new \InvalidArgumentException('Login fields keys must be a string, ' . gettype($fieldName) . ' given');
+                throw new \InvalidArgumentException(
+                    'Login fields keys must be a string, ' . gettype($fieldName) . ' given'
+                );
             }
         }
 

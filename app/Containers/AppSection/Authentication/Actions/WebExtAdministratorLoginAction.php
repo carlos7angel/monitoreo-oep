@@ -30,7 +30,8 @@ class WebExtAdministratorLoginAction extends ParentAction
                     static fn (Builder $query): Builder => $query->orWhere($loginField->name, $loginField->value);
             } else {
                 $credentials[$loginField->name] =
-                    static fn (Builder $query): Builder => $query->orWhereRaw("lower({$loginField->name}) = lower(?)", [$loginField->value]);
+                    static fn (Builder $query): Builder =>
+                    $query->orWhereRaw("lower({$loginField->name}) = lower(?)", [$loginField->value]);
             }
         }
 
@@ -64,15 +65,11 @@ class WebExtAdministratorLoginAction extends ParentAction
 
         session()->regenerate();
 
+        if (! $loggedIn) {
+            Auth::guard('external')->logout();
+            throw new LoginFailedException(implode(" | ", $errorResult['errors']));
+        }
+
         return $user;
-
-        //        if ($loggedIn) {
-        //            return redirect()->intended();
-        //        } else {
-        //            return back()->withErrors(
-        //                $errorResult['errors'],
-        //            )->onlyInput(...$errorResult['fields']);
-        //        }
-
     }
 }

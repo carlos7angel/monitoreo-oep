@@ -4,6 +4,7 @@ namespace App\Containers\AppSection\Authentication\Actions;
 
 use Apiato\Core\Exceptions\IncorrectIdException;
 use App\Containers\AppSection\Authentication\Exceptions\InvalidResetPasswordTokenException;
+use App\Containers\AppSection\Authentication\Notifications\PasswordReset;
 use App\Containers\AppSection\User\Tasks\FindUserByEmailTask;
 use App\Ship\Exceptions\NotFoundException;
 use App\Ship\Exceptions\UpdateResourceFailedException;
@@ -27,7 +28,6 @@ class ResetPasswordAction extends ParentAction
      */
     public function run(Request $request): void
     {
-        //        dd($request->all());
         $sanitizedData = $request->sanitizeInput([
             'email',
             'token',
@@ -51,7 +51,7 @@ class ResetPasswordAction extends ParentAction
                 throw new NotFoundException('User Not Found.');
             default:
                 $user = $this->findUserByEmailTask->run($sanitizedData['email']);
-                // $user->notify(new PasswordReset());
+                $user->notify(new PasswordReset());
         }
     }
 }

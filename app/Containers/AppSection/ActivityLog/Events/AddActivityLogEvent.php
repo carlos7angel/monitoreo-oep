@@ -14,12 +14,12 @@ class AddActivityLogEvent extends ParentEvent implements ShouldQueue
     protected $model;
     protected $data;
 
-    public function __construct($_log, $_request, $_model, $_data = null)
+    public function __construct($log, $request, $model, $data = null)
     {
-        $this->log = $_log;
-        $this->request = $_request;
-        $this->model = $_model;
-        $this->data = $_data;
+        $this->log = $log;
+        $this->request = $request;
+        $this->model = $model;
+        $this->data = $data;
     }
 
     public function handle()
