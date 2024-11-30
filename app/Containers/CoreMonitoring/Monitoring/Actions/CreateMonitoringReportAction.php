@@ -56,7 +56,7 @@ class CreateMonitoringReportAction extends ParentAction
         }
 
         $data = [
-            'code' => substr(hash("sha512", Carbon::now()->timestamp . $user->id .  $election->id . Str::random(24)),0,30),
+            'code' => substr(hash("sha512", Carbon::now()->timestamp . $user->id .  $election->id . Str::random(24)), 0, 30),
             'fid_election' => $election->id,
             'status' => 'NEW',
             'created_by' => $user->id,

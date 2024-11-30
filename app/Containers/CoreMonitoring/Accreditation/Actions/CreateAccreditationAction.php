@@ -44,7 +44,7 @@ class CreateAccreditationAction extends ParentAction
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('external');
 
-        $unique_code = substr(hash("sha512", Carbon::now()->timestamp . $user->id .  $sanitizedData['media_election'] . Str::random(24)),0,30);
+        $unique_code = substr(hash("sha512", Carbon::now()->timestamp . $user->id .  $sanitizedData['media_election'] . Str::random(24)), 0, 30);
         $data = [
             'code' => $unique_code,
             'fid_election' => (int) $sanitizedData['media_election'],
@@ -68,7 +68,7 @@ class CreateAccreditationAction extends ParentAction
             }
 
             $data['data'] = app(GenerateAccreditationDataTask::class)->run($user->profile_data);
-            $data['code'] = 'D-' . strtoupper(substr(hash("sha512",$accreditation->id . $accreditation->created_at . $accreditation->code), 0, 6)) . '-' . Carbon::now()->format('y');
+            $data['code'] = 'D-' . strtoupper(substr(hash("sha512", $accreditation->id . $accreditation->created_at . $accreditation->code), 0, 6)) . '-' . Carbon::now()->format('y');
             $data['status_activity'] = app(UpdateStatusActivityAccreditationTask::class)->run(null, 'draft', '', $user->id);
 
             $accreditation = $this->updateAccreditationTask->run($data, $accreditation->id);

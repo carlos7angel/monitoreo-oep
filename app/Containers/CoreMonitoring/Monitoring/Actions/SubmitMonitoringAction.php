@@ -48,7 +48,7 @@ class SubmitMonitoringAction extends ParentAction
         }
 
         $data = [
-            'code' => substr(hash("sha512",Carbon::now()->timestamp . $user->id .  $election->id . Str::random(24)),0,30),
+            'code' => substr(hash("sha512", Carbon::now()->timestamp . $user->id .  $election->id . Str::random(24)), 0, 30),
             'fid_election' => $election->id,
             'status' => 'SUBMITTED',
             'submitted_at' => Carbon::now(),

@@ -45,7 +45,8 @@ class EnableUserPoliticalGroupProfileAccountAction extends ParentAction
             throw new EmailAlreadyExistsException('El correo electrónico ya existe, intente con otro.');
         }
 
-        $password = strtoupper(substr(hash("sha512",
+        $password = strtoupper(substr(hash(
+            "sha512",
             Carbon::now()->timestamp . $pp->email . $pp->name . Str::random(24)
         ), 0, 10));
         // $password = 'admin';

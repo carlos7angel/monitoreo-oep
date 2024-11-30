@@ -66,7 +66,7 @@ class StoreMonitoringAction extends ParentAction
         }
 
         $data = [
-            'code' => substr(hash("sha512", Carbon::now()->timestamp . $user->id .  $request->media_profile . Str::random(24)),0,30),
+            'code' => substr(hash("sha512", Carbon::now()->timestamp . $user->id .  $request->media_profile . Str::random(24)), 0, 30),
             'media_type' => $request->oep_media_type,
             'fid_election' => $election->id,
             'fid_form' => $form->id,
