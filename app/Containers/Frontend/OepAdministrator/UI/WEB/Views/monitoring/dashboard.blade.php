@@ -197,12 +197,11 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
-
+    <script src="{{ asset('themes/common/plugins/custom/amchart5/index.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('themes/common/plugins/custom/amchart5/Animated.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('themes/common/plugins/custom/amchart5/xy.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('themes/common/plugins/custom/amchart5/percent.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('themes/common/plugins/custom/amchart5/radar.js') }}" type="text/javascript"></script>
 
     <script src="{{ asset('themes/admin/js/custom/monitoring/dashboard-chart-monitoring-scope.js') }}"></script>
     <script src="{{ asset('themes/admin/js/custom/monitoring/dashboard-data-monitoring-summary.js') }}"></script>

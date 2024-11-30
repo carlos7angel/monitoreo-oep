@@ -25,7 +25,7 @@ class CreateLogoImagePoliticalGroupTask extends ParentTask
         $type = 'local';
 
         $sanitize_name = Str::slug($name);
-        $unique_code = md5(Carbon::now()->timestamp . $sanitize_name .  $file->getSize() . $file->getMimeType() . Str::random(24));
+        $unique_code = hash("sha512", Carbon::now()->timestamp . $sanitize_name .  $file->getSize() . $file->getMimeType() . Str::random(24));
         $new_name = strtoupper(substr($unique_code, 0, 5)) . '__' . $sanitize_name . '.' . $file->getClientOriginalExtension();
 
         try {

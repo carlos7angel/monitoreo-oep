@@ -40,10 +40,10 @@ final class VerifyEmailActionTest extends UnitTestCase
         $user = UserFactory::new()->unverified()->createOne();
         $action = app(VerifyEmailAction::class);
         $request = VerifyEmailRequest::injectData([
-            'hash' => sha1('nonematching@email.com'),
+            'hash' => sha1('nonematching@email.com'), //NOSONAR
         ])->withUrlParameters([
             'id' => $user->id,
-        ]); //NOSONAR
+        ]);
 
         $action->run($request);
     }

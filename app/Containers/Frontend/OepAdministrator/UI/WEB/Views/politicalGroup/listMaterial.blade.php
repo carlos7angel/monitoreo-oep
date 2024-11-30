@@ -103,7 +103,7 @@
                                                 <div class="text-gray-500">{{ $material->genre == 'DIFFUSION_PLAN' ? 'Plan de Difusión' : 'Propaganda' }} - {{ $material->fileMaterial->mime_type }}</div>
                                             @endif
                                             @if($material->type == 'LINK')
-                                                <a href="{{ $material->link_material }}" target="_blank" class="fs-6 text-hover-primary fw-bold">{{ $material->name }}</a>
+                                                <a href="{{ $material->link_material }}" target="_blank" rel="noopener" class="fs-6 text-hover-primary fw-bold">{{ $material->name }}</a>
                                                 <div class="text-gray-500">Enlace externo</div>
                                             @endif
                                         </div>
