@@ -15,7 +15,7 @@
     <link rel="canonical" href="/" />
 
     <link rel="shortcut icon" href="{{ asset('themes/common/media/logos/favicon/favicon.ico') }}" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+    <link href="{{ asset('themes/common/css/style.font.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('themes/common/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('themes/external/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('themes/external/css/style.external.css') }}" rel="stylesheet" type="text/css" />
