@@ -50,12 +50,13 @@ class CreateAdminUserAction extends ParentAction
 
         $adminRole = app(FindRoleTask::class)->run($request->user_role, 'web');
 
-        if ($adminRole->name === 'plenary') {
+        if ($adminRole->name === 'plenary' || $adminRole->name === 'admin') {
             $data['type'] = 'TSE';
             $data['department'] = 'Nacional';
         }
 
-        if ($adminRole->name === 'media' || $adminRole->name === 'monitor' || $adminRole->name === 'analyst' || $adminRole->name === 'secretariat') {
+        if ($adminRole->name === 'media' || $adminRole->name === 'monitor'
+            || $adminRole->name === 'analyst' || $adminRole->name === 'secretariat') {
             $data['type'] = $request->user_type;
             $data['department'] = $request->user_type === 'TSE' ? 'Nacional' : $request->user_department;
         }

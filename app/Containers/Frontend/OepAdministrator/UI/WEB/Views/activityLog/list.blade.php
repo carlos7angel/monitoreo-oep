@@ -5,7 +5,7 @@
         <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">Logs de Actividad</h1>
         <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
             <li class="breadcrumb-item text-gray-600">
-                <a href="javascript;" class="text-gray-600 text-hover-primary">Inicio</a>
+                <a href="{{ route('oep_admin_index') }}" class="text-gray-600 text-hover-primary">Inicio</a>
             </li>
             <li class="breadcrumb-item text-gray-600">Logs</li>
             <li class="breadcrumb-item text-gray-500">Lista</li>

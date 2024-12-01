@@ -11,7 +11,9 @@
         </ul>
     </div>
     <div class="d-flex align-items-center">
-        <a href="javascript:void(0)" class="btn btn-primary px-5" id="kt_button_new_user"><i class="ki-outline ki-add-files me-2 fs-3"></i> Nuevo Usuario</a>
+        <a href="javascript:void(0)" class="btn btn-primary px-5" id="kt_button_new_user">
+            <i class="ki-outline ki-add-files me-2 fs-3"></i> Nuevo Usuario
+        </a>
     </div>
 @endsection
 
@@ -22,11 +24,13 @@
             <div class="card-body p-5">
                 <div class="d-flex align-items-center">
                     <div class="position-relative w-md-400px me-md-2">
-                        <i class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 translate-middle ms-6">
+                        <i class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 translate-middle
+                        ms-6">
                             <span class="path1"></span>
                             <span class="path2"></span>
                         </i>
-                        <input type="text" class="form-control form-control-sm form-control-solid ps-10" name="dt_search_input" value="" placeholder="Buscador" />
+                        <input type="text" class="form-control form-control-sm form-control-solid ps-10"
+                               name="dt_search_input" value="" placeholder="Buscador" />
                     </div>
                     <div class="d-flex align-items-center">
                         <button type="submit" id="kt_search" class="btn btn-sm btn-secondary me-3">Buscar</button>
@@ -45,7 +49,8 @@
                 </div>
             </div>
             <div class="card-body pt-0">
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users" data-url="{{ route('oep_admin_users_json_dt') }}" aria-describedby="table"> <!-- //NOSONAR -->
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users"
+                       data-url="{{ route('oep_admin_users_json_dt') }}" aria-describedby="table"> <!-- //NOSONAR -->
                     <thead>
                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                         <th class="w-10px pe-2">#</th>
@@ -80,8 +85,12 @@
                     </div>
                 </div>
                 <div class="modal-body scroll-y__ my-7 px-5 px-lg-10 pt-0 pb-15">
-                    <form id="kt_form_new_user" class="form" action="{{ route('oep_admin_users_store') }}" method="post" autocomplete="off">
-                        <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+                    <form id="kt_form_new_user" class="form" action="{{ route('oep_admin_users_store') }}"
+                          method="post" autocomplete="off">
+                        <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll"
+                             data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto"
+                             data-kt-scroll-dependencies="#kt_modal_add_user_header"
+                             data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
 
                             <div class="fv-row mb-7">
                                 <label class="required fw-semibold fs-6 mb-2">Nombre:</label>
@@ -90,62 +99,91 @@
 
                             <div class="fv-row mb-7">
                                 <label class="required fw-semibold fs-6 mb-2">Correo Electrónico:</label>
-                                <input type="email" name="user_email" class="form-control mb-3 mb-lg-0" placeholder="" />
+                                <input type="email" name="user_email" class="form-control mb-3 mb-lg-0" placeholder=""/>
                             </div>
 
                             <div class="fv-row mb-7">
                                 <label class="required fw-semibold fs-6 mb-2">Contraseña:</label>
-                                <input type="email" name="user_password" class="form-control mb-3 mb-lg-0" placeholder="" />
+                                <input type="email" name="user_password" class="form-control mb-3 mb-lg-0"
+                                       placeholder=""/>
                             </div>
 
                             <div class="mb-7">
                                 <label class="required fw-semibold fs-6 mb-5">Rol:</label>
                                 <div class="d-flex fv-row">
                                     <div class="form-check form-check-custom form-check-solid">
-                                        <input class="form-check-input me-3" name="user_role" type="radio" value="media" id="kt_modal_update_role_option_0" />
+                                        <input class="form-check-input me-3" name="user_role" type="radio"
+                                               value="admin" id="kt_modal_update_role_option_9" />
+                                        <label class="form-check-label" for="kt_modal_update_role_option_9">
+                                            <div class="fw-bold text-gray-800">Usuario administrador regular</div>
+                                            <div class="text-gray-600">
+                                                Usuario administrador con permisos de todo el Sistema
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class='separator separator-dashed my-5'></div>
+                                <div class="d-flex fv-row">
+                                    <div class="form-check form-check-custom form-check-solid">
+                                        <input class="form-check-input me-3" name="user_role" type="radio"
+                                               value="media" id="kt_modal_update_role_option_0" />
                                         <label class="form-check-label" for="kt_modal_update_role_option_0">
                                             <div class="fw-bold text-gray-800">Usuario gestor de Medios</div>
-                                            <div class="text-gray-600">Usuario encargado de la Gestión de los Medios de Comunicación</div>
+                                            <div class="text-gray-600">
+                                                Usuario encargado de la Gestión de los Medios de Comunicación
+                                            </div>
                                         </label>
                                     </div>
                                 </div>
                                 <div class='separator separator-dashed my-5'></div>
                                 <div class="d-flex fv-row">
                                     <div class="form-check form-check-custom form-check-solid">
-                                        <input class="form-check-input me-3" name="user_role" type="radio" value="monitor" id="kt_modal_update_role_option_1" />
+                                        <input class="form-check-input me-3" name="user_role" type="radio"
+                                               value="monitor" id="kt_modal_update_role_option_1" />
                                         <label class="form-check-label" for="kt_modal_update_role_option_1">
                                             <div class="fw-bold text-gray-800">Usuario Monitor</div>
-                                            <div class="text-gray-600">Usuario encargado del registro y monitoreo de propaganda electoral</div>
+                                            <div class="text-gray-600">
+                                                Usuario encargado del registro y monitoreo de propaganda electoral
+                                            </div>
                                         </label>
                                     </div>
                                 </div>
                                 <div class='separator separator-dashed my-5'></div>
                                 <div class="d-flex fv-row">
                                     <div class="form-check form-check-custom form-check-solid">
-                                        <input class="form-check-input me-3" name="user_role" type="radio" value="analyst" id="kt_modal_update_role_option_2" />
+                                        <input class="form-check-input me-3" name="user_role" type="radio"
+                                               value="analyst" id="kt_modal_update_role_option_2" />
                                         <label class="form-check-label" for="kt_modal_update_role_option_2">
                                             <div class="fw-bold text-gray-800">Usuario Comisión de Análisis</div>
-                                            <div class="text-gray-600">Usuario encargado del análisis de los registros de monitoreo</div>
+                                            <div class="text-gray-600">
+                                                Usuario encargado del análisis de los registros de monitoreo
+                                            </div>
                                         </label>
                                     </div>
                                 </div>
                                 <div class='separator separator-dashed my-5'></div>
                                 <div class="d-flex fv-row">
                                     <div class="form-check form-check-custom form-check-solid">
-                                        <input class="form-check-input me-3" name="user_role" type="radio" value="secretariat" id="kt_modal_update_role_option_3" />
+                                        <input class="form-check-input me-3" name="user_role" type="radio"
+                                               value="secretariat" id="kt_modal_update_role_option_3" />
                                         <label class="form-check-label" for="kt_modal_update_role_option_3">
                                             <div class="fw-bold text-gray-800">Usuario Secretaría de Cámara</div>
-                                            <div class="text-gray-600">Usuario encargado del análisis y gestión de informe de vulneraciones</div>
+                                            <div class="text-gray-600">
+                                                Usuario encargado del análisis y gestión de informe de vulneraciones
+                                            </div>
                                         </label>
                                     </div>
                                 </div>
                                 <div class='separator separator-dashed my-5'></div>
                                 <div class="d-flex fv-row">
                                     <div class="form-check form-check-custom form-check-solid">
-                                        <input class="form-check-input me-3" name="user_role" type="radio" value="plenary" id="kt_modal_update_role_option_4" />
+                                        <input class="form-check-input me-3" name="user_role" type="radio"
+                                               value="plenary" id="kt_modal_update_role_option_4" />
                                         <label class="form-check-label" for="kt_modal_update_role_option_4">
                                             <div class="fw-bold text-gray-800">Usuario Sala Plena</div>
-                                            <div class="text-gray-600">Usuario encargado del análisis y gestión de informe de vulneraciones</div>
+                                            <div class="text-gray-600">
+                                                Usuario encargado del análisis y gestión de informe de vulneraciones
+                                            </div>
                                         </label>
                                     </div>
                                 </div>
@@ -155,7 +193,8 @@
                             <div id="kt_type_select_for_user_admin" class="d-none">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Tipo:</label>
-                                    <select class="form-select" data-control="select2" data-hide-search="true" data-placeholder="Seleccionar" name="user_type">
+                                    <select class="form-select" data-control="select2" data-hide-search="true"
+                                            data-placeholder="Seleccionar" name="user_type">
                                         <option value=""></option>
                                         <option value="TED">TED</option>
                                         <option value="TSE">TSE</option>
@@ -166,7 +205,8 @@
                             <div id="kt_department_select_for_user_admin" class="d-none">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Departamento:</label>
-                                    <select class="form-select" data-control="select2" data-hide-search="true" data-placeholder="Seleccionar" name="user_department">
+                                    <select class="form-select" data-control="select2" data-hide-search="true"
+                                            data-placeholder="Seleccionar" name="user_department">
                                         <option value="La Paz">La Paz</option>
                                         <option value="Oruro">Oruro</option>
                                         <option value="Potosí">Potosí</option>
@@ -182,7 +222,9 @@
 
                         </div>
                         <div class="text-center pt-10">
-                            <button type="reset" id="kt_button_new_user_cancel" class="btn btn-light me-3">Cancelar</button>
+                            <button type="reset" id="kt_button_new_user_cancel" class="btn btn-light me-3">
+                                Cancelar
+                            </button>
                             <button type="submit" id="kt_button_new_user_submit" class="btn btn-primary">
                                 <span class="indicator-label">Guardar</span>
                                 <span class="indicator-progress">Espere por favor...
@@ -198,7 +240,8 @@
 @endsection
 
 @section('styles')
-    <link href="{{ asset('themes/common/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('themes/common/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
+          type="text/css" />
 @endsection
 
 @section('scripts')

@@ -144,8 +144,9 @@ var KTUserCreate = function () {
         $('input[name="user_role"]').on('change', function (e) {
             e.preventDefault();
             var el = $(this).val();
-            if (el === 'plenary') {
+            if (el === 'plenary' || el === 'admin') {
                 $('#kt_type_select_for_user_admin').removeClass('d-block').addClass('d-none');
+                $('#kt_department_select_for_user_admin').removeClass('d-block').addClass('d-none');
                 validator.disableValidator('user_type');
                 validator.disableValidator('user_department');
             } else {
