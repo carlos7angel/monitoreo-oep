@@ -47,7 +47,12 @@ class StorePropagandaMaterialAction extends ParentAction
 
         if ($request->get('material_type') === 'FILE') {
             if ($request->file('material_file')) {
-                $file_bases = $this->createFileTask->run($request->file('material_file'), 'propaganda', $registration->election->id, $user);
+                $file_bases = $this->createFileTask->run(
+                    $request->file('material_file'),
+                    'propaganda',
+                    $registration->election->id,
+                    $user
+                );
                 $data['file_material'] = $file_bases->unique_code;
             }
         }

@@ -30,7 +30,6 @@ class GetOpenMonitoringItemsByElectionScopeTask extends ParentTask
             $conditions[] = ['scope_department', '=', $scope_department];
         }
 
-        // return $this->repository->findWhere($conditions)->pluck('id')->toArray();
         return $this->repository->findWhere($conditions);
     }
 }

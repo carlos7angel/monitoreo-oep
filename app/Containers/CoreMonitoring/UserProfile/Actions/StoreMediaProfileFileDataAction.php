@@ -41,17 +41,32 @@ class StoreMediaProfileFileDataAction extends ParentAction
             $data = [];
 
             if ($request->file('media_file_power_attorney')) {
-                $file_bases = $this->createFileTask->run($request->file('media_file_power_attorney'), 'profile-media', $user->profile_data->id, $user);
+                $file_bases = $this->createFileTask->run(
+                    $request->file('media_file_power_attorney'),
+                    'profile-media',
+                    $user->profile_data->id,
+                    $user
+                );
                 $data['file_power_attorney'] = $file_bases->unique_code;
             }
 
             if ($request->file('media_file_rep_document')) {
-                $file_bases = $this->createFileTask->run($request->file('media_file_rep_document'), 'profile-media', $user->profile_data->id, $user);
+                $file_bases = $this->createFileTask->run(
+                    $request->file('media_file_rep_document'),
+                    'profile-media',
+                    $user->profile_data->id,
+                    $user
+                );
                 $data['file_rep_document'] = $file_bases->unique_code;
             }
 
             if ($request->file('media_file_nit')) {
-                $file_bases = $this->createFileTask->run($request->file('media_file_nit'), 'profile-media', $user->profile_data->id, $user);
+                $file_bases = $this->createFileTask->run(
+                    $request->file('media_file_nit'),
+                    'profile-media',
+                    $user->profile_data->id,
+                    $user
+                );
                 $data['file_nit'] = $file_bases->unique_code;
             }
 

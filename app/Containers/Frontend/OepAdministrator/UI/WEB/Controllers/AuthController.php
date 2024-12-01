@@ -36,7 +36,11 @@ class AuthController extends WebController
     {
         try {
             app(WebOepAdministratorLoginAction::class)->run($request);
-            return response()->json(['success' => true, 'message' => 'Ingreso satisfactorio', 'redirect' => route('oep_admin_index')]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Ingreso satisfactorio',
+                'redirect' => route('oep_admin_index')
+            ]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -64,7 +68,11 @@ class AuthController extends WebController
     {
         try {
             app(ForgotPasswordAction::class)->run($request);
-            return response()->json(['success' => true, 'message' => 'Correo enviado satisfactoriamente', 'redirect' => route('oep_admin_index')]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Correo enviado satisfactoriamente',
+                'redirect' => route('oep_admin_index')
+            ]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -83,7 +91,11 @@ class AuthController extends WebController
     {
         try {
             app(ResetPasswordAction::class)->run($request);
-            return response()->json(['success' => true, 'message' => 'Contraseña restablecida satisfactoriamente', 'redirect' => route('oep_admin_index')]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Contraseña restablecida satisfactoriamente',
+                'redirect' => route('oep_admin_index')
+            ]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -93,7 +105,9 @@ class AuthController extends WebController
     {
         $page_title = "Mi Perfil";
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
-        return view('frontend@oepAdministrator::authentication.myProfile', ['user' => $user], compact('page_title'));
+        return view('frontend@oepAdministrator::authentication.myProfile', [
+            'user' => $user
+        ], compact('page_title'));
     }
 
     public function updatePasswordProfile(UpdatePasswordProfileRequest $request)

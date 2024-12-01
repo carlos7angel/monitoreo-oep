@@ -22,21 +22,28 @@ class PropagandaMaterialController extends WebController
     {
         $page_title = "Material de Propaganda Electoral";
         $registration = app(FindRegistrationByIdTask::class)->run($request->id);
-        return view('frontend@extAdministrator::propagandaMaterial.listMaterial', ['registration' => $registration], compact('page_title'));
+        return view('frontend@extAdministrator::propagandaMaterial.listMaterial', [
+            'registration' => $registration
+        ], compact('page_title'));
     }
 
     public function createMaterial(CreatePropagandaMaterialByElectionRequest $request)
     {
         $page_title = "Nuevo Material";
         $registration = app(FindRegistrationByIdTask::class)->run($request->id);
-        return view('frontend@extAdministrator::propagandaMaterial.createMaterial', ['registration' => $registration], compact('page_title'));
+        return view('frontend@extAdministrator::propagandaMaterial.createMaterial', [
+            'registration' => $registration
+        ], compact('page_title'));
     }
 
     public function storeMaterial(StorePropagandaMaterialByElectionRequest $request)
     {
         try {
             $material = app(StorePropagandaMaterialAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => route('ext_admin_propaganda_material_by_election_list', ['id' => $request->id])]);
+            return response()->json([
+                'success' => true,
+                'redirect' => route('ext_admin_propaganda_material_by_election_list', ['id' => $request->id])
+            ]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -47,14 +54,23 @@ class PropagandaMaterialController extends WebController
         $page_title = "Editar Material";
         $registration = app(FindRegistrationByIdTask::class)->run($request->registration_id);
         $material = app(FindPropagandaMaterialByIdTask::class)->run($request->id);
-        return view('frontend@extAdministrator::propagandaMaterial.editMaterial', ['registration' => $registration, 'material' => $material], compact('page_title'));
+        return view('frontend@extAdministrator::propagandaMaterial.editMaterial', [
+            'registration' => $registration,
+            'material' => $material
+        ], compact('page_title'));
     }
 
     public function updateMaterial(UpdatePropagandaMaterialByElectionRequest $request)
     {
         try {
             $material = app(UpdatePropagandaMaterialAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => route('ext_admin_propaganda_material_edit', ['registration_id' => $request->registration_id, 'id' => $material->id])]);
+            return response()->json([
+                'success' => true,
+                'redirect' => route('ext_admin_propaganda_material_edit', [
+                    'registration_id' => $request->registration_id,
+                    'id' => $material->id
+                ])
+            ]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }

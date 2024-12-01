@@ -20,6 +20,6 @@ class ListFormsTask extends ParentTask
      */
     public function run($skipPaginate = false): mixed
     {
-        return $skipPaginate ? $this->repository->all() : $this->repository->paginate(); // addRequestCriteria()
+        return $skipPaginate ? $this->repository->all() : $this->repository->paginate();
     }
 }

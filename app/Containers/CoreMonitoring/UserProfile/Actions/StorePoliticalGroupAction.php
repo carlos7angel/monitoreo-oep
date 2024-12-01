@@ -41,16 +41,12 @@ class StorePoliticalGroupAction extends ParentAction
 
         $sanitizedData = $request->sanitizeInput($request->all());
 
-        //        $existing_email = app(FindUserByEmailTask::class)->run($request->get('pp_email'));
-        //        if ($existing_email) {
-        //            throw new NotFoundException('El correo electrónico ya existe, intente con otro.');
-        //        }
-
         $data = [
             'name' => $request->get('pp_name'),
             'initials' => $request->get('pp_initials'),
             'description' => $request->get('pp_description'),
-            'foundation_date' => $request->get('pp_foundation_date') ? $request->get('pp_foundation_date') : null,
+            'foundation_date' => $request->get('pp_foundation_date')
+                ? $request->get('pp_foundation_date') : null,
             'cellphone' => $request->get('pp_cellphone') ? $request->get('pp_cellphone') : null,
 
             'email' => $request->get('pp_email'),

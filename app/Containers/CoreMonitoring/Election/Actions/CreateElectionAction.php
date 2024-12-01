@@ -60,20 +60,31 @@ class CreateElectionAction extends ParentAction
 
         if ($request->has('election_enable_monitoring')) {
             $data['enable_for_monitoring'] = true;
-            $data['fid_form_tv_media'] = $request->get('election_form_tv_media') ? $request->get('election_form_tv_media') : null;
-            $data['fid_form_radio_media'] = $request->get('election_form_radio_media') ? $request->get('election_form_radio_media') : null;
-            $data['fid_form_print_media'] = $request->get('election_form_print_media') ? $request->get('election_form_print_media') : null;
-            $data['fid_form_digital_media'] = $request->get('election_form_digital_media') ? $request->get('election_form_digital_media') : null;
-            $data['fid_form_rrss_media'] = $request->get('election_form_rrss_media') ? $request->get('election_form_rrss_media') : null;
+            $data['fid_form_tv_media'] = $request->get('election_form_tv_media')
+                ? $request->get('election_form_tv_media') : null;
+            $data['fid_form_radio_media'] = $request->get('election_form_radio_media')
+                ? $request->get('election_form_radio_media') : null;
+            $data['fid_form_print_media'] = $request->get('election_form_print_media')
+                ? $request->get('election_form_print_media') : null;
+            $data['fid_form_digital_media'] = $request->get('election_form_digital_media')
+                ? $request->get('election_form_digital_media') : null;
+            $data['fid_form_rrss_media'] = $request->get('election_form_rrss_media')
+                ? $request->get('election_form_rrss_media') : null;
         }
 
         if ($request->has('election_enable_political_registration')) {
             $data['enable_for_political_registration'] = true;
-            $data['end_date_political_registration'] = $request->get('election_end_date_political_registration');
-            $data['description_for_political_registration'] = $request->get('election_description_political_registration');
-            $data['max_size_for_political_registration'] = (int) $request->get('election_max_size_political_registration');
+            $data['end_date_political_registration'] = $request
+                ->get('election_end_date_political_registration');
+            $data['description_for_political_registration'] = $request
+                ->get('election_description_political_registration');
+            $data['max_size_for_political_registration'] = (int) $request
+                ->get('election_max_size_political_registration');
             if ($request->has('election_mime_type_political_registration')) {
-                $data['mime_types_for_political_registration'] = is_array($request->get('election_mime_type_political_registration')) ? json_encode($request->get('election_mime_type_political_registration')) : null;
+                $data['mime_types_for_political_registration'] =
+                    is_array($request->get('election_mime_type_political_registration'))
+                    ? json_encode($request->get('election_mime_type_political_registration'))
+                    : null;
             }
         }
 
@@ -81,15 +92,28 @@ class CreateElectionAction extends ParentAction
 
             $election = $this->createElectionTask->run($data);
 
-            if ($request->file('election_affidavit_file_registration_media') || $request->file('election_logo') || $request->file('election_banner')) {
-                if ($request->has('election_enable_registration_media') && $request->file('election_affidavit_file_registration_media')) {
-                    $file_bases = $this->createFileTask->run($request->file('election_affidavit_file_registration_media'), 'election', $election->id, $user);
+            if ($request->file('election_affidavit_file_registration_media') ||
+                $request->file('election_logo') || $request->file('election_banner')) {
+                if ($request->has('election_enable_registration_media') &&
+                    $request->file('election_affidavit_file_registration_media')) {
+                    $file_bases = $this->createFileTask->run(
+                        $request->file('election_affidavit_file_registration_media'),
+                        'election',
+                        $election->id,
+                        $user
+                    );
                     $election->file_affidavit_media_registration = $file_bases->unique_code;
                 }
-                $election->logo_image = $this->createLogoImageElectionTask->run($request->file('election_logo'), $election->id);
+                $election->logo_image = $this->createLogoImageElectionTask->run(
+                    $request->file('election_logo'),
+                    $election->id
+                );
 
                 if ($request->file('election_banner')) {
-                    $election->banner = $this->createLogoImageElectionTask->run($request->file('election_banner'), $election->id);
+                    $election->banner = $this->createLogoImageElectionTask->run(
+                        $request->file('election_banner'),
+                        $election->id
+                    );
                 }
 
                 $election->save();

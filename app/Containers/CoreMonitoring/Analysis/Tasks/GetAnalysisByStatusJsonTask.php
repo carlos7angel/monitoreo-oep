@@ -22,7 +22,6 @@ class GetAnalysisByStatusJsonTask extends ParentTask
     {
         $result = $this->repository->scopeQuery(function ($query) use ($election_id) {
             $query = $query->where('analysis_reports.fid_election', '=', $election_id);
-            // $query = $query->whereIn('monitoring_reports.status', ['NEW', 'SUBMITTED', 'IN_PROGRESS', 'REJECTED', 'FINISHED', 'ARCHIVED']);
             return $query->distinct()->select([
                 'analysis_reports.*',
             ]);

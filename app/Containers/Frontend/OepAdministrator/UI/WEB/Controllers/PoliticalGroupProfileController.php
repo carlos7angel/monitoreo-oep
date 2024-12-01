@@ -37,7 +37,9 @@ class PoliticalGroupProfileController extends WebController
     {
         try {
             $pp = app(StorePoliticalGroupAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => route('oep_admin_political_group_edit', ['id' => $pp->id])]);
+            return response()->json(['success' => true, 'redirect' => route('oep_admin_political_group_edit', [
+                'id' => $pp->id
+            ])]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -47,14 +49,16 @@ class PoliticalGroupProfileController extends WebController
     {
         $page_title = "Editar Partido Político";
         $pp = app(FindUserPoliticalGroupProfileByIdTask::class)->run($request->id);
-        return view('frontend@oepAdministrator::politicalGroup.edit', ['pp' => $pp], compact('page_title'));
+        return view('frontend@oepAdministrator::politicalGroup.edit',['pp' => $pp],compact('page_title'));
     }
 
     public function update(UpdatePoliticalGroupRequest $request)
     {
         try {
             $pp = app(UpdatePoliticalGroupAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => route('oep_admin_political_group_edit', ['id' => $pp->id])]);
+            return response()->json(['success' => true, 'redirect' => route('oep_admin_political_group_edit', [
+                'id' => $pp->id
+            ])]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -82,7 +86,10 @@ class PoliticalGroupProfileController extends WebController
         $page_title = "Partido Político";
         $pp = app(FindUserPoliticalGroupProfileByIdTask::class)->run($request->id);
         $elections = app(GetActiveElectionsForPoliticalRegistrationTask::class)->run($request->id);
-        return view('frontend@oepAdministrator::politicalGroup.detail', ['pp' => $pp, 'elections' => $elections], compact('page_title'));
+        return view('frontend@oepAdministrator::politicalGroup.detail', [
+            'pp' => $pp,
+            'elections' => $elections
+        ], compact('page_title'));
     }
 
     public function enableAccount(EnableUserPoliticalGroupProfileAccountRequest $request)

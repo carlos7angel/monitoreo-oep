@@ -13,7 +13,9 @@ class RegistrationController extends WebController
     public function listRegistrations(ListRegistrationElectionsRequest $request)
     {
         $page_title = "Registros a Procesos Electorales";
-        return view('frontend@extAdministrator::registration.listRegistrations', [], compact('page_title'));
+        return view('frontend@extAdministrator::registration.listRegistrations', [
+
+        ], compact('page_title'));
     }
 
     public function listRegistrationsJsonDt(GetRegistrationElectionsDataTableRequest $request)

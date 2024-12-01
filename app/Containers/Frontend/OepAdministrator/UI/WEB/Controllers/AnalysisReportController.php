@@ -45,7 +45,9 @@ class AnalysisReportController extends WebController
     {
         $page_title = "Informes de Análisis de Monitoreo";
         $elections = app(GetActiveElectionsForMonitoringTask::class)->run();
-        return view('frontend@oepAdministrator::analysisReport.list', ['elections' => $elections], compact('page_title'));
+        return view('frontend@oepAdministrator::analysisReport.list', [
+            'elections' => $elections
+        ], compact('page_title'));
     }
 
     public function listJsonDt(ListAnalysisReportJsonDtRequest $request)
@@ -63,7 +65,10 @@ class AnalysisReportController extends WebController
         $page_title = "Detalle Informe de Análisis";
         $analysis_report = app(FindAnalysisReportByIdTask::class)->run($request->id);
         $activities = app(GetActivitiesByAnalysisReportTask::class)->run($analysis_report->id);
-        return view('frontend@oepAdministrator::analysisReport.detail', ['analysis_report' => $analysis_report, 'activities' => $activities], compact('page_title'));
+        return view('frontend@oepAdministrator::analysisReport.detail', [
+            'analysis_report' => $analysis_report,
+            'activities' => $activities
+        ], compact('page_title'));
     }
 
     public function editFormAnalysis(EditFormAnalysisReportRequest $request)

@@ -28,7 +28,8 @@ class GetAllFormsJsonDataTableTask extends ParentTask
 
         $result = $this->formRepository->scopeQuery(function ($query) use ($searchValue) {
             if (! empty($searchValue)) {
-                $query = $query->where('name', 'like', '%'.$searchValue.'%')->orWhere('unique_code', 'like', '%'.$searchValue.'%');
+                $query = $query->where('name', 'like', '%'.$searchValue.'%')
+                                ->orWhere('unique_code', 'like', '%'.$searchValue.'%');
             }
             return $query->distinct()->select(['forms.*']);
         });

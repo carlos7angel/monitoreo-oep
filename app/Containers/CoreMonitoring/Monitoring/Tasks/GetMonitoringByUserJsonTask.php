@@ -27,7 +27,9 @@ class GetMonitoringByUserJsonTask extends ParentTask
             $query = $query->join('monitoring_items', 'monitoring_reports.fid_monitoring_item', 'monitoring_items.id');
 
             $query = $query->where('monitoring_reports.fid_election', '=', $election_id);
-            $query = $query->whereIn('monitoring_reports.status', ['NEW', 'SUBMITTED', 'IN_PROGRESS', 'REJECTED', 'FINISHED', 'ARCHIVED']);
+            $query = $query->whereIn('monitoring_reports.status', [
+                'NEW', 'SUBMITTED', 'IN_PROGRESS', 'REJECTED', 'FINISHED', 'ARCHIVED'
+            ]);
 
             return $query->distinct()->select([
                 'monitoring_reports.*',

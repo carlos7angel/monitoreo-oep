@@ -24,14 +24,19 @@ class MediaProfileController extends WebController
     {
         $page_title = "Datos Generales";
         $user = Auth::guard('external')->user();
-        return view('frontend@extAdministrator::mediaProfile.generalData', ['profile' => $user->profile_data], compact('page_title'));
+        return view('frontend@extAdministrator::mediaProfile.generalData', [
+            'profile' => $user->profile_data
+        ], compact('page_title'));
     }
 
     public function storeGeneralData(StoreMediaProfileGeneralDataRequest $request)
     {
         try {
             $profile = app(StoreMediaProfileGeneralDataAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => route('ext_admin_media_profile_general_data_show')]);
+            return response()->json([
+                'success' => true,
+                'redirect' => route('ext_admin_media_profile_general_data_show')
+            ]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -41,14 +46,19 @@ class MediaProfileController extends WebController
     {
         $page_title = "Tipo de Medio";
         $user =  app(GetAuthenticatedUserByGuardTask::class)->run('external');
-        return view('frontend@extAdministrator::mediaProfile.categoryData', ['profile' => $user->profile_data], compact('page_title'));
+        return view('frontend@extAdministrator::mediaProfile.categoryData', [
+            'profile' => $user->profile_data
+        ], compact('page_title'));
     }
 
     public function storeCategoryData(StoreMediaProfileCategoryDataRequest $request)
     {
         try {
             $profile = app(StoreMediaProfileCategoryDataAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => route('ext_admin_media_profile_category_data_show')]);
+            return response()->json([
+                'success' => true,
+                'redirect' => route('ext_admin_media_profile_category_data_show')
+            ]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -58,14 +68,19 @@ class MediaProfileController extends WebController
     {
         $page_title = "Datos de Contacto";
         $user =  app(GetAuthenticatedUserByGuardTask::class)->run('external');
-        return view('frontend@extAdministrator::mediaProfile.contactData', ['profile' => $user->profile_data], compact('page_title'));
+        return view('frontend@extAdministrator::mediaProfile.contactData', [
+            'profile' => $user->profile_data
+        ], compact('page_title'));
     }
 
     public function storeContactData(StoreMediaProfileContactDataRequest $request)
     {
         try {
             $profile = app(StoreMediaProfileContactDataAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => route('ext_admin_media_profile_contact_data_show')]);
+            return response()->json([
+                'success' => true,
+                'redirect' => route('ext_admin_media_profile_contact_data_show')
+            ]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -75,13 +90,18 @@ class MediaProfileController extends WebController
     {
         $page_title = "Archivos";
         $user =  app(GetAuthenticatedUserByGuardTask::class)->run('external');
-        return view('frontend@extAdministrator::mediaProfile.fileData', ['profile' => $user->profile_data], compact('page_title'));
+        return view('frontend@extAdministrator::mediaProfile.fileData', [
+            'profile' => $user->profile_data
+        ], compact('page_title'));
     }
     public function storeFileData(StoreMediaProfileFileDataRequest $request)
     {
         try {
             $profile = app(StoreMediaProfileFileDataAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => route('ext_admin_media_profile_file_data_show')]);
+            return response()->json([
+                'success' => true,
+                'redirect' => route('ext_admin_media_profile_file_data_show')
+            ]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }

@@ -32,7 +32,8 @@ class StoreDataFieldsFormTask extends ParentTask
                 case 'textbox':
                 case 'datepicker':
                 case 'textarea':
-                    $data[$field->unique_fieldname] = isset($input[$field->unique_fieldname]) ? $input[$field->unique_fieldname] : null;
+                    $data[$field->unique_fieldname] = isset($input[$field->unique_fieldname])
+                        ? $input[$field->unique_fieldname] : null;
                     break;
                 case 'select':
                 case 'checkbox':
@@ -58,7 +59,12 @@ class StoreDataFieldsFormTask extends ParentTask
                     }
 
                     if (isset($input[$field->unique_fieldname]) && $request->file($field->unique_fieldname)) {
-                        $file = app(CreateFileTask::class)->run($request->file($field->unique_fieldname), 'monitoring', $monitoring->id, $user);
+                        $file = app(CreateFileTask::class)->run(
+                            $request->file($field->unique_fieldname),
+                            'monitoring',
+                            $monitoring->id,
+                            $user
+                        );
                         $data[$field->unique_fieldname] = [
                             'code' => $file->unique_code,
                             'original_name' => $file->origin_name,

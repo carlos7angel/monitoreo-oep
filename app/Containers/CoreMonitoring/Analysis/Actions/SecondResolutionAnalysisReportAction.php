@@ -36,8 +36,11 @@ class SecondResolutionAnalysisReportAction extends ParentAction
 
         $user = $this->getAuthenticatedUserByGuardTask->run('web');
         $analysis_report = $this->findAnalysisReportByIdTask->run($request->id);
-        if ($analysis_report->status !== 'IN_TREATMENT_PLENARY' && $analysis_report->status !== 'COMPLEMENTARY_REPORT_PLENARY') {
-            throw new ValidationFailedException('Operación no permitida, el estado no esta autorizado para realizar esta acción.');
+        if ($analysis_report->status !== 'IN_TREATMENT_PLENARY' &&
+            $analysis_report->status !== 'COMPLEMENTARY_REPORT_PLENARY') {
+            throw new ValidationFailedException(
+                'Operación no permitida, el estado no esta autorizado para realizar esta acción.'
+            );
         }
         if (! $request->file('analysis_file_second_resolution')) {
             throw new ValidationFailedException('El archivo es un campo obligatorio');
@@ -46,7 +49,12 @@ class SecondResolutionAnalysisReportAction extends ParentAction
         return DB::transaction(function () use ($data, $analysis_report, $user, $request) {
 
             if ($request->file('analysis_file_second_resolution')) {
-                $file_report = $this->createFileTask->run($request->file('analysis_file_second_resolution'), 'analysis-report', $analysis_report->id, $user);
+                $file_report = $this->createFileTask->run(
+                    $request->file('analysis_file_second_resolution'),
+                    'analysis-report',
+                    $analysis_report->id,
+                    $user
+                );
                 $analysis_report->file_resolution_second_instance = $file_report->unique_code;
             }
 

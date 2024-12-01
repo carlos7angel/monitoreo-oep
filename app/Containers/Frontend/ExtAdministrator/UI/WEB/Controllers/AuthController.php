@@ -38,9 +38,11 @@ class AuthController extends WebController
         try {
             $result = app(WebExtAdministratorLoginAction::class)->run($request);
         } catch (Exception $e) {
-            return redirect()->route('ext_admin_login')->withInput(['email' => $request->email])->with('status', $e->getMessage());
+            return redirect()->route('ext_admin_login')
+                ->withInput(['email' => $request->email])->with('status', $e->getMessage());
         }
-        return is_array($result) ? redirect()->route('ext_admin_login')->with($result) : redirect()->route('ext_admin_index');
+        return is_array($result) ? redirect()->route('ext_admin_login')
+            ->with($result) : redirect()->route('ext_admin_index');
     }
 
     public function postLogout(LogoutRequest $request)
@@ -65,9 +67,11 @@ class AuthController extends WebController
     {
         try {
             app(ForgotPasswordAction::class)->run($request);
-            return redirect()->route('ext_admin_forgot_password')->with('success', 'Se ha enviado un correo para restablecer su contraseña.');
+            return redirect()->route('ext_admin_forgot_password')
+                ->with('success', 'Se ha enviado un correo para restablecer su contraseña.');
         } catch (Exception $e) {
-            return redirect()->route('ext_admin_forgot_password')->with('error', $e->getMessage());
+            return redirect()->route('ext_admin_forgot_password')
+                ->with('error', $e->getMessage());
         }
     }
 
@@ -84,7 +88,11 @@ class AuthController extends WebController
     {
         try {
             app(ResetPasswordAction::class)->run($request);
-            return redirect()->route('ext_admin_reset_password')->with('success', 'La contraseña ha sido restablecida con satisfactoriamente. Intente ingresar nuevamente');
+            return redirect()->route('ext_admin_reset_password')
+                ->with(
+                    'success',
+                    'La contraseña ha sido restablecida con satisfactoriamente. Intente ingresar nuevamente'
+                );
         } catch (Exception $e) {
             return redirect()->route('ext_admin_reset_password')->with('error', $e->getMessage());
         }
@@ -94,7 +102,9 @@ class AuthController extends WebController
     {
         $page_title = "Mi Perfil";
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('external');
-        return view('frontend@extAdministrator::authentication.myProfile', ['user' => $user], compact('page_title'));
+        return view('frontend@extAdministrator::authentication.myProfile', [
+            'user' => $user
+        ], compact('page_title'));
     }
 
     public function updatePasswordProfile(UpdatePasswordProfileRequest $request)

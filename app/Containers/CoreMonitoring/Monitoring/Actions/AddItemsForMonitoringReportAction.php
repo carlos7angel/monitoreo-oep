@@ -34,7 +34,8 @@ class AddItemsForMonitoringReportAction extends ParentAction
         $monitoring_report = app(FindMonitoringReportByIdTask::class)->run($request->id);
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
-        $monitoring_item_ids = $request->has('new_monitoring_items') ? $request->get('new_monitoring_items') : [];
+        $monitoring_item_ids = $request->has('new_monitoring_items')
+            ? $request->get('new_monitoring_items') : [];
         if (count($monitoring_item_ids) <= 0) {
             throw new CreateResourceFailedException('No existen registros para adicionar');
         }

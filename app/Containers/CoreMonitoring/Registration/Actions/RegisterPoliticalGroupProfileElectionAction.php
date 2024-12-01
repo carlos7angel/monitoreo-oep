@@ -36,7 +36,8 @@ class RegisterPoliticalGroupProfileElectionAction extends ParentAction
         $pp = app(FindUserPoliticalGroupProfileByIdTask::class)->run($request->id);
         $election = app(FindElectionByIdTask::class)->run($request->election_id);
 
-        $registered = app(FindRegistrationByElectionAndProfileTask::class)->run($election->id, $pp->id, $pp->user->id);
+        $registered = app(FindRegistrationByElectionAndProfileTask::class)
+            ->run($election->id, $pp->id, $pp->user->id);
         if (count($registered) > 0) {
             throw new NotFoundException('El Proceso Electoral ya esta registrado para el Partido Político');
         }
@@ -54,7 +55,9 @@ class RegisterPoliticalGroupProfileElectionAction extends ParentAction
 
             // Add Log
             App::make(Dispatcher::class)->dispatch(
-                new AddActivityLogEvent(LogConstants::REGISTERED_POLITICAL_GROUP, $request->server(), $registration)
+                new AddActivityLogEvent(
+                    LogConstants::REGISTERED_POLITICAL_GROUP, $request->server(), $registration
+                )
             );
 
             return $registration;

@@ -51,7 +51,9 @@ class ElectionController extends WebController
     {
         try {
             $election = app(CreateElectionAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => route('oep_admin_elections_edit', ['id' => $election->id])]);
+            return response()->json(['success' => true, 'redirect' => route('oep_admin_elections_edit', [
+                'id' => $election->id
+            ])]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -62,14 +64,19 @@ class ElectionController extends WebController
         $page_title = "Editar Proceso Electoral";
         $forms = app(GetAllFormsAction::class)->run($request);
         $election = app(FindElectionByIdTask::class)->run($request->id);
-        return view('frontend@oepAdministrator::election.edit', ['election' => $election, 'forms' => $forms], compact('page_title'));
+        return view('frontend@oepAdministrator::election.edit', [
+            'election' => $election,
+            'forms' => $forms
+        ], compact('page_title'));
     }
 
     public function update(UpdateElectionRequest $request)
     {
         try {
             $election = app(UpdateElectionAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => route('oep_admin_elections_edit', ['id' => $election->id])]);
+            return response()->json(['success' => true, 'redirect' => route('oep_admin_elections_edit', [
+                'id' => $election->id
+            ])]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }

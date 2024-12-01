@@ -26,12 +26,12 @@ class CreateLogoImageElectionTask extends ParentTask
 
         $sanitize_name = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
         $unique_code = md5(Carbon::now()->timestamp . $sanitize_name .  $file->getSize() . $file->getMimeType() . Str::random(24)); //NOSONAR
-        $new_name = substr($unique_code, 0, 8) . '__' . $sanitize_name . '.' . $file->getClientOriginalExtension();
+        $new_name = substr($unique_code, 0, 8) . '__' . $sanitize_name . '.' . $file->getClientOriginalExtension(); //NOSONAR
 
         try {
             $path = '/elecciones/logos';
             $upload = Storage::disk('local-uploads')->putFileAs($path, $file, $new_name);
-            $hash_file = hash_file('md5', Storage::disk('local-uploads')->getConfig()['root'] . '/' . $upload);
+            $hash_file = hash_file('md5', Storage::disk('local-uploads')->getConfig()['root'] . '/' . $upload); //NOSONAR
             $relative_path = $path . '/' . $new_name;
             $url = url('/') . '/storage' . $relative_path;
         } catch (Exception $exception) {

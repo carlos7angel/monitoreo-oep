@@ -56,7 +56,10 @@ class Controller extends WebController
         $page_title = "Material del Proceso Electoral";
         $election = app(FindElectionByIdTask::class)->run($request->id);
         $registrations = app(ListRegistrationsByElectionTask::class)->run($election->id);
-        return view('frontend@website::listMaterial', ['election' => $election, 'registrations' => $registrations], compact('page_title'));
+        return view('frontend@website::listMaterial', [
+            'election' => $election,
+            'registrations' => $registrations
+        ], compact('page_title'));
     }
 
     public function listAccreditationRatesPage(ListAccreditationRatesPageRequest $request)
@@ -64,7 +67,10 @@ class Controller extends WebController
         $page_title = "Lista de Medios Habilitados";
         $election = app(FindElectionByIdTask::class)->run($request->id);
         $data = app(ListMediaAccreditationRatesScopeByElectionAction::class)->run($election->id);
-        return view('frontend@website::listAccreditationRates', ['election' => $election, 'data' => $data], compact('page_title'));
+        return view('frontend@website::listAccreditationRates', [
+            'election' => $election,
+            'data' => $data
+        ], compact('page_title'));
     }
 
 }

@@ -47,7 +47,10 @@ class CreateDefaultFieldTask extends ParentTask
             throw new CreateResourceFailedException();
         }
 
-        $unique_code = hash("sha512", $field->id . Carbon::now()->timestamp . $form_id .  $type->id . $type->type . Str::random(24));
+        $unique_code = hash(
+            "sha512",
+            $field->id . Carbon::now()->timestamp . $form_id .  $type->id . $type->type . Str::random(24)
+        );
 
         $data = [
             'unique_fieldname' => $type->type . '-' . strtoupper(substr($unique_code, 0, 10)),

@@ -41,7 +41,9 @@ class CreateAnalysisReportAction extends ParentAction
 
         $monitoring_report = app(FindMonitoringReportByIdTask::class)->run($request->id);
         if ($monitoring_report->status !== 'SUBMITTED') {
-            throw new ValidationFailedException('Operación no permitida. El registro no puede cambiar de estado.');
+            throw new ValidationFailedException(
+                'Operación no permitida. El registro no puede cambiar de estado.'
+            );
         }
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
@@ -50,7 +52,14 @@ class CreateAnalysisReportAction extends ParentAction
         }
 
         $data = [
-            'code' => substr(hash("sha512", Carbon::now()->timestamp . $user->id .  $monitoring_report->id . Str::random(24)), 0, 30),
+            'code' => substr(
+                hash(
+                    "sha512",
+                    Carbon::now()->timestamp . $user->id .  $monitoring_report->id . Str::random(24)
+                ),
+                0,
+                30
+            ),
             'fid_monitoring_report' => $monitoring_report->id,
             'fid_election' => $monitoring_report->fid_election,
             'status' => 'NEW',
@@ -63,7 +72,15 @@ class CreateAnalysisReportAction extends ParentAction
         return DB::transaction(function () use ($data, $monitoring_report, $request, $user) {
 
             $analysis_report = $this->createAnalysisReportTask->run($data);
-            $analysis_report->code = 'A-' . strtoupper(substr(hash("sha512", $analysis_report->id . $analysis_report->code), 0, 6)) . '/' . Carbon::now()->format('y');
+            $analysis_report->code = 'A-' . strtoupper(
+                substr(
+                    hash(
+                        "sha512",
+                        $analysis_report->id . $analysis_report->code
+                    ),
+                    0,
+                    6
+                )) . '/' . Carbon::now()->format('y');
 
             $analysis_status = [
                 'fid_analysis_report' => $analysis_report->id,

@@ -17,7 +17,9 @@ class ActivityLogController extends WebController
     {
         $page_title = "Logs de Actividad";
         $types = app(GetActivityLogTypesTask::class)->run();
-        return view('frontend@oepAdministrator::activityLog.list', ['types' => $types], compact('page_title'));
+        return view('frontend@oepAdministrator::activityLog.list', [
+            'types' => $types
+        ], compact('page_title'));
     }
 
     public function listJsonDt(ListActivityLogsJsonDtRequest $request)

@@ -57,7 +57,12 @@ class UpdateElectionAction extends ParentAction
             $data['due_days_observed_media_registration'] = (int) $request->get('election_due_days_observed');
             // $data['fid_form_media_registration'] = $request->get('election_subform_registration_media');
             if ($request->file('election_affidavit_file_registration_media')) {
-                $file_bases = $this->createFileTask->run($request->file('election_affidavit_file_registration_media'), 'election', $election->id, $user);
+                $file_bases = $this->createFileTask->run(
+                    $request->file('election_affidavit_file_registration_media'),
+                    'election',
+                    $election->id,
+                    $user
+                );
                 $data['file_affidavit_media_registration'] = $file_bases->unique_code;
             }
         } else {
@@ -71,11 +76,16 @@ class UpdateElectionAction extends ParentAction
 
         if ($request->has('election_enable_monitoring')) {
             $data['enable_for_monitoring'] = true;
-            $data['fid_form_tv_media'] = $request->get('election_form_tv_media') ? $request->get('election_form_tv_media') : null;
-            $data['fid_form_radio_media'] = $request->get('election_form_radio_media') ? $request->get('election_form_radio_media') : null;
-            $data['fid_form_print_media'] = $request->get('election_form_print_media') ? $request->get('election_form_print_media') : null;
-            $data['fid_form_digital_media'] = $request->get('election_form_digital_media') ? $request->get('election_form_digital_media') : null;
-            $data['fid_form_rrss_media'] = $request->get('election_form_rrss_media') ? $request->get('election_form_rrss_media') : null;
+            $data['fid_form_tv_media'] = $request->get('election_form_tv_media')
+                ? $request->get('election_form_tv_media') : null;
+            $data['fid_form_radio_media'] = $request->get('election_form_radio_media')
+                ? $request->get('election_form_radio_media') : null;
+            $data['fid_form_print_media'] = $request->get('election_form_print_media')
+                ? $request->get('election_form_print_media') : null;
+            $data['fid_form_digital_media'] = $request->get('election_form_digital_media')
+                ? $request->get('election_form_digital_media') : null;
+            $data['fid_form_rrss_media'] = $request->get('election_form_rrss_media')
+                ? $request->get('election_form_rrss_media') : null;
         } else {
             $data['enable_for_monitoring'] = false;
             $data['fid_form_tv_media'] = null;
@@ -87,11 +97,17 @@ class UpdateElectionAction extends ParentAction
 
         if ($request->has('election_enable_political_registration')) {
             $data['enable_for_political_registration'] = true;
-            $data['end_date_political_registration'] = $request->get('election_end_date_political_registration');
-            $data['description_for_political_registration'] = $request->get('election_description_political_registration');
-            $data['max_size_for_political_registration'] = (int) $request->get('election_max_size_political_registration');
+            $data['end_date_political_registration'] = $request
+                ->get('election_end_date_political_registration');
+            $data['description_for_political_registration'] = $request
+                ->get('election_description_political_registration');
+            $data['max_size_for_political_registration'] = (int) $request
+                ->get('election_max_size_political_registration');
             if ($request->has('election_mime_type_political_registration')) {
-                $data['mime_types_for_political_registration'] = is_array($request->get('election_mime_type_political_registration')) ? json_encode($request->get('election_mime_type_political_registration')) : null;
+                $data['mime_types_for_political_registration'] =
+                    is_array($request->get('election_mime_type_political_registration'))
+                        ? json_encode($request->get('election_mime_type_political_registration'))
+                        : null;
             }
         } else {
             $data['enable_for_political_registration'] = false;
@@ -103,11 +119,17 @@ class UpdateElectionAction extends ParentAction
 
         return DB::transaction(function () use ($data, $election, $request) {
             if ($request->file('election_logo')) {
-                $data['logo_image'] = $this->createLogoImageElectionTask->run($request->file('election_logo'), $election->id);
+                $data['logo_image'] = $this->createLogoImageElectionTask->run(
+                    $request->file('election_logo'),
+                    $election->id
+                );
             }
 
             if ($request->file('election_banner')) {
-                $data['banner'] = $this->createLogoImageElectionTask->run($request->file('election_banner'), $election->id);
+                $data['banner'] = $this->createLogoImageElectionTask->run(
+                    $request->file('election_banner'),
+                    $election->id
+                );
             }
 
             // Add Log

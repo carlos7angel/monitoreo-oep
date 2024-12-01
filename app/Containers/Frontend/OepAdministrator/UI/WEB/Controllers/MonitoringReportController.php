@@ -32,7 +32,9 @@ class MonitoringReportController extends WebController
     {
         $page_title = "Reportes de Monitoreo";
         $elections = app(GetActiveElectionsForMonitoringTask::class)->run();
-        return view('frontend@oepAdministrator::monitoringReport.list', ['elections' => $elections], compact('page_title'));
+        return view('frontend@oepAdministrator::monitoringReport.list', [
+            'elections' => $elections
+        ], compact('page_title'));
     }
 
     public function listJsonDt(ListMonitoringReportJsonDtRequest $request)
@@ -72,7 +74,9 @@ class MonitoringReportController extends WebController
     {
         $page_title = "Detalle Reporte de Monitoreo";
         $monitoring_report = app(FindMonitoringReportByIdTask::class)->run($request->id);
-        return view('frontend@oepAdministrator::monitoringReport.detail', ['monitoring_report' => $monitoring_report], compact('page_title'));
+        return view('frontend@oepAdministrator::monitoringReport.detail', [
+            'monitoring_report' => $monitoring_report
+        ], compact('page_title'));
     }
 
     public function removeItem(RemoveMonitoringItemFromMonitoringReportRequest $request)
@@ -90,7 +94,8 @@ class MonitoringReportController extends WebController
         try {
             $monitoring_item = app(FindMonitoringByIdTask::class)->run($request->monitoring_item_id);
             $election = app(FindElectionByIdTask::class)->run($monitoring_item->fid_election);
-            [$form, $fields] = app(GetFieldsFormByTypeAction::class)->run($monitoring_item->media_type, $election);
+            [$form, $fields] = app(GetFieldsFormByTypeAction::class)
+                ->run($monitoring_item->media_type, $election);
             $render = view('frontend@oepAdministrator::monitoring.partials.detailMonitoringItem')->with([
                 'monitoring' => $monitoring_item,
                 'form' => $form,

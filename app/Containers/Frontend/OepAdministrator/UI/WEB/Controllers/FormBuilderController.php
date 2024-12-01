@@ -47,7 +47,9 @@ class FormBuilderController extends WebController
     {
         try {
             $form = app(CreateFormAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => route('oep_admin_form_builder', ['id' => $form->id])]);
+            return response()->json(['success' => true, 'redirect' => route('oep_admin_form_builder', [
+                'id' => $form->id
+            ])]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -59,7 +61,11 @@ class FormBuilderController extends WebController
         $form = app(FindFormByIdAction::class)->run($request);
         $field_types = app(GetAllFieldTypesAction::class)->run($request);
         $form_fields = app(GetFieldsByFormTask::class)->run($form->id);
-        return view('frontend@oepAdministrator::formBuilder.builder', ['form' => $form, 'field_types' => $field_types, 'fields' => $form_fields], compact('page_title'));
+        return view('frontend@oepAdministrator::formBuilder.builder', [
+            'form' => $form,
+            'field_types' => $field_types,
+            'fields' => $form_fields
+        ], compact('page_title'));
     }
 
     public function createFieldType(CreateFieldTypeFormRequest $request)

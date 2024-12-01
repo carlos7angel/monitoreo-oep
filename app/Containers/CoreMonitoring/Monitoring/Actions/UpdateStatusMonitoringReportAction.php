@@ -40,7 +40,8 @@ class UpdateStatusMonitoringReportAction extends ParentAction
                 $request->monitoring_report_status === 'REJECTED') {
                 $monitoring_report->submitted_at = Carbon::now()->toDateTimeString();
                 $monitoring_report->observations = $request->monitoring_report_observations;
-                $monitoring_item = app(FindMonitoringByIdTask::class)->run($monitoring_report->fid_monitoring_item);
+                $monitoring_item = app(FindMonitoringByIdTask::class)
+                    ->run($monitoring_report->fid_monitoring_item);
                 if ($request->monitoring_report_status === 'REJECTED') {
                     $monitoring_item->status = 'REJECTED';
                 }

@@ -21,7 +21,11 @@ class ListAccreditationRatesByElectionTask extends ParentTask
     public function run($id): mixed
     {
         $result = $this->repository->scopeQuery(function ($query) use ($id) {
-            $query = $query->join('media_accreditations', 'media_accreditation_rates.fid_accreditation', 'media_accreditations.id');
+            $query = $query->join(
+                'media_accreditations',
+                'media_accreditation_rates.fid_accreditation',
+                'media_accreditations.id'
+            );
             $query = $query->where('media_accreditations.fid_election', $id);
             $query = $query->where('media_accreditations.status', 'accredited');
             return $query->distinct()->select(['media_accreditation_rates.*']);

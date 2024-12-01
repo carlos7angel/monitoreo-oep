@@ -20,6 +20,8 @@ class ListCatalogsTask extends ParentTask
      */
     public function run($skipPagination = false): mixed
     {
-        return $skipPagination ? $this->repository->addRequestCriteria()->all() : $this->repository->addRequestCriteria()->paginate();
+        return $skipPagination
+            ? $this->repository->addRequestCriteria()->all()
+            : $this->repository->addRequestCriteria()->paginate();
     }
 }

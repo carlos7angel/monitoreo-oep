@@ -52,7 +52,10 @@ class StoreMediaProfileGeneralDataAction extends ParentAction
 
         return DB::transaction(function () use ($sanitizedData, $data, $user, $request) {
             if ($request->file('media_logo')) {
-                $data['logo'] = $this->createLogoImageMediaTask->run($request->file('media_logo'), $sanitizedData['media_name']);
+                $data['logo'] = $this->createLogoImageMediaTask->run(
+                    $request->file('media_logo'),
+                    $sanitizedData['media_name']
+                );
             }
 
             return $this->updateUserMediaProfileTask->run($data, $user->profile_data->id);

@@ -49,14 +49,24 @@ class CreateMonitoringReportAction extends ParentAction
             $scope_department = $user->department;
         }
 
-        $monitoring_items = app(GetOpenMonitoringItemsByElectionScopeTask::class)->run($election->id, $scope_type, $scope_department, $user);
+        $monitoring_items = app(GetOpenMonitoringItemsByElectionScopeTask::class)->run(
+            $election->id,
+            $scope_type,
+            $scope_department,
+            $user
+        );
 
         if ($monitoring_items->count() <= 0) {
             throw new CreateResourceFailedException('No existen registros de monitoreo para reportar');
         }
 
         $data = [
-            'code' => substr(hash("sha512", Carbon::now()->timestamp . $user->id .  $election->id . Str::random(24)), 0, 30),
+            'code' => substr(
+                hash(
+                    "sha512",
+                    Carbon::now()->timestamp . $user->id .  $election->id . Str::random(24)
+                ), 0, 30
+            ),
             'fid_election' => $election->id,
             'status' => 'NEW',
             'created_by' => $user->id,
@@ -68,7 +78,10 @@ class CreateMonitoringReportAction extends ParentAction
 
             $monitoring_report = $this->createMonitoringReportTask->run($data);
             $monitoring_report->monitoringItems()->sync($monitoring_items->pluck('id')->toArray());
-            $monitoring_report->code = 'R-' . strtoupper(substr(hash("sha512", $monitoring_report->id . $monitoring_report->code), 0, 6)) . '/' . Carbon::now()->format('y');
+            $monitoring_report->code = 'R-' . strtoupper(substr(hash(
+                "sha512",
+                $monitoring_report->id . $monitoring_report->code), 0, 6
+                )) . '/' . Carbon::now()->format('y');
             $monitoring_report->save();
 
             foreach ($monitoring_items->all() as $monitoring_item) {

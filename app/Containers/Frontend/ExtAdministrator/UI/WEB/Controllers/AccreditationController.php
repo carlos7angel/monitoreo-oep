@@ -25,7 +25,9 @@ class AccreditationController extends WebController
     public function listAccreditations(ShowListAccreditationsElectionsRequest $request)
     {
         $page_title = "Acreditaciones";
-        return view('frontend@extAdministrator::accreditation.listAccreditations', [], compact('page_title'));
+        return view('frontend@extAdministrator::accreditation.listAccreditations', [
+
+        ], compact('page_title'));
     }
 
     public function listAccreditationsJsonDt(GetGetAccreditationsDataTableRequest $request)
@@ -43,14 +45,19 @@ class AccreditationController extends WebController
         $page_title = "Nueva Acreditación";
         $user =  app(GetAuthenticatedUserByGuardTask::class)->run('external');
 
-        return view('frontend@extAdministrator::accreditation.newAccreditation', ['profile' => $user->profile_data], compact('page_title'));
+        return view('frontend@extAdministrator::accreditation.newAccreditation', [
+            'profile' => $user->profile_data
+        ], compact('page_title'));
     }
 
     public function store(StoreAccreditationRequest $request)
     {
         try {
             $accreditation = app(CreateAccreditationAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => route('ext_admin_accreditations_edit', ['id' => $accreditation->id, 'action' => 'saved'])]);
+            return response()->json(['success' => true, 'redirect' => route('ext_admin_accreditations_edit', [
+                'id' => $accreditation->id,
+                'action' => 'saved'
+            ])]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -93,7 +100,11 @@ class AccreditationController extends WebController
                 'accreditation' => $accreditation,
                 'profile_data' => app(ConvertJsonDataToProfileDataTask::class)->run($accreditation->data)
             ])->render();
-            return response()->json(['success' => true, 'accreditation' => $accreditation, 'render' => $summary_render]);
+            return response()->json([
+                'success' => true,
+                'accreditation' => $accreditation,
+                'render' => $summary_render
+            ]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }

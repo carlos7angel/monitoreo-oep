@@ -34,7 +34,7 @@ class CreateFileTask extends ParentTask
         [$path, $fileable_type, $fileable_id] = $this->getPathByTypeTask->run($type, $id, $user);
         $sanitize_name = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
         $unique_code = md5(Carbon::now()->timestamp . $sanitize_name .  $file->getSize() . $file->getMimeType() . Str::random(24)); //NOSONAR
-        $new_name = substr($unique_code, 0, 8) . '__' . $sanitize_name . '.' . $file->getClientOriginalExtension();
+        $new_name = substr($unique_code, 0, 8) . '__' . $sanitize_name . '.' . $file->getClientOriginalExtension(); //NOSONAR
         [$hash_file, $url_file, $path_file, $locale_upload] = $this->storageFileTask->run($file, $path, $new_name);
 
         $data = [

@@ -2,7 +2,7 @@
 <html lang="es" xml:lang="es">
 <head>
     <title>Reporte de Monitoreo</title>
-    <meta content="text/html; charset=utf-8" />
+    <meta content="text/html;" />
     <style>
         body{
             font-family: sans-serif;

@@ -43,7 +43,8 @@ class UpdatePoliticalGroupAction extends ParentAction
             'name' => $request->get('pp_name'),
             'initials' => $request->get('pp_initials'),
             'description' => $request->get('pp_description'),
-            'foundation_date' => $request->get('pp_foundation_date') ? $request->get('pp_foundation_date') : null,
+            'foundation_date' => $request->get('pp_foundation_date')
+                ? $request->get('pp_foundation_date') : null,
             'cellphone' => $request->get('pp_cellphone') ? $request->get('pp_cellphone') : null,
             'rep_full_name' => $request->get('pp_rep_full_name'),
             'rep_document' => $request->get('pp_rep_document'),

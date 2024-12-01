@@ -36,10 +36,13 @@ class RejectAnalysisReportAction extends ParentAction
         $user = $this->getAuthenticatedUserByGuardTask->run('web');
         $analysis_report = $this->findAnalysisReportByIdTask->run($request->id);
         if ($analysis_report->status !== 'NEW') {
-            throw new ValidationFailedException('Operación no permitida, el estado no esta autorizado para realizar esta acción.');
+            throw new ValidationFailedException(
+                'Operación no permitida, el estado no esta autorizado para realizar esta acción.'
+            );
         }
 
-        $monitoring_report = app(FindMonitoringReportByIdTask::class)->run($analysis_report->fid_monitoring_report);
+        $monitoring_report = app(FindMonitoringReportByIdTask::class)
+                                ->run($analysis_report->fid_monitoring_report);
         $monitoring_item = app(FindMonitoringByIdTask::class)->run($monitoring_report->fid_monitoring_item);
 
         return DB::transaction(function () use ($data, $analysis_report, $user, $monitoring_report, $monitoring_item) {

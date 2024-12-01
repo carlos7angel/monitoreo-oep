@@ -64,7 +64,11 @@ class GetMonitoringReportsJsonDTTask extends ParentTask
 
                 $query = $query->join('elections', 'monitoring_reports.fid_election', 'elections.id');
                 $query = $query->join('users', 'monitoring_reports.created_by', 'users.id');
-                $query = $query->join('monitoring_items', 'monitoring_reports.fid_monitoring_item', 'monitoring_items.id');
+                $query = $query->join(
+                    'monitoring_items',
+                    'monitoring_reports.fid_monitoring_item',
+                    'monitoring_items.id'
+                );
 
                 if (! empty($searchValue)) {
                     $query = $query->where('monitoring_reports.code', 'like', '%'.$searchValue.'%');

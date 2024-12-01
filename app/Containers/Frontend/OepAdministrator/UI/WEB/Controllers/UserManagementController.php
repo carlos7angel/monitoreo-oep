@@ -46,7 +46,9 @@ class UserManagementController extends WebController
     {
         $page_title = "Usuario Administrador";
         $user = app(FindUserByIdTask::class)->run($request->id);
-        return view('frontend@oepAdministrator::userManagement.detail', ['user' => $user], compact('page_title'));
+        return view('frontend@oepAdministrator::userManagement.detail', [
+            'user' => $user
+        ], compact('page_title'));
     }
 
     public function updatePassword(UpdatePasswordRequest $request)

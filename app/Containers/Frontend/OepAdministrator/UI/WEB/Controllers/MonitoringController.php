@@ -83,7 +83,10 @@ class MonitoringController extends WebController
     {
         try {
             $monitoring = app(StoreMonitoringAction::class)->run($request);
-            return response()->json(['success' => true, 'redirect' => route('oep_admin_media_monitoring_edit', ['election_id' => $request->id, 'id' => $monitoring->id])]);
+            return response()->json(['success' => true, 'redirect' => route('oep_admin_media_monitoring_edit', [
+                'election_id' => $request->id,
+                'id' => $monitoring->id
+            ])]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
