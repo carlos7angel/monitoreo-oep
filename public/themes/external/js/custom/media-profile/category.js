@@ -27,7 +27,6 @@ var KTFormGeneral = function () {
                 }
 
                 var numRowsCompleted = $('#table_media_types').find('tbody tr[data-valid="1"]').length;
-                console.log("VAL:IDOS", numRowsCompleted);
 
                 if (numRows !== numRowsCompleted ) {
                     return {
@@ -280,12 +279,8 @@ var KTFormGeneral = function () {
                         const data = Object.fromEntries(formData.entries());
                         data.media_scope_states = formData.getAll("media_scope_states[]");
 
-                        console.log(data);
 
                         var row = table.find('tr[data-type="'+data.media_type_id+'"]');
-
-                        console.log(row);
-                        console.log(row.length);
 
                         if (row.length) {
 
@@ -460,7 +455,6 @@ var KTFormGeneral = function () {
             } else {
                 row.remove();
             }
-            console.log(row.length);
         });
 
     }

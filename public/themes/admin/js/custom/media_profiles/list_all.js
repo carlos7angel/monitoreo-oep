@@ -87,8 +87,6 @@ var KTMediaList = function () {
                     className: 'pe-0',
                     render: function (data, type, full, meta) {
 
-                        console.log(full);
-
                         let logo_html = ``;
                         if (full.logo) {
                             let media_logo = '/storage'+ full.logo;

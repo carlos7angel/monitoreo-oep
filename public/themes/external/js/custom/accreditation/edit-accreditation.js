@@ -374,8 +374,6 @@ var KTAccreditationElection = function () {
 
         $(form).find('.kt_media_file_rates').each(function (index, el) {
 
-            // console.log(index, el);
-
             var inputFile = $(this);
 
             var inputDefault = inputFile.parent().children('.file_rate_default');

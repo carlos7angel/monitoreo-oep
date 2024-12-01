@@ -14,8 +14,6 @@ var KTFormsCreate = function () {
 
     var _validationForm = function () {
 
-        console.log('FORM INIT');
-
         validator = FormValidation.formValidation(
             document.querySelector('#kt_modal_form_field_edit_form'),
             {
@@ -163,7 +161,6 @@ var KTFormsCreate = function () {
                             submitButton = document.getElementById('kt_modal_form_field_submit');
                             cancelButton = document.getElementById('kt_modal_form_field_cancel');
                             if(validator) {
-                                console.log('DESTROY');
                                 validator.destroy();
                             }
                             _validationForm();
