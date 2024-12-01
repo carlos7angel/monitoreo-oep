@@ -20,7 +20,7 @@ class SendSubmitAccreditation extends ParentMail implements ShouldQueue
 
     public function build(): static
     {
-        return $this->view('coreMonitoring@monitoring::submitAccreditation')
+        return $this->view('coreMonitoring@accreditation::submitAccreditation')
             ->subject('Nuevo Registro de Acreditación | OEP')
             ->to($this->recipient->email, $this->recipient->name)
             ->with([

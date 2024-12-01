@@ -77,7 +77,6 @@ class AccreditationController extends WebController
             return redirect()->route('ext_admin_accreditations_list');
         }
         $profile_json = app(ConvertJsonDataToProfileDataTask::class)->run($accreditation->data);
-        //dd($profile_json);
 
         return view('frontend@extAdministrator::accreditation.editAccreditation', [
             'accreditation' => $accreditation,

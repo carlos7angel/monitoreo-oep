@@ -33,7 +33,7 @@
                             }
                         @endphp
                         <div class="w-100px h-100px w-lg-150px h-lg-150px position-relative border-1 "
-                             style="background-image: url({{$logo}}); background-size: contain; background-position: center">
+                             style="background-image: url({{$logo}}); background-size: contain; background-position: center; background-repeat: no-repeat">
                         </div>
                     </div>
                     <div class="flex-grow-1">
