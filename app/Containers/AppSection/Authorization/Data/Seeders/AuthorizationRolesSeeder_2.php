@@ -25,6 +25,5 @@ class AuthorizationRolesSeeder_2 extends ParentSeeder
         // EXTERNAL
         $task->run('user_media', 'Usuario externo Medio de Comunicación', 'Medio de Comunicación', 'external');
         $task->run('user_political', 'Usuario externo Partido Político', 'Partido Político', 'external');
-
     }
 }
