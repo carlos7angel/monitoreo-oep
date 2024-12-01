@@ -49,7 +49,7 @@ class PoliticalGroupProfileController extends WebController
     {
         $page_title = "Editar Partido Político";
         $pp = app(FindUserPoliticalGroupProfileByIdTask::class)->run($request->id);
-        return view('frontend@oepAdministrator::politicalGroup.edit',['pp' => $pp],compact('page_title'));
+        return view('frontend@oepAdministrator::politicalGroup.edit', ['pp' => $pp], compact('page_title'));
     }
 
     public function update(UpdatePoliticalGroupRequest $request)

@@ -24,20 +24,44 @@ class UpdateAccreditationRatesTask extends ParentTask
         $rates = $accreditation->rates;
 
         $this->processMediaType(
-            $request, $user, $accreditation, $rates, $profile,
-            'Televisivo', 'media_type_television', 'media_television_file_rate'
+            $request,
+            $user,
+            $accreditation,
+            $rates,
+            $profile,
+            'Televisivo',
+            'media_type_television',
+            'media_television_file_rate'
         );
         $this->processMediaType(
-            $request, $user, $accreditation, $rates, $profile,
-            'Radial', 'media_type_radio', 'media_radio_file_rate'
+            $request,
+            $user,
+            $accreditation,
+            $rates,
+            $profile,
+            'Radial',
+            'media_type_radio',
+            'media_radio_file_rate'
         );
         $this->processMediaType(
-            $request, $user, $accreditation, $rates, $profile,
-            'Impreso', 'media_type_print', 'media_print_file_rate'
+            $request,
+            $user,
+            $accreditation,
+            $rates,
+            $profile,
+            'Impreso',
+            'media_type_print',
+            'media_print_file_rate'
         );
         $this->processMediaType(
-            $request, $user, $accreditation, $rates, $profile,
-            'Digital', 'media_type_digital', 'media_digital_file_rate'
+            $request,
+            $user,
+            $accreditation,
+            $rates,
+            $profile,
+            'Digital',
+            'media_type_digital',
+            'media_digital_file_rate'
         );
     }
 
@@ -49,8 +73,8 @@ class UpdateAccreditationRatesTask extends ParentTask
         $profile,
         $mediaType,
         $keyMediaTypeDB,
-        $requestFileKey)
-    {
+        $requestFileKey
+    ) {
 
         if ($profile->{$keyMediaTypeDB}) {
             $itemType = $profile->mediaTypes->where('type', $mediaType)->first();

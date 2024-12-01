@@ -113,7 +113,8 @@ class StoreMonitoringAction extends ParentAction
                     ),
                     0,
                     6
-                )) . '-' . Carbon::now()->format('y');
+                )
+            ) . '-' . Carbon::now()->format('y');
             $monitoring->data = json_encode($data_form);
             $monitoring->save();
 

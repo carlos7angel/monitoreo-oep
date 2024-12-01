@@ -25,8 +25,7 @@ class GetRegistrationElectionsJsonDTTask extends ParentTask
 
         $political_group_profile_id = $user->profile_data->id;
 
-        $result = $this->repository->scopeQuery(function ($query)
-        use ($searchValue, $political_group_profile_id, $user) {
+        $result = $this->repository->scopeQuery(function ($query) use ($searchValue, $political_group_profile_id, $user) {
 
             $query = $query->join('elections', 'political_registrations.fid_election', 'elections.id');
             $query = $query->where('fid_political_group_profile', $political_group_profile_id);

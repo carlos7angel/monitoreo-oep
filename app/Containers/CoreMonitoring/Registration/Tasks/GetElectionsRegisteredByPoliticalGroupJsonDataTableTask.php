@@ -25,8 +25,7 @@ class GetElectionsRegisteredByPoliticalGroupJsonDataTableTask extends ParentTask
 
         $user = app(GetAuthenticatedUserByGuardTask::class)->run('web');
 
-        $result = $this->registrationRepository->scopeQuery(function ($query)
-        use ($searchValue, $political_group_profile_id, $user) {
+        $result = $this->registrationRepository->scopeQuery(function ($query) use ($searchValue, $political_group_profile_id, $user) {
 
             $query = $query->leftJoin('elections', 'political_registrations.fid_election', 'elections.id');
             $query = $query->where('fid_political_group_profile', $political_group_profile_id);

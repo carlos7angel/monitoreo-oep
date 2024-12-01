@@ -80,7 +80,8 @@ class CreateAnalysisReportAction extends ParentAction
                     ),
                     0,
                     6
-                )) . '/' . Carbon::now()->format('y');
+                )
+            ) . '/' . Carbon::now()->format('y');
 
             $analysis_status = [
                 'fid_analysis_report' => $analysis_report->id,
