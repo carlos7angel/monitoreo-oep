@@ -110,7 +110,8 @@ class Election extends ParentModel
 
     public function setStartDateMediaRegistrationAttribute($value)
     {
-        $this->attributes['start_date_media_registration'] = $value ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 00:00:00') : null;
+        $this->attributes['start_date_media_registration'] = $value
+            ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 00:00:00') : null;
     }
 
     public function getStartDateMediaRegistrationAttribute($value)
@@ -120,7 +121,8 @@ class Election extends ParentModel
 
     public function setEndDateMediaRegistrationAttribute($value)
     {
-        $this->attributes['end_date_media_registration'] = $value ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 00:00:00') : null;
+        $this->attributes['end_date_media_registration'] = $value
+            ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 00:00:00') : null;
     }
 
     public function getEndDateMediaRegistrationAttribute($value)
@@ -131,16 +133,20 @@ class Election extends ParentModel
     protected function startDatePoliticalRegistration(): Attribute
     {
         return new Attribute(
-            get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y H:i'),
-            set: static fn (string|null $value): string|null => null === $value ? null : Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 00:00:00')
+            get: static fn (string|null $value): string|null => null === $value
+                ? null : Carbon::parse($value)->format('d/m/Y H:i'),
+            set: static fn (string|null $value): string|null => null === $value
+                ? null : Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 00:00:00')
         );
     }
 
     protected function endDatePoliticalRegistration(): Attribute
     {
         return new Attribute(
-            get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y H:i'),
-            set: static fn (string|null $value): string|null => null === $value ? null : Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 23:59:59')
+            get: static fn (string|null $value): string|null => null === $value
+                ? null : Carbon::parse($value)->format('d/m/Y H:i'),
+            set: static fn (string|null $value): string|null => null === $value
+                ? null : Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d 23:59:59')
         );
     }
 }

@@ -14,7 +14,9 @@ return new class () extends Migration {
             $table->foreign('fid_form')->references('id')->on('forms')->onDelete('cascade');
             $table->unsignedBigInteger('fid_field_type');
             $table->foreign('fid_field_type')->references('id')->on('field_types')->onDelete('cascade');
-            $table->enum('field_type_name', ['textbox','textarea','select','datepicker','checkbox','fileupload','hidden','button','table','html']);
+            $table->enum('field_type_name', [
+                'textbox','textarea','select','datepicker','checkbox','fileupload','hidden','button','table','html'
+            ]);
 
             //general
             $table->string('unique_fieldname')->unique();

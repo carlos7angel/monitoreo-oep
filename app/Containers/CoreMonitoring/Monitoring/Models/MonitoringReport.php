@@ -55,7 +55,12 @@ class MonitoringReport extends ParentModel
 
     public function monitoringItems()
     {
-        return $this->belongsToMany(MonitoringItem::class, 'monitoring_item_report', 'fid_monitoring_report', 'fid_monitoring_item');
+        return $this->belongsToMany(
+            MonitoringItem::class,
+            'monitoring_item_report',
+            'fid_monitoring_report',
+            'fid_monitoring_item'
+        );
     }
 
     /**
@@ -64,14 +69,16 @@ class MonitoringReport extends ParentModel
     protected function createdAt(): Attribute
     {
         return new Attribute(
-            get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y h:i A'),
+            get: static fn (string|null $value): string|null => null === $value
+                ? null : Carbon::parse($value)->format('d/m/Y h:i A'),
         );
     }
 
     protected function submittedAt(): Attribute
     {
         return new Attribute(
-            get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y h:i A'),
+            get: static fn (string|null $value): string|null => null === $value
+                ? null : Carbon::parse($value)->format('d/m/Y h:i A'),
         );
     }
 }

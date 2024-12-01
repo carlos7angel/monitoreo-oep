@@ -16,14 +16,16 @@ class CheckUserMediaProfileComplete extends ParentMiddleware
         $profile = $user->profile_data;
 
         // General
-        if (empty($profile->name) || empty($profile->business_name) || empty($profile->nit) || empty($profile->rep_full_name) ||
+        if (empty($profile->name) || empty($profile->business_name) ||
+            empty($profile->nit) || empty($profile->rep_full_name) ||
             empty($profile->rep_document) || empty($profile->rep_exp)) {
             $request->session()->flash('validation_profile', true);
             return redirect()->route('ext_admin_media_profile_general_data_show');
         }
 
         // Classification
-        if (!$profile->media_type_television && !$profile->media_type_radio && !$profile->media_type_print && !$profile->media_type_digital) {
+        if (!$profile->media_type_television && !$profile->media_type_radio
+            && !$profile->media_type_print && !$profile->media_type_digital) {
             $request->session()->flash('validation_profile', true);
             return redirect()->route('ext_admin_media_profile_category_data_show');
         }

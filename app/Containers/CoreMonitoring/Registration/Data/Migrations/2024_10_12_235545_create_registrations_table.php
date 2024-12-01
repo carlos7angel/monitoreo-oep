@@ -16,14 +16,17 @@ return new class () extends Migration {
             $table->unsignedBigInteger('fid_user')->nullable();
             $table->foreign('fid_user')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('fid_political_group_profile')->nullable();
-            $table->foreign('fid_political_group_profile')->references('id')->on('political_group_profiles')->onDelete('cascade');
+            $table->foreign('fid_political_group_profile')->references('id')
+                ->on('political_group_profiles')->onDelete('cascade');
             $table->text('status_activity')->nullable();
             $table->dateTime('registered_at')->nullable();
             $table->unsignedBigInteger('registered_by')->nullable();
             $table->foreign('registered_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
 
-            $table->index(['fid_election', 'fid_user', 'fid_political_group_profile'], 'registrations_fid_election_fid_user_fid_political_group_index');
+            $table->index([
+                'fid_election', 'fid_user', 'fid_political_group_profile'
+            ], 'registrations_fid_election_fid_user_fid_political_group_index');
         });
     }
 

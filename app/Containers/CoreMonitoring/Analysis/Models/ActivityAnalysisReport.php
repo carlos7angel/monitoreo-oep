@@ -54,7 +54,8 @@ class ActivityAnalysisReport extends ParentModel
     protected function registeredAt(): Attribute
     {
         return new Attribute(
-            get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y h:i A'),
+            get: static fn (string|null $value): string|null => null === $value
+                ? null : Carbon::parse($value)->format('d/m/Y h:i A'),
         );
     }
 }

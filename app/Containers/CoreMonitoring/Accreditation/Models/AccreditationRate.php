@@ -63,7 +63,8 @@ class AccreditationRate extends ParentModel
     protected function submittedAt(): Attribute
     {
         return new Attribute(
-            get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y H:i'),
+            get: static fn (string|null $value): string|null => null === $value
+                ? null : Carbon::parse($value)->format('d/m/Y H:i'),
         );
     }
 

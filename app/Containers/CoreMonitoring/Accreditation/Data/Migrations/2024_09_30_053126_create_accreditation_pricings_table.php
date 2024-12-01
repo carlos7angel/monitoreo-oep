@@ -16,17 +16,12 @@ return new class () extends Migration {
 
             $table->enum('type', ['Televisivo', 'Radial', 'Digital', 'Impreso']); //ENGLISH
 
-            $table->enum('scope', ['Nacional', 'La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro', 'Potosí', 'Beni', 'Chuquisaca', 'Pando', 'Tarija']);
+            $table->enum('scope', [
+                'Nacional', 'La Paz', 'Cochabamba', 'Santa Cruz', 'Oruro',
+                'Potosí', 'Beni', 'Chuquisaca', 'Pando', 'Tarija'
+            ]);
 
             $table->string('file_rate', 50)->nullable();
-
-
-            //            $table->unsignedBigInteger('fid_election')->nullable();
-            //            $table->foreign('fid_election')->references('id')->on('elections')->onDelete('cascade');
-            //            $table->unsignedBigInteger('fid_user')->nullable();
-            //            $table->foreign('fid_user')->references('id')->on('users')->onDelete('cascade');
-            //            $table->unsignedBigInteger('fid_media_profile')->nullable();
-            //            $table->foreign('fid_media_profile')->references('id')->on('media_profiles')->onDelete('cascade');
 
             $table->dateTime('submitted_at')->nullable();
             $table->timestamps();

@@ -80,7 +80,8 @@ class PoliticalGroupProfile extends ParentModel
 
     public function setFoundationDateAttribute($value)
     {
-        $this->attributes['foundation_date'] = $value ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d') : null;
+        $this->attributes['foundation_date'] = $value
+            ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d') : null;
     }
 
 }

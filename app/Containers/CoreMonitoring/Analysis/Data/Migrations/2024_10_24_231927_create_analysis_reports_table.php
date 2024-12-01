@@ -55,7 +55,6 @@ return new class () extends Migration {
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('fid_last_analysis_report_activity')->nullable();
-            // $table->foreign('fid_last_analysis_report_activity')->references('id')->on('analysis_report_status_activity')->onDelete('cascade');
 
             $table->enum('scope_type', ['TED','TSE'])->nullable();
             $table->string('scope_department', 50)->nullable();

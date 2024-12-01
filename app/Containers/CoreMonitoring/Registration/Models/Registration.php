@@ -71,8 +71,8 @@ class Registration extends ParentModel
     protected function registeredAt(): Attribute
     {
         return new Attribute(
-            get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y H:i'),
-            // set: static fn (string|null $value): string|null => null === $value ? null : Carbon::createFromFormat('d/m/Y', $value)->toDateTimeString()
+            get: static fn (string|null $value): string|null => null === $value
+                ? null : Carbon::parse($value)->format('d/m/Y H:i'),
         );
     }
 

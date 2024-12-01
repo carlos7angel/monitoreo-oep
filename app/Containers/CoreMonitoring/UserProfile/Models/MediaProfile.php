@@ -107,7 +107,8 @@ class MediaProfile extends ParentModel
     protected function registrationDate(): Attribute
     {
         return new Attribute(
-            get: static fn (string|null $value): string|null => null === $value ? null : Carbon::parse($value)->format('d/m/Y h:i A'),
+            get: static fn (string|null $value): string|null => null === $value
+                ? null : Carbon::parse($value)->format('d/m/Y h:i A'),
         );
     }
 }

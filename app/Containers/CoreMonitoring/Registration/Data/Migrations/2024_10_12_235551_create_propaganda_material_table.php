@@ -17,7 +17,8 @@ return new class () extends Migration {
             $table->string('file_material', 50)->nullable();
             $table->string('link_material', 255)->nullable();
             $table->unsignedBigInteger('fid_political_registration')->nullable();
-            $table->foreign('fid_political_registration')->references('id')->on('political_registrations')->onDelete('cascade');
+            $table->foreign('fid_political_registration')
+                ->references('id')->on('political_registrations')->onDelete('cascade');
             $table->unsignedBigInteger('fid_election')->nullable();
             $table->foreign('fid_election')->references('id')->on('elections')->onDelete('cascade');
             $table->timestamps();

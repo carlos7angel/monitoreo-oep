@@ -16,9 +16,13 @@ return new class () extends Migration {
             $table->text('description')->nullable();
             $table->string('logo_image', 150)->nullable();
             $table->string('banner', 150)->nullable();
-            $table->enum('type', ['Generales', 'Primarias', 'Subnacionales', 'Judiciales', 'Referendos'])->default('Generales'); //*
+            $table->enum('type', [
+                'Generales', 'Primarias', 'Subnacionales', 'Judiciales', 'Referendos'
+            ])->default('Generales'); //*
             $table->date('election_date')->nullable();
-            $table->enum('status', ['draft', 'active', 'unpublished', 'finished', 'archived', 'canceled'])->default('draft');
+            $table->enum('status', [
+                'draft', 'active', 'unpublished', 'finished', 'archived', 'canceled'
+            ])->default('draft');
 
             // WEB
             $table->boolean('show_web')->default(false);

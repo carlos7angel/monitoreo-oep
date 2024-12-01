@@ -11,7 +11,9 @@ return new class () extends Migration {
 
             $table->id();
             $table->string('name', 50);
-            $table->enum('type', ['textbox','textarea','select','datepicker','checkbox','fileupload','hidden','button','table','html']);
+            $table->enum('type', [
+                'textbox','textarea','select','datepicker','checkbox','fileupload','hidden','button','table','html'
+            ]);
             $table->text('description')->nullable();
             $table->enum('category', ['form_element', 'html_element', 'advanced_element'])->default('form_element');
             $table->text('options')->nullable();

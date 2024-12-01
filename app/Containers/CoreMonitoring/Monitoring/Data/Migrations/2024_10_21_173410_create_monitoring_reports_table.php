@@ -13,7 +13,9 @@ return new class () extends Migration {
             $table->string('code', 50)->unique();
             $table->unsignedBigInteger('fid_election')->nullable();
             $table->foreign('fid_election')->references('id')->on('elections')->onDelete('cascade');
-            $table->enum('status', ['NEW', 'SUBMITTED', 'IN_PROGRESS', 'REJECTED', 'FINISHED', 'ARCHIVED'])->default('NEW');
+            $table->enum('status', [
+                'NEW', 'SUBMITTED', 'IN_PROGRESS', 'REJECTED', 'FINISHED', 'ARCHIVED'
+            ])->default('NEW');
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamp('submitted_at')->nullable();
