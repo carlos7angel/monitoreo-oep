@@ -49,9 +49,9 @@ class GetAdminAccreditationsByElectionJsonDataTableTask extends ParentTask
                     );
                 }
 
-                if ($user->roles->first()->name === 'media') {
-                    $query = $query->where('media_profiles.coverage', '=', $user->department);
-                }
+                // if ($user->roles->first()->name === 'media') {
+                //     $query = $query->where('media_profiles.coverage', '=', $user->department);
+                // }
 
 
                 return $query->distinct()->select([
