@@ -43,7 +43,7 @@
                                 <div class="d-flex flex-column h-100">
                                     <div class="mb-7">
                                         <div class="d-flex flex-stack mb-6">
-                                            <div class="flex-shrink-0 me-5">
+                                            <div class="flex-shrink-0__ me-5">
                                                 <span class="text-gray-500 fs-7 fw-bold me-2 d-block lh-1 pb-1">Proceso Electoral activo</span>
                                                 <span class="text-gray-800 fs-2 fw-bold">{{ $election->name }}</span>
                                             </div>
