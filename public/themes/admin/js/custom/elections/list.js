@@ -101,7 +101,7 @@ var KTElectionsList = function () {
                                 </a>
                                 <div class="ms-5">
                                     <a class="text-gray-700 fs-6 fw-bold mb-1">${data}</a>
-                                    <div class="text-muted fs-7 fw-bold">${ moment(full.election_date).format('YYYY')}</div>
+                                    <div class="text-muted fs-7 fw-bold">${ moment(full.election_date, 'DD/MM/YYYY').format('YYYY')}</div>
                                 </div>
                             </div>`;
                     },
