@@ -118,6 +118,9 @@ var KTMonitoringDashboard = function () {
 
         $(document).on('change', '#kt_select_election', function () {
             var election_id = $(this).val();
+            if (! election_id) {
+                return;
+            }
             root.dispose();
             init();
             loadData(election_id);
@@ -139,6 +142,9 @@ var KTMonitoringDashboard = function () {
 
     var _initializeSelect = function () {
         var election_id = $('#kt_select_election').val();
+        if (! election_id) {
+            return;
+        }
         loadData(election_id);
     };
 

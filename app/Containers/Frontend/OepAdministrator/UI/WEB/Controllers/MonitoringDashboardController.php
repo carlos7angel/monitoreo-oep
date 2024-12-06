@@ -23,7 +23,7 @@ class MonitoringDashboardController extends WebController
         $elections = app(ListElectionsTask::class)->run();
         return view('frontend@oepAdministrator::monitoring.dashboard', [
             'elections' => $elections,
-            'selected_election' => $elections[0]->id
+            'selected_election' => isset($elections[0]) ? $elections[0]->id : 0
         ], compact('page_title'));
     }
 

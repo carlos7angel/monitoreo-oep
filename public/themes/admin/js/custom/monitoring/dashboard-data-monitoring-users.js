@@ -58,12 +58,18 @@ var KTMonitoringUsersData = function () {
     var _handleMonitoringData = function () {
         $(document).on('change', '#kt_select_election', function () {
             var election_id = $(this).val();
+            if (! election_id) {
+                return;
+            }
             _getMonitoringUserData(election_id);
         });
     };
 
     var _initMonitoringData = function () {
         var election_id = $('#kt_select_election').val();
+        if (! election_id) {
+            return;
+        }
         _getMonitoringUserData(election_id);
     };
 

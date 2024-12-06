@@ -12,7 +12,7 @@
         </ul>
     </div>
     <div class="d-flex align-items-center">
-        <select class="form-select form-select-solid" name="select_election" id="kt_select_election" data-control="select2" data-placeholder="" data-hide-search="true">
+        <select class="form-select form-select-solid" name="select_election" id="kt_select_election" data-control="select2" data-placeholder="Seleccione una opción" data-hide-search="true">
             @foreach($elections as $election)
                 <option value="{{ $election->id }}" {{ $selected_election == $election->id ? 'selected' : '' }}>{{ $election->name }}</option>
             @endforeach
@@ -151,7 +151,7 @@
         </div>
 
         <div class="row gx-5 gx-xl-10">
-            <div class="col-xl-9 mb-10">
+            <div class="col-xl-12 mb-10">
                 <div class="card card-flush h-xl-100">
                     <div class="card-header pt-7">
                         <h3 class="card-title align-items-start flex-column">
@@ -182,7 +182,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 mb-10">
+            <div class="col-xl-12 mb-10">
             </div>
         </div>
 
